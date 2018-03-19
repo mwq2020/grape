@@ -1,0 +1,106 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="/css/common.css" type="text/css" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/wrap.js"></script>
+    <script type="text/javascript" src="/js/jquery.jslides.js"></script>
+
+</head>
+
+<body>
+<div class="wrap">
+    <div class="header">
+        <a href="#" class="fl logo"><img src="///images/logo.png" width="100%"></a>
+        <a href="#" class="fr unLogin">
+            <i></i>
+            <p>未登录</p>
+        </a>
+        <a href="#" class="fr sear">
+            <i></i>
+            <p>搜索</p>
+        </a>
+    </div>
+    <div class="hdTab">
+        <ul class="clearfix">
+            <li class="cur"><a href="#">活动简介</a></li>
+            <li><a href="#">活动规则</a></li>
+            <li><a href="#">上传作品展示</a></li>
+        </ul>
+        <div class="clearfix hdCz">
+            <a href="#" class="fr"><i class="hdIcon01"></i>作品上传</a>
+            <a href="#" class="fr"><i class="hdIcon02"></i>活动报名</a>
+            <a href="#" class="fr"><i class="hdIcon03"></i>所有活动</a>
+        </div>
+    </div>
+    <div class="wrap1755 heit72">
+        <span class="snow03" style="width:16.5rem"></span>
+        <span class="zs"></span>
+        <div class="hdBox clearfix">
+            <div class="fl wid622">
+                <div class="hdImg"><a href="#"><img src="/temp/img.jpg"></a></div>
+                <div class="hdSmallImg">
+                    <div id="colee_right">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td id="colee_right1" valign="top" align="center">
+                                    <table cellpadding="2" cellspacing="0" border="0">
+                                        <tr align="center">
+                                            <td><a href="javascrip:;"><img src="/temp/img.jpg"></a></td>
+                                            <td><a href="javascrip:;"><img src="/temp/bg.png"></a></td>
+                                            <td><a href="javascrip:;"><img src="http://js.alixixi.com/img/201108/1.jpg"></a></td>
+                                            <td><a href="javascrip:;"><img src="http://js.alixixi.com/img/201108/1.jpg"></a></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td id="colee_right2" valign="top"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <script>
+                    var speed=30//速度数值越大速度越慢
+                    var colee_right2=document.getElementById("colee_right2");
+                    var colee_right1=document.getElementById("colee_right1");
+                    var colee_right=document.getElementById("colee_right");
+                    colee_right2.innerHTML=colee_right1.innerHTML
+                    function Marquee4(){
+                        if(colee_right.scrollLeft<=0)
+                            colee_right.scrollLeft+=colee_right2.offsetWidth
+                        else{
+                            colee_right.scrollLeft--
+                        }
+                    }
+                    var MyMar4=setInterval(Marquee4,speed)
+                    colee_right.onmouseover=function() {clearInterval(MyMar4)}
+                    colee_right.onmouseout=function() {MyMar4=setInterval(Marquee4,speed)}
+                    //点击小图展示大图
+                    $(function(){
+                        $(".hdSmallImg img").click(function(){
+                            var src=$(this)[0].src;
+                            $(".hdImg img").attr("src",src)
+                        })
+
+                    })
+                </script>
+            </div>
+            <ul class="fr">
+                <li><span>活动时间：</span>即日—2018.01.05</li>
+                <li><span>活动地点：</span>线上活动</li>
+                <li><span>主办方：</span>紫葡萄少儿艺术库</li>
+                <li><span>活动简介：</span></li>
+                <li><p>洒进阳台的缕缕阳光是红色的，你也是红色的；冒着气的暖壶指示灯是红色的，你也是红色的；马路上突然驶过的车是红色的，你也是红色的；办公桌上的保温杯是红色的，你也是红色的；电影院里的座椅是红色的，你也是红色的；商场门头上正在安装的圣诞彩灯是红色的你也是红色的......</p>
+                    <p>随手拍下你眼中红色的一切事物，即可获得600积分，体验城市文化脉络，尽享城市文化生活。</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
+</div>
+</body>
+</html>
