@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/js/jquery.event.drag-1.5.min.js"></script>
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
     <style type="text/css">
         .header{height:1.9rem}
     </style>
@@ -40,14 +41,18 @@
         </a>
         <div class="fr midSearch">
             <div class="searchBox">
-                <input type="text" class="fl searchInp" value="顽强拼搏"/>
-                <input type="submit" class="fl searchSub" value=" ">
+                <input type="text" name="search_keywords" id="search_keywords" class="fl searchInp" value="顽强拼搏"/>
+                <input type="submit" class="fl searchSub" value=" " id="search_btn">
             </div>
             <div class="hotWords">
-                热词：<a href="#">简笔画</a>|<a href="#">手工</a>|<a href="#">音乐</a>|<a href="#">象棋</a>|<a href="#">书法</a>|<a href="#">民间艺术</a>
+                热词：
+                {volist name="hot_keyword_list" id="vo"}
+                    <a href="/index/search/index?keyword={$vo.keyword}">{$vo.keyword}</a> {if $key != 5}|{/if}
+                {/volist}
             </div>
         </div>
     </div>
+
     <div class="wrap1755">
         <span class="snow03"></span>
         <span class="zs"></span>
@@ -57,194 +62,56 @@
                 <div class="main_image Flipcon" style="height:2.3rem;">
                     <ul>
                         <li class="lict">
-                            {volist name="video_list" id="vo"}
+                            {volist name="search_list" id="vo"}
                             <dl>
                                 <dt><a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
                                     <b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
                                     <div class="Picinfo">
-                                        <span class="fl">2017-08-30</span>
+                                        <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
                                         <span class="fr">
-                                            <b><i><img src="/images/eye.png" /></i>742</b>
-                                            <b><i><img src="/images/sc.png" /></i>742</b>
+                                            <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
+                                            <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
                                         </span>
                                     </div>
                                 </dt>
                                 <dd>快速画出青苹果</dd>
                             </dl>
                             {/volist}
-
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <!--
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                        </li>
-                        <li class="lict">
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-
-                        </li>
-                        <li class="lict">
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            -->
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        {if $hot_recommand}
         <h3 class="keyTips keyTips2"><b class="Seajl"><i><img width="100%" src="/images/hot.png" /></i>热门推荐</b></h3>
         <div class="searchResult">
             <div class="main_visual">
                 <div class="main_image Flipcon" style="height:2.3rem;">
                     <ul>
                         <li class="lict">
+                            {volist name="hot_recommand" id="vo"}
                             <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
+                                <dt>
+                                    <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
+                                    <b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
+                                    <div class="Picinfo">
+                                        <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
+                                        <span class="fr">
+                                            <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
+                                            <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
+                                        </span>
+                                    </div>
                                 </dt>
-                                <dd>快速画出青苹果</dd>
+                                <dd>{$vo.title}</dd>
                             </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <!--
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            -->
-                        </li>
-                        <li class="lict">
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-
-                        </li>
-                        <li class="lict">
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
+                            {/volist}
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        {/if}
 
     </div>
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>

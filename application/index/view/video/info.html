@@ -5,10 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{if $page_title}{$page_title}{else}视频详情{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+
 </head>
 
 <body>
@@ -57,92 +62,34 @@
                             </video>
                         </div>
                         <div class="videoBot">
-                            <a href="#" class="fr">查看简介&gt;&gt;</a>
-                            <a href="#" class="share fl">分享</a>
-                            <a href="#" class="sc fl">收藏</a>
-                            <a href="#" class="dj fl">{$video_info.view_num}次播放</a>
+                            <a href="void:javascript();" class="fr view_video_desc_btn">查看简介&gt;&gt;</a>
+                            <a href="void:javascript();" class="share fl">分享</a>
+                            <a href="void:javascript();" class="sc fl add_like_btn" data-video_id="{$video_info.video_id}">收藏</a>
+                            <a href="void:javascript();" class="dj fl">{$video_info.view_num}次播放</a>
                         </div>
                     </div>
                     <div class="fr videoRight02">
                         <h3><i></i>相关视频推荐</h3>
                         <div class="videoScrol">
-                            {volist name="recommand_list" id="video"}
+                            {volist name="recommand_list" id="vo"}
                             <dl>
                                 <dt>
-                                    <a href="/index/video/info?video_id={$video.video_id}"><img src="/temp/img.jpg"></a>
+                                    <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
                                     <em>绘画 | 简笔画</em>
                                     <div class="Picinfo">
                                         <span class="fl">
-                                            <b><i><img src="/images/eye.png"></i>{$video.view_num}</b>
-                                            <b><i><img src="/images/sc.png"></i>{$video.like_num}</b>
+                                            <b><i><img src="/images/eye.png"></i>{$vo.view_num}</b>
+                                            <b><i><img src="/images/sc.png"></i>{$vo.like_num}</b>
                                         </span>
                                     </div>
                                 </dt>
                                 <dd>
-                                    <h3><a href="#">{$video.title}</a></h3>
-                                    <p>{$video.view_num}次播放</p>
-                                    <p style="color:#999">2017-12-20</p>
+                                    <h3><a href="/index/video/info?video_id={$vo.video_id}">{$vo.title}</a></h3>
+                                    <p>{$vo.view_num}次播放</p>
+                                    <p style="color:#999">{$vo.add_time|date="Y-m-d",###}</p>
                                 </dd>
                             </dl>
                             {/volist}
-
-                            <!--
-                            <dl>
-                                <dt>
-                                    <a href="#"><img src="/temp/img.jpg"></a><em>绘画 | 简笔画</em>
-                                <div class="Picinfo"><span class="fl"><b><i><img src="/images/eye.png"></i>742</b><b><i><img src="/images/sc.png"></i>742</b></span></div>
-                                </dt>
-                                <dd>
-                                    <h3><a href="#">卡通人物的塑造卡通人物的塑造</a></h3>
-                                    <p>4,678次播放</p>
-                                    <p style="color:#999">2017-12-20</p>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                                    <a href="#"><img src="/temp/img.jpg"></a><em>绘画 | 简笔画</em>
-                                <div class="Picinfo"><span class="fl"><b><i><img src="/images/eye.png"></i>742</b><b><i><img src="/images/sc.png"></i>742</b></span></div>
-                                </dt>
-                                <dd>
-                                    <h3><a href="#">卡通人物的塑造卡通人物的塑造</a></h3>
-                                    <p>4,678次播放</p>
-                                    <p style="color:#999">2017-12-20</p>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                                    <a href="#"><img src="/temp/img.jpg"></a><em>绘画 | 简笔画</em>
-                                <div class="Picinfo"><span class="fl"><b><i><img src="images/eye.png"></i>742</b><b><i><img src="images/sc.png"></i>742</b></span></div>
-                                </dt>
-                                <dd>
-                                    <h3><a href="#">卡通人物的塑造卡通人物的塑造</a></h3>
-                                    <p>4,678次播放</p>
-                                    <p style="color:#999">2017-12-20</p>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                                    <a href="#"><img src="/temp/img.jpg"></a><em>绘画 | 简笔画</em>
-                                <div class="Picinfo"><span class="fl"><b><i><img src="/images/eye.png"></i>742</b><b><i><img src="/images/sc.png"></i>742</b></span></div>
-                                </dt>
-                                <dd>
-                                    <h3><a href="#">卡通人物的塑造卡通人物的塑造</a></h3>
-                                    <p>4,678次播放</p>
-                                    <p style="color:#999">2017-12-20</p>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>
-                                    <a href="#"><img src="/temp/img.jpg"></a><em>绘画 | 简笔画</em>
-                                <div class="Picinfo"><span class="fl"><b><i><img src="/images/eye.png"></i>742</b><b><i><img src="/images/sc.png"></i>742</b></span></div>
-                                </dt>
-                                <dd>
-                                    <h3><a href="#">卡通人物的塑造卡通人物的塑造</a></h3>
-                                    <p>4,678次播放</p>
-                                    <p style="color:#999">2017-12-20</p>
-                                </dd>
-                            </dl>
-                            -->
                         </div>
                         <b class="filter"></b>
                     </div>
@@ -151,8 +98,20 @@
             <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
         </div>
 
-
     </div>
 </div>
+
+<!-- 详情弹层start -->
+<div class="layer" id="video_info_desc" style="display:none;">
+    <div class="jianDetail">
+        <span class="zwClose" id="close_video_desc_btn"></span>
+        <div class="detailFOnt">
+            <h3>简介详情</h3>
+            <p>{$video_info.mark}</p>
+        </div>
+    </div>
+</div>
+<!-- 详情弹层end -->
+
 </body>
 </html>
