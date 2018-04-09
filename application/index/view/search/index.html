@@ -41,7 +41,7 @@
         </a>
         <div class="fr midSearch">
             <div class="searchBox">
-                <input type="text" name="search_keywords" id="search_keywords" class="fl searchInp" value="顽强拼搏"/>
+                <input type="text" name="search_keywords" id="search_keywords" class="fl searchInp" value="手工"/>
                 <input type="submit" class="fl searchSub" value=" " id="search_btn">
             </div>
             <div class="hotWords">
@@ -56,8 +56,9 @@
     <div class="wrap1755">
         <span class="snow03"></span>
         <span class="zs"></span>
-        
+
         {if $search_list}
+        <!-- 上个搜索结果 -->
         <h3 class="keyTips"><b class="Seajl"><i><img width="100%" src="/images/colck.png" /></i>搜索记录</b></h3>
         <div class="searchResult">
             <div class="main_visual">
@@ -76,7 +77,7 @@
                                         </span>
                                     </div>
                                 </dt>
-                                <dd>快速画出青苹果</dd>
+                                <dd>{$vo.title}</dd>
                             </dl>
                             {/volist}
                         </li>
@@ -87,6 +88,7 @@
         {/if}
 
         {if $hot_recommand}
+        <!-- 热门视频推荐 -->
         <h3 class="keyTips keyTips2"><b class="Seajl"><i><img width="100%" src="/images/hot.png" /></i>热门推荐</b></h3>
         <div class="searchResult">
             <div class="main_visual">

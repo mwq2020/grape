@@ -5,6 +5,10 @@ use think\Loader;
 
 class Category extends \think\Controller
 {
+    /**
+     * 视频列表
+     * @return mixed
+     */
     public function index()
     {
         $sort = isset($_REQUEST['sort']) ? intval($_REQUEST['sort']) : 1;
@@ -20,7 +24,7 @@ class Category extends \think\Controller
         if(!empty($cat_id)){
             $query = $query->where('cat_id',$cat_id);
         }
-        if(!empty($cat_id)){
+        if(!empty($second_cat_id)){
             $query = $query->where('second_cat_id',$second_cat_id);
         }
 
