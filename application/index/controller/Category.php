@@ -10,11 +10,18 @@ class Category extends \think\Controller
         $sort = isset($_REQUEST['sort']) ? intval($_REQUEST['sort']) : 1;
         $sort = in_array($sort,[1,2,3,4]) ? $sort : 1;
         $cat_id = isset($_REQUEST['cat_id']) ? intval($_REQUEST['cat_id']) : 0;
+        $second_cat_id = isset($_REQUEST['second_cat_id']) ? intval($_REQUEST['second_cat_id']) : 0;
+
+        $second_cat_list = Loader::model('Category')->where('parent_id',$cat_id)->select();
+        $this->assign('second_cat_list',$second_cat_list);
 
         //查询语句构造
         $query = Loader::model('Video')->where('status',1);
         if(!empty($cat_id)){
             $query = $query->where('cat_id',$cat_id);
+        }
+        if(!empty($cat_id)){
+            $query = $query->where('second_cat_id',$second_cat_id);
         }
 
         if($sort == 1){
@@ -31,9 +38,8 @@ class Category extends \think\Controller
         $this->assign('video_list',$video_list);
         $this->assign('sort',$sort);
         $this->assign('cat_id',$cat_id);
-//        echo "<pre>";
-//        print_r($video_list);
-//        exit;
+        $this->assign('second_cat_id',$second_cat_id);
+
         $this->assign('page_title','视频分类');
         return $this->fetch('category/index');
     }

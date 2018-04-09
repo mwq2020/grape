@@ -1,0 +1,68 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="/css/common.css" type="text/css" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/wrap.js"></script>
+    <script type="text/javascript" src="/js/jquery.jslides.js"></script>
+    <style type="text/css">
+        .header{height:1.9rem}
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="header">
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
+        <a href="#" class="fr unLogin">
+            <i></i>
+            <p>未登录</p>
+        </a>
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/" class="fr sear">
+            <i class="home"></i>
+            <p>回首页</p>
+        </a>
+        <div class="fr midSearch">
+            <div class="searchBox">
+                <input type="text" name="search_keywords" id="search_keywords" class="fl searchInp" value="{$Think.get.keyword}"/>
+                <input type="submit" class="fl searchSub" value=" " id="search_btn">
+            </div>
+            <div class="hotWords">
+                热词：
+                {volist name="hot_keyword_list" id="vo"}
+                    <a href="/index/search/index?keyword={$vo.keyword}">{$vo.keyword}</a> {if $key != 5}|{/if}
+                {/volist}
+            </div>
+        </div>
+    </div>
+    <div class="wrap1755">
+        <span class="snow03"></span>
+        <span class="zs"></span>
+        <h3 class="keyTips">根据关键词<span> "{$Think.get.keyword}" </span>搜索出0条结果 </h3>
+        <ul class="flTab clearfix">
+            <li {if $cat_id == 0}class="cur"{/if}><a href="/index/search/index?keyword={$Think.get.keyword}">全部（{$search_video_num}）</a></li>
+            {volist name="cat_list" id="vo"}
+            <li {if $vo.cat_id == $cat_id}class="cur"{/if}><a href="/index/search/index?cat_id={$vo.cat_id}&keyword={$Think.get.keyword}">{$vo.cat_name}（{$vo.count_num}）</a></li>
+            {/volist}
+        </ul>
+        <div class="noWOrks" style="top:60%">
+            <span class="zwClose"></span>
+            暂无作品
+        </div>
+    </div>
+    <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
+</div>
+</body>
+</html>
