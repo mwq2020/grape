@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>无标题文档</title>
+    <title>{if $page_title}{$page_title}{else}紫葡萄少儿艺术库{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
@@ -10,17 +10,29 @@
     <script type="text/javascript" src="/js/wrap.js"></script>
     <script type="text/javascript" src="/js/jquery.jslides.js"></script>
 
+
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
 </head>
 
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
-        <a href="#" class="fr unLogin">
-            <i></i>
-            <p>未登录</p>
-        </a>
-        <a href="#" class="fr sear">
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+
+        {if !$Think.session.user_id}
+            <a href="#" class="fr unLogin">
+                <i></i>
+                <p>未登录</p>
+            </a>
+        {else}
+            <a href="/index/user/viewlist" class="fr unLogin">
+                <img src="{$Think.session.avatar}">
+            </a>
+        {/if}
+
+        <a href="/index/search/index" class="fr sear">
             <i></i>
             <p>搜索</p>
         </a>
@@ -30,6 +42,9 @@
             <div class="fl banner">
                 <div id="full-screen-slider">
                     <ul id="slides">
+                        {volist name="banner_list" id="vo"}
+                            <li><a href="{$vo.url}"><img src="{$vo.banner_img}"></a></li>
+                        {/volist}
                         <li><a href="#"><img src="/temp/img.jpg"></a></li>
                         <li><a href="#"><img src="/temp/bg.png"></a></li>
                     </ul>
@@ -37,26 +52,37 @@
             </div>
             <div class="fr banner02">
                 <dl>
-                    <dt><a href="#"><img src="/temp/bg.png"><b class="play"></b></a></dt>
-                    <dd><a href="#">文化遗产技艺大展展示</a></dd>
+                    <!--<dt><a href="#"><img src="/temp/bg.png"><b class="play"></b></a></dt>-->
+                    <dt><a href="/index/video/info?video_id={$video_list.1.video_id}"><img src="{$video_list.1.video_img}"><b class="play"></b></a></dt>
+                    <dd><a href="/index/video/info?video_id={$video_list.1.video_id}">文化遗产技艺大展展示{$video_list.1.title}</a></dd>
                 </dl>
             </div>
             <div class="clear"></div>
             <div class="clearfix video">
                 <ul>
-                    <li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>
-                    <li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>
-                    <li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>
+                    <li><a href="/index/video/info?video_id={$video_list.2.video_id}"><img src="{$video_list.2.video_img}"><b class="play"></b></a></li>
+                    <li><a href="/index/video/info?video_id={$video_list.3.video_id}"><img src="{$video_list.3.video_img}"><b class="play"></b></a></li>
+                    <li><a href="/index/video/info?video_id={$video_list.4.video_id}"><img src="{$video_list.4.video_img}"><b class="play"></b></a></li>
+
+                    <!--<li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>-->
+                    <!--<li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>-->
+                    <!--<li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>-->
                 </ul>
             </div>
         </div>
         <div class="fr indexRight">
             <h3><i></i>大家都在看</h3>
             <ul>
+                {volist name="recommand_list" id="vo"}
+                    <li><a href="/index/video/info?video_id={$vo.video_id}">{$vo.title}</a></li>
+                {/volist}
+                <!--
                 <li><a href="#">爱我你就抱抱我</a></li>
                 <li><a href="#">夏天吃荔枝</a></li>
                 <li><a href="#">幼儿遇到地震</a></li>
                 <li><a href="#">绘画课程</a></li>
+                -->
+
             </ul>
         </div>
         <div class="clear"></div>
@@ -64,7 +90,7 @@
     <div class="indexNav">
         <ul class="nav">
             <li class="nav01">
-                <a href="#">
+                <a href="/index/category/index?cat_id=1">
                     <div class="navFont">民间艺术</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -72,7 +98,7 @@
                 </a>
             </li>
             <li class="nav02">
-                <a href="#">
+                <a href="/index/category/index?cat_id=2">
                     <div class="navFont">绘画</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -80,7 +106,7 @@
                 </a>
             </li>
             <li class="nav03">
-                <a href="#">
+                <a href="/index/category/index?cat_id=3">
                     <div class="navFont">手工</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -88,7 +114,7 @@
                 </a>
             </li>
             <li class="nav04">
-                <a href="#">
+                <a href="/index/category/index?cat_id=4">
                     <div class="navFont">书法</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -96,7 +122,7 @@
                 </a>
             </li>
             <li class="nav05">
-                <a href="#">
+                <a href="/index/category/index?cat_id=5">
                     <div class="navFont">舞蹈</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -104,7 +130,7 @@
                 </a>
             </li>
             <li class="nav06">
-                <a href="#">
+                <a href="/index/category/index?cat_id=6">
                     <div class="navFont">音乐</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -112,7 +138,7 @@
                 </a>
             </li>
             <li class="nav07">
-                <a href="#">
+                <a href="/index/category/index?cat_id=7">
                     <div class="navFont">棋类</div>
                     <div class="cicle">
                         <span class="fl"></span><span class="fr"></span>
@@ -125,6 +151,11 @@
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
 
 </div>
+
+{if !$Think.session.user_id}
+{include file="common/login_pop" /}
+{/if}
+
 <style type="text/css">
     .footer{margin-top:-.8rem}
 </style>

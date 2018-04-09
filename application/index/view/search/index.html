@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>1-9全站搜索-点击</title>
+    <title>{if $page_title}{$page_title}{else}搜索{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <link href="/css/layer.css" type="text/css" rel="stylesheet">
@@ -23,11 +23,18 @@
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
         <a href="#" class="fr unLogin">
-            <img src="temp/img.jpg">
+            <i></i>
+            <p>未登录</p>
         </a>
-        <a href="#" class="fr sear">
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/" class="fr sear">
             <i class="home"></i>
             <p>回首页</p>
         </a>
@@ -50,18 +57,29 @@
                 <div class="main_image Flipcon" style="height:2.3rem;">
                     <ul>
                         <li class="lict">
+                            {volist name="video_list" id="vo"}
+                            <dl>
+                                <dt><a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
+                                    <b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
+                                    <div class="Picinfo">
+                                        <span class="fl">2017-08-30</span>
+                                        <span class="fr">
+                                            <b><i><img src="/images/eye.png" /></i>742</b>
+                                            <b><i><img src="/images/sc.png" /></i>742</b>
+                                        </span>
+                                    </div>
+                                </dt>
+                                <dd>快速画出青苹果</dd>
+                            </dl>
+                            {/volist}
+
                             <dl>
                                 <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
                                 <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
                                 </dt>
                                 <dd>快速画出青苹果</dd>
                             </dl>
-                            <dl>
-                                <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                </dt>
-                                <dd>快速画出青苹果</dd>
-                            </dl>
+                            <!--
                             <dl>
                                 <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
                                 <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
@@ -121,6 +139,7 @@
                                 </dt>
                                 <dd>快速画出青苹果</dd>
                             </dl>
+                            -->
                         </li>
                     </ul>
                 </div>
@@ -144,6 +163,7 @@
                                 </dt>
                                 <dd>快速画出青苹果</dd>
                             </dl>
+                            <!--
                             <dl>
                                 <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i></b>
                                 <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
@@ -162,6 +182,7 @@
                                 </dt>
                                 <dd>快速画出青苹果</dd>
                             </dl>
+                            -->
                         </li>
                         <li class="lict">
                             <dl>

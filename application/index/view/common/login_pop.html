@@ -1,0 +1,17 @@
+<!-- 公共的登录弹层页面 -->
+<div class="layer">
+    <div class="login">
+        <span class="closedLayer" id="login_pop_div"></span>
+        <div class="loginBox clearfix">
+            <ul class="fl">
+                <li><span class="fl">读者证号</span><input type="text" name="reader_no" id="reader_no" class="userInp fl"></li>
+                <li><span class="fl">密　　码</span><input type="password" name="password" id="password" class="userInp fl"></li>
+            </ul>
+            <input type="submit" class="fr lgSubmit" value="">
+        </div>
+    </div>
+    <div class="errorBox" style="display: none;">
+        <span class="coloseError"></span>
+        <p id="login_err_msg">您输入的证号或密码不正确，请重新输入。</p>
+    </div>
+</div>

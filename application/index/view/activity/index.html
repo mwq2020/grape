@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>2-4所有活动</title>
+    <title>{if $page_title}{$page_title}{else}活动列表{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
@@ -13,16 +13,21 @@
     <script type="text/javascript" src="/js/jquery.event.drag-1.5.min.js"></script>
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script></head>
-
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
         <a href="#" class="fr unLogin">
             <i></i>
             <p>未登录</p>
         </a>
-        <a href="#" class="fr sear">
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/index/search/index" class="fr sear">
             <i></i>
             <p>搜索</p>
         </a>
@@ -36,16 +41,35 @@
         </div>
     </div>
     <div class="wrap1755 heit72">
-        <a href="#" class="Goback"><img src="/images/back.png" /></a>
+        <a href="/" class="Goback"><img src="/images/back.png" /></a>
         <span class="snow03" style="width:16.5rem"></span>
         <span class="zs"></span>
         <div class="main_visual MarTop40">
             <div class="main_image Worksshow">
                 <ul>
                     <li class="lict">
+                        {volist name="activity_list" id="vo"}
+                            <div class="activity">
+                                <a href="/index/activity/info?activity_id={$vo.activity_id}">
+                                    <img src="{$vo.activity_img}" />
+                                    {if $vo.status_txt == '进行中' }
+                                        <b class="Jxz">{$vo.status_txt}</b>
+                                    {else}
+                                        <b class="over">{$vo.status_txt}</b>
+                                    {/if}
+                                </a>
+                            </div>
+                        {/volist}
+
+                        <!--<div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
+                        <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="Jxz">进行中</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
+                        -->
+                    </li>
+                    <!--
+                    <li class="lict">
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="Jxz">进行中</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
@@ -54,17 +78,9 @@
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="Jxz">进行中</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
-
-                    </li>
-                    <li class="lict">
                         <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="Jxz">进行中</b></a></div>
-                        <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
-                        <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="over">已结束</b></a></div>
-                        <div class="activity"><a href="#"><img src="/images/pic.png" /><b class="Jxz">进行中</b></a></div>
-
                     </li>
-
-
+                    -->
                 </ul>
             </div>
         </div>

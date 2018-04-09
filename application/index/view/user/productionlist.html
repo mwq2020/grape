@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>个人中心-我的作品x</title>
+    <title>{if $page_title}{$page_title}{else}个人中心-我的作品列表{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
@@ -17,12 +17,18 @@
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
         <a href="#" class="fr unLogin">
             <i></i>
             <p>未登录</p>
         </a>
-        <a href="#" class="fr sear">
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/index/search/index" class="fr sear">
             <i></i>
             <p>搜索</p>
         </a>
@@ -46,15 +52,15 @@
                 <h3 class="keyTips">当前位置：<b>个人中心</b></h3>
                 <div class="CenterTOp">
                     <ul class="Cenul1">
-                        <li><a href="#">观看记录</a></li>
-                        <li class="Curcent"><a href="#">我的作品</a></li>
-                        <li><a href="#">我的消息</a></li>
+                        <li><a href="/index/user/viewlist">观看记录</a></li>
+                        <li class="Curcent"><a href="/index/user/productionlist">我的作品</a></li>
+                        <li><a href="/index/user/message">我的消息</a></li>
                     </ul>
                     <ul class="Cenul2">
-                        <li class="Curcent"><a href="#">全部</a></li>
-                        <li><a href="#">近7天</a></li>
-                        <li><a href="#">近30天</a></li>
-                        <li><a href="#">近6个月天</a></li>
+                        <li {if $type == 0}class="Curcent"{/if}><a href="/index/user/productionlist">全部</a></li>
+                        <li {if $type == 1}class="Curcent"{/if}><a href="/index/user/productionlist?type=1">近7天</a></li>
+                        <li {if $type == 2}class="Curcent"{/if}><a href="/index/user/productionlist?type=2">近30天</a></li>
+                        <li {if $type == 3}class="Curcent"{/if}><a href="/index/user/productionlist?type=3">近6个月天</a></li>
                     </ul>
                     <div class="personalData">
                         <span class="Tx fl"><img width="100%" src="/images/tx.png" /></span>
@@ -69,6 +75,21 @@
                     <div class="main_image Worksshow">
                         <ul>
                             <li class="lict2">
+                                {volist name="product_list" id="vo"}
+                                <div class="Worksct Worksct2">
+                                    <dl>
+                                        <dt><img src="/images/pic.png" /></dt>
+                                        <dd>
+                                            <a href="#">{$vo.product_name}</a>
+                                            <p>活动名称：{$vo.activity_name}</p>
+                                            <p>参加实践：2017-08-20</p>
+                                            <span class="Mc">获奖等级：<i>一等奖</i>
+                                            </span>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                {/volist}
+                                <!--
                                 <div class="Worksct Worksct2">
                                     <dl>
                                         <dt><img src="/images/pic.png" /></dt>
@@ -87,13 +108,9 @@
                                         <dd><a href="#">卡通人物的塑造</a><p>活动名称：快速去画出青苹果大赛</p><p>参加实践：2017-08-20</p><span class="Mc">获奖等级：<i>一等奖</i></span></dd>
                                     </dl>
                                 </div>
-                                <div class="Worksct Worksct2">
-                                    <dl>
-                                        <dt><img src="/images/pic.png" /></dt>
-                                        <dd><a href="#">卡通人物的塑造</a><p>活动名称：快速去画出青苹果大赛</p><p>参加实践：2017-08-20</p><span class="Mc">获奖等级：<i>一等奖</i></span></dd>
-                                    </dl>
-                                </div>
+                                -->
                             </li>
+                            <!--
                             <li class="lict2">
                                 <div class="Worksct Worksct2">
                                     <dl>
@@ -145,15 +162,11 @@
                                         <dd><a href="#">卡通人物的塑造</a><p>活动名称：快速去画出青苹果大赛</p><p>参加实践：2017-08-20</p><span class="Mc">获奖等级：<i>一等奖</i></span></dd>
                                     </dl>
                                 </div>
-
-
-
                             </li>
+                            -->
                         </ul>
                     </div>
                 </div>
-
-
 
 
             </div>

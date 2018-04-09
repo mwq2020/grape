@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>个人中心观看记录</title>
+    <title>{if $page_title}{$page_title}{else}个人中心-观看记录{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
@@ -17,12 +17,18 @@
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
         <a href="#" class="fr unLogin">
             <i></i>
             <p>未登录</p>
         </a>
-        <a href="#" class="fr sear">
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/index/search/index" class="fr sear">
             <i></i>
             <p>搜索</p>
         </a>
@@ -46,23 +52,22 @@
                 <h3 class="keyTips">当前位置：<b>个人中心</b></h3>
                 <div class="CenterTOp">
                     <ul class="Cenul1">
-                        <li class="Curcent"><a href="#">观看记录</a></li>
-                        <li><a href="#">我的作品</a></li>
-                        <li><a href="#">我的消息</a></li>
+                        <li class="Curcent"><a href="/index/user/viewlist">观看记录</a></li>
+                        <li><a href="/index/user/productionlist">我的作品</a></li>
+                        <li><a href="/index/user/message">我的消息</a></li>
                     </ul>
                     <ul class="Cenul2">
-                        <li class="Curcent"><a href="#">全部</a></li>
-                        <li><a href="#">近7天</a></li>
-                        <li><a href="#">近30天</a></li>
-                        <li><a href="#">近6个月天</a></li>
+                        <li {if $type == 0}class="Curcent"{/if}><a href="/index/user/viewlist">全部</a></li>
+                        <li {if $type == 1}class="Curcent"{/if}><a href="/index/user/viewlist?type=1">近7天</a></li>
+                        <li {if $type == 2}class="Curcent"{/if}><a href="/index/user/viewlist?type=2">近30天</a></li>
+                        <li {if $type == 3}class="Curcent"{/if}><a href="/index/user/viewlist?type=3">近6个月天</a></li>
                     </ul>
-
                     <div class="personalData">
                         <span class="Tx fl"><img width="100%" src="/images/tx.png" /></span>
                         <div class="Txcon fr">
                             <span>姓名：陈雨曦</span>
                             <span>读者证号：1564896</span>
-                            <a href="#" class="Dlbtn">退出登录</a>
+                            <a href="/index/user/logout" class="Dlbtn">退出登录</a>
                         </div>
                     </div>
                 </div>
@@ -70,13 +75,26 @@
                     <div class="main_image">
                         <ul>
                             <li class="lict3">
+                                {volist name="view_list" id="vo"}
                                 <dl>
-                                    <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
-                                    <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
-                                    <i class="Playbtn"><img src="/images/play.png" /></i>
+                                    <dt>
+                                        <a href="/index/video/info?video_id={$vo.video_id}">
+                                            <img src="{$vo.video_img}"/>
+                                        </a>
+                                        <b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
+                                        <div class="Picinfo">
+                                            <span class="fl">{$vo.date_time|date="Y-m-d",###}</span>
+                                            <span class="fr">
+                                                <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
+                                                <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
+                                            </span>
+                                        </div>
+                                        <i class="Playbtn"><img src="/images/play.png" /></i>
                                     </dt>
                                     <dd>快速画出青苹果</dd>
                                 </dl>
+                                {/volist}
+                                <!--
                                 <dl>
                                     <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
                                     <div class="Picinfo"><span class="fl">2017-08-30</span><span class="fr"><b><i><img src="/images/eye.png" /></i>742</b><b><i><img src="/images/sc.png" /></i>742</b></span></div>
@@ -112,7 +130,9 @@
                                     </dt>
                                     <dd>快速画出青苹果</dd>
                                 </dl>
+                                -->
                             </li>
+                            <!--
                             <li class="lict3">
                                 <dl>
                                     <dt><a href="#"><img src="/images/pic.png"></a><b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
@@ -152,6 +172,7 @@
                                     <dd>快速画出青苹果</dd>
                                 </dl>
                             </li>
+                            -->
                         </ul>
                     </div>
                 </div>

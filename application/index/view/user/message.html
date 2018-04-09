@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>3-1个人中心-我的消息</title>
+    <title>{if $page_title}{$page_title}{else}个人中心-我的消息{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
@@ -15,12 +15,18 @@
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
         <a href="#" class="fr unLogin">
             <i></i>
             <p>未登录</p>
         </a>
-        <a href="#" class="fr sear">
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/index/search/index" class="fr sear">
             <i></i>
             <p>搜索</p>
         </a>
@@ -44,14 +50,14 @@
                 <h3 class="keyTips">当前位置：<b>个人中心</b></h3>
                 <div class="CenterTOp">
                     <ul class="Cenul1">
-                        <li><a href="#">观看记录</a></li>
-                        <li><a href="#">我的作品</a></li>
-                        <li class="Curcent"><a href="#">我的消息</a></li>
+                        <li><a href="/index/user/viewlist">观看记录</a></li>
+                        <li><a href="/index/user/productionlist">我的作品</a></li>
+                        <li class="Curcent"><a href="/index/user/message">我的消息</a></li>
                     </ul>
                     <ul class="Cenul2">
-                        <li class="Curcent"><a href="#">系统消息</a></li>
-                        <li><a href="#">作品消息</a></li>
-                        <li><a href="#">活动消息</a></li>
+                        <li {if $type ==1}class="Curcent"{/if}><a href="/index/user/message?type=1">系统消息</a></li>
+                        <li {if $type ==2}class="Curcent"{/if}><a href="/index/user/message?type=2">作品消息</a></li>
+                        <li {if $type ==3}class="Curcent"{/if}><a href="/index/user/message?type=3">活动消息</a></li>
                     </ul>
 
                     <div class="personalData">
@@ -64,11 +70,19 @@
                     </div>
                 </div>
                 <div class="main_visual" style="margin-top:.85rem;height:4.8rem;overflow:auto">
+                    {volist name="message_list" id="vo"}
                     <div class="news">
+                        {if $vo.status == 1}
+                        <i><img src="/images/xx2.png" /></i>
+                        {else}
                         <i><img src="/images/xx1.png" /></i>
-                        <a href="#">自制水火箭发射器 水火箭简单制作过程步骤图解</a>
-                        <span>2017-08-20</span>
+                        {/if}
+                        <a href="#">{$vo.content}</a>
+                        <span>{$vo.add_time|date="Y-m-d",###}</span>
                     </div>
+                    {/volist}
+
+                    <!--
                     <div class="news">
                         <i><img src="/images/xx2.png" /></i>
                         <a href="#">自制水火箭发射器 水火箭简单制作过程步骤图解</a>
@@ -79,6 +93,7 @@
                         <a href="#">自制水火箭发射器 水火箭简单制作过程步骤图解水火箭简单制作过程步骤图解水火箭简单制作过程步骤图解水火箭简单制作过程步骤图解水火箭简单制作过程步骤图解</a>
                         <span>2017-08-20</span>
                     </div>
+
                     <div class="news">
                         <i><img src="/images/xx1.png" /></i>
                         <a href="#">自制水火箭发射器 水火箭简单制作过程步骤图解</a>
@@ -89,18 +104,8 @@
                         <a href="#">自制水火箭发射器 水火箭简单制作过程步骤图解</a>
                         <span>2017-08-20</span>
                     </div>
+                    -->
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
 

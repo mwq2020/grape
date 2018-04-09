@@ -1,0 +1,142 @@
+<?php
+namespace app\manage\controller;
+use \think\Db;
+use think\Loader;
+
+class Banner extends \think\Controller
+{
+
+    //用户列表（筛选）
+    //详情
+    //禁用
+    //添加
+    //修改
+
+    /**
+     * 用户列表
+     * @return mixed
+     */
+    public function index()
+    {
+        $where = [];
+        if(!empty($_REQUEST['title'])){
+            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        }
+        if(!empty($_REQUEST['cat_id'])){
+            $where['cat_id'] = intval($_REQUEST['cat_id']);
+        }
+
+        $banner_list = Loader::model('Banner')->where($where)->order('banner_id','desc')->paginate(10);
+        $this->assign('banner_list', $banner_list);
+
+        $page = $banner_list->render();
+        $this->assign('page', $page);
+
+        $this->view->engine->layout('layout');
+        return $this->fetch('banner/index');
+    }
+
+    /**
+     * 添加活动页面
+     * @return mixed
+     */
+    public function add()
+    {
+        if(empty($_POST)){
+            $this->assign('error_msg', '');
+            $this->view->engine->layout('layout');
+            return $this->fetch('banner/add');
+        }
+
+        try{
+            $image_name = '';
+            $file = request()->file('banner_img');
+            if($file){
+                $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/banner');
+                if($info){
+                    $image_name =  $info->getSaveName();
+                }else{
+                    throw new \Exception('图片保存失败【'.$file->getError().'】');
+                }
+            }
+            if(empty($image_name)){
+                throw new \Exception('banenr图片不能为空');
+            }
+            if(empty($_REQUEST['title'])){
+                throw new \Exception('banenr标题不能为空');
+            }
+
+            $data = [];
+            $data['title']          = $_REQUEST['title'];
+            $data['url']            = $_REQUEST['url'];
+            $data['banner_img']     = $image_name ? '/static/image/banner/'.$image_name : '';
+            $data['status']         = intval($_REQUEST['status']);
+            $data['banner_type']    = $_REQUEST['banner_type'];
+            $data['remark']         = $_REQUEST['remark'];
+            $data['add_time']       = time();
+            $data['update_time']    = time();
+            $flag = Loader::model('Banner')->insert($data);
+            if(empty($flag)){
+                throw new Exception('banenr添加失败');
+            }
+        } catch (Exception $e) {
+            $this->assign('error_msg', $e->getMessage());
+            $this->view->engine->layout('layout');
+            return $this->fetch('banner/add');
+        }
+        return $this->redirect('banner/index');
+    }
+
+
+    /**
+     * 添加活动页面
+     * @return mixed
+     */
+    public function edit()
+    {
+        if(empty($_POST)){
+            $this->assign('error_msg', '');
+            $this->view->engine->layout('layout');
+            return $this->fetch('banner/edit');
+        }
+
+        try{
+            $image_name = '';
+            $file = request()->file('banner_img');
+            if($file){
+                $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/banner');
+                if($info){
+                    $image_name =  $info->getSaveName();
+                }else{
+                    throw new \Exception('图片保存失败【'.$file->getError().'】');
+                }
+            }
+            if(empty($image_name)){
+                throw new \Exception('banenr图片不能为空');
+            }
+            if(empty($_REQUEST['title'])){
+                throw new \Exception('banenr标题不能为空');
+            }
+
+            $data = [];
+            $data['title']          = $_REQUEST['title'];
+            $data['url']            = $_REQUEST['url'];
+            $data['banner_img']     = $image_name ? '/static/image/banner/'.$image_name : '';
+            $data['status']         = intval($_REQUEST['status']);
+            $data['banner_type']    = $_REQUEST['banner_type'];
+            $data['remark']         = $_REQUEST['remark'];
+            $data['add_time']       = time();
+            $data['update_time']    = time();
+            $flag = Loader::model('Banner')->insert($data);
+            if(empty($flag)){
+                throw new Exception('banenr添加失败');
+            }
+        } catch (Exception $e) {
+            $this->assign('error_msg', $e->getMessage());
+            $this->view->engine->layout('layout');
+            return $this->fetch('banner/add');
+        }
+        return $this->redirect('banner/index');
+    }
+
+}
