@@ -113,5 +113,9 @@
 </div>
 <!-- 详情弹层end -->
 
+{if !$Think.session.user_id}
+{include file="common/login_pop" /}
+{/if}
+
 </body>
 </html>

@@ -3,6 +3,7 @@ namespace app\index\controller;
 use \think\Db;
 use think\Exception;
 use think\Loader;
+use think\Session;
 
 class User extends \think\Controller
 {
@@ -38,7 +39,8 @@ class User extends \think\Controller
      */
     public function logout()
     {
-
+        Session::clear();
+        $this->redirect('/');
     }
 
     /**

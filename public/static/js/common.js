@@ -43,6 +43,12 @@ $(function(){
         $(this).parent().parent().hide();
     })
 
+    // 点击为登录 显示登录弹层
+    $('.unLogin').click(function(){
+        console.log('login btn click')
+        $('#login_pop_div').parent().parent().show();
+    })
+
     //搜索页面点击搜索按钮
     $('#search_btn').click(function(){
         window.location = '/index/search/index?keyword='+$('#search_keywords').val();

@@ -12,6 +12,10 @@
     <script type="text/javascript" src="/js/jquery.event.drag-1.5.min.js"></script>
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script>
+
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
 </head>
 
 <body>
@@ -157,5 +161,10 @@
 
     </div>
 </div>
+
+{if !$Think.session.user_id}
+{include file="common/login_pop" /}
+{/if}
+
 </body>
 </html>
