@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*格式化样式*/
+*{margin:0;padding:0}
+body{font:12px/1.5 Microsoft YaHei,Arial, Helvetica, sans-serif;color:#333;}
+table{width:100%; border-collapse:collapse;border:none;border-spacing:0}
+a{color:#202020;text-decoration:none;}
+img{border:none}
+input{vertical-align:middle;outline:none}
+textarea{outline:none;font-family:MIcrosoft YaHei}
+ul,ol,dl{list-style:none;}
+b,em,i,u,strong{font-weight:normal;font-style:normal;text-decoration:none;}
+h1,h2,h3,h4,h5,h6{font-size:14px;font-weight:normal;}
+
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+    color: #999;
+}
+input::-moz-placeholder,textarea::-moz-placeholder{
+    color: #999;
+}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder{
+    color: #999;
+}
+/*公共样式*/
+.fl{float:left;}
+.fr{float:right;}
+.clearfix{overflow:hidden;zoom:1}
+.clear{clear:both}
+
+
+@font-face
+{
+    font-family: myFirstFont;
+    src: url(../font/华康娃娃体W5.TTF);
+}
+
+body{background:url(../images/wrapBg.jpg) no-repeat top center;background-size:cover;}
+.wrap{height:10.8rem;overflow:hidden}
+.header{height:1.7rem;}
+.logo{width:4.12rem;height:1.04rem;margin-top:.3rem;margin-left:1rem}
+.unLogin{width:.66rem;height:.66rem;border:solid .02rem #fff;background:#f1aa36;border-radius:10px;margin-right:1.12rem;margin-top:.77rem;font-size:.16rem;color:#fff;text-align:center}
+.unLogin i{background:url(../images/unlogin.png) no-repeat;background-size:100%;width:.28rem;height:.28rem;display:block;margin:.05rem auto.03rem auto}
+.sear{width:.66rem;height:.66rem;border:solid .02rem #fff;background:#f1aa36;border-radius:10px;margin-right:.4rem;margin-top:.77rem;font-size:.16rem;color:#fff;text-align:center}
+.sear i{background:url(../images/searchIcon.png) no-repeat;background-size:100%;width:.26rem;height:.27rem;display:block;margin:.05rem auto.03rem auto}
+
+.footer{width:96%;height:.6rem;line-height:.6rem;text-align:center;color:#fff;background:rgba(0,0,0,.6);position:relative;z-index:10000;margin:0 auto;border-radius:.3rem;font-size:.22rem;margin-top:.1rem}
