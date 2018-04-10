@@ -21,7 +21,7 @@
     <div class="header">
         <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
         {if !$Think.session.user_id}
-        <a href="#" class="fr unLogin">
+        <a href="javascript:void(0)" class="fr unLogin">
             <i></i>
             <p>未登录</p>
         </a>
@@ -62,10 +62,10 @@
                             </video>
                         </div>
                         <div class="videoBot">
-                            <a href="void:javascript();" class="fr view_video_desc_btn">查看简介&gt;&gt;</a>
-                            <a href="void:javascript();" class="share fl">分享</a>
-                            <a href="void:javascript();" class="sc fl add_like_btn" data-video_id="{$video_info.video_id}">收藏</a>
-                            <a href="void:javascript();" class="dj fl">{$video_info.view_num}次播放</a>
+                            <a href="javascript:void(0)" class="fr view_video_desc_btn">查看简介&gt;&gt;</a>
+                            <a href="javascript:void(0)" class="share fl">分享</a>
+                            <a href="javascript:void(0)" class="sc fl add_like_btn" data-video_id="{$video_info.video_id}">收藏</a>
+                            <a href="javascript:void(0)" class="dj fl">{$video_info.view_num}次播放</a>
                         </div>
                     </div>
                     <div class="fr videoRight02">
