@@ -9,43 +9,32 @@
                 <i class="icon-home home-icon"></i>
                 <a href="/manage/index/index">起始页</a>
             </li>
-
-            <li>
-                <a href="/manage/index/index">验码</a>
-            </li>
-            <li class="active">验码</li>
-        </ul><!-- .breadcrumb -->
+            <li class="active">管理员列表</li>
+        </ul>
     </div>
 
     <div class="page-content">
-
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="header smaller lighter blue">后台管理账户列表</h3>
-
-                <form method="post" action="/manage/video/video_list">
+                <form method="post" action="/manage/admin/index">
                     <div class="col-sm-2">
-                        标题 ：<input type="text" name="title" />
+                        管理员角色 ：
+                        <select name="role_id">
+                            <option value="0">请选择</option>
+                            {volist name="role_list" id="vo"}
+                            <option value="{$vo.role_id}" >{$vo.role_name}</option>
+                            {/volist}
+                        </select>
                         <div class="space-12"></div>
                     </div>
 
                     <div class="col-sm-2">
-                        分类 ：<input type="text" name="cat_id" />
+                        登录名 ：<input type="text" name="account" />
                         <div class="space-12"></div>
                     </div>
 
-                    <div class="col-sm-4">
-                        上传时间
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="end_time" type="text" id="upload_time" class="form-control" data-date-format="yyyy-mm-dd" />
-                                                <span class="input-group-addon">
-                                                    <i class="icon-calendar"></i>
-                                                </span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-2">
+                        真实姓名 ：<input type="text" name="real_name" />
                         <div class="space-12"></div>
                     </div>
 
@@ -54,7 +43,7 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <a href="/manage/video/info" class="btn btn-success">添加视频</a>
+                        <a href="/manage/admin/add" class="btn btn-success">添加管理员</a>
                     </div>
                 </form>
 
@@ -85,13 +74,25 @@
                             <td>{$vo.user_name}</td>
                             <td>{$vo.email}</td>
                             <td>{$vo.mobile}</td>
-                            <td>{:date('Y-m-d H:i:s',$vo['last_login_time'])}</td>
+                            <td>{if $vo['last_login_time'] > 0} {:date('Y-m-d H:i:s',$vo['last_login_time'])} {else} 没登录过 {/if}</td>
                             <td>{$vo.status == 1 ? '启用' : '禁用'}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                    <a class="blue" href="/manage/activity/info?user_id={$vo.admin_id}">
-                                        <i class="icon-zoom-in bigger-130"></i>
+
+                                    {if  $vo.status==1}
+                                        <a class="blue" href="/manage/admin/change_status?admin_id={$vo.admin_id}&status=0">
+                                            <span>禁用</span>
+                                        </a>
+                                    {else}
+                                        <a class="blue" href="/manage/admin/change_status?admin_id={$vo.admin_id}&status=1">
+                                            <span>启用</span>
+                                        </a>
+                                    {/if}
+
+                                    <a class="blue" href="/manage/admin/edit?admin_id={$vo.admin_id}">
+                                        <span>编辑</span>
                                     </a>
+
                                 </div>
                             </td>
                         </tr>
@@ -107,6 +108,5 @@
             </div>
         </div>
 
-
-    </div><!-- /.page-content -->
-</div><!-- /.main-content -->
+    </div>
+</div>

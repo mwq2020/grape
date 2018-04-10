@@ -14,12 +14,18 @@ class Admin extends \think\Controller
     public function index()
     {
         $where = [];
-        if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        if(!empty($_REQUEST['account'])){
+            $where['account'] = ['like','%'.trim($_REQUEST['account']).'%'];
         }
-        if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+        if(!empty($_REQUEST['real_name'])){
+            $where['real_name'] = ['like','%'.trim($_REQUEST['real_name']).'%'];
         }
+        if(!empty($_REQUEST['role_id'])){
+            $where['role_id'] = intval($_REQUEST['role_id']);
+        }
+
+        $role_list = Loader::model('Role')->where('status',1)->select();
+        $this->assign('role_list',$role_list);
 
         $admin_list = Loader::model('Admin')->where($where)->order('admin_id','desc')->paginate(10);
         $this->assign('admin_list', $admin_list);
@@ -32,16 +38,165 @@ class Admin extends \think\Controller
     }
 
     /**
+     * 管理员添加
+     * @return mixed
+     */
+    public function add()
+    {
+        $error_msg = '';
+        $role_list = Loader::model('Role')->where('status',1)->select();
+        $this->assign('role_list',$role_list);
+
+        if(empty($_POST)){
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('admin/admin_add');
+        }
+
+        try {
+            if(empty($_REQUEST['account'])){
+                throw new \Exception('登录账号不能为空');
+            }
+            if(empty($_REQUEST['user_name'])){
+                throw new \Exception('用户名不能为空');
+            }
+            if(empty($_REQUEST['email'])){
+                throw new \Exception('邮箱不能为空');
+            }
+            if(empty($_REQUEST['mobile'])){
+                throw new \Exception('手机号不能为空');
+            }
+            if(empty($_REQUEST['password'])){
+                throw new \Exception('密码不能为空');
+            }
+            if($_REQUEST['password'] != $_REQUEST['password_repeat']){
+                throw new \Exception('密码和确认密码不一致');
+            }
+            if(empty($_REQUEST['role_id'])){
+                throw new \Exception('角色不能为空');
+            }
+
+            $data = [];
+            $data['account']    = $_REQUEST['account'];
+            $data['user_name']  = $_REQUEST['user_name'];
+            $data['email']      = $_REQUEST['email'];
+            $data['mobile']     = $_REQUEST['mobile'];
+            $data['salt']       = rand(1000,9999);
+            $data['password']   = md5($_REQUEST['password'].$data['salt']);
+            $data['role_id']    = intval($_REQUEST['role_id']);
+            $data['status']     = 1;
+            $data['add_time']   = time();
+            $flag = Loader::model('Admin')->insert($data);
+            if(empty($flag)){
+                throw new \Exception('账户添加失败');
+            }
+
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('admin/admin_add');
+        }
+        return $this->redirect('/manage/admin/index');
+    }
+
+    /**
+     * 管理员修改
+     * @return mixed
+     */
+    public function edit()
+    {
+        $error_msg = '';
+        $role_list = Loader::model('Role')->where('status',1)->select();
+        $this->assign('role_list',$role_list);
+
+        if(empty($_POST)){
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('admin/admin_edit');
+        }
+
+        try {
+            if(empty($_REQUEST['account'])){
+                throw new \Exception('登录账号不能为空');
+            }
+            if(empty($_REQUEST['user_name'])){
+                throw new \Exception('用户名不能为空');
+            }
+            if(empty($_REQUEST['email'])){
+                throw new \Exception('邮箱不能为空');
+            }
+            if(empty($_REQUEST['mobile'])){
+                throw new \Exception('手机号不能为空');
+            }
+            if(empty($_REQUEST['password'])){
+                throw new \Exception('密码不能为空');
+            }
+            if($_REQUEST['password'] != $_REQUEST['password_repeat']){
+                throw new \Exception('密码和确认密码不一致');
+            }
+            if(empty($_REQUEST['role_id'])){
+                throw new \Exception('角色不能为空');
+            }
+            if(empty($_REQUEST['admin_id'])){
+                throw new \Exception('参数错误');
+            }
+            $admin_info = Loader::model('Admin')->find($_REQUEST['admin_id']);
+            if(empty($admin_info)){
+                throw new \Exception('管理员不存在，刷新试试');
+            }
+
+            $data = [];
+            $data['account']    = $_REQUEST['account'];
+            $data['user_name']  = $_REQUEST['user_name'];
+            $data['email']      = $_REQUEST['email'];
+            $data['mobile']     = $_REQUEST['mobile'];
+            $data['salt']       = rand(1000,9999);
+            $data['password']   = md5($_REQUEST['password'].$data['salt']);
+            $data['role_id']    = intval($_REQUEST['role_id']);
+            $data['status']     = 1;
+            $flag = Loader::model('Admin')->update($data);
+            if(empty($flag)){
+                throw new \Exception('账户修改失败');
+            }
+
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('admin/admin_edit');
+        }
+        return $this->redirect('/manage/admin/index');
+    }
+
+
+    public function change_status()
+    {
+        try {
+            if(!isset($_REQUEST['status']) || empty($_REQUEST['admin_id'])){
+                throw new \Exception('入参错误');
+            }
+            $admin_info = Loader::model('Admin')->where('admin_id',$_REQUEST['admin_id'])->find();
+            if(empty($admin_info)){
+                throw new \Exception('管理员不存在');
+            }
+            $admin_info->status = intval($_REQUEST['status']);
+            $admin_info->save();
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('admin/admin_add');
+        }
+        return $this->redirect('/manage/admin/index');
+    }
+
+    /**
      * 用户修改密码
      */
     public function modify_password()
     {
         if(!empty($_POST)){
-//            echo "<pre>";
-//            print_r($_POST);
-//            exit;
-
-
             try {
                 $admin_id = session('admin_id');
                 if(empty($_POST['admin_id']) || empty($admin_id) || $admin_id != $_POST['admin_id']) {
@@ -110,85 +265,6 @@ class Admin extends \think\Controller
 
         $this->view->engine->layout('layout');
         return $this->fetch('video/video_list',$view_data);
-    }
-
-
-    /**
-     * 视频的添加、修改页面
-     * @return mixed
-     */
-    public function  info()
-    {
-        $view_data = [];
-        $view_data['error_msg'] = '';
-
-
-        $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
-        if($video_id){
-            $video_info = Db::table('video')->find($video_id);
-            $view_data['video_info'] = $video_info;
-        }
-
-        $this->view->engine->layout('layout');
-        return $this->fetch('video/info',$view_data);
-    }
-
-    /**
-     * 视频的添加和编辑
-     */
-    public function edit()
-    {
-        $image_name = '';
-        $file = request()->file('video_img');
-        if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image');
-            if($info){
-                $image_name =  $info->getSaveName();
-            }else{
-                // 上传失败获取错误信息
-                echo $file->getError();exit;
-            }
-        }
-
-        $video_name = '';
-        $file = request()->file('video');
-        if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'video');
-            if($info){
-                $video_name =  $info->getSaveName();
-            }else{
-                // 上传失败获取错误信息
-                echo $file->getError(); exit;
-            }
-        }
-        //exit;
-
-        $data = [];
-        $data['cat_id']         = $_REQUEST['cat_id'];
-        $data['second_cat_id']  = $_REQUEST['second_cat_id'];
-        $data['title']          = $_REQUEST['title'];
-        if($image_name){
-            $data['video_img']      = $image_name;
-        }
-        if($video_name){
-            $data['video_url']      = $video_name;
-        }
-        $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 2;
-        $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
-        $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
-        $data['add_time']       = time();
-        $data['update_time']    = time();
-        $flag = Db::table('video')->insert($data);
-        if(empty($flag)){
-            echo "添加失败，请重试";exit;
-        }
-        $this->redirect('/manage/video/video_list');
-    }
-
-
-    public function test()
-    {
-        echo "ffff";exit;
     }
 
     /**
