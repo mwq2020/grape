@@ -76,6 +76,12 @@ class Admin extends \think\Controller
                 throw new \Exception('角色不能为空');
             }
 
+            //检查账户名是否已经存在
+            $account_exist = Loader::model('Admin')->where('account',$_REQUEST['account'])->find();
+            if(!empty($account_exist)){
+                throw new \Exception('账户名已存在，请更换');
+            }
+
             $data = [];
             $data['account']    = $_REQUEST['account'];
             $data['user_name']  = $_REQUEST['user_name'];
@@ -110,6 +116,9 @@ class Admin extends \think\Controller
         $role_list = Loader::model('Role')->where('status',1)->select();
         $this->assign('role_list',$role_list);
 
+        $admin_info = Loader::model('Admin')->find($_REQUEST['admin_id']);
+        $this->assign('admin_info',$admin_info);
+
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
@@ -129,11 +138,10 @@ class Admin extends \think\Controller
             if(empty($_REQUEST['mobile'])){
                 throw new \Exception('手机号不能为空');
             }
-            if(empty($_REQUEST['password'])){
-                throw new \Exception('密码不能为空');
-            }
-            if($_REQUEST['password'] != $_REQUEST['password_repeat']){
-                throw new \Exception('密码和确认密码不一致');
+            if(!empty($_REQUEST['password']) || !empty($_REQUEST['password_repeat'])){
+                if($_REQUEST['password'] != $_REQUEST['password_repeat']){
+                    throw new \Exception('密码和确认密码不一致');
+                }
             }
             if(empty($_REQUEST['role_id'])){
                 throw new \Exception('角色不能为空');
@@ -141,25 +149,32 @@ class Admin extends \think\Controller
             if(empty($_REQUEST['admin_id'])){
                 throw new \Exception('参数错误');
             }
-            $admin_info = Loader::model('Admin')->find($_REQUEST['admin_id']);
             if(empty($admin_info)){
                 throw new \Exception('管理员不存在，刷新试试');
             }
 
-            $data = [];
-            $data['account']    = $_REQUEST['account'];
-            $data['user_name']  = $_REQUEST['user_name'];
-            $data['email']      = $_REQUEST['email'];
-            $data['mobile']     = $_REQUEST['mobile'];
-            $data['salt']       = rand(1000,9999);
-            $data['password']   = md5($_REQUEST['password'].$data['salt']);
-            $data['role_id']    = intval($_REQUEST['role_id']);
-            $data['status']     = 1;
-            $flag = Loader::model('Admin')->update($data);
+            //检查账户名是否已经存在
+            $map = [];
+            $map['admin_id'] = ['<>',$_REQUEST['admin_id']];
+            $map['account'] = $_REQUEST['account'];
+            $account_exist = Loader::model('Admin')->where($map)->find();
+            if(!empty($account_exist)){
+                throw new \Exception('账户名已存在，请更换');
+            }
+
+            $admin_info->account    = $_REQUEST['account'];
+            $admin_info->user_name  = $_REQUEST['user_name'];
+            $admin_info->email      = $_REQUEST['email'];
+            $admin_info->mobile     = $_REQUEST['mobile'];
+            $admin_info->role_id    = intval($_REQUEST['role_id']);
+            if(!empty($_REQUEST['password'])){
+                $admin_info->salt = rand(1000,9999);
+                $admin_info->password = md5($_REQUEST['password'].$admin_info->salt);
+            }
+            $flag = $admin_info->save();
             if(empty($flag)){
                 throw new \Exception('账户修改失败');
             }
-
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);

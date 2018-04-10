@@ -26,11 +26,7 @@
                 <button type="button" class="close" data-dismiss="alert">
                     <i class="icon-remove"></i>
                 </button>
-
-                <strong>
-                    <i class="icon-remove"></i>
-                    错误
-                </strong>
+                <strong> <i class="icon-remove"></i>错误</strong>
                 【{$error_msg}】
             </div>
         </div>
@@ -43,33 +39,33 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">账号登录</label>
                         <div class="col-sm-9">
-                            <input type="text" name="account" value="" />
+                            <input type="text" name="account" value="{$admin_info.account}" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">用户名</label>
                         <div class="col-sm-9">
-                            <input type="text" name="user_name" value="" />
+                            <input type="text" name="user_name" value="{$admin_info.user_name}" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">邮箱</label>
                         <div class="col-sm-9">
-                            <input type="text" name="email" value="" />
+                            <input type="text" name="email" value="{$admin_info.email}" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">手机号</label>
                         <div class="col-sm-9">
-                            <input type="text" name="mobile" value="" />
+                            <input type="text" name="mobile" value="{$admin_info.mobile}" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">管理员初始密码</label>
+                        <label class="col-sm-3 control-label no-padding-right">管理员密码</label>
                         <div class="col-sm-9">
                             <input type="password" name="password" value="" />
                         </div>
@@ -88,11 +84,13 @@
                             <select name="role_id">
                                 <option value="0">请选择</option>
                                 {volist name="role_list" id="vo"}
-                                <option value="{$vo.role_id}" >{$vo.role_name}</option>
+                                <option value="{$vo.role_id}" {if $admin_info.role_id == $vo.role_id}selected{/if} >{$vo.role_name}</option>
                                 {/volist}
                             </select>
                         </div>
                     </div>
+
+                    <input type="hidden" name="admin_id" value="{$admin_info.admin_id}" />
 
                     <div class="clearfix form-actions">
                         <div class="col-md-offset-3 col-md-9">
