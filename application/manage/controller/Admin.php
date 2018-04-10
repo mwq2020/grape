@@ -17,8 +17,8 @@ class Admin extends \think\Controller
         if(!empty($_REQUEST['account'])){
             $where['account'] = ['like','%'.trim($_REQUEST['account']).'%'];
         }
-        if(!empty($_REQUEST['real_name'])){
-            $where['real_name'] = ['like','%'.trim($_REQUEST['real_name']).'%'];
+        if(!empty($_REQUEST['user_name'])){
+            $where['user_name'] = ['like','%'.trim($_REQUEST['user_name']).'%'];
         }
         if(!empty($_REQUEST['role_id'])){
             $where['role_id'] = intval($_REQUEST['role_id']);
