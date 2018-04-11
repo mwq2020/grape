@@ -10,9 +10,8 @@
                 <i class="icon-home home-icon"></i>
                 <a href="/manage/index/index">起始页</a>
             </li>
-
             <li>
-                <a href="/manage/role/index">角色列表</a>
+                <a href="/manage/contract/index">合同列表</a>
             </li>
         </ul><!-- .breadcrumb -->
     </div>
@@ -26,12 +25,7 @@
                 <button type="button" class="close" data-dismiss="alert">
                     <i class="icon-remove"></i>
                 </button>
-
-                <strong>
-                    <i class="icon-remove"></i>
-                    错误
-                </strong>
-                【{$error_msg}】
+                <strong><i class="icon-remove"></i>错误</strong> 【{$error_msg}】
             </div>
         </div>
         {/if}
@@ -39,46 +33,67 @@
         <!-- 验证表单部分 -->
         <div class="row">
             <div class="col-xs-12">
-                <form class="form-horizontal" role="form" action="" method="post">
+                <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">角色名称</label>
+                        <label class="col-sm-3 control-label no-padding-right">合同名称</label>
                         <div class="col-sm-9">
-                            <input type="text" name="role_name" value="{$role_info.role_name}" />
+                            <input type="text" name="title" value="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 管理员权限 </label>
-                        <div class="col-sm-30">
-                            <input type="checkbox" name="select_all">全选
-                            <br>
-                            <table>
-                                {foreach name="privilege_lsit" item="vo" key="privilege_key"}
-                                <tr>
-                                    <td>{$vo.name}</td>
-                                    <td>
-                                        <div style="border:1px solid #cccccc;margin:5px 10px;">
-                                            {foreach name="vo.child" item="role_list" key="role_key"}
-                                            <div>
-                                                {foreach name="role_list" item="item_row" key="item_key"}
-                                                <input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1">{$item_row}
-                                                {/foreach}
-                                            </div>
-                                            {/foreach}
-                                        </div>
-                                    </td>
-                                </tr>
-                                {/foreach}
-                            </table>
+                        <label class="col-sm-3 control-label no-padding-right">合同起止时间</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="contract_start_time" value="" /> ~ <input type="text" name="contract_end_time" value="" />
                         </div>
                     </div>
 
-                    <input type="hidden" name="role_id" value="{$role_info.role_id}">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">客户姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="customer_name" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">合同金额</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="order_amount" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">合同签订时间</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="contract_time" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">联系人</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="link_person" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">联系电话</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="link_person_phone" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">合同附件</label>
+                        <div class="col-sm-9">
+                            <input type="file" name="contract_img" value="" />
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">备注</label>
                         <div class="col-sm-9">
-                            <textarea name="remark">{$role_info.remark}</textarea>
+                            <textarea name="remark"></textarea>
                         </div>
                     </div>
 

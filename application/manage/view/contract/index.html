@@ -9,11 +9,7 @@
                 <i class="icon-home home-icon"></i>
                 <a href="/manage/index/index">起始页</a>
             </li>
-
-            <li>
-                <a href="/manage/index/index">验码</a>
-            </li>
-            <li class="active">验码</li>
+            <li class="active">合同管理</li>
         </ul><!-- .breadcrumb -->
     </div>
 
@@ -21,32 +17,19 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="header smaller lighter blue">视频列表</h3>
-
-                <form method="post" action="/manage/video/video_list">
-                    <div class="col-sm-2">
-                        标题 ：<input type="text" name="title" />
+                <form method="post" action="/manage/contact/index">
+                    <div class="col-sm-3">
+                        客户名称 ：<input type="text" name="title" />
                         <div class="space-12"></div>
                     </div>
 
                     <div class="col-sm-2">
-                        分类 ：<input type="text" name="cat_id" />
-                        <div class="space-12"></div>
+                        合同金额 ：<input type="text" name="cat_id" />
                     </div>
 
-                    <div class="col-sm-4">
-                        上传时间
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="end_time" type="text" id="upload_time" class="form-control" data-date-format="yyyy-mm-dd" />
-                                                <span class="input-group-addon">
-                                                    <i class="icon-calendar"></i>
-                                                </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space-12"></div>
+                    <div class="col-sm-2">
+                        起止时间 ：
+                        <input name="start_time" type="text" />
                     </div>
 
                     <div class="col-sm-2">
@@ -54,7 +37,7 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <a href="/manage/video/info" class="btn btn-success">添加视频</a>
+                        <a href="/manage/contract/add" class="btn btn-success">添加合同</a>
                     </div>
                 </form>
 
@@ -89,9 +72,11 @@
                             <td>{:date('Y-m-d H:i:s',$vo['contract_start_time'])}  ~  {:date('Y-m-d H:i:s',$vo['contract_end_time'])}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                    <a class="blue" href="/manage/contract/info?user_id={$vo.contract_id}">
-                                        <i class="icon-zoom-in bigger-130"></i>
+
+                                    <a class="blue" href="/manage/contract/edit?contract_id={$vo.contract_id}">
+                                        <span>编辑</span>
                                     </a>
+
                                 </div>
                             </td>
                         </tr>
