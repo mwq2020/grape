@@ -9,11 +9,7 @@
                 <i class="icon-home home-icon"></i>
                 <a href="/manage/index/index">起始页</a>
             </li>
-
-            <li>
-                <a href="/manage/index/index">验码</a>
-            </li>
-            <li class="active">验码</li>
+            <li class="active">客户管理</li>
         </ul><!-- .breadcrumb -->
     </div>
 
@@ -21,40 +17,56 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="header smaller lighter blue">视频列表</h3>
-
-                <form method="post" action="/manage/video/video_list">
-                    <div class="col-sm-2">
-                        标题 ：<input type="text" name="title" />
+                <form method="post" action="/manage/customer/index">
+                    <div class="col-sm-3">
+                        客户名称 ：<input type="text" name="title" />
                         <div class="space-12"></div>
                     </div>
 
-                    <div class="col-sm-2">
-                        分类 ：<input type="text" name="cat_id" />
-                        <div class="space-12"></div>
+                    <div class="col-sm-3">
+                        账号 ：<input type="text" name="cat_id" />
                     </div>
 
-                    <div class="col-sm-4">
-                        上传时间
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="end_time" type="text" id="upload_time" class="form-control" data-date-format="yyyy-mm-dd" />
-                                                <span class="input-group-addon">
-                                                    <i class="icon-calendar"></i>
-                                                </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="space-12"></div>
+                    <div class="col-sm-3">
+                        区域 ：
+                        <select>
+                            <option value="0">请选择</option>
+                            <option value="1">北京</option>
+                            <option value="2">上海</option>
+                        </select>
                     </div>
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
+                        销售对接人 ：<input type="text" name="cat_id" />
+                    </div>
+
+                    <div class="col-sm-3">
+                        客户类型 ：
+                        <select>
+                        <option value="0">请选择</option>
+                        <option value="1">正式客户</option>
+                        <option value="2">使用客户</option>
+                    </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        注册时间 ： <input type="text" name="cat_id" />
+                    </div>
+
+                    <div class="col-sm-3">
+                        失效时间 ： <input type="text" name="cat_id" />
+                    </div>
+
+                    <div class="col-sm-1">
                         <input class="btn btn-success" type="submit" value="搜索">
                     </div>
 
-                    <div class="col-sm-2">
-                        <a href="/manage/video/info" class="btn btn-success">添加视频</a>
+                    <div class="col-sm-1">
+                        <a href="/manage/customer/add" class="btn btn-success">新增客户</a>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a href="/manage/customer/add" class="btn btn-success">批量提醒</a>
                     </div>
                 </form>
 
@@ -85,13 +97,35 @@
                             <td>{$vo.sale_person}</td>
                             <td>{$vo.region_name}</td>
                             <td>{$vo.type}</td>
-                            <td>{:date('Y-m-d H:i:s',$vo['register_time'])}</td>
+                            <td>{:date('Y-m-d H:i:s',$vo['start_time'])}</td>
                             <td>{:date('Y-m-d H:i:s',$vo['end_time'])}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                    <a class="blue" href="/manage/customer/info?user_id={$vo.customer_id}">
-                                        <i class="icon-zoom-in bigger-130"></i>
+
+                                    <a class="blue" href="/manage/customer/edit?customer_id={$vo.customer_id}">
+                                        <span>编辑</span>
                                     </a>
+
+                                    <a class="blue" href="/manage/customer/edit?customer_id={$vo.customer_id}">
+                                        <span>提醒</span>
+                                    </a>
+
+                                    <a class="blue" href="/manage/customer/edit?customer_id={$vo.customer_id}">
+                                        <span>用户管理</span>
+                                    </a>
+
+                                    <a class="blue" href="/manage/customer/edit?customer_id={$vo.customer_id}">
+                                        <span>时间管理</span>
+                                    </a>
+
+                                    <a class="blue" href="/manage/customer/edit?customer_id={$vo.customer_id}">
+                                        <span>ip管理</span>
+                                    </a>
+
+                                    <a class="blue" href="/manage/customer/edit?customer_id={$vo.customer_id}">
+                                        <span>密码更改</span>
+                                    </a>
+
                                 </div>
                             </td>
                         </tr>
