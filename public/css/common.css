@@ -45,3 +45,4 @@ body{background:url(../images/wrapBg.jpg) no-repeat top center;background-size:c
 .sear i{background:url(../images/searchIcon.png) no-repeat;background-size:100%;width:.26rem;height:.27rem;display:block;margin:.05rem auto.03rem auto}
 
 .footer{width:96%;height:.6rem;line-height:.6rem;text-align:center;color:#fff;background:rgba(0,0,0,.6);position:relative;z-index:10000;margin:0 auto;border-radius:.3rem;font-size:.22rem;margin-top:.1rem}
+.footer a{color:#fff;display:inline-block;vertical-align:middle;margin-left:.1rem}
