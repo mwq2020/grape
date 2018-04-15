@@ -15,11 +15,26 @@ class User extends \think\Controller
     {
         $return_data = ['code' => 200,'data'=>[],'msg'=>''];
         try {
-            //调用接口判断登录是否正确
+            //调用接口判断登录是否正确、
             $reader_no = isset($_REQUEST['reader_no']) ? $_REQUEST['reader_no'] : '';
+            $password = isset($_REQUEST['password']) ? $_REQUEST['password'] : '';
+
+            $flag = Loader::model('User')->Login($reader_no,$password);
+            if(empty($flag)){
+                throw new \Exception('登录失败，请检查用户名及密码');
+            }
+
             $user_info = Loader::model('User')->where('reader_no',$reader_no)->find();
             if(empty($user_info)){
-                throw new Exception('用户不存在');
+                $user_info = [];
+                $user_info['reader_no'] = $reader_no;
+                $user_info['status'] = 1;
+                $user_info['register_time'] = time();
+                $flag = Loader::model('User')->insert($user_info);
+                if(empty($flag)){
+                    throw new \Exception('登录失败，请检查用户名及密码');
+                }
+                $user_info['user_id'] = Loader::model('User')->getLastInsID();
             }
             $return_data['data'] = ['user_id' => $user_info['user_id'],'reader_no' => $user_info['reader_no']];
             //session('[start]');
@@ -27,7 +42,7 @@ class User extends \think\Controller
             session('reader_no',$user_info['reader_no']);
             session('avatar','/static/image/user/default_user.jpg');
             session('user_info',$user_info);
-        } catch (Exception $e){
+        } catch (\Exception $e){
             $return_data['code'] = 500;
             $return_data['msg'] = $e->getMessage();
         }
