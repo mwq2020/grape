@@ -39,8 +39,8 @@
             <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
         </ul>
         <div class="clearfix hdCz">
-            <a href="/index/activity/upload" class="fr"><i class="hdIcon01"></i>作品上传</a>
-            <a href="/index/activity/signup" class="fr"><i class="hdIcon02"></i>活动报名</a>
+            <a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=upload" class="fr {if $step == 'upload'}current{/if}"><i class="hdIcon01"></i>作品上传</a>
+            <a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=signup" class="fr {if $step == 'signup'}current{/if}"><i class="hdIcon02"></i>活动报名</a>
             <a href="/index/activity/index" class="fr"><i class="hdIcon03"></i>所有活动</a>
         </div>
     </div>
@@ -81,9 +81,9 @@
                     var colee_right=document.getElementById("colee_right");
                     colee_right2.innerHTML=colee_right1.innerHTML
                     function Marquee4(){
-                        if(colee_right.scrollLeft<=0)
+                        if(colee_right.scrollLeft <= 0){
                             colee_right.scrollLeft+=colee_right2.offsetWidth
-                        else{
+                        }else{
                             colee_right.scrollLeft--
                         }
                     }
@@ -106,10 +106,7 @@
                 <li><span>主办方：</span>紫葡萄少儿艺术库</li>
                 <li><span>活动简介：</span></li>
                 <li>
-                    {$activity_info.activity_desc}
-                    <p>洒进阳台的缕缕阳光是红色的，你也是红色的；冒着气的暖壶指示灯是红色的，你也是红色的；马路上突然驶过的车是红色的，你也是红色的；
-                        办公桌上的保温杯是红色的，你也是红色的；电影院里的座椅是红色的，你也是红色的；商场门头上正在安装的圣诞彩灯是红色的你也是红色的......</p>
-                    <p>随手拍下你眼中红色的一切事物，即可获得600积分，体验城市文化脉络，尽享城市文化生活。</p>
+                    <p>{$activity_info.activity_desc}</p>
                 </li>
             </ul>
 
@@ -121,5 +118,35 @@
     </div>
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
 </div>
+
+<!-- 报名弹层 -->
+{if $step == 'signup'}
+{include file="common/activity_signup_pop" /}
+{/if}
+
+
+<!-- 读者证号报名弹窗 -->
+{if $step == 'readno_signup'}
+{include file="common/activity_readno_signup" /}
+{/if}
+
+
+<!-- 手机号报名弹窗 -->
+{if $step == 'mobile_signup'}
+{include file="common/activity_mobile_signup" /}
+{/if}
+
+
+<!-- 上传文件弹层 -->
+{if $step == 'upload'}
+{include file="common/activity_upload_file" /}
+{/if}
+
+
+<!-- 上传文件弹层 -->
+{if $step == 'upload_info'}
+{include file="common/activity_upload_info" /}
+{/if}
+
 </body>
 </html>

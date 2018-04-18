@@ -69,6 +69,8 @@ class Activity extends \think\Controller
 
         $this->assign('activity_info',$activity_info);
         $this->assign('page_title','活动详情');
+        $step = isset($_REQUEST['step']) ? $_REQUEST['step'] : '';
+        $this->assign('step',$step);
         return $this->fetch('info');
     }
 
