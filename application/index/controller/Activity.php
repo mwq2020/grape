@@ -139,4 +139,38 @@ class Activity extends \think\Controller
         exit(json_encode($return_data));
     }
 
+    public function send_sms()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>[]];
+        try {
+            $mobile = isset($_REQUEST['mobile']) ? $_REQUEST['mobile'] : '';
+            if(empty($mobile)){
+                throw new \Exception('手机号不能为空');
+            }
+            $code = rand(100000,999999);
+            $param_data = ['code' => $code,'sms_log'=>'sadfasfasf'];
+            $flag = Loader::model('SmsLog')->sendValidSms('18211072317',$param_data,'SMS_130240207');
+            if(empty($flag)){
+                throw new \Exception('短信发送失败，请重试');
+            }
+
+            $sms_content = "验证码{$code},有效期10分钟";
+            $sms_data = [];
+            $sms_data['user_id'] = 0;
+            $sms_data['mobile'] = $mobile;
+            $sms_data['content'] = $sms_content;
+            $sms_data['code'] = $code;
+            $sms_data['status'] = 1;
+            $sms_data['add_time'] = time();
+            $flag = Loader::model('SmsLog')->insert($sms_data);
+            if(empty($flag)){
+                throw new \Exception('短信入库失败，请重试');
+            }
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
 }

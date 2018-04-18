@@ -93,4 +93,25 @@ $(function(){
     })
 
 
+
+
+
+
+
+    //活动详情页面关闭弹层按钮
+    $('.colseActivity').click(function(){
+        $(this).parent().parent().hide();
+    })
+
+    //点击获取验证码按钮
+    $('.hqYzm').click(function(){
+        console.log('获取验证码');
+    })
+
+    //手机号报名页面确认按钮
+    $('.activityConfirm').click(function(){
+        console.log('手机号报名提交页面');
+    })
+
+
 })
