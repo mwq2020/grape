@@ -13,7 +13,7 @@
     <script type="text/javascript" src="/js/jquery.event.drag-1.5.min.js"></script>
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script></head>
-    <script type="text/javascript" src="/static/js/common.js"></script>
+<script type="text/javascript" src="/static/js/common.js"></script>
 <body>
 <div class="wrap">
     <div class="header">
@@ -39,7 +39,7 @@
             <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">活动规则</a></li>
             {if $activity_status != 'not_beginning'}
             {if $activity_status == 'starting'}
-            <li><a href="/index/activity/product_list?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
+            <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
             {else}
             <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">结果公示</a></li>
             {/if}
@@ -61,20 +61,20 @@
                 <ul>
                     <li class="lict2">
                         {volist name="product_list" id="vo"}
-                            <div class="Worksct">
-                                <i class="Nummber fl">{$key+1}</i>
-                                <dl>
-                                    <dt class="shareVideo">
-                                        <img src="{$vo.product_img}" />
-                                        <span class="codePopup"></span>
-                                    </dt>
-                                    <dd>
-                                        <a href="#">{$vo.product_name}</a>
-                                        <b>上传者：{$vo.real_name}</b>
-                                        <p>{$vo.product_desc|msubstr=0,34}...</p>
-                                    </dd>
-                                </dl>
-                            </div>
+                        <div class="Worksct">
+                            <i class="Nummber fl">{$key+1}</i>
+                            <dl>
+                                <dt class="shareVideo">
+                                    <img src="{$vo.product_img}" />
+                                    <span class="codePopup"></span>
+                                </dt>
+                                <dd>
+                                    <a href="#">{$vo.product_name}</a>
+                                    <b>上传者：{$vo.real_name}</b>
+                                    <p>{$vo.product_desc|msubstr=0,34}...</p>
+                                </dd>
+                            </dl>
+                        </div>
                         {/volist}
 
                         <!--

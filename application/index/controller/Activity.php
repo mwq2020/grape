@@ -62,12 +62,14 @@ class Activity extends \think\Controller
             }
         }
 
-        //输出活动结束标志
+        //活动状态
+        $activity_status = 'starting';
         if($activity_info['end_time'] <= time()){
-            $this->assign('is_end',1);
-        } else {
-            $this->assign('is_end',0);
+            $activity_status = 'ending';
+        } elseif($activity_info['start_time'] >= time()) {
+            $activity_status = 'not_beginning';
         }
+        $this->assign('activity_status',$activity_status);
 
         //判断是否输出报名按钮、上传作品按钮
         $user_id = session('user_id');
@@ -117,6 +119,16 @@ class Activity extends \think\Controller
             }
         }
 
+        //输出活动结束标志
+        //活动状态
+        $activity_status = 'starting';
+        if($activity_info['end_time'] <= time()){
+            $activity_status = 'ending';
+        } elseif($activity_info['start_time'] >= time()) {
+            $activity_status = 'not_beginning';
+        }
+        $this->assign('activity_status',$activity_status);
+
         //判断是否输出报名按钮、上传作品按钮
         $user_id = session('user_id');
         $is_signup = 0;
@@ -147,12 +159,76 @@ class Activity extends \think\Controller
      */
     public function res()
     {
+        $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
+        $activity_info = Loader::model('Activity')->find($activity_id);
+        if($activity_info){
+            $activity_info = $activity_info->toArray();
+
+            $activity_info['activity_gallery'] = json_decode($activity_info['activity_gallery'],true);
+            if($activity_info['start_time'] > time()){
+                $activity_info['status_txt'] = '未开始';
+            } elseif($activity_info['start_time'] <= time() && $activity_info['end_time'] >= time()){
+                $activity_info['status_txt'] = '进行中';
+            }else {
+                $activity_info['status_txt'] = '已结束';
+            }
+        }
+
+
+        //活动状态
+        $activity_status = 'starting';
+        if($activity_info['end_time'] <= time()){
+            $activity_status = 'ending';
+        } elseif($activity_info['start_time'] >= time()) {
+            $activity_status = 'not_beginning';
+        }
+        $this->assign('activity_status',$activity_status);
+
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id')->join('user c','a.user_id=c.user_id');
         $product_list = $query->select();
 
         $this->assign('product_list',$product_list);
         $this->assign('page_title','活动结果');
         return $this->fetch('res');
+    }
+
+
+    /**
+     * 活动结果页面
+     */
+    public function product_list()
+    {
+        $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
+        $activity_info = Loader::model('Activity')->find($activity_id);
+        if($activity_info){
+            $activity_info = $activity_info->toArray();
+
+            $activity_info['activity_gallery'] = json_decode($activity_info['activity_gallery'],true);
+            if($activity_info['start_time'] > time()){
+                $activity_info['status_txt'] = '未开始';
+            } elseif($activity_info['start_time'] <= time() && $activity_info['end_time'] >= time()){
+                $activity_info['status_txt'] = '进行中';
+            }else {
+                $activity_info['status_txt'] = '已结束';
+            }
+        }
+
+
+        //活动状态
+        $activity_status = 'starting';
+        if($activity_info['end_time'] <= time()){
+            $activity_status = 'ending';
+        } elseif($activity_info['start_time'] >= time()) {
+            $activity_status = 'not_beginning';
+        }
+        $this->assign('activity_status',$activity_status);
+
+        $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id')->join('user c','a.user_id=c.user_id');
+        $product_list = $query->select();
+
+        $this->assign('product_list',$product_list);
+        $this->assign('page_title','活动作品列表');
+        return $this->fetch('product_list');
     }
 
 
