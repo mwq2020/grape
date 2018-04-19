@@ -173,8 +173,6 @@ class Activity extends \think\Controller
                 $activity_info['status_txt'] = '已结束';
             }
         }
-
-
         //活动状态
         $activity_status = 'starting';
         if($activity_info['end_time'] <= time()){
@@ -184,10 +182,18 @@ class Activity extends \think\Controller
         }
         $this->assign('activity_status',$activity_status);
 
+        //获奖作品展示
+        $query = Db::table('product')->alias('a')->join('user c','a.user_id=c.user_id');
+        $map = [];
+        $map['a.activity_id'] = $activity_id;
+        $award_list = $query->where($map)->where('a.award_grade','>',0)->select();
+        $this->assign('award_list',$award_list);
+
+        //所有作品展示
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id')->join('user c','a.user_id=c.user_id');
         $product_list = $query->select();
-
         $this->assign('product_list',$product_list);
+
         $this->assign('page_title','活动结果');
         return $this->fetch('res');
     }

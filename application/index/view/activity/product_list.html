@@ -39,7 +39,7 @@
             <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">活动规则</a></li>
             {if $activity_status != 'not_beginning'}
             {if $activity_status == 'starting'}
-            <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
+            <li class="cur"><a href="/index/activity/res?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
             {else}
             <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">结果公示</a></li>
             {/if}

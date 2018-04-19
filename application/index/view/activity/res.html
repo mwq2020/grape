@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{if $page_title}{$page_title}{else}活动结果{/if}</title>
+    <title>{if $page_title}{$page_title}{else}活动结果公示{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
@@ -13,7 +13,7 @@
     <script type="text/javascript" src="/js/jquery.event.drag-1.5.min.js"></script>
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script></head>
-    <script type="text/javascript" src="/static/js/common.js"></script>
+
 <body>
 <div class="wrap">
     <div class="header">
@@ -39,9 +39,9 @@
             <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">活动规则</a></li>
             {if $activity_status != 'not_beginning'}
             {if $activity_status == 'starting'}
-            <li><a href="/index/activity/product_list?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
+            <li class="cur"><a href="/index/activity/product_list?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
             {else}
-            <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">结果公示</a></li>
+            <li class="cur"><a href="/index/activity/res?activity_id={$Think.request.activity_id}">结果公示</a></li>
             {/if}
             {/if}
         </ul>
@@ -53,28 +53,81 @@
             <a href="/index/activity/index" class="fr"><i class="hdIcon03"></i>所有活动</a>
         </div>
     </div>
-    <div class="wrap1755 heit72">
+    <div class="wrap1755 heit72" style="margin-top:0.4rem">
         <span class="snow03" style="width:16.5rem"></span>
         <span class="zs"></span>
-        <div class="main_visual MarTop40">
-            <div class="main_image Worksshow">
-                <ul>
-                    <li class="lict2">
+        <div class="Scrollmain">
+            <div class="Result">
+                {if $award_list}
+                <div class="Wid1100">
+                    <div class="wid1034">
+                        <span class="zjTit"><img src="/images/md.png" /></span>
+                        <div class="ResultTab">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr class="Th">
+                                    <td align="center">获奖登记</td>
+                                    <td align="center">作品名称</td>
+                                    <td align="center">读者证号</td>
+                                    <td align="center">姓名</td>
+                                </tr>
+
+                                {volist name="award_list" id="vo"}
+                                <tr>
+                                    <td align="center">{$vo.award_grade}等奖</td>
+                                    <td align="center">{$vo.product_name}</td>
+                                    <td align="center">{$vo.reader_no}</td>
+                                    <td align="center">{$vo.telphone}</td>
+                                </tr>
+                                {/volist}
+
+                                <!--
+                                <tr>
+                                    <td align="center">一等奖</td>
+                                    <td align="center">卡通人物塑雕 </td>
+                                    <td align="center">09383</td>
+                                    <td align="center"> 姚沛晨</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">一等奖</td>
+                                    <td align="center">卡通人物塑雕 </td>
+                                    <td align="center">09383</td>
+                                    <td align="center"> 姚沛晨</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">一等奖</td>
+                                    <td align="center">卡通人物塑雕 </td>
+                                    <td align="center">09383</td>
+                                    <td align="center"> 姚沛晨</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">一等奖</td>
+                                    <td align="center">卡通人物塑雕 </td>
+                                    <td align="center">09383</td>
+                                    <td align="center"> 姚沛晨</td>
+                                </tr>
+                                -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {/if}
+
+                <span class="zpzsTit">作品展示</span>
+
+                <div class="MarTop40">
+                    <div class="Worksshow">
                         {volist name="product_list" id="vo"}
-                            <div class="Worksct">
-                                <i class="Nummber fl">{$key+1}</i>
-                                <dl>
-                                    <dt class="shareVideo">
-                                        <img src="{$vo.product_img}" />
-                                        <span class="codePopup"></span>
-                                    </dt>
-                                    <dd>
-                                        <a href="#">{$vo.product_name}</a>
-                                        <b>上传者：{$vo.real_name}</b>
-                                        <p>{$vo.product_desc|msubstr=0,34}...</p>
-                                    </dd>
-                                </dl>
-                            </div>
+                        <div class="Worksct">
+                            <i class="Nummber fl">{$key+1}</i>
+                            <dl>
+                                <dt><img src="{$vo.product_img}" /></dt>
+                                <dd>
+                                    <a href="#">{$vo.product_name}</a>
+                                    <b>上传者：{$vo.real_name}</b>
+                                    <p>{$vo.product_desc|msubstr=0,34}...</p>
+                                </dd>
+                            </dl>
+                        </div>
                         {/volist}
 
                         <!--
@@ -82,7 +135,11 @@
                             <i class="Nummber fl">2</i>
                             <dl>
                                 <dt><img src="/images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
+                                <dd>
+                                    <a href="#">卡通人物的塑造</a>
+                                    <b>上传者：矩矩</b>
+                                    <p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p>
+                                </dd>
                             </dl>
                         </div>
                         <div class="Worksct">
@@ -114,60 +171,10 @@
                             </dl>
                         </div>
                         -->
-                    </li>
-
-                    <!--
-                    <li class="lict2">
-                        <div class="Worksct">
-                            <i class="Nummber fl">1</i>
-                            <dl>
-                                <dt><img src="images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
-                            </dl>
-                        </div>
-                        <div class="Worksct">
-                            <i class="Nummber fl">2</i>
-                            <dl>
-                                <dt><img src="/images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
-                            </dl>
-                        </div>
-                        <div class="Worksct">
-                            <i class="Nummber fl">3</i>
-                            <dl>
-                                <dt><img src="/images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
-                            </dl>
-                        </div>
-                    </li>
-                    <li class="lict2">
-                        <div class="Worksct">
-                            <i class="Nummber fl">1</i>
-                            <dl>
-                                <dt><img src="/images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
-                            </dl>
-                        </div>
-                        <div class="Worksct">
-                            <i class="Nummber fl">2</i>
-                            <dl>
-                                <dt><img src="/images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
-                            </dl>
-                        </div>
-                        <div class="Worksct">
-                            <i class="Nummber fl">3</i>
-                            <dl>
-                                <dt><img src="/images/pic.png" /></dt>
-                                <dd><a href="#">卡通人物的塑造</a><b>上传者：矩矩</b><p>随手拍下你眼中红色的一切事物体验城尽情享受城市...</p></dd>
-                            </dl>
-                        </div>
-                    </li>
-                    -->
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
 </div>
