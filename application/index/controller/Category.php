@@ -38,8 +38,12 @@ class Category extends \think\Controller
             $query =$query->order('view_num','desc');
         }
 
-        $video_list = $query->limit(8)->select();
+        $video_list = $query->paginate(6);
         $this->assign('video_list',$video_list);
+
+        $page = $video_list->render();
+        $this->assign('page', $page);
+
         $this->assign('sort',$sort);
         $this->assign('cat_id',$cat_id);
         $this->assign('second_cat_id',$second_cat_id);
