@@ -14,6 +14,7 @@
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script></head>
     <script type="text/javascript" src="/static/js/common.js"></script>
+
 <body>
 <div class="wrap">
     <div class="header">
@@ -40,7 +41,7 @@
             <a href="#" class="fr"><i class="hdIcon01"></i>作品上传</a>
             <a href="#" class="fr"><i class="hdIcon02"></i>活动报名</a>
             -->
-            <a href="#" class="fr current"><i class="hdIcon03"></i>所有活动</a>
+            <a href="/index/activity/index" class="fr current"><i class="hdIcon03"></i>所有活动</a>
         </div>
     </div>
     <div class="wrap1755 heit72">
@@ -91,5 +92,11 @@
     </div>
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
 </div>
+
+{if !$Think.session.user_id}
+<link href="/css/layer.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/js/ratio.js"></script>
+{include file="common/login_pop" /}
+{/if}
 </body>
 </html>
