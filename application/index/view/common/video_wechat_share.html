@@ -1,7 +1,10 @@
 <div class="layer" id="video_wechat_share_btn" style="display:none;">
     <div class="share02">
         <span class="zwClose"></span>
-        <p class="ewm"><img src="/temp/ewm.jpg" width="100%"></p>
+        <p class="ewm">
+            <!--<img src="/temp/ewm.jpg" width="100%">-->
+            <img src="/index/video/make_qrcode?video_id={$video_info.video_id}" width="100%">
+        </p>
         <div class="shareFont">
             <p>扫描二维码</p>
             <p>分享"{$video_info.title}"</p>

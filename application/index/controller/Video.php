@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use \think\Db;
 use think\Loader;
+use Endroid\QrCode\QrCode;
 
 class Video extends \think\Controller
 {
@@ -53,5 +54,22 @@ class Video extends \think\Controller
         }
         exit(json_encode($return_data));
     }
+
+    public function make_qrcode()
+    {
+        $qrCode=new QrCode();
+        $url = 'http://www.zptys.net/index/video/info?video_id=3';//加http://这样扫码可以直接跳转url
+        $qrCode->setText($url)
+            ->setSize(300)//大小
+            ->setLabelFontPath(VENDOR_PATH.'endroid/qrcode/assets/noto_sans.otf')
+            ->setErrorCorrectionLevel('high')
+            ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
+            ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
+            ->setLabelFontSize(16);
+        header('Content-Type: '.$qrCode->getContentType());
+        echo $qrCode->writeString();
+        exit;
+    }
+
 
 }
