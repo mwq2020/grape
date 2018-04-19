@@ -41,11 +41,15 @@
         <ul class="clearfix">
             <li class="cur"><a href="/index/activity/info?activity_id={$Think.request.activity_id}">活动简介</a></li>
             <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">活动规则</a></li>
-            <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
+            <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
         </ul>
         <div class="clearfix hdCz">
+            {if $is_signup == 1 && $is_upload_product==0}
             <a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=upload" class="fr {if $step == 'upload'}current{/if}"><i class="hdIcon01"></i>作品上传</a>
+            {/if}
+            {if $is_signup == 0}
             <a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=signup" class="fr {if $step == 'signup'}current{/if}"><i class="hdIcon02"></i>活动报名</a>
+            {/if}
             <a href="/index/activity/index" class="fr"><i class="hdIcon03"></i>所有活动</a>
         </div>
     </div>
@@ -152,6 +156,11 @@
 <!-- 上传文件弹层 -->
 {if $step == 'upload_info'}
 {include file="common/activity_upload_info" /}
+{/if}
+
+
+{if !$Think.session.user_id}
+{include file="common/login_pop" /}
 {/if}
 
 </body>

@@ -130,7 +130,7 @@ $(function(){
     })
 
     //手机号报名页面确认按钮
-    $('.activityConfirm').click(function(){
+    $('#mobile_avctivity_signup').click(function(){
 
         var mobile = $('#activity_mobile').val();
         var code = $('#activity_mobile_code').val();
@@ -151,6 +151,7 @@ $(function(){
             success: function(data){
                 if(data.code == 200){
                     alert('报名成功');
+                    window.location = "/index/activity/info?activity_id="+activity_id;
                 } else {
                     alert('报名失败【'+data.msg+'】');
                 }
@@ -159,6 +160,92 @@ $(function(){
                 alert('网络错误');
             },
         });
+    })
+
+
+    //读者证号报名页面确认按钮
+    $('#readno_avctivity_signup').click(function(){
+        var mobile = $('#readno_mobile').val();
+        var activity_id = $('#activity_id').val();
+
+        if(mobile == ''){
+            return alert('手机号不能为空');
+        }
+
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '/index/activity/readno_signup' ,
+            data: 'mobile='+ mobile+ '&activity_id='+ activity_id+ '&m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    alert('报名成功');
+                    window.location = "/index/activity/info?activity_id="+activity_id;
+                } else {
+                    alert('报名失败【'+data.msg+'】');
+                }
+            } ,
+            error:function(){
+                alert('网络错误');
+            },
+        });
+    })
+
+
+    //文件上传
+    $('#product_img').on('change', function() {
+        var fd = new FormData();
+        fd.append("product_img", $("#product_img").get(0).files[0]);
+        $.ajax({
+            url: "/index/activity/upload_file",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: fd,
+            dataType:'json',
+            success: function(res) {
+                console.log(res);
+                console.log('code',res.code);
+                console.log('url',res.url);
+                if(res.code == 200){
+                    window.location = '/index/activity/info?activity_id='+$('#activity_id').val()+'&step=upload_info&file_path='+res.url;
+                } else {
+                    alert('上传图片失败【'+res.msg+'】');
+                }
+            }
+        });
+    });
+
+    //确定上传内容
+    $('.uploadBtn').click(function(){
+        console.log('图片上传');
+        var activity_id = $('#activity_id').val();
+        var product_img = $('input[name="product_img"]').val();
+        var title = $('input[name="title"]').val();
+        var product_desc = $('#product_desc').val();
+
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '/index/activity/upload_product' ,
+            data: 'activity_id='+ activity_id+'&product_img='+product_img+'&title='+title+'&product_desc='+product_desc + '&m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    alert('提交作品成功');
+                    window.location = "/index/activity/info?activity_id="+activity_id;
+                } else {
+                    alert('报名失败【'+data.msg+'】');
+                }
+            } ,
+            error:function(){
+                alert('网络错误');
+            },
+        });
+
 
     })
 

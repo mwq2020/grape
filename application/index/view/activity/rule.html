@@ -36,11 +36,19 @@
         <ul class="clearfix">
             <li><a href="/index/activity/info?activity_id={$Think.request.activity_id}">活动简介</a></li>
             <li class="cur"><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">活动规则</a></li>
-            <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
+            <li><a href="/index/activity/res?activity_id={$Think.request.activity_id}">上传作品展示</a></li>
         </ul>
         <div class="clearfix hdCz">
+            <!--
             <a href="#" class="fr"><i class="hdIcon01"></i>作品上传</a>
             <a href="#" class="fr"><i class="hdIcon02"></i>活动报名</a>
+            -->
+            {if $is_signup == 1 && $is_upload_product==0}
+            <a href="/index/activity/rule?activity_id={$activity_info.activity_id}&step=upload" class="fr {if $step == 'upload'}current{/if}"><i class="hdIcon01"></i>作品上传</a>
+            {/if}
+            {if $is_signup == 0}
+            <a href="/index/activity/rule?activity_id={$activity_info.activity_id}&step=signup" class="fr {if $step == 'signup'}current{/if}"><i class="hdIcon02"></i>活动报名</a>
+            {/if}
             <a href="/index/activity/index" class="fr"><i class="hdIcon03"></i>所有活动</a>
         </div>
     </div>
@@ -71,5 +79,39 @@
     </div>
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
 </div>
+
+<!-- 报名弹层 -->
+{if $step == 'signup'}
+{include file="common/activity_signup_pop" /}
+{/if}
+
+
+<!-- 读者证号报名弹窗 -->
+{if $step == 'readno_signup'}
+{include file="common/activity_readno_signup" /}
+{/if}
+
+
+<!-- 手机号报名弹窗 -->
+{if $step == 'mobile_signup'}
+{include file="common/activity_mobile_signup" /}
+{/if}
+
+
+<!-- 上传文件弹层 -->
+{if $step == 'upload'}
+{include file="common/activity_upload_file" /}
+{/if}
+
+
+<!-- 上传文件弹层 -->
+{if $step == 'upload_info'}
+{include file="common/activity_upload_info" /}
+{/if}
+
+
+{if !$Think.session.user_id}
+{include file="common/login_pop" /}
+{/if}
 </body>
 </html>

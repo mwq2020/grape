@@ -40,6 +40,11 @@ class User extends \think\Controller
             //session('[start]');
             session('user_id',$user_info['user_id']);
             session('reader_no',$user_info['reader_no']);
+            if(!empty($user_info['reader_no'])){
+                session('real_name',$user_info['reader_no']);
+            } else {
+                session('real_name',$user_info['telphone']);
+            }
             session('avatar','/static/image/user/default_user.jpg');
             session('user_info',$user_info);
         } catch (\Exception $e){

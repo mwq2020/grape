@@ -9,7 +9,7 @@
         <div class="uploadBox clearfix">
             <div class="worksBox">
                 <dl class="clearfix">
-                    <dt><a href="javascript:;"><img src="temp/bg.png" width="292" height="166"></a><span>缩略图</span></dt>
+                    <dt><a href="javascript:;"><img src="/temp/bg.png" width="292" height="166"></a><span>缩略图</span></dt>
                     <dd>
                         <p>上传作者：局局</p>
                         <p>文件大小：3.12M</p>
@@ -19,12 +19,13 @@
                 <ul>
                     <li>
                         <span class="fl">作品名称</span>
-                        <input type="text" class="workName fl" placeholder="请输入您作品的名称">
+                        <input type="text" class="workName fl" name="title" placeholder="请输入您作品的名称">
                     </li>
                     <li>
                         <span class="fl">作品简介</span>
-                        <textarea class="workDetail fl" placeholder="请输入您的作品简介"></textarea>
+                        <textarea class="workDetail fl" id="product_desc" name="product_desc" placeholder="请输入您的作品简介"></textarea>
                     </li>
+                    <input type="hidden"  name="product_img" value="{$Think.request.file_path}"/>
                     <li align="center"><input type="submit" class="uploadBtn" value=""></li>
                 </ul>
             </div>

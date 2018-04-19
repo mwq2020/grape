@@ -17,26 +17,34 @@
 <body>
 <div class="wrap">
     <div class="header">
-        <a href="#" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
         <a href="javascript:void(0)" class="fr unLogin">
             <i></i>
             <p>未登录</p>
         </a>
-        <a href="#" class="fr sear">
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/" class="fr sear">
             <i></i>
             <p>搜索</p>
         </a>
     </div>
     <div class="hdTab">
         <ul class="clearfix">
-            <li><a href="#">活动简介</a></li>
-            <li><a href="#">活动规则</a></li>
-            <li class="cur"><a href="#">结果公示</a></li>
+            <li><a href="/index/activity/info?activity_id={$Think.request.activity_id}">活动简介</a></li>
+            <li><a href="/index/activity/rule?activity_id={$Think.request.activity_id}">活动规则</a></li>
+            <li class="cur"><a href="/index/activity/res?activity_id={$Think.request.activity_id}">结果公示</a></li>
         </ul>
         <div class="clearfix hdCz">
+            <!--
             <a href="#" class="fr"><i class="hdIcon01"></i>作品上传</a>
             <a href="#" class="fr"><i class="hdIcon02"></i>活动报名</a>
-            <a href="#" class="fr"><i class="hdIcon03"></i>所有活动</a>
+            -->
+            <a href="/index/activity/index" class="fr"><i class="hdIcon03"></i>所有活动</a>
         </div>
     </div>
     <div class="wrap1755 heit72">

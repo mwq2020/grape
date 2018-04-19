@@ -6,6 +6,7 @@ use think\Loader;
 
 class Activity extends \think\Controller
 {
+
     /**
      * 活动列表页面
      * @return mixed
@@ -36,12 +37,17 @@ class Activity extends \think\Controller
         return $this->fetch('activity/index');
     }
 
+
     /**
      * 活动详情页面
      * @return mixed
      */
     public function info()
     {
+//        echo "<pre>";
+//        print_r($_REQUEST);
+//        print_r(session('reader_no'));
+//        exit;
         $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
         $activity_info = Loader::model('Activity')->find($activity_id);
         if($activity_info){
@@ -63,6 +69,21 @@ class Activity extends \think\Controller
             $this->assign('is_end',0);
         }
 
+        //判断是否输出报名按钮、上传作品按钮
+        $user_id = session('user_id');
+        $is_signup = 0;
+        $is_upload_product = 0;
+        if(!empty($user_id)) {
+            $map = ['activity_id' => $activity_id,'user_id'=>$user_id];
+            $signup_info = Loader::model('ActivitySignup')->where($map)->find();
+            $is_signup = !empty($signup_info) ? 1 :0;
+
+            $map = ['activity_id' => $activity_id,'user_id'=>$user_id];
+            $product_info = Loader::model('Product')->where($map)->find();
+            $is_upload_product = !empty($product_info) ? 1 :0;
+        }
+        $this->assign('is_signup',$is_signup);
+        $this->assign('is_upload_product',$is_upload_product);
 //        echo "<pre>";
 //        print_r($activity_info);
 //        exit;
@@ -73,6 +94,7 @@ class Activity extends \think\Controller
         $this->assign('step',$step);
         return $this->fetch('info');
     }
+
 
     /**
      * 活动规则页面
@@ -94,10 +116,31 @@ class Activity extends \think\Controller
                 $activity_info['status_txt'] = '已结束';
             }
         }
+
+        //判断是否输出报名按钮、上传作品按钮
+        $user_id = session('user_id');
+        $is_signup = 0;
+        $is_upload_product = 0;
+        if(!empty($user_id)) {
+            $map = ['activity_id' => $activity_id,'user_id'=>$user_id];
+            $signup_info = Loader::model('ActivitySignup')->where($map)->find();
+            $is_signup = !empty($signup_info) ? 1 :0;
+
+            $map = ['activity_id' => $activity_id,'user_id'=>$user_id];
+            $product_info = Loader::model('Product')->where($map)->find();
+            $is_upload_product = !empty($product_info) ? 1 :0;
+        }
+        $this->assign('is_signup',$is_signup);
+        $this->assign('is_upload_product',$is_upload_product);
+
+
         $this->assign('activity_info',$activity_info);
         $this->assign('page_title','活动规则');
+        $step = isset($_REQUEST['step']) ? $_REQUEST['step'] : '';
+        $this->assign('step',$step);
         return $this->fetch('rule');
     }
+
 
     /**
      * 活动结果页面
@@ -111,6 +154,7 @@ class Activity extends \think\Controller
         $this->assign('page_title','活动结果');
         return $this->fetch('res');
     }
+
 
     /**
      * 上传视频文件
@@ -138,6 +182,7 @@ class Activity extends \think\Controller
 
         exit(json_encode($return_data));
     }
+
 
     /**
      * 短信发送
@@ -184,7 +229,7 @@ class Activity extends \think\Controller
     }
 
     /**
-     * 获活动报名
+     * 活动报名
      */
     public function signup()
     {
@@ -226,13 +271,25 @@ class Activity extends \think\Controller
                 $user_data = [];
                 $user_data['telphone'] = $mobile;
                 $user_data['register_time'] = time();
+                $user_data['real_name'] = $mobile;
                 $flag = Loader::model('User')->insert($user_data);
                 if(empty($flag)){
                     throw new \Exception('用户生成失败');
                 }
                 $user_id = Loader::model('User')->getLastInsID();
+                $user_info = Loader::model('User')->find($user_id);
+                session('user_id',$user_id);
+                session('reader_no','');
+                session('real_name',$mobile);
+                session('avatar','/static/image/user/default_user.jpg');
+                session('user_info',$user_info);
             } else {
                 $user_id = $user_info['user_id'];
+                session('user_id',$user_id);
+                session('reader_no','');
+                session('real_name',$mobile);
+                session('avatar','/static/image/user/default_user.jpg');
+                session('user_info',$user_info);
             }
 
             $signup_data = [];
@@ -255,5 +312,96 @@ class Activity extends \think\Controller
         }
         exit(json_encode($return_data));
     }
+
+
+    /**
+     * 活动报名
+     */
+    public function readno_signup()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>[]];
+        try {
+            $mobile = isset($_REQUEST['mobile']) ? $_REQUEST['mobile'] : '';
+            $activity_id = isset($_REQUEST['activity_id']) ? $_REQUEST['activity_id'] : '';
+            if(empty($mobile)){
+                throw new \Exception('手机号不能为空');
+            }
+            if(strlen($mobile) != 11){
+                throw new \Exception('手机号格式错误');
+            }
+            if(empty($activity_id)){
+                throw new \Exception('参数2错误，请重试');
+            }
+
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                throw new \Exception('登录状态退出，请重新登录');
+            }
+            $user_info = Loader::model('User')->find($user_id);
+            if(empty($user_info)){
+                throw new \Exception('用户异常请退出重新登录');
+            }
+
+            $signup_data = [];
+            $signup_data['user_id']     = $user_id;
+            $signup_data['activity_id'] = $activity_id;
+            $signup_data['mobile']      = $mobile;
+            $signup_data['add_time']    = time();
+            $flag = Loader::model('ActivitySignup')->insert($signup_data);
+            if(empty($flag)){
+                throw new \Exception('报名信息入库失败，请重试');
+            }
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
+
+    /**
+     * 作品上传保存
+     */
+    public function upload_product()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>['product_id'=>0]];
+        try {
+            $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
+            $product_desc = isset($_REQUEST['product_desc']) ? $_REQUEST['product_desc'] : '';
+            $activity_id = isset($_REQUEST['activity_id']) ? $_REQUEST['activity_id'] : '';
+            $product_img = isset($_REQUEST['product_img']) ? $_REQUEST['product_img'] : '';
+            if(empty($title)){
+                throw new \Exception('作品标题不能为空');
+            }
+            if(empty($product_desc)){
+                throw new \Exception('作品描述不能为空');
+            }
+            if(empty($activity_id)){
+                throw new \Exception('参数错误');
+            }
+
+            $product_data = [];
+            $product_data['user_id'] = session('user_id');
+            $product_data['activity_id'] = $activity_id;
+            $product_data['product_name'] = $title;
+            $product_data['product_desc'] = $product_desc;
+            $product_data['product_img'] = $product_img;
+            $product_data['type'] = 1;
+            $product_data['add_time'] = time();
+            $flag = Loader::model('Product')->insert($product_data);
+            if(empty($flag)){
+                throw new \Exception('作品入库失败，请重试');
+            }
+            $return_data['data']['product_id'] = Loader::model('Product')->getLastInsID();
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
+
+
+
 
 }

@@ -10,8 +10,12 @@
         <span class="snow"></span>
         <div class="activityBox clearfix">
             <div class="activityDetail">
+                {if $Think.session.user_id && $Think.session.reader_no != ''}
                 <p><a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=readno_signup" class="readerSIgn"></a></p>
                 <p><a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=mobile_signup" class="phoneSIgn"></a></p>
+                {else}
+                <p><a href="/index/activity/info?activity_id={$activity_info.activity_id}&step=mobile_signup" class="phoneSIgn"></a></p>
+                {/if}
             </div>
         </div>
         <span class="ball"></span>
