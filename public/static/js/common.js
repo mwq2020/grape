@@ -295,6 +295,17 @@ $(function(){
         $(this).parent().parent().hide();
     })
 
+    //分享微信按钮
+    $('.video_wechat_share_btn').click(function(){
+        $('#video_wechat_share_btn').show();
+    })
+
+    //分享页面点击关闭
+    $('.zwClose').click(function(){
+        $(this).parent().parent().hide();
+        //$('#video_wechat_share_btn').hide();
+    })
+
 })
 
 

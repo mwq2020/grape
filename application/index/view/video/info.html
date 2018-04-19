@@ -63,7 +63,7 @@
                         </div>
                         <div class="videoBot">
                             <a href="javascript:void(0)" class="fr view_video_desc_btn">查看简介&gt;&gt;</a>
-                            <a href="javascript:void(0)" class="share fl">分享</a>
+                            <a href="javascript:void(0)" class="share fl video_wechat_share_btn">分享</a>
                             <a href="javascript:void(0)" class="sc fl add_like_btn" data-video_id="{$video_info.video_id}">收藏</a>
                             <a href="javascript:void(0)" class="dj fl">{$video_info.view_num}次播放</a>
                         </div>
@@ -116,6 +116,8 @@
 {if !$Think.session.user_id}
 {include file="common/login_pop" /}
 {/if}
+
+{include file="common/video_wechat_share" /}
 
 </body>
 </html>
