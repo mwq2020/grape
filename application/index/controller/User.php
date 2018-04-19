@@ -169,6 +169,9 @@ class User extends \think\Controller
         }
         $this->assign('product_info',$product_info);
 
+        $product_info->view_num += 1;
+        $product_info->save();
+
         //我的其他作品
         $product_list = Db::table('product')->where('user_id',$user_id)->limit(3)->select();
         $this->assign('product_list',$product_list);
