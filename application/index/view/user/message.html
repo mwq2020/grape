@@ -77,7 +77,7 @@
                         {else}
                         <i><img src="/images/xx1.png" /></i>
                         {/if}
-                        <a href="#">{$vo.content}</a>
+                        <a href="javascript:void(0)" class="view_message_btn" data-message_id="{$vo.message_id}" data-status="{$vo.status}">{$vo.content}</a>
                         <span>{$vo.add_time|date="Y-m-d",###}</span>
                     </div>
                     {/volist}
@@ -115,5 +115,9 @@
 
     </div>
 </div>
+
+<link href="/css/layer.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/js/ratio.js"></script>
+{include file="common/user_message_info" /}
 </body>
 </html>

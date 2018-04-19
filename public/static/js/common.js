@@ -246,7 +246,41 @@ $(function(){
             },
         });
 
+    })
 
+
+    //点击查看消息详情事件
+    $('.view_message_btn').click(function(){
+        var message_info = $(this).html();
+        $('#message_info').html(message_info);
+        $('#message_info_desc').show();
+
+        var message_id= $(this).attr('data-message_id');
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '/index/user/change_message_status' ,
+            data: 'message_id='+ message_id + '&m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    //alert('消息状态修改');
+                } else {
+                    //alert('消息状态修改失败【'+data.msg+'】');
+                }
+            } ,
+            error:function(){
+                //alert('网络错误');
+            },
+        });
+    })
+
+
+    //消息详情查看
+    $('#close_message_desc_btn').click(function(){
+        $(this).parent().parent().hide();
+        location.reload();
     })
 
 })

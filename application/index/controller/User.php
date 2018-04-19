@@ -69,6 +69,11 @@ class User extends \think\Controller
      */
     public function viewlist()
     {
+        $user_id = session('user_id');
+        if(empty($user_id)){
+            return $this->redirect('/');
+        }
+
         $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id');
 
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
@@ -86,7 +91,7 @@ class User extends \think\Controller
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.date_time','>=',$start_time);
         }
-        $view_list = $query->where('a.user_id',1)->select(); //todo 用户id 替换成正确的
+        $view_list = $query->where('a.user_id',$user_id)->select(); //todo 用户id 替换成正确的
 
 //        echo "<pre>";
 //        print_r($view_list);
@@ -103,10 +108,15 @@ class User extends \think\Controller
      */
     public function message()
     {
+        $user_id = session('user_id');
+        if(empty($user_id)){
+            return $this->redirect('/');
+        }
+
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
         $type = in_array($type,[1,2,3]) ? $type : 1;
 
-        $message_list = Db::table('message')->where('type',$type)->where('user_id',1)->select();
+        $message_list = Db::table('message')->where('type',$type)->where('user_id',$user_id)->select();
 //        echo "<pre>";
 //        print_r($message_list);
 //        exit;
@@ -118,6 +128,11 @@ class User extends \think\Controller
 
     public function productionlist()
     {
+        $user_id = session('user_id');
+        if(empty($user_id)){
+            return $this->redirect('/');
+        }
+
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id');
 
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
@@ -132,7 +147,7 @@ class User extends \think\Controller
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.add_time','>=',$start_time);
         }
-        $product_list = $query->where('a.user_id',1)->select(); //todo 用户id 替换成正确的
+        $product_list = $query->where('a.user_id',$user_id)->select(); //todo 用户id 替换成正确的
 
         $this->assign('product_list',$product_list);
         $this->assign('type',$type);
@@ -145,6 +160,35 @@ class User extends \think\Controller
 
         $this->assign('page_title','用户中心-我的作品详情');
         return $this->fetch('productioninfo');
+    }
+
+
+    /**
+     * 更改message状态
+     */
+    public function change_message_status()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>['product_id'=>0]];
+        try {
+            $message_id = isset($_REQUEST['message_id']) ? $_REQUEST['message_id'] : '';
+            if(empty($message_id)){
+                throw new \Exception('参数错误');
+            }
+            $message_info = Loader::model('Message')->find($message_id);
+            if(empty($message_info)){
+                throw new \Exception('消息不存在');
+            }
+
+            if($message_info['status'] != 1){
+                $message_info->status = 1;
+                $message_info->save();
+            }
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+
     }
 
 
