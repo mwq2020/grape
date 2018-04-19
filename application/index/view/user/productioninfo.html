@@ -33,25 +33,48 @@
         </a>
     </div>
     <div class="wrap1755" style="width:16.6rem">
-        <a href="#" class="Goback"><img src="/images/back.png"></a>
+        <a href="/" class="Goback"><img src="/images/back.png"></a>
         <span class="snow03" style="width:17rem"></span>
         <span class="zs"></span>
         <h3 class="keyTips">当前位置：<b>个人中心</b></h3>
         <div class="clearfix">
             <div class="fl videoLeft">
-                <h3>快速画出青苹果</h3>
+                <h3>{$product_info.product_name}</h3>
                 <div class="videoMid">
-                    <img src="/temp/video.jpg" width="100%" height="100%">
+                    <img src="{$product_info.product_img}" width="100%" height="100%">
                 </div>
                 <div class="videoBot">
-                    <a href="#" class="fr">查看简介>></a>
+                    <a href="javascript:void(0)" class="fr" id="view_product_desc_btn">查看简介>></a>
+
+                    <!--
                     <a href="#" class="share fl">分享</a>
                     <a href="#" class="sc fl">收藏</a>
-                    <a href="#" class="dj fl">4,678次播放</a>
+                    -->
+
+                    <a href="#" class="dj fl">{$product_info.view_num}次播放</a>
                 </div>
             </div>
             <div class="fr videoRight">
                 <h3><i></i>我的其他作品</h3>
+                {volist name="product_list" id="vo"}
+                <dl>
+                    <dt>
+                        <a href="/index/user/product_info?product_id={$vo.product_id}">
+                            <img src="{$vo.product_img}">
+                        </a>
+                        <!--
+                        <b>二等奖</b>
+                        -->
+                    </dt>
+                    <dd>
+                        <h3><a href="/index/user/product_info?product_id={$vo.product_id}">{$vo.product_name}</a></h3>
+                        <p>{$vo.product_desc}</p>
+                        <p style="color:#999">{$vo.view_num}次播放</p>
+                    </dd>
+                </dl>
+                {/volist}
+
+                <!--
                 <dl>
                     <dt><a href="#"><img src="/temp/img.jpg"></a><b>二等奖</b></dt>
                     <dd>
@@ -68,18 +91,17 @@
                         <p style="color:#999">4,678次播放</p>
                     </dd>
                 </dl>
-                <dl>
-                    <dt><a href="#"><img src="/temp/img.jpg"></a><b>二等奖</b></dt>
-                    <dd>
-                        <h3><a href="#">卡通人物的塑造</a></h3>
-                        <p>来自活动"简笔画大赛"导师解析，作品二等奖陈雨曦</p>
-                        <p style="color:#999">4,678次播放</p>
-                    </dd>
-                </dl>
+                -->
             </div>
         </div>
     </div>
     <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
 </div>
+
+
+<link href="/css/layer.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/js/ratio.js"></script>
+{include file="common/user_product_desc" /}
+
 </body>
 </html>

@@ -71,7 +71,7 @@ class User extends \think\Controller
     {
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/');
+            return $this->redirect('/?error=no_login');
         }
 
         $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id');
@@ -110,7 +110,7 @@ class User extends \think\Controller
     {
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/');
+            return $this->redirect('/?error=no_login');
         }
 
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
@@ -130,7 +130,7 @@ class User extends \think\Controller
     {
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/');
+            return $this->redirect('/?error=no_login');
         }
 
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id');
@@ -147,7 +147,7 @@ class User extends \think\Controller
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.add_time','>=',$start_time);
         }
-        $product_list = $query->where('a.user_id',$user_id)->select(); //todo 用户id 替换成正确的
+        $product_list = $query->where('a.user_id',$user_id)->limit(4)->select(); //todo 用户id 替换成正确的
 
         $this->assign('product_list',$product_list);
         $this->assign('type',$type);
@@ -155,8 +155,23 @@ class User extends \think\Controller
         return $this->fetch('productionlist');
     }
 
-    public function productioninfo()
+    public function product_info()
     {
+        $user_id = session('user_id');
+        if(empty($user_id)){
+            return $this->redirect('/?error=no_login');
+        }
+
+        $product_id = isset($_REQUEST['product_id']) ? intval($_REQUEST['product_id']) : 0;
+        $product_info = Loader::model('Product')->find($product_id);
+        if(empty($product_info)){
+            return $this->redirect('/?error=no_product');
+        }
+        $this->assign('product_info',$product_info);
+
+        //我的其他作品
+        $product_list = Db::table('product')->where('user_id',$user_id)->limit(3)->select();
+        $this->assign('product_list',$product_list);
 
         $this->assign('page_title','用户中心-我的作品详情');
         return $this->fetch('productioninfo');

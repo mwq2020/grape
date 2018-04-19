@@ -81,9 +81,9 @@
                                     <dl>
                                         <dt><img src="/images/pic.png" /></dt>
                                         <dd>
-                                            <a href="#">{$vo.product_name}</a>
+                                            <a href="/index/user/product_info?product_id={$vo.product_id}">{$vo.product_name}</a>
                                             <p>活动名称：{$vo.activity_name}</p>
-                                            <p>参加实践：2017-08-20</p>
+                                            <p>参加实践：{$vo.add_time|date="Y-m-d",###}</p>
                                             <span class="Mc">获奖等级：<i>一等奖</i>
                                             </span>
                                         </dd>

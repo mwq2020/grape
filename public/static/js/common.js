@@ -283,6 +283,18 @@ $(function(){
         location.reload();
     })
 
+
+    //点击查看消息详情事件
+    $('#view_product_desc_btn').click(function(){
+        $('#product_info_desc').show();
+    })
+
+
+    //消息详情查看
+    $('#close_product_desc_btn').click(function(){
+        $(this).parent().parent().hide();
+    })
+
 })
 
 
