@@ -90,6 +90,12 @@ class Activity extends \think\Controller
 //        print_r($activity_info);
 //        exit;
 
+        //作品页面
+        $product_image_src = isset($_REQUEST['file_path']) ? $_REQUEST['file_path'] : '';
+        $this->assign('product_image_src',$product_image_src);
+        $product_file_size = Loader::model('Activity')->getsize($product_image_src);
+        $this->assign('product_file_size',$product_file_size);
+
         $this->assign('activity_info',$activity_info);
         $this->assign('page_title','活动详情');
         $step = isset($_REQUEST['step']) ? $_REQUEST['step'] : '';

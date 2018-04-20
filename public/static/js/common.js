@@ -68,6 +68,7 @@ $(function(){
         }
     })
 
+    //视频添加喜欢收藏
     $('.add_like_btn').click(function(){
         var video_id = $(this).attr('data-video_id');
         $.ajax({
