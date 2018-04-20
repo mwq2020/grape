@@ -40,6 +40,10 @@ class Video extends \think\Controller
     {
         $return_data = ['code'=>200,'data'=>['status' => 1],'msg'=>''];
         try {
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                throw new \Exception('您还没登录，请登录完再过来重试！');
+            }
             $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
             if(empty($video_id)){
                 throw new \Exception('入参错误');

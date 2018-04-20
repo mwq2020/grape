@@ -116,9 +116,9 @@ class Activity extends \think\Controller
             $data['add_time']   = time();
             $flag = Loader::model('Activity')->insert($data);
             if(empty($flag)){
-                throw new Exception('活动添加失败');
+                throw new \Exception('活动添加失败');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assign('error_msg', $e->getMessage());
             $customer_list = Loader::model('Customer')->getCustomerSelectList();
             $this->assign('customer_list', $customer_list);

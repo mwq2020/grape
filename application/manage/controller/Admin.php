@@ -215,31 +215,31 @@ class Admin extends \think\Controller
             try {
                 $admin_id = session('admin_id');
                 if(empty($_POST['admin_id']) || empty($admin_id) || $admin_id != $_POST['admin_id']) {
-                    throw new Exception('参数错误');
+                    throw new \Exception('参数错误');
                 }
 
                 if(empty($_POST['old_password'])){
-                    throw new Exception('原密码不能为空');
+                    throw new \Exception('原密码不能为空');
                 }
                 if(empty($_POST['password'])){
-                    throw new Exception('新密码不能为空');
+                    throw new \Exception('新密码不能为空');
                 }
                 if(empty($_POST['comfirm_password'])){
-                    throw new Exception('确认密码不能为空');
+                    throw new \Exception('确认密码不能为空');
                 }
                 if($_POST['password'] != $_POST['comfirm_password']){
-                    throw new Exception('新密码和确认密码不一致');
+                    throw new \Exception('新密码和确认密码不一致');
                 }
                 if(strlen($_POST['password']) < 6){
-                    throw new Exception('新密码长度太短');
+                    throw new \Exception('新密码长度太短');
                 }
 
                 $admin_info = Loader::model('Admin')->find($admin_id);
                 if(empty($admin_info)){
-                    throw new Exception('管理账号不存在');
+                    throw new \Exception('管理账号不存在');
                 }
                 if(md5($_POST['old_password'].$admin_info['salt']) !=  $admin_info['password']){
-                    throw new Exception('原密码错误');
+                    throw new \Exception('原密码错误');
                 }
 
                 $salt = rand(9999,100);
@@ -248,7 +248,7 @@ class Admin extends \think\Controller
                 $admin_info->password = $md5_password;
                 $flag = $admin_info->save();
                 if(empty($flag)){
-                    throw new Exception('密码修改失败');
+                    throw new \Exception('密码修改失败');
                 }
                 return $this->redirect('/manage/index/index');
             } catch (\Exception $e){

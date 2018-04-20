@@ -71,9 +71,9 @@ class Banner extends \think\Controller
             $data['update_time']    = time();
             $flag = Loader::model('Banner')->insert($data);
             if(empty($flag)){
-                throw new Exception('banenr添加失败');
+                throw new \Exception('banenr添加失败');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assign('error_msg', $e->getMessage());
             $this->view->engine->layout('layout');
             return $this->fetch('banner/add');
@@ -126,7 +126,7 @@ class Banner extends \think\Controller
             if(empty($flag)){
                 throw new Exception('banenr修改失败');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->assign('error_msg', $e->getMessage());
             $this->view->engine->layout('layout');
             return $this->fetch('banner/edit');

@@ -247,7 +247,7 @@ class Activity extends \think\Controller
         try {
             $file = request()->file('product_img');
             if(empty($file)){
-                throw new Exception('上传文件为空');
+                throw new \Exception('上传文件为空');
             }
 
             $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/product');
@@ -257,7 +257,7 @@ class Activity extends \think\Controller
                 throw new \Exception('图片保存失败【'.$file->getError().'】');
             }
 
-        } catch (Exception $e){
+        } catch (\Exception $e){
             $return_data['code']    = 500;
             $return_data['msg']     = $e->getMessage();
         }
