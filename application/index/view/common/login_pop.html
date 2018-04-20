@@ -1,9 +1,51 @@
 <!-- 公共的登录弹层页面 -->
+<!--
 <div class="layer" style="display:none;">
     <div class="login">
         <span class="closedLayer" id="login_pop_div"></span>
         <div class="loginBox clearfix">
             <ul class="fl">
+                <li><span class="fl">读者证号</span><input type="text" name="reader_no" id="reader_no" class="userInp fl"></li>
+                <li><span class="fl">密　　码</span><input type="password" name="password" id="password" class="userInp fl"></li>
+            </ul>
+            <input type="submit" class="fr lgSubmit" value="">
+        </div>
+    </div>
+    <div class="errorBox" style="display: none;">
+        <span class="coloseError"></span>
+        <p id="login_err_msg">您输入的证号或密码不正确，请重新输入。</p>
+    </div>
+</div>
+-->
+
+<link href="/css/common.css" type="text/css" rel="stylesheet">
+<link href="/css/layer.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="/css/chosen.css">
+<script src="/js/publish.js"></script>
+<script src="/js/chosen.jquery.js"></script>
+<script>
+    $(function(){
+        $('.dept_select').chosen();
+    });
+</script>
+
+
+<div class="layer" style="display:none;">
+    <div class="login">
+        <span class="closedLayer" id="login_pop_div"></span>
+        <div class="loginBox">
+            <ul class="fl readerCard">
+                <li>
+                    <span class="fl">图&nbsp;书&nbsp;馆&nbsp;</span>
+                    <div class="fl Library">
+                        <select name="dept" data-placeholder="请选择图书馆" id="dept" class="dept_select" style="width:2.37rem">
+                            <option value="-1"></option>
+                            <option value="a1">中国国家图书馆中国国家图书馆中国国家图书馆</option>
+                            <option value="b5">中关村图书馆</option>
+                            <option value="c1">西单图书馆</option>
+                        </select>
+                    </div>
+                </li>
                 <li><span class="fl">读者证号</span><input type="text" name="reader_no" id="reader_no" class="userInp fl"></li>
                 <li><span class="fl">密　　码</span><input type="password" name="password" id="password" class="userInp fl"></li>
             </ul>

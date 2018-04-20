@@ -147,7 +147,7 @@ i.home{width:.28rem;height:.27rem;background:url(../images/home.png) no-repeat;b
 #colee_right{width:6.22rem;overflow:hidden}
 .heit72{width:15.91rem;height:7.2rem;margin-top:.2rem}
 /*****************2-2-活动规则**********************/
-.hdGzBox{width:14rem;height:6.5rem;overflow:auto;margin:0 auto;padding-top:.5rem;font-size:.18rem}
+.hdGzBox{width:14rem;height:6.5rem;overflow:auto;margin:0 auto;padding-top:.5rem}
 .hdGzBox h3{width:2.07rem;height:.49rem;line-height:.4rem;text-align:center;color:#fff;font-size:.22rem;background:url(../images/hdgz.png);background-size:100%;margin:.1rem 0}
 .hdGzBox ul li{font-size:.22rem;line-height:2}
 .hdGzBox ul li i{display:inline-block;width:.08rem;height:.08rem;border-radius:100%;vertical-align:middle;background:#666;margin-right:.07rem}
