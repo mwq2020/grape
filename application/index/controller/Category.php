@@ -39,10 +39,16 @@ class Category extends \think\Controller
         }
 
         $video_list = $query->paginate(6);
-        $this->assign('video_list',$video_list);
-
         $page = $video_list->render();
         $this->assign('page', $page);
+        $video_list = !empty($video_list) ? $video_list->toArray() : ['data'=>[]];
+
+        $cat_list = Loader::model('Category')->getCategoryList();
+        foreach($video_list['data'] as &$row){
+            $row['cat_name'] = isset($cat_list[$row['second_cat_id']]) ? $cat_list[$row['second_cat_id']]['cat_name'] : '';
+        }
+
+        $this->assign('video_list',$video_list['data']);
 
         $this->assign('sort',$sort);
         $this->assign('cat_id',$cat_id);

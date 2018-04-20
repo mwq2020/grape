@@ -73,14 +73,16 @@
                         <li class="lict">
                             {volist name="video_list" id="vo"}
                             <dl>
-                                <dt><a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a><b class="Tag"><i>{$vo.cat_id}分类名</i></b>
-                                <div class="Picinfo">
-                                    <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
-                                    <span class="fr">
-                                        <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
-                                        <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
-                                    </span>
-                                </div>
+                                <dt>
+                                    <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
+                                    <b class="Tag"><i>{$vo.cat_name}</i></b>
+                                    <div class="Picinfo">
+                                        <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
+                                        <span class="fr">
+                                            <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
+                                            <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
+                                        </span>
+                                    </div>
                                 <i class="Playbtn"><img src="/images/play.png" /></i>
                                 </dt>
                                 <dd>{$vo.title}</dd>

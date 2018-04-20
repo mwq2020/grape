@@ -52,10 +52,10 @@
             <a href="#" class="fr"><i class="hdIcon01"></i>作品上传</a>
             <a href="#" class="fr"><i class="hdIcon02"></i>活动报名</a>
             -->
-            {if $is_signup == 1 && $is_upload_product==0}
+            {if $is_signup == 1 && $is_upload_product==0 && $activity_status != 'ending'}
             <a href="/index/activity/rule?activity_id={$activity_info.activity_id}&step=upload" class="fr {if $step == 'upload'}current{/if}"><i class="hdIcon01"></i>作品上传</a>
             {/if}
-            {if $is_signup == 0}
+            {if $is_signup == 0 && $activity_status != 'ending'}
             <a href="/index/activity/rule?activity_id={$activity_info.activity_id}&step=signup" class="fr {if $step == 'signup'}current{/if}"><i class="hdIcon02"></i>活动报名</a>
             {/if}
             <a href="/index/activity/index" class="fr"><i class="hdIcon03"></i>所有活动</a>

@@ -23,4 +23,18 @@ class Category extends Model
         $list = Category::all();
     }
 
+    /**
+     * 获取分类列表
+     * @return array
+     */
+    public function getCategoryList()
+    {
+        $list = [];
+        $res = Category::where([])->select();
+        foreach($res as $row){
+            $list[$row['cat_id']] =  $row;
+        }
+        return $list;
+    }
+
 }

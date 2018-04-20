@@ -54,6 +54,20 @@ $(function(){
         window.location = '/index/search/index?keyword='+$('#search_keywords').val();
     })
 
+    //数据框焦点时自动清除搜索内容
+    $('#search_keywords').focus(function(){
+        if($(this).val() == '请输入想要搜索的内容……'){
+            $(this).val('');
+        }
+    })
+
+    //数据框失去焦点并且没有输入任何内容回复提示
+    $('#search_keywords').blur(function(){
+        if($(this).val() == ''){
+            $(this).val('请输入想要搜索的内容……');
+        }
+    })
+
     $('.add_like_btn').click(function(){
         var video_id = $(this).attr('data-video_id');
         $.ajax({
