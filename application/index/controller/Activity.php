@@ -187,6 +187,20 @@ class Activity extends \think\Controller
         $map = [];
         $map['a.activity_id'] = $activity_id;
         $award_list = $query->where($map)->where('a.award_grade','>',0)->select();
+        if(!empty($award_list)){
+            foreach($award_list as &$row){
+                $row['award_grade_txt'] = '';
+                if($row['award_grade'] == 1){
+                    $row['award_grade_txt'] = '一等奖';
+                } elseif ($row['award_grade'] == 2){
+                    $row['award_grade_txt'] = '二等奖';
+                } elseif ($row['award_grade'] == 3){
+                    $row['award_grade_txt'] = '三等奖';
+                } elseif ($row['award_grade'] == 100){
+                    $row['award_grade_txt'] = '优秀奖';
+                }
+            }
+        }
         $this->assign('award_list',$award_list);
 
         //所有作品展示
@@ -284,8 +298,8 @@ class Activity extends \think\Controller
             $param_data = ['code' => $code];
 
             //todo  上线需要解开这个 否则报名短信发布出去
-            //$flag = Loader::model('SmsLog')->sendValidSms($mobile,$param_data,'SMS_132400562');
-            $flag = true;
+            $flag = Loader::model('SmsLog')->sendValidSms($mobile,$param_data,'SMS_132400562');
+            //$flag = true;
             if(empty($flag)){
                 throw new \Exception('短信发送失败，请重试');
             }
@@ -481,9 +495,5 @@ class Activity extends \think\Controller
         }
         exit(json_encode($return_data));
     }
-
-
-
-
 
 }
