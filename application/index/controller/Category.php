@@ -38,7 +38,7 @@ class Category extends \think\Controller
             $query =$query->order('view_num','desc');
         }
 
-        $video_list = $query->paginate(6);
+        $video_list = $query->paginate(6,false,['query' => $_GET]);
         $page = $video_list->render();
         $this->assign('page', $page);
         $video_list = !empty($video_list) ? $video_list->toArray() : ['data'=>[]];

@@ -66,29 +66,28 @@
                 <a href="/index/category/index?cat_id={$cat_id}&sort=3" {if $sort == 3}class="CurSort"{/if}>点赞最多</a>
                 <a href="/index/category/index?cat_id={$cat_id}&sort=4" {if $sort == 4}class="CurSort"{/if}>观看最多</a>
             </div>
-            <div class="main_visual">
-                <div class="main_image">
-                    <div class="huihuaListBox  marTop2">
-                        {volist name="video_list" id="vo"}
-                            <dl>
-                                <dt>
-                                    <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
-                                    <b class="Tag"><i>{$vo.cat_name}</i></b>
-                                    <div class="Picinfo">
-                                        <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
-                                        <span class="fr">
-                                            <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
-                                            <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
-                                        </span>
-                                    </div>
-                                <i class="Playbtn"><img src="/images/play.png" /></i>
-                                </dt>
-                                <dd>{$vo.title}</dd>
-                            </dl>
-                        {/volist}
-                    {$page}
-                </div>
+
+            <div class="huihuaListBox  marTop2">
+                {volist name="video_list" id="vo"}
+                    <dl>
+                        <dt>
+                            <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
+                            <b class="Tag"><i>{$vo.cat_name}</i></b>
+                            <div class="Picinfo">
+                                <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
+                                <span class="fr">
+                                    <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
+                                    <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
+                                </span>
+                            </div>
+                        <i class="Playbtn"><img src="/images/play.png" /></i>
+                        </dt>
+                        <dd><a href="#" class="share fr">分享</a>{$vo.title}</dd>
+                    </dl>
+                {/volist}
+            {$page}
             </div>
+
             <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
         </div>
 

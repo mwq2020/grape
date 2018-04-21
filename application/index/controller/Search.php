@@ -36,7 +36,13 @@ class Search extends \think\Controller
             }
 
             //获取视频列表
-            $search_list = $query->order('view_num','desc')->limit(12)->select();
+            $search_list = $query->order('view_num','desc')->paginate(10,false,['query' => $_GET]);
+
+            $video_count = $query->count();
+            $this->assign('video_count', $video_count);
+
+            $page = $search_list->render();
+            $this->assign('page', $page);
             $this->assign('search_list',$search_list);
 
             //搜索结果统计

@@ -15,12 +15,12 @@
 .coloseError{position:absolute;width:.32rem;height:.32rem;background:url(../images/colsed.png) no-repeat center;background-size:100%;top:-.1rem;right:-.1rem;cursor:pointer}
 
 /***2-1-1-活动报名-弹层***/
-.activity{width:5.96rem;height:4.04rem;background:rgba(255,255,255,.3);padding:.08rem;border-radius:.15rem;position:fixed;top:50%;margin-top:-2.06rem;left:50%;margin-left:-3.02rem}
+.activityPopup{width:5.96rem;height:4.04rem;background:rgba(255,255,255,.3);padding:.08rem;border-radius:.15rem;position:fixed;top:50%;margin-top:-2.06rem;left:50%;margin-left:-3.02rem}
 .activityBox{background:url(../images/layerCon.jpg) repeat;height:4.04rem;border-radius:.15rem}
 .snow{width:6rem;height:.38rem;background:url(../images/snow.png) no-repeat;background-size:100%;position:absolute;right:.08rem;top:0}
 .ball{position:absolute;width:.47rem;height:.47rem;background:url(../images/ball.png) no-repeat;background-size:100%;bottom:-.08rem;right:-.16rem}
 .colseActivity{position:absolute;width:.52rem;height:.52rem;background:url(../images/colsed.png) no-repeat;background-size:100%;top:-.58rem;right:-.58rem;cursor:pointer}
-.activityDetail{width:4.74rem;margin:0 auto;margin-top:.5rem}
+.activityDetail{width:5.2rem;margin:0 auto;margin-top:.5rem}
 .activityDetail ul li{font-size:.24rem;color:#fff;height:.45rem;line-height:.45rem;padding:.15rem 0}
 .marLeft40{margin-left:.4rem}
 .contactPhone{width:3.18rem;height:.45rem;background:url(../images/contactPhone.png) no-repeat;background-size:100%;border:0;padding:0 .2rem;font-size:.24rem;color:#666;margin-left:.2rem;line-height:.45rem;}

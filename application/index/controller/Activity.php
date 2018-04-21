@@ -13,9 +13,13 @@ class Activity extends \think\Controller
      */
     public function index()
     {
-        $activity_list = Loader::model('Activity')->where('status',1)->order('activity_id','desc')->limit(12)->select();
+        $activity_list = Loader::model('Activity')->where('status',1)->order('activity_id','desc')->paginate(6,false,['query' => $_GET]);
+        $page = $activity_list->render();
+        $this->assign('page', $page);
+
         if($activity_list){
-            $activity_list = collection($activity_list)->toArray();
+            $activity_list = $activity_list->toArray();
+            $activity_list = empty($activity_list['data']) ? [] : $activity_list['data'];
             foreach($activity_list as &$row){
                 $row['activity_gallery'] = json_decode($row['activity_gallery'],true);
                 if($row['start_time'] > time()){
@@ -27,10 +31,6 @@ class Activity extends \think\Controller
                 }
             }
         }
-
-//        echo "<pre>";
-//        print_r($activity_list);
-//        exit;
 
         $this->assign('activity_list',$activity_list);
         $this->assign('page_title','活动列表');
@@ -250,7 +250,10 @@ class Activity extends \think\Controller
         $this->assign('activity_status',$activity_status);
 
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id')->join('user c','a.user_id=c.user_id');
-        $product_list = $query->select();
+        $product_list = $query->paginate(6,false,['query' => $_GET]);
+
+        $page = $product_list->render();
+        $this->assign('page', $page);
 
         $this->assign('product_list',$product_list);
         $this->assign('page_title','活动作品列表');

@@ -91,8 +91,13 @@ class User extends \think\Controller
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.date_time','>=',$start_time);
         }
-        $view_list = $query->where('a.user_id',$user_id)->select(); //todo 用户id 替换成正确的
-
+        $view_list = $query->where('a.user_id',$user_id)->paginate(8,false,['query' => $_GET]);    //->select(); //todo 用户id 替换成正确的
+        $page = $view_list->render();
+        $this->assign('page', $page);
+//        echo "<pre>";
+//        print_r($_REQUEST);
+//        print_r($page);
+//        exit;
 //        echo "<pre>";
 //        print_r($view_list);
 //        exit;
@@ -116,7 +121,9 @@ class User extends \think\Controller
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
         $type = in_array($type,[1,2,3]) ? $type : 1;
 
-        $message_list = Db::table('message')->where('type',$type)->where('user_id',$user_id)->select();
+        $message_list = Db::table('message')->where('type',$type)->where('user_id',$user_id)->paginate(5,false,['query' => $_GET]);
+        $page = $message_list->render();
+        $this->assign('page', $page);
 //        echo "<pre>";
 //        print_r($message_list);
 //        exit;
@@ -147,7 +154,14 @@ class User extends \think\Controller
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.add_time','>=',$start_time);
         }
-        $product_list = $query->where('a.user_id',$user_id)->limit(4)->select(); //todo 用户id 替换成正确的
+        $product_list = $query->where('a.user_id',$user_id)->paginate(4,false,['query' => $_GET]);
+        $page = $product_list->render();
+        $this->assign('page', $page);
+
+//        echo "<pre>";
+//        print_r($product_list);
+//        print_r($page);
+//        exit;
 
         $this->assign('product_list',$product_list);
         $this->assign('type',$type);

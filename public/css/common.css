@@ -48,9 +48,9 @@ body{background:url(../images/wrapBg.jpg) no-repeat top center;background-size:c
 .footer a{color:#fff;display:inline-block;vertical-align:middle;margin-left:.1rem}
 
 /**分页**/
-.pagination{text-align:center;padding:.2rem 0}
+.pagination{text-align:center;padding:.1rem 0}
 .pagination li{display:inline-block;font-size:.14rem;margin:0 .03rem}
-.pagination li a{display:inline-block;height:.28rem;line-height:.28rem;text-align:center;padding:0 .1rem;border:solid .02rem #542f20;border-radius:.28rem;box-shadow:.01rem .01rem .01rem #e8ac4f}
+.pagination li a{display:inline-block;height:.28rem;line-height:.28rem;text-align:center;padding:0 .1rem;border:solid .02rem #542f20;border-radius:.28rem;box-shadow:.01rem .01rem .01rem #e8ac4f;background:#fff}
 .pagination li:hover a,.pagination li.active span{color:#fff;background:#e8ac4f;}
 .pagination li.active span{display:inline-block;height:.32rem;line-height:.32rem;border-radius:100%;font-size:.16rem;padding:0 .12rem;text-align:center;;border:solid .02rem #542f20;box-shadow:.01rem .01rem .01rem #e8ac4f}
 .pagination li.disabled{display:none}
