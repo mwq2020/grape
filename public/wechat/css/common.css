@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0;padding:0;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-webkit-appearance:none;}/*-webkit-appearance:radio;*/
+body{font:14px/1.5 微软雅黑;background:#fff;color:#333;-webkit-tap-highlight-color: rgba(0,0,0,0)}
+ul{list-style-type:none;}
+input,select,textarea{vertical-align:middle; font:14px 微软雅黑; color:#333;outline:none;background:none;border:none}
+a{text-decoration:none;color:#333;}
+table{border-spacing:0px; border-collapse:collapse;width:100%; border:0px;margin:0;padding:0;}
+img{border:0px;}
+em{font-style:normal;}
+b,i{font-style:normal;}
+.clearfix{overflow:hidden;zoom:1;}
+.clear{clear:both; height:0px; font-size:0px; line-height:0px; overflow:hidden;}
+.fl{float:left;}
+.fr{float:right;}
+
+
+.wrapMain{max-width:7.5rem;background:-webkit-gradient(linear, 0 0, 0 100%, from(#c938e7), to(#6107dc)); background:-moz-linear-gradient(top,#c938e7,#6107dc);min-height:13.5rem;overflow-x:hidden;margin:0 auto;position:relative}
+.pad20{padding:0.2rem;}
+.padlr20{padding:0 0.2rem;}
