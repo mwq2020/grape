@@ -41,7 +41,9 @@ $(function(){
     //登录弹层关闭
     $('#login_pop_div').click(function(){
         console.log('login closebtn click')
-        $(this).parent().parent().hide();
+        //$(this).parent().parent().hide();
+        $("#login_pop_div").parent().parent().css("opacity","0");
+        $("#login_pop_div").parent().parent().css("z-index","-9999");
     })
 
     // 点击为登录 显示登录弹层
