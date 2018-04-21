@@ -49,7 +49,7 @@ $(function(){
         console.log('login btn show click')
         //$('#login_pop_div').parent().parent().show();
         $("#login_pop_div").parent().parent().css("opacity","1");
-        $("#login_pop_div").parent().parent().css("z-index","999");
+        $("#login_pop_div").parent().parent().css("z-index","9999");
     })
 
     //搜索页面点击搜索按钮
