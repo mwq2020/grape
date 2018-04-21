@@ -1,26 +1,10 @@
 <!-- 公共的登录弹层页面 -->
-<!--
-<div class="layer" style="display:none;">
-    <div class="login">
-        <span class="closedLayer" id="login_pop_div"></span>
-        <div class="loginBox clearfix">
-            <ul class="fl">
-                <li><span class="fl">读者证号</span><input type="text" name="reader_no" id="reader_no" class="userInp fl"></li>
-                <li><span class="fl">密　　码</span><input type="password" name="password" id="password" class="userInp fl"></li>
-            </ul>
-            <input type="submit" class="fr lgSubmit" value="">
-        </div>
-    </div>
-    <div class="errorBox" style="display: none;">
-        <span class="coloseError"></span>
-        <p id="login_err_msg">您输入的证号或密码不正确，请重新输入。</p>
-    </div>
-</div>
--->
 
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/layer.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="/css/chosen.css">
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/ratio.js"></script>
 <script src="/js/publish.js"></script>
 <script src="/js/chosen.jquery.js"></script>
 <script>
@@ -30,7 +14,7 @@
 </script>
 
 
-<div class="layer" style="display:none;">
+<div class="layer" style="filter:alpha(opactiy=0);opaicty:0;z-index:-99">
     <div class="login">
         <span class="closedLayer" id="login_pop_div"></span>
         <div class="loginBox">

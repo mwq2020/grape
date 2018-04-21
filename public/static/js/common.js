@@ -40,13 +40,16 @@ $(function(){
 
     //登录弹层关闭
     $('#login_pop_div').click(function(){
+        console.log('login closebtn click')
         $(this).parent().parent().hide();
     })
 
     // 点击为登录 显示登录弹层
     $('.unLogin').click(function(){
-        console.log('login btn click')
-        $('#login_pop_div').parent().parent().show();
+        console.log('login btn show click')
+        //$('#login_pop_div').parent().parent().show();
+        $("#login_pop_div").parent().parent().css("opacity","1");
+        $("#login_pop_div").parent().parent().css("z-index","999");
     })
 
     //搜索页面点击搜索按钮
