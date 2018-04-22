@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{if $page_title}{$page_title}{else}视频详情{/if}</title>
+    <link href="/css/common.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/js/ratio.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/wrap.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+
+    <script type="text/javascript" src="/jwplayer/jwplayer.js"></script>
+    <!--<script type="text/javascript" src="/jwplayer-7.10.4/jwplayer.js"></script>-->
+    <!--<script type="text/javascript" src="/jwplayer-7.10.4/jwplayer.js"></script>-->
+    <!--<script type="text/javascript" src="/jwplayer-7.10.4/jwplayer.js"></script>-->
+    <!--<script>jwplayer.key="4sNBpozdkb2Gv+IYeWyd+CID9tW2NXdJE5GeSg==";//修改为自己的key</script>-->
+
+</head>
+
+<body>
+<div class="wrap">
+    <div class="header">
+        <a href="/" class="fl logo"><img src="/images/logo.png" width="100%"></a>
+        {if !$Think.session.user_id}
+        <a href="javascript:void(0)" class="fr unLogin">
+            <i></i>
+            <p>未登录</p>
+        </a>
+        {else}
+        <a href="/index/user/viewlist" class="fr unLogin">
+            <img src="{$Think.session.avatar}">
+        </a>
+        {/if}
+        <a href="/index/search/index" class="fr sear">
+            <i></i>
+            <p>搜索</p>
+        </a>
+    </div>
+    <div class="PaintingMain">
+        <div class="PaintNav fl">
+            <ul>
+                <li class="NHuihua CurliBg"><a href="/index/category/index?cat_id=1">绘画</a></li>
+                <li class="Nsg"><a href="/index/category/index?cat_id=2">手工</a></li>
+                <li class="Nsf"><a href="/index/category/index?cat_id=3">书法</a></li>
+                <li class="Nwd"><a href="/index/category/index?cat_id=4">舞蹈</a></li>
+                <li class="NHyy"><a href="/index/category/index?cat_id=5">音乐</a></li>
+                <li class="Nql"><a href="/index/category/index?cat_id=6">棋类</a></li>
+                <li class="Nsf"><a href="/index/category/index?cat_id=7">民间艺术</a></li>
+            </ul>
+        </div>
+        <div class="Paintright fl">
+            <div class="wrap1755" style="width:14.48rem">
+                <span class="snow03" style="width:14.82rem"></span>
+                <span class="zs"></span>
+                <h3 class="keyTips">当前位置：<b>{$current_location}</b></h3>
+                <div class="clearfix">
+                    <div class="fl videoLeft">
+                        <h3>{$video_info.title}</h3>
+                        <div class="videoMid">
+                            <!--<img src="{$video_info.video_img}" width="100%" height="100%">-->
+                            <!--<video controls width="100%" height="100%" poster="{$video_info.video_img}">-->
+                                <!--<source src="{$video_info.video_url}" type="video/mp4">-->
+                            <!--</video>-->
+                            <div id="video_player"></div>
+                        </div>
+                        <div class="videoBot">
+                            <a href="javascript:void(0)" class="fr view_video_desc_btn">查看简介&gt;&gt;</a>
+                            <a href="javascript:void(0)" class="share fl video_wechat_share_btn">分享</a>
+                            <a href="javascript:void(0)" class="sc fl add_like_btn" data-video_id="{$video_info.video_id}">收藏</a>
+                            <a href="javascript:void(0)" class="dj fl">{$video_info.view_num}次播放</a>
+                        </div>
+                    </div>
+                    <div class="fr videoRight02">
+                        <h3><i></i>相关视频推荐</h3>
+                        <div class="videoScrol">
+                            {volist name="recommand_list" id="vo"}
+                            <dl>
+                                <dt>
+                                    <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
+                                    <em>绘画 | 简笔画</em>
+                                <div class="Picinfo">
+                                        <span class="fl">
+                                            <b><i><img src="/images/eye.png"></i>{$vo.view_num}</b>
+                                            <b><i><img src="/images/sc.png"></i>{$vo.like_num}</b>
+                                        </span>
+                                </div>
+                                </dt>
+                                <dd>
+                                    <h3><a href="/index/video/info?video_id={$vo.video_id}">{$vo.title}</a></h3>
+                                    <p>{$vo.view_num}次播放</p>
+                                    <p style="color:#999">{$vo.add_time|date="Y-m-d",###}</p>
+                                </dd>
+                            </dl>
+                            {/volist}
+                        </div>
+                        <b class="filter"></b>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 详情弹层start -->
+<div class="layer" id="video_info_desc" style="display:none;">
+    <div class="jianDetail">
+        <span class="zwClose" id="close_video_desc_btn"></span>
+        <div class="detailFOnt">
+            <h3>简介详情</h3>
+            <p>{$video_info.mark}</p>
+        </div>
+    </div>
+</div>
+<!-- 详情弹层end -->
+
+{if !$Think.session.user_id}
+{include file="common/login_pop" /}
+{/if}
+
+{include file="common/video_wechat_share" /}
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+    jwplayer("video_player").setup({
+        "file": "{$video_info.video_url}",//视频文件路径
+        //"aspectratio": "16:9",//播放器自适应比例
+        //"height": "360",//播放器高度
+        "width":'100%',
+        "height":'100%',
+        "type":"mp4",//播放文件类型（可选）
+        //"title": "{$video_info.title}",//标题（可选）
+        "description": "{$video_info.title}",//描述（可选）
+        "image": "{$video_info.video_img}",//视频封面（可选）
+        "repeat":"true",//重复播放（留空则不重复播放）
+        "autostart":"false",//自动播放（留空则不启用自动播放）
+    });
+</script>
