@@ -18,12 +18,11 @@ class Search extends \think\Controller
         $query = Loader::model('Video')->where('status',1);
         if(!empty($keyword)){ /* 客户输入关键字搜索页面 */
             Cookie::set('keyword',$keyword,30*24*3600);
-
             if($cat_id){
                 $query = $query->where('cat_id',$cat_id);
             }
-            $query = $query->where('title|title','like','%'.$keyword.'%');
-
+            $query = $query->where('title','like','%'.$keyword.'%');
+            //$query = $query->where('title|title','like','%'.$keyword.'%');
 
             //更新搜索关键字信息
             $keyword_info = Loader::model('SearchKeyword')->where('keyword',$keyword)->find();
@@ -37,8 +36,7 @@ class Search extends \think\Controller
 
             //获取视频列表
             $search_list = $query->order('view_num','desc')->paginate(10,false,['query' => $_GET]);
-
-            $video_count = $query->count();
+            $video_count = $search_list->total();
             $this->assign('video_count', $video_count);
 
             $page = $search_list->render();

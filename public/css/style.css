@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 /*首页*/
 .indexMain{width:17.22rem;margin:0 auto;}
@@ -388,3 +388,7 @@ i.home{width:.28rem;height:.27rem;background:url(../images/home.png) no-repeat;b
 .gkListBox dl dt img{height:100%;width:100%}
 .gkListBox dl dd{font-size:0.22rem;color:#333;line-height:0.5rem}
 .gkListBox .share{ margin-right: 0;color: #888;background-size: .24rem .24rem; padding-left: .3rem;font-size: .2rem;}
+
+/***********************报名成功*********************/
+.signSucess{width:5.2rem;height:3.48rem;background:rgba(0,0,0,0.7);position:fixed;top:50%;margin-top:-1.74rem;left:50%;margin-left:-2.6rem;border-radius:.2rem}
+.heart{background:url(../images/heart.png) no-repeat left center;background-size:.32rem .3rem}

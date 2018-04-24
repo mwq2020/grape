@@ -21,7 +21,7 @@ class Video extends \think\Controller
             $where['cat_id'] = intval($_REQUEST['cat_id']);
         }
 
-        $video_list = Loader::model('Video')->where($where)->order('video_id','desc')->paginate(10);
+        $video_list = Loader::model('Video')->where($where)->order('video_id','desc')->paginate(10,false,['query' => $_GET]);
         $this->assign('video_list', $video_list);
 
         $page = $video_list->render();
@@ -154,10 +154,29 @@ class Video extends \think\Controller
         $this->redirect('/manage/video/video_list');
     }
 
-
-    public function test()
+    /**
+     * 更改视频的状态
+     * @return mixed|void
+     */
+    public function change_status()
     {
-        echo "ffff";exit;
+        try {
+            if(!isset($_REQUEST['status']) || empty($_REQUEST['admin_id'])){
+                throw new \Exception('入参错误');
+            }
+            $admin_info = Loader::model('video')->where('video_id',$_REQUEST['video_id'])->find();
+            if(empty($admin_info)){
+                throw new \Exception('视频不存在');
+            }
+            $admin_info->status = intval($_REQUEST['status']);
+            $admin_info->save();
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('video/edit');
+        }
+        return $this->redirect('video/edit');
     }
 
     /**

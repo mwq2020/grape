@@ -2,13 +2,11 @@
 
 <link href="/css/common.css" type="text/css" rel="stylesheet">
 <link href="/css/layer.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" href="/css/chosen.css">
+<link rel="stylesheet" href="/css/combo.select.css">
 <script src="/js/publish.js"></script>
-<script src="/js/chosen.jquery.js"></script>
+<script src="/js/jquery.combo.select.js"></script>
 <script>
-    $(function(){
-        $('.dept_select').chosen();
-    });
+    $("#schoolId").comboSelect();
 </script>
 
 
@@ -20,11 +18,10 @@
                 <li>
                     <span class="fl">图&nbsp;书&nbsp;馆&nbsp;</span>
                     <div class="fl Library">
-                        <select name="dept" data-placeholder="请选择图书馆" id="dept" class="dept_select" style="width:2.37rem">
-                            <option value="-1"></option>
-                            <option value="a1">中国国家图书馆中国国家图书馆中国国家图书馆</option>
-                            <option value="b5">中关村图书馆</option>
-                            <option value="c1">西单图书馆</option>
+                        <select name="faultDiscription" id="schoolId">
+                            <option value="0" disabled selected>请选择图书馆</option>
+                            <option value="1">国家图书馆</option>
+                            <option value="2">中关村图书大厦</option>
                         </select>
                     </div>
                 </li>
