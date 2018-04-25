@@ -17,9 +17,10 @@
     <script src="/wechat/js/jquery-1.9.0.min.js" type="text/javascript"></script>
     <script src="/wechat/js/main.js" type="text/javascript"></script>
     <script src="/wechat/js/rem750.js" type="text/javascript"></script>
+    <script src="/wechat/js/common.js" type="text/javascript"></script>
     <script>
         $(function(){
-//视频简介查看更多
+            //视频简介查看更多
             $(".ilook").click(function(){
                 if( $(".moreIntro").is(":hidden")){
                     $(this).addClass("ilook02")
@@ -37,19 +38,26 @@
 <body>
 <div class="wrapMain">
     <div class="VideoCon pad20">
-        <div class="Seachercon  fl"><input class="Seachinput" type="text" placeholder="搜索书名" /><i><img width="100%" src="/wechat/images/close2.png" /></i></div><a href="#" class="SeachIcon fr"><img width="100%" src="/wechat/images/Ic3.png" /></a>
+        <div class="Seachercon  fl"><input class="Seachinput" type="text" value="搜索书名" id="search_keywords"/>
+            <i><img width="100%" src="/wechat/images/close2.png" /></i>
+        </div>
+        <a href="javascript:void(0)" class="SeachIcon fr" id="search_btn"><img width="100%" src="/wechat/images/Ic3.png" /></a>
     </div>
     <span class="eyeTit">热门搜索</span>
     <div class="pad20">
-        <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k1.png" /></i>快速画出青苹果</div>
+        {volist name="search_word_list" id="vo"}
+            <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k1.png" /></i>{$vo.keyword}</div>
+        {/volist}
+
+        <!--
         <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k2.png" /></i>快速画出青苹果</div>
         <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k3.png" /></i>快速画出青苹果</div>
         <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k4.png" /></i>快速画出青苹果</div>
         <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k4.png" /></i>快速画出青苹果</div>
+        -->
 
     </div>
 </div>
 <script src="/wechat/js/flickity-docs.min.js"></script>
-
 </body>
 </html>

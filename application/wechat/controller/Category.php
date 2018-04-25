@@ -7,24 +7,51 @@ class Category extends \think\Controller
 {
     public function index()
     {
-        //首页banner数据获取
-        $banner_list = Loader::model('Banner')->where('status',1)->order('banner_id','desc')->select();
-        $this->assign('banner_list',$banner_list);
+        $sort = isset($_REQUEST['sort']) ? intval($_REQUEST['sort']) : 1;
+        $sort = in_array($sort,[1,2,3,4]) ? $sort : 1;
+        $cat_id = isset($_REQUEST['cat_id']) ? intval($_REQUEST['cat_id']) : 1;
+        $second_cat_id = isset($_REQUEST['second_cat_id']) ? intval($_REQUEST['second_cat_id']) : 0;
 
-        //首页视频展示获取
-        $video_list = [];
-        $video_list[1] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $video_list[2] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $video_list[3] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $video_list[4] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $this->assign('video_list',$video_list);
+        $second_cat_list = Loader::model('Category')->where('parent_id',$cat_id)->select();
+        $this->assign('second_cat_list',$second_cat_list);
 
-        //首页右侧推荐展示
-        $recommand_list = Loader::model('Video')->where('status',1)->order('view_num','desc')->limit(4)->select();
-        $this->assign('recommand_list',$recommand_list);
+        //查询语句构造
+        $query = Loader::model('Video')->where('status',1);
+        if(!empty($cat_id)){
+            $query = $query->where('cat_id',$cat_id);
+        }
+        if(!empty($second_cat_id)){
+            $query = $query->where('second_cat_id',$second_cat_id);
+        }
 
-        $this->assign('page_title','紫葡萄少儿艺术库');
-        return $this->fetch('index');
+        if($sort == 1){
+            $query =$query->order('view_num desc,add_time desc');
+        } elseif($sort == 2){
+            $query =$query->order('add_time','desc');
+        } elseif($sort == 3){
+            $query =$query->order('like_num','desc');
+        } elseif($sort == 4){
+            $query =$query->order('view_num','desc');
+        }
+
+        $video_list = $query->paginate(8,false,['query' => $_GET]);
+        $page = $video_list->render();
+        $this->assign('page', $page);
+        $video_list = !empty($video_list) ? $video_list->toArray() : ['data'=>[]];
+
+        $cat_list = Loader::model('Category')->getCategoryList();
+        foreach($video_list['data'] as &$row){
+            $row['cat_name'] = isset($cat_list[$row['second_cat_id']]) ? $cat_list[$row['second_cat_id']]['cat_name'] : '';
+        }
+
+        $this->assign('video_list',$video_list['data']);
+
+        $this->assign('sort',$sort);
+        $this->assign('cat_id',$cat_id);
+        $this->assign('second_cat_id',$second_cat_id);
+
+        $this->assign('page_title','视频分类');
+        return $this->fetch('category/index');
     }
 
 }

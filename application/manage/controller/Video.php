@@ -21,6 +21,9 @@ class Video extends \think\Controller
             $where['cat_id'] = intval($_REQUEST['cat_id']);
         }
 
+        $cat_list = Loader::model('Category')->where('parent_id',0)->order('cat_id','asc')->select();
+        $this->assign('cat_list', $cat_list);
+
         $video_list = Loader::model('Video')->where($where)->order('video_id','desc')->paginate(10,false,['query' => $_GET]);
         $this->assign('video_list', $video_list);
 

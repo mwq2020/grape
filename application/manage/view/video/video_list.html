@@ -9,11 +9,7 @@
                 <i class="icon-home home-icon"></i>
                 <a href="/manage/index/index">起始页</a>
             </li>
-
-            <li>
-                <a href="/manage/index/index">验码</a>
-            </li>
-            <li class="active">验码</li>
+            <li class="active">视频列表</li>
         </ul><!-- .breadcrumb -->
     </div>
 
@@ -21,16 +17,21 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="header smaller lighter blue">视频列表</h3>
 
-                <form method="post" action="/manage/video/video_list">
+                <form method="get" action="/manage/video/video_list">
                     <div class="col-sm-2">
-                        标题 ：<input type="text" name="title" />
+                        资源名称 ：<input type="text" name="title" value="{$Think.get.title}"/>
                         <div class="space-12"></div>
                     </div>
 
                     <div class="col-sm-2">
-                        分类 ：<input type="text" name="cat_id" />
+                        分类 ：
+                        <select name="cat_id">
+                            <option value="0">请选择</option>
+                            {volist name="cat_list" id="vo"}
+                                <option value="{$vo.cat_id}" {if $Think.get.cat_id == $vo.cat_id} selected {/if}>{$vo.cat_name}</option>
+                            {/volist}
+                        </select>
                         <div class="space-12"></div>
                     </div>
 
@@ -39,10 +40,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="input-group input-group-sm">
-                                    <input name="end_time" type="text" id="upload_time" class="form-control" data-date-format="yyyy-mm-dd" />
-                                                <span class="input-group-addon">
-                                                    <i class="icon-calendar"></i>
-                                                </span>
+                                    <input name="upload_time" type="text" class="form-control" value="{$Think.get.upload_time}" />
                                 </div>
                             </div>
                         </div>

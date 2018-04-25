@@ -19,7 +19,7 @@
     <script src="/wechat/js/rem750.js" type="text/javascript"></script>
     <script>
         $(function(){
-//视频简介查看更多
+            //视频简介查看更多
             $(".ilook").click(function(){
                 if( $(".moreIntro").is(":hidden")){
                     $(this).addClass("ilook02")
@@ -36,75 +36,94 @@
 </head>
 <body>
 <div class="wrapMain">
-    <div class="videoiBanner"><img width="100%" src="/wechat/images/img2.png" /></div>
+    <div class="videoiBanner"><img width="100%" src="{$video_info.video_img}" /></div>
     <div class="VideoCon">
-        <span class="videoTit">快速画出青苹果<b>简笔画</b></span>
-        <p class="clearfix Videoinfo"><span><i class="Ieye"><img width="100%" src="/wechat/images/look.png" /></i>4,678次播放</span><span><i class="Isc"><img width="100%" src="/wechat/images/dz.png" /></i>收藏</span><span><i class="share"><img width="100%" src="/wechat/images/share.png" /></i>分享</span></p>
+        <span class="videoTit">{$video_info.title}<b>简笔画</b></span>
+        <p class="clearfix Videoinfo">
+            <span>
+            <i class="Ieye"><img width="100%" src="/wechat/images/look.png" /></i>{$video_info.view_num}次播放</span><span>
+            <i class="Isc"><img width="100%" src="/wechat/images/dz.png" /></i>收藏</span><span>
+            <i class="share"><img width="100%" src="/wechat/images/share.png" /></i>分享
+        </span>
+        </p>
         <span class="videoJianjie">简介</span>
-        <p class="videoIntr">本视频由飞乐鸟工作室提供。飞鸟工作室是由国内知名插画家飞乐鸟发起的绘画工作室。致力于传播"创享美丽生活"的理念，对生活永远怀有最远大的梦想和最朴实的情怀...<span class="moreIntro" style="display:none">的理念，对生活永远怀有最远大的情怀的理念，对生远大
-		的梦想和最朴实的情怀</span><a href="#" class="ilook"></a></p>
+        <p class="videoIntr">
+            本视频由飞乐鸟工作室提供。飞鸟工作室是由国内知名插画家飞乐鸟发起的绘画工作室。致力于传播"创享美丽生活"的理念，对生活永远怀有最远大的梦想和最朴实的情怀...
+            <span class="moreIntro" style="display:none">的理念，对生活永远怀有最远大的情怀的理念，对生远大的梦想和最朴实的情怀</span>
+            <a href="javascript:void(0)" class="ilook"></a>
+        </p>
     </div>
     <span class="eyeTit">相关推荐</span>
 
     <div class="pad20 clearfix">
         <div class="SubCon clearfix">
+            {volist name="recommand_list" id="vo"}
             <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                 <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <a href="/wechat/video/index?video_id={$vo.video_id}">
+                        <img width="100%" src="{$vo.video_img}" />
+                        <span class="SubBar">
+                        <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                        <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                        </span>
+                    </a>
                     <span class="SubTag">简笔画</span>
                 </div>
             </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
+            {/volist}
 
+            <!--
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            <div class="Subct fl">
+                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
+                <div class="SubPicm fl">
+                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
+                    <span class="SubTag">简笔画</span>
+                </div>
+            </div>
+            -->
         </div>
 
     </div>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>首页</title>
+    <title>{if $page_title}{$page_title}{else}首页{/if}</title>
     <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
     <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
@@ -42,9 +42,15 @@
         <div class="example">
             <div class="example__demo">
                 <div class="gallery show-neighbors js-flickity" data-flickity-options='{ "autoPlay": true, "wrapAround": true }'>
+                    {volist name="banner_list" id="vo"}
+                        <div class="gallery-cell"><img width="100%" height="100%" src="{$vo.banner_img}" /></div>
+                    {/volist}
+
+                    <!--
                     <div class="gallery-cell"><img width="100%" height="100%" src="/wechat/images/banner.png" /></div>
                     <div class="gallery-cell"><img width="100%" height="100%" src="/wechat/temp/img.png" /></div>
                     <div class="gallery-cell"><img width="100%" height="100%" src="/wechat/images/img.png" /></div>
+                    -->
                 </div>
             </div>
         </div>
@@ -70,16 +76,40 @@
     <span class="eyeTit">精彩推荐</span>
     <div class="clearfix">
         <div class="Flowerbg clearfix">
+            {volist name="recommand_list" id="vo"}
+            <div class="Videocon fl">
+                <img width="100%" height="100%" src="{$vo.video_img}" />
+                <span><img width="100%" src="/wechat/images/play.png" /></span>
+            </div>
+            {/volist}
+            <!--
             <div class="Videocon fl"><img width="100%" height="100%" src="/wechat/images/img.png" /><span><img width="100%" src="/wechat/images/play.png" /></span></div>
             <div class="Videocon fl"><img width="100%" height="100%" src="/wechat/images/img.png" /><span><img width="100%" src="/wechat/images/play.png" /></span></div>
             <div class="Videocon fl"><img width="100%" height="100%" src="/wechat/images/img.png" /><span><img width="100%" src="/wechat/images/play.png" /></span></div>
             <div class="Videocon fl"><img width="100%" height="100%" src="/wechat/images/img.png" /><span><img width="100%" src="/wechat/images/play.png" /></span></div>
+            -->
         </div>
     </div>
     <div class="clearfix">
         <div class="Subjectmain">
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="ys"><img width="100%" src="/wechat/images/km1.png" /></i>民间艺术</div>
             <div class="SubCon clearfix" style="display:block">
+                {volist name="video_list.1" id="vo"}
+                    <div class="Subct fl">
+                        <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                        <div class="SubPicm fl">
+                            <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                            </a>
+                            <span class="SubTag">简笔画</span>
+                        </div>
+                    </div>
+                {/volist}
+
+                <!--
                 <div class="Subct fl">
                     <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
@@ -108,9 +138,25 @@
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="hh"><img width="100%" src="/wechat/images/km2.png" /></i>绘画</div>
             <div class="SubCon clearfix" style="display:none">
+                {volist name="video_list.2" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+                <!--
                 <div class="Subct fl">
                     <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
@@ -139,9 +185,27 @@
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="sg"><img width="100%" src="/wechat/images/km3.png" /></i>手工</div>
             <div class="SubCon clearfix" style="display:none">
+
+                {volist name="video_list.3" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+
+                <!--
                 <div class="Subct fl">
                     <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
@@ -170,11 +234,79 @@
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                -->
             </div>
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="sf"><img width="100%" src="/wechat/images/km4.png" /></i>书法</div>
+            <div class="SubCon clearfix" style="display:none">
+                {volist name="video_list.4" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="wd"><img width="100%" src="/wechat/images/km5.png" /></i>舞蹈</div>
+            <div class="SubCon clearfix" style="display:none">
+                {volist name="video_list.5" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="yy"><img width="100%" src="/wechat/images/km6.png" /></i>音乐</div>
+            <div class="SubCon clearfix" style="display:none">
+                {volist name="video_list.6" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+
             <div class="SubjectTitel titBg"><a href="javascript:;" class="Lookmore"></a><i class="ql"><img width="100%" src="/wechat/images/km7.png" /></i>棋类</div>
+            <div class="SubCon clearfix" style="display:none">
+                {volist name="video_list.7" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                                <span class="SubBar">
+                                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                                    <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                                </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+            </div>
 
         </div>
     </div>
