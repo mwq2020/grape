@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta http-equiv='description' content='Ceeile Carine'>
+    <meta name='description' content='Ceeile Carine'>
+    <meta name='keywords' content='Ceeile Carine'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>4个人中心（未登录）</title>
+    <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
+    <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
+    <script src="/wechat/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="/wechat/js/main.js" type="text/javascript"></script>
+    <script src="/wechat/js/rem750.js" type="text/javascript"></script>
+    <script src="/wechat/js/common.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="wrapMain">
+    <div class="yellowBg02">
+        <dl class="Login" id="login_btn">
+            <dt><a href="javascript:void(0)"><img width="100%" src="/wechat/images/dl.png" /></a></dt>
+            <dd><a href="javascript:void(0)">点击登录</a></dd>
+        </dl>
+    </div>
+    <div class="pad20 Matop84">
+        <div class="centerBar"><a href="javascript:;" class="lookNext fr"></a><i class="c1"><img width="100%" src="/wechat/images/c1.png" /></i><p>观看记录<span>共0条，0新</span></p></div>
+        <div class="centerBar"><a href="javascript:;" class="lookNext fr"></a><i class="c2"><img width="100%" src="/wechat/images/c2.png" /></i><p>我的收藏<span>共0条，0新</span></p></div>
+        <div class="centerBar"><a href="javascript:;" class="lookNext fr"></a><i class="c3"><img width="100%" src="/wechat/images/c3.png" /></i><p>我的作品<span>共0条，0新</span></p></div>
+        <div class="centerBar"><a href="javascript:;" class="lookNext fr"></a><i class="c4"><img width="100%" src="/wechat/images/c4.png" /></i><p>我的消息<span>共0条，0新</span></p></div>
+    </div>
+</div>
+
+{if !$Think.session.user_id}
+    {include file="common/login" /}
+{/if}
+
+</body>
+</html>
