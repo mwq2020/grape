@@ -1,0 +1,14 @@
+{volist name="video_list" id="vo"}
+<div class="Subct fl">
+    <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+    <div class="SubPicm fl">
+        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <span class="SubBar">
+                            <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                            <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
+                        </span>
+        </a>
+        <span class="SubTag">{$vo.cat_name}</span>
+    </div>
+</div>
+{/volist}

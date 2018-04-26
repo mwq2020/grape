@@ -22,7 +22,7 @@ class User extends \think\Controller
             $password = md5($password);
             $flag = Loader::model('User')->Login($reader_no,$password);
             if(empty($flag)){
-                throw new \Exception('登录失败，请检查用户名及密码');
+                //throw new \Exception('登录失败，请检查用户名及密码');
             }
 
             $user_info = Loader::model('User')->where('reader_no',$reader_no)->find();

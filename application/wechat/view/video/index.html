@@ -17,6 +17,8 @@
     <script src="/wechat/js/jquery-1.9.0.min.js" type="text/javascript"></script>
     <script src="/wechat/js/main.js" type="text/javascript"></script>
     <script src="/wechat/js/rem750.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="/jwplayer/jwplayer.js"></script>
     <script>
         $(function(){
             //视频简介查看更多
@@ -36,7 +38,13 @@
 </head>
 <body>
 <div class="wrapMain">
-    <div class="videoiBanner"><img width="100%" src="{$video_info.video_img}" /></div>
+    <div class="videoiBanner">
+        <!--<img width="100%" src="{$video_info.video_img}" />-->
+        {if !$Think.session.reader_no}
+        <img id="video_img" src="{$video_info.video_img}" width="100%">
+        {/if}
+        <div id="video_player" {if !$Think.session.reader_no}style="display:none;" {/if}></div>
+    </div>
     <div class="VideoCon">
         <span class="videoTit">{$video_info.title}<b>简笔画</b></span>
         <p class="clearfix Videoinfo">
@@ -132,3 +140,20 @@
 
 </body>
 </html>
+{if $Think.session.reader_no}
+<script type="text/javascript">
+    jwplayer("video_player").setup({
+        "file": "{$video_info.video_url}",//视频文件路径
+        //"aspectratio": "16:9",//播放器自适应比例
+        //"height": "360",//播放器高度
+        "width":'100%',
+        "height":'100%',
+        "type":"mp4",//播放文件类型（可选）
+        //"title": "{$video_info.title}",//标题（可选）
+        "description": "{$video_info.title}",//描述（可选）
+        "image": "{$video_info.video_img}",//视频封面（可选）
+        "repeat":"true",//重复播放（留空则不重复播放）
+        "autostart":"false",//自动播放（留空则不启用自动播放）
+    });
+</script>
+{/if}

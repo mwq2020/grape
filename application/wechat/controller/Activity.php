@@ -32,12 +32,34 @@ class Activity extends \think\Controller
         return $this->fetch('index');
     }
 
+    public function activity_ajax()
+    {
+        $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+        $activity_list = Loader::model('Activity')->where('status',1)->order('activity_id','desc')->paginate(6,false,['query' => $_GET,'page'=>$page]);
+
+        if($activity_list){
+            $activity_list = $activity_list->toArray();
+            $activity_list = empty($activity_list['data']) ? [] : $activity_list['data'];
+            foreach($activity_list as &$row){
+                $row['activity_gallery'] = json_decode($row['activity_gallery'],true);
+                if($row['start_time'] > time()){
+                    $row['status_txt'] = '未开始';
+                } elseif($row['start_time'] <= time() && $row['end_time'] >= time()){
+                    $row['status_txt'] = '进行中';
+                }else {
+                    $row['status_txt'] = '已结束';
+                }
+            }
+        }
+
+        $this->assign('activity_list',$activity_list);
+        exit(json_encode(['code'=>200,'html' => $this->fetch('activity_ajax')]));
+    }
+
+
+
     public function info()
     {
-//        echo "<pre>";
-//        print_r($_REQUEST);
-//        print_r(session('reader_no'));
-//        exit;
         $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
         $activity_info = Loader::model('Activity')->find($activity_id);
         if($activity_info){

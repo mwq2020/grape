@@ -24,8 +24,6 @@ class User extends Model
             //$params = ['strUserName'=>'080812300021','strUserPin'=>'751008000','strAutherizeKey'=>''];
             $params = ['strUserName'=>$UserName,'strUserPin'=>$UserPin,'strAutherizeKey'=>$AutherizeKey];
             $ret = $client->Login($params);
-            var_dump($ret);
-            exit;
             if(empty($ret)){
                 return false;
             }

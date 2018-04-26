@@ -55,16 +55,16 @@
                 <dl>
                     <b class="ms"></b>
                     <!--<dt><a href="#"><img src="/temp/bg.png"><b class="play"></b></a></dt>-->
-                    <dt><a href="/index/video/info?video_id={$video_list.1.video_id}"><img src="{$video_list.1.video_img}"><b class="play"></b></a></dt>
-                    <dd><a href="/index/video/info?video_id={$video_list.1.video_id}">文化遗产技艺大展展示{$video_list.1.title}</a></dd>
+                    <dt><a href="/index/video/video_info?video_id={$video_list.1.video_id}"><img src="{$video_list.1.video_img}"><b class="play"></b></a></dt>
+                    <dd><a href="/index/video/video_info?video_id={$video_list.1.video_id}">文化遗产技艺大展展示{$video_list.1.title}</a></dd>
                 </dl>
             </div>
             <div class="clear"></div>
             <div class="clearfix video">
                 <ul>
-                    <li><a href="/index/video/info?video_id={$video_list.2.video_id}"><img src="{$video_list.2.video_img}"><b class="play"></b></a></li>
-                    <li><a href="/index/video/info?video_id={$video_list.3.video_id}"><img src="{$video_list.3.video_img}"><b class="play"></b></a></li>
-                    <li><a href="/index/video/info?video_id={$video_list.4.video_id}"><img src="{$video_list.4.video_img}"><b class="play"></b></a></li>
+                    <li><a href="/index/video/video_info?video_id={$video_list.2.video_id}"><img src="{$video_list.2.video_img}"><b class="play"></b></a></li>
+                    <li><a href="/index/video/video_info?video_id={$video_list.3.video_id}"><img src="{$video_list.3.video_img}"><b class="play"></b></a></li>
+                    <li><a href="/index/video/video_info?video_id={$video_list.4.video_id}"><img src="{$video_list.4.video_img}"><b class="play"></b></a></li>
                     <!--<li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>-->
                     <!--<li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>-->
                     <!--<li><a href="#"><img src="/temp/img.jpg"><b class="play"></b></a></li>-->
@@ -75,7 +75,7 @@
             <h3><i></i>大家都在看</h3>
             <ul>
                 {volist name="recommand_list" id="vo"}
-                    <li><a href="/index/video/info?video_id={$vo.video_id}">{$vo.title}</a></li>
+                    <li><a href="/index/video/video_info?video_id={$vo.video_id}">{$vo.title}</a></li>
                 {/volist}
                 <!--
                 <li><a href="#">爱我你就抱抱我</a></li>

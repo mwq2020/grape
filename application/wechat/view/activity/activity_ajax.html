@@ -1,0 +1,7 @@
+{volist name="activity_list" id="vo"}
+<li><span class="{if $vo.status_txt == '进行中'}ongoing{else}onEnd{/if}">{$vo.status_txt}</span>
+    <a href="/wechat/activity/info?activity_id={$vo.activity_id}">
+        <img src="{$vo.activity_img}" />
+    </a>
+</li>
+{/volist}

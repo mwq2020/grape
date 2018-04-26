@@ -17,7 +17,6 @@
     <script src="/wechat/js/jquery-1.9.0.min.js" type="text/javascript"></script>
     <script src="/wechat/js/main.js" type="text/javascript"></script>
     <script src="/wechat/js/rem750.js" type="text/javascript"></script>
-
 </head>
 <body>
 <div class="wrapMain">
@@ -37,12 +36,8 @@
             <div class="ScrollNav">
                 <a href="/wechat/category/index" class="Curyellow">全部</a>
                 {volist name="second_cat_list" id="vo"}
-                    <a href="/wechat/category/index?second_cat_id={$vo.cat_id}">{$vo.cat_name}</a>
+                    <a href="/wechat/category/index?cat_id={$cat_id}&second_cat_id={$vo.cat_id}">{$vo.cat_name}</a>
                 {/volist}
-
-                <!--
-                <a href="#">色彩画</a><a href="#">手抄报</a><a href="#">色彩认知</a><a href="#">主题创作</a><a href="#">全部</a><a href="#">全部</a>
-                -->
             </div>
         </div>
     </div>
@@ -53,7 +48,7 @@
         <a href="/wechat/category/index?cat_id={$cat_id}&second_cat_id={$second_cat_id}&sort=4"><i>观看最多</i></a>
     </div>
     <div class="pad20 clearfix">
-        <div class="SubCon clearfix">
+        <div class="SubCon clearfix" id="page_content">
 
             {volist name="video_list" id="vo"}
             <div class="Subct fl">
@@ -65,69 +60,59 @@
                             <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
                         </span>
                     </a>
-                    <span class="SubTag">简笔画</span>
+                    <span class="SubTag">{$vo.cat_name}</span>
                 </div>
             </div>
             {/volist}
-
-            <!--
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            <div class="Subct fl">
-                <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-                <div class="SubPicm fl">
-                    <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                    <span class="SubTag">简笔画</span>
-                </div>
-            </div>
-            -->
-
         </div>
-
     </div>
-
 </div>
 <script src="/wechat/js/flickity-docs.min.js"></script>
+<script type="text/javascript">
+    window.page    = 1;
+    window.is_page_end = 0;
+    function getCategoryPage() {
+        var cat_id  = '{$cat_id}';
+        var second_cat_id = '{$second_cat_id}';
+        var sort = '{$sort}';
+
+        $.ajax({
+            type: 'get',
+            async: false,
+            url: '/wechat/category/ajax_page' ,
+            data: 'page='+ window.page +'&cat_id=' + cat_id + '&second_cat_id=' + second_cat_id + '&sort=' + sort + '&m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    if(data.html == ''){
+                        window.is_page_end = 1;
+                    } else {
+                        $('#page_content').append(data.html);
+                    }
+                }
+            } ,
+            error:function(){
+                return  false;
+            },
+        });
+        //$("#page_tag_load").hide();
+    }
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var $body = $("body");
+            /*判断窗体高度与竖向滚动位移大小相加 是否 超过内容页高度*/
+            if (($(window).height() + $(window).scrollTop()) >= $body.height()) {
+                //$("#page_tag_load").show();
+                console.log('分页开始',window.page);
+                window.page++;
+                if(window.is_page_end != 1){
+                    getCategoryPage();
+                }
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

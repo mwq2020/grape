@@ -74,7 +74,7 @@
                             {volist name="recommand_list" id="vo"}
                             <dl>
                                 <dt>
-                                    <a href="/index/video/info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
+                                    <a href="/index/video/video_info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
                                     <em>绘画 | 简笔画</em>
                                     <div class="Picinfo">
                                         <span class="fl">
@@ -84,7 +84,7 @@
                                     </div>
                                 </dt>
                                 <dd>
-                                    <h3><a href="/index/video/info?video_id={$vo.video_id}">{$vo.title}</a></h3>
+                                    <h3><a href="/index/video/video_info?video_id={$vo.video_id}">{$vo.title}</a></h3>
                                     <p>{$vo.view_num}次播放</p>
                                     <p style="color:#999">{$vo.add_time|date="Y-m-d",###}</p>
                                 </dd>

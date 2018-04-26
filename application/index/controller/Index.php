@@ -13,10 +13,10 @@ class Index extends \think\Controller
 
         //首页视频展示获取
         $video_list = [];
-        $video_list[1] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $video_list[2] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $video_list[3] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
-        $video_list[4] = Loader::model('Video')->where('status',1)->order('video_id','desc')->find();
+        $video_list[1] = Loader::model('Video')->where(['status'=>1,'position'=>1])->order('video_id','desc')->find();
+        $video_list[2] = Loader::model('Video')->where(['status'=>1,'position'=>2])->order('video_id','desc')->find();
+        $video_list[3] = Loader::model('Video')->where(['status'=>1,'position'=>3])->order('video_id','desc')->find();
+        $video_list[4] = Loader::model('Video')->where(['status'=>1,'position'=>4])->order('video_id','desc')->find();
         $this->assign('video_list',$video_list);
 
         //首页右侧推荐展示

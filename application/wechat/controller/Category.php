@@ -2,6 +2,7 @@
 namespace app\wechat\controller;
 use \think\Db;
 use think\Loader;
+use think\Request;
 
 class Category extends \think\Controller
 {
@@ -11,31 +12,32 @@ class Category extends \think\Controller
         $sort = in_array($sort,[1,2,3,4]) ? $sort : 1;
         $cat_id = isset($_REQUEST['cat_id']) ? intval($_REQUEST['cat_id']) : 1;
         $second_cat_id = isset($_REQUEST['second_cat_id']) ? intval($_REQUEST['second_cat_id']) : 0;
+        $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
 
         $second_cat_list = Loader::model('Category')->where('parent_id',$cat_id)->select();
         $this->assign('second_cat_list',$second_cat_list);
 
         //查询语句构造
-        $query = Loader::model('Video')->where('status',1);
+
+        $query = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name');
         if(!empty($cat_id)){
-            $query = $query->where('cat_id',$cat_id);
+            $query = $query->where('a.cat_id',$cat_id);
         }
         if(!empty($second_cat_id)){
-            $query = $query->where('second_cat_id',$second_cat_id);
+            $query = $query->where('a.second_cat_id',$second_cat_id);
         }
 
         if($sort == 1){
-            $query =$query->order('view_num desc,add_time desc');
+            $query =$query->order('a.view_num desc,a.add_time desc');
         } elseif($sort == 2){
-            $query =$query->order('add_time','desc');
+            $query =$query->order('a.add_time','desc');
         } elseif($sort == 3){
-            $query =$query->order('like_num','desc');
+            $query =$query->order('a.like_num','desc');
         } elseif($sort == 4){
-            $query =$query->order('view_num','desc');
+            $query =$query->order('a.view_num','desc');
         }
 
-        $video_list = $query->paginate(8,false,['query' => $_GET]);
-        $page = $video_list->render();
+        $video_list = $query->paginate(8,false,['query' => $_GET,'page'=>$page]);
         $this->assign('page', $page);
         $video_list = !empty($video_list) ? $video_list->toArray() : ['data'=>[]];
 
@@ -49,9 +51,48 @@ class Category extends \think\Controller
         $this->assign('sort',$sort);
         $this->assign('cat_id',$cat_id);
         $this->assign('second_cat_id',$second_cat_id);
-
         $this->assign('page_title','视频分类');
-        return $this->fetch('category/index');
+        $this->assign('is_ajax',0);
+        if (!Request::instance()->isAjax()){
+            return $this->fetch('category/index');
+        } else {
+            $this->assign('is_ajax',1);
+            echo json_encode(['code'=>200,'html'=>$this->fetch('category/index')]);
+            exit;
+        }
+    }
+
+    public function ajax_page()
+    {
+        $sort = isset($_REQUEST['sort']) ? intval($_REQUEST['sort']) : 1;
+        $sort = in_array($sort,[1,2,3,4]) ? $sort : 1;
+        $cat_id = isset($_REQUEST['cat_id']) ? intval($_REQUEST['cat_id']) : 1;
+        $second_cat_id = isset($_REQUEST['second_cat_id']) ? intval($_REQUEST['second_cat_id']) : 0;
+        $page = isset($_REQUEST['page']) ? intval($_REQUEST['page']) : 1;
+
+        //查询语句构造
+        $query = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->field('a.*,b.cat_name');
+        if(!empty($cat_id)){
+            $query = $query->where('a.cat_id',$cat_id);
+        }
+        if(!empty($second_cat_id)){
+            $query = $query->where('a.second_cat_id',$second_cat_id);
+        }
+
+        if($sort == 1){
+            $query =$query->order('a.view_num desc,a.add_time desc');
+        } elseif($sort == 2){
+            $query =$query->order('a.add_time','desc');
+        } elseif($sort == 3){
+            $query =$query->order('a.like_num','desc');
+        } elseif($sort == 4){
+            $query =$query->order('a.view_num','desc');
+        }
+
+        $video_list = $query->paginate(8,false,['query' => $_GET,'page'=>$page]);
+        $this->assign('video_list',$video_list);
+        echo json_encode(['code'=>200,'html'=>$this->fetch('category/ajax_page')]);
+        exit;
     }
 
 }
