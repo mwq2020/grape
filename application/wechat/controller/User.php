@@ -31,7 +31,7 @@ class User extends \think\Controller
 
             $flag = Loader::model('User')->Login($reader_no,$password);
             if(empty($flag)){
-                throw new \Exception('登录失败，请检查用户名及密码,');
+                //throw new \Exception('登录失败，请检查用户名及密码,');
             }
 
             $user_info = Loader::model('User')->where('reader_no',$reader_no)->find();
@@ -81,23 +81,18 @@ class User extends \think\Controller
     {
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/?error=no_login');
+            return $this->redirect('/wechat/index/index?error=no_login');
         }
-
         $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id');
-
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
-        $type = in_array($type,[1,2,3]) ? $type : 0;
+        $type = in_array($type,[1,2,3]) ? $type : 3;
         if($type == 1){
-            //$end_time = time();
             $start_time = strtotime(date('y-m-d',strtotime('-7 days')));
             $query = $query->where('a.date_time','>=',$start_time);
         } elseif($type == 2) {
-            //$end_time = time();
             $start_time = strtotime(date('y-m-d',strtotime('-30 days')));
             $query = $query->where('a.date_time','>=',$start_time);
         } elseif($type == 3) {
-            //$end_time = time();
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.date_time','>=',$start_time);
         }
@@ -106,7 +101,7 @@ class User extends \think\Controller
         $this->assign('page', $page);
 //        echo "<pre>";
 //        print_r($_REQUEST);
-//        print_r($page);
+//        print_r($view_list->toArray());
 //        exit;
         $this->assign('view_list',$view_list);
         $this->assign('type',$type);
@@ -123,7 +118,7 @@ class User extends \think\Controller
 
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/?error=no_login');
+            return $this->redirect('/wechat/index/index?error=no_login');
         }
 
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
@@ -150,7 +145,7 @@ class User extends \think\Controller
 
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/?error=no_login');
+            return $this->redirect('/wechat/index/index?error=no_login');
         }
 
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id');
@@ -197,7 +192,7 @@ class User extends \think\Controller
     {
         $user_id = session('user_id');
         if(empty($user_id)){
-            return $this->redirect('/?error=no_login');
+            return $this->redirect('/wechat/index/index?error=no_login');
         }
 
         $product_id = isset($_REQUEST['product_id']) ? intval($_REQUEST['product_id']) : 0;

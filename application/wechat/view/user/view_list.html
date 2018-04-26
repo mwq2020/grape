@@ -42,13 +42,23 @@
                 最近7天
             </h3>
             <div class="SubCon clearfix marTop20" style="display: block;">
+                {if $type==1}
+                {volist name="view_list" id="vo"}
                 <div class="Subct fl">
-                    <div class="Titelcon"><span class="deleCollect"></span>快速画出青苹果1<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="#"><img width="100%" src="/wechat/images/img.png"><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>120</i></span></a>
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
+                            <span class="SubBar">
+                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
+                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
+                            </span>
+                        </a>
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                {/volist}
+                {/if}
+                <!--
                 <div class="Subct fl">
                     <div class="Titelcon"><span class="deleCollect"></span>快速画出青苹果2<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
@@ -70,8 +80,7 @@
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
-
-
+                -->
             </div>
         </div>
         <div class="newsBox">
@@ -81,13 +90,23 @@
                 近30天
             </h3>
             <div class="SubCon clearfix marTop20">
+                {if $type==2}
+                {volist name="view_list" id="vo"}
                 <div class="Subct fl">
-                    <div class="Titelcon"><span class="deleCollect"></span>快速画出青苹果1<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="#"><img width="100%" src="/wechat/images/img.png"><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>120</i></span></a>
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
+                            <span class="SubBar">
+                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
+                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
+                            </span>
+                        </a>
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                {/volist}
+                {/if}
+                <!--
                 <div class="Subct fl">
                     <div class="Titelcon"><span class="deleCollect"></span>快速画出青苹果2<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
@@ -95,6 +114,7 @@
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                -->
             </div>
         </div>
         <div class="newsBox">
@@ -104,6 +124,23 @@
                 近60天
             </h3>
             <div class="SubCon clearfix marTop20">
+                {if $type==3}
+                {volist name="view_list" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
+                            <span class="SubBar">
+                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
+                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
+                            </span>
+                        </a>
+                        <span class="SubTag">简笔画</span>
+                    </div>
+                </div>
+                {/volist}
+                {/if}
+                <!--
                 <div class="Subct fl">
                     <div class="Titelcon"><span class="deleCollect"></span>快速画出青苹果1<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
@@ -118,6 +155,7 @@
                         <span class="SubTag">简笔画</span>
                     </div>
                 </div>
+                -->
             </div>
         </div>
 

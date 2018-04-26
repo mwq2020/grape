@@ -19,6 +19,7 @@ class User extends \think\Controller
             $reader_no = isset($_REQUEST['reader_no']) ? $_REQUEST['reader_no'] : '';
             $password = isset($_REQUEST['password']) ? $_REQUEST['password'] : '';
 
+            $password = md5($password);
             $flag = Loader::model('User')->Login($reader_no,$password);
             if(empty($flag)){
                 throw new \Exception('登录失败，请检查用户名及密码');

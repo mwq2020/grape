@@ -54,7 +54,7 @@ $(function(){
             cache:false, //同理
             success: function(data){
                 if(data.code == 200){
-                    //window.location = '/index/index/index';
+                    //window.location = '/wechat/user/index';
                     location.reload();
                 } else {
                     return $('#login_error').html('<span>!</span>'+data.msg).show();

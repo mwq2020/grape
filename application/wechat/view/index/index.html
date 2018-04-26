@@ -31,7 +31,6 @@
                     $(this).parent().next(".SubCon").hide();
                     $(this).parent().addClass("titBg")
                 }
-
             })
         })
     </script>
@@ -77,10 +76,12 @@
     <div class="clearfix">
         <div class="Flowerbg clearfix">
             {volist name="recommand_list" id="vo"}
+            <a href="/wechat/video/index?video_id={$vo.video_id}">
             <div class="Videocon fl">
                 <img width="100%" height="100%" src="{$vo.video_img}" />
                 <span><img width="100%" src="/wechat/images/play.png" /></span>
             </div>
+            </a>
             {/volist}
             <!--
             <div class="Videocon fl"><img width="100%" height="100%" src="/wechat/images/img.png" /><span><img width="100%" src="/wechat/images/play.png" /></span></div>
@@ -98,7 +99,7 @@
                     <div class="Subct fl">
                         <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                         <div class="SubPicm fl">
-                            <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                            <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
@@ -146,7 +147,7 @@
                 <div class="Subct fl">
                     <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
@@ -194,7 +195,7 @@
                 <div class="Subct fl">
                     <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
@@ -242,7 +243,7 @@
                 <div class="Subct fl">
                     <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
@@ -260,7 +261,7 @@
                 <div class="Subct fl">
                     <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
@@ -278,7 +279,7 @@
                 <div class="Subct fl">
                     <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>
@@ -296,7 +297,7 @@
                 <div class="Subct fl">
                     <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
                     <div class="SubPicm fl">
-                        <a href="/wechat/video/info?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}" />
                                 <span class="SubBar">
                                     <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
                                     <i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>{$vo.like_num}</i>

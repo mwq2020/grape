@@ -66,6 +66,7 @@
             {/volist}
         </ul>
 
+        {if $search_list}
         <div class="searchListBox clearfix">
         {volist name="search_list" id="vo"}
         <dl>
@@ -82,12 +83,17 @@
             <dd>{$vo.title}</dd>
         </dl>
         {/volist}
-
         {$page}
         </div>
+        {else}
+        <div class="noWOrks" style="top:60%">
+            <span class="zwClose"></span>
+            暂无搜索结果
+        </div>
+        {/if}
 
     </div>
-    <div class="footer">2009-2018 Aliyun.com 版权所有ICP证：苏ICP备13035115号-6  苏公备案 3301000200099号</div>
+    <div class="footer">©2013-2018 南京佳朝教育科技有限公司 版权所有 ICP证：苏ICP备13035115号-6</div>
 </div>
 
 {if !$Think.session.user_id}

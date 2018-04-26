@@ -69,6 +69,10 @@ class Search extends \think\Controller
             $this->assign('search_video_num',$search_video_num);
             $this->assign('cat_id',$cat_id);
 
+//            echo "<pre>";
+//            print_r($search_list);
+//            exit;
+
             /* 搜索无结果是跳转到无搜索结果页面 */
             if(empty($search_list)){
                 return $this->fetch('search/no_result');
