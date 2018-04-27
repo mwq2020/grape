@@ -20,11 +20,15 @@
     <ul class="topTab clearfix">
         <li class="tabBg01"><a href="/wechat/activity/info?activity_id={$activity_info.activity_id}">活动简介</a></li>
         <li class="tabBg02"><a href="/wechat/activity/rule?activity_id={$activity_info.activity_id}">活动规则</a></li>
-        <li class="tabBg03"><a href="/wechat/activity/res?activity_id={$activity_info.activity_id}">作品展示</a></li>
+        {if $activity_status == 'ending'}
+        <li class="tabBg03"><a href="/wechat/activity/res?activity_id={$activity_info.activity_id}">活动结果</a></li>
+        {else}
+        <li class="tabBg03"><a href="/wechat/activity/product_list?activity_id={$activity_info.activity_id}">作品展示</a></li>
+        {/if}
     </ul>
     <div class="hdBox">
         <div class="hdImg"><img src="{$activity_info.activity_img}" width="100%"></div>
-        <p>活动时间：{$activity_info.start_time|date="Y-m-d",###}-{$activity_info.end_time|date="Y-m-d",###}</p>
+        <p>活动时间：{$activity_info.start_time|date="Y-m-d",###} ~ {$activity_info.end_time|date="Y-m-d",###}</p>
         <p>活动地点：{$activity_info.address}</p>
         <p>主办单位：{$activity_info.sponsor}</p>
     </div>
@@ -32,15 +36,19 @@
     <div class="hdBox hdintro">
         <h3 class="hdTitle"><i></i>活动简介</h3>
         <p>{$activity_info.activity_desc}</p>
+        <!--
         <p>本视频由飞乐鸟工作室提供。飞鸟工作室是由国内知名插画家飞乐鸟发起的绘画工作室。致力于传播"创享美丽生活"的理念，对生活永远怀有最远大的梦想和最朴实的情怀，通过绘画、手作、栽培等多种形式让更多的人发现并享受身边的乐趣，为帮助每个爱画画、爱动手的人创作出令人感动的作品而努力。其代表作《三天学会铅笔画》、《从0开始学素描》、《怎么画都可爱的生活涂鸦》、《飞乐鸟的手绘时光》系列等长期荣登全国各大书店畅销榜，更有数十种版权远销海外。</p>
         <p>通过绘画、手作、栽培等多种形式让更多的人发现并享受身边的乐趣，为帮助每个爱画画、爱动手的人创作出令人感动的作品而努力。</p>
+        -->
     </div>
     <p class="bord"></p>
 
     {if $activity_status == 'starting'}
         {if $is_signup == 0}
         <div class="heitBtn"><span class="hdSign">上传作品</span></div>
-        {else}
+        {/if}
+
+        {if $is_upload_product == 0}
         <div class="heitBtn"><span class="hdSign">活动报名</span></div>
         {/if}
     {elseif $activity_status == 'ending'}
@@ -50,5 +58,38 @@
     {/if}
 
 </div>
+
+
+<!-- 报名弹层 -->
+{if $step == 'signup'}
+{include file="common/activity_signup_channel" /}
+{/if}
+
+
+<!-- 读者证号报名弹窗 -->
+{if $step == 'readno_signup'}
+{include file="common/activity_readerno_signup" /}
+{/if}
+
+
+<!-- 手机号报名弹窗 -->
+{if $step == 'mobile_signup'}
+{include file="common/activity_mobile_signup" /}
+{/if}
+
+
+<!-- 上传文件弹层 -->
+{if $step == 'upload'}
+{include file="common/activity_upload_file" /}
+{/if}
+
+
+<!-- 上传文件弹层 -->
+{if $step == 'upload_info'}
+{include file="common/activity_upload_info" /}
+{/if}
+
+
+
 </body>
 </html>

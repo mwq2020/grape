@@ -57,7 +57,10 @@ class Activity extends \think\Controller
     }
 
 
-
+    /**
+     * 活动列表页面
+     * @return mixed
+     */
     public function info()
     {
         $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
@@ -98,9 +101,6 @@ class Activity extends \think\Controller
         }
         $this->assign('is_signup',$is_signup);
         $this->assign('is_upload_product',$is_upload_product);
-//        echo "<pre>";
-//        print_r($activity_info);
-//        exit;
 
         //作品页面
         $product_image_src = isset($_REQUEST['file_path']) ? $_REQUEST['file_path'] : '';

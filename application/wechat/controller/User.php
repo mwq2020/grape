@@ -84,8 +84,8 @@ class User extends \think\Controller
             return $this->redirect('/wechat/index/index?error=no_login');
         }
         $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id');
-        $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
-        $type = in_array($type,[1,2,3]) ? $type : 3;
+        $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 1;
+        $type = in_array($type,[1,2,3]) ? $type : 1;
         if($type == 1){
             $start_time = strtotime(date('y-m-d',strtotime('-7 days')));
             $query = $query->where('a.date_time','>=',$start_time);
@@ -97,12 +97,7 @@ class User extends \think\Controller
             $query = $query->where('a.date_time','>=',$start_time);
         }
         $view_list = $query->where('a.user_id',$user_id)->paginate(8,false,['query' => $_GET]);    //->select(); //todo 用户id 替换成正确的
-        $page = $view_list->render();
-        $this->assign('page', $page);
-//        echo "<pre>";
-//        print_r($_REQUEST);
-//        print_r($view_list->toArray());
-//        exit;
+
         $this->assign('view_list',$view_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-历史浏览记录');
@@ -142,16 +137,14 @@ class User extends \think\Controller
      */
     public function product_list()
     {
-
         $user_id = session('user_id');
         if(empty($user_id)){
             return $this->redirect('/wechat/index/index?error=no_login');
         }
 
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id');
-
-        $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
-        $type = in_array($type,[1,2,3]) ? $type : 0;
+        $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 1;
+        $type = in_array($type,[1,2,3]) ? $type : 1;
         if($type == 1){
             $start_time = strtotime(date('y-m-d',strtotime('-7 days')));
             $query = $query->where('a.add_time','>=',$start_time);
@@ -162,7 +155,7 @@ class User extends \think\Controller
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.add_time','>=',$start_time);
         }
-        $product_list = $query->where('a.user_id',$user_id)->paginate(4,false,['query' => $_GET]);
+        $product_list = $query->where('a.user_id',$user_id)->paginate(8,false,['query' => $_GET]);
         $this->assign('product_list',$product_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-我的作品集');
@@ -210,7 +203,8 @@ class User extends \think\Controller
         $this->assign('product_list',$product_list);
 
         $this->assign('page_title','用户中心-我的作品详情');
-        return $this->fetch('productioninfo');
+        return $this->fetch('product_info');//视频作品的详情页面
+        return $this->fetch('product_info_audio');//音频作品的详情页面
     }
 
 
