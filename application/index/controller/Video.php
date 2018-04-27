@@ -26,6 +26,23 @@ class Video extends \think\Controller
             $video_info->view_num += 1;
             $video_info->save();
         }
+
+        //记录视频到浏览视频列表
+        $user_id = session('user_id');
+        if($user_id && $video_id){
+            $view_info = Db::table('user_view_list')->where(['video_id'=>$video_id,'user_id'=>$user_id])->find();
+            if(empty($view_info)){
+                $insert_data = [];
+                $insert_data['video_id'] = $video_id;
+                $insert_data['user_id'] = $user_id;
+                $insert_data['date_time'] = strtotime(date('Y-m-d'));
+                $insert_data['add_time'] = time();
+                $insert_data['update_time'] = time();
+                Db::table('user_view_list')->insert($insert_data);
+            }
+        }
+
+
         $cat_list = Loader::model('Category')->getCategoryList();
         $current_location = $cat_list[$video_info->cat_id]['cat_name'] ."-".$cat_list[$video_info->second_cat_id]['cat_name'];
         $this->assign('current_location',$current_location);

@@ -13,7 +13,7 @@ class Video extends \think\Controller
         $this->assign('video_info',$video_info);
 
         //右侧视频推荐
-        $recommand_list = Loader::model('Video')->limit(8)->select();
+        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->limit(8)->order('a.view_num','desc')->select();
         $this->assign('recommand_list',$recommand_list);
         $this->assign('page_title','视频详情');
 
@@ -21,6 +21,22 @@ class Video extends \think\Controller
             $video_info->view_num += 1;
             $video_info->save();
         }
+
+        //记录视频到浏览视频列表
+        $user_id = session('user_id');
+        if($user_id && $video_id){
+            $view_info = Db::table('user_view_list')->where(['video_id'=>$video_id,'user_id'=>$user_id])->find();
+            if(empty($view_info)){
+                $insert_data = [];
+                $insert_data['video_id'] = $video_id;
+                $insert_data['user_id'] = $user_id;
+                $insert_data['date_time'] = strtotime(date('Y-m-d'));
+                $insert_data['add_time'] = time();
+                $insert_data['update_time'] = time();
+                Db::table('user_view_list')->insert($insert_data);
+            }
+        }
+
         $cat_list = Loader::model('Category')->getCategoryList();
         $current_location = $cat_list[$video_info->cat_id]['cat_name'] ."-".$cat_list[$video_info->second_cat_id]['cat_name'];
         $this->assign('current_location',$current_location);

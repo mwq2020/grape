@@ -163,14 +163,6 @@ class User extends \think\Controller
             $query = $query->where('a.add_time','>=',$start_time);
         }
         $product_list = $query->where('a.user_id',$user_id)->paginate(4,false,['query' => $_GET]);
-        $page = $product_list->render();
-        $this->assign('page', $page);
-
-//        echo "<pre>";
-//        print_r($product_list);
-//        print_r($page);
-//        exit;
-
         $this->assign('product_list',$product_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-我的作品集');
@@ -183,7 +175,15 @@ class User extends \think\Controller
      */
     public function collect_list()
     {
-        $this->assign('page_title','紫葡萄少儿艺术库');
+        $user_id = session('user_id');
+        if(empty($user_id)){
+            return $this->redirect('/wechat/index/index?error=no_login');
+        }
+        $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id')->join('category c','b.second_cat_id=c.cat_id')->field('a.id,b.*,c.cat_name');
+        $collect_list = $query->where('a.user_id',$user_id)->order('a.add_time','desc')->paginate(8,false,['query' => $_GET]);    //->select(); //todo 用户id 替换成正确的
+        $this->assign('collect_list',$collect_list);
+
+        $this->assign('page_title','紫葡萄少儿艺术库-我的收藏');
         return $this->fetch('collect_list');
     }
 

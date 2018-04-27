@@ -29,7 +29,7 @@ class Category extends \think\Controller
         }
 
         if($sort == 1){
-            $query =$query->order('view_num desc,add_time desc');
+            $query =$query->order('video_sn asc');
         } elseif($sort == 2){
             $query =$query->order('add_time','desc');
         } elseif($sort == 3){
