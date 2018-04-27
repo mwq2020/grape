@@ -12,6 +12,11 @@ class Video extends \think\Controller
         $video_info = Loader::model('Video')->find($video_id);
         $this->assign('video_info',$video_info);
 
+        //参数错误或者视频不存在就跳转到首页
+        if(empty($video_id) || empty($video_info)){
+            return $this->redirect('/wechat/index/index?from=no_video');
+        }
+
         //右侧视频推荐
         $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->limit(8)->order('a.view_num','desc')->select();
         $this->assign('recommand_list',$recommand_list);
