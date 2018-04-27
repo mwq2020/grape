@@ -51,7 +51,7 @@
 .SubBar{display:block;width:3.05rem;height:0.35rem;background:rgba(51,51,51,0.4);border-radius:0 0 0.2rem 0.2rem;position:absolute;bottom:0.2rem;left:0.2rem;line-height:0.35rem;}
 .SubBar i{display:inline-block;font-size:0.18rem;color:#fff;line-height:0.35rem;padding:0 0.2rem}
 .SubBar i b{display:block;float:left;margin-top:0.02rem;margin-right:0.06rem;width:0.22rem;height:0.18rem;}
-.SubTag{display:inline-block;width:0.9rem;height:0.4rem;background:#ff659a;border-radius:0.08rem;color:#fff;text-align:center;line-height:0.4rem;position:absolute;right:0.3rem;top:0.28rem}
+.SubTag{display:inline-block;height:0.4rem;background:#ff659a;border-radius:0.08rem;color:#fff;text-align:center;line-height:0.4rem;position:absolute;right:0.3rem;top:0.28rem;padding:0 .1rem}
 
 /*艺术库*/
 .ArtNav1{width:100%;height:1.7rem;background:#ca5aec;padding:0 0.2rem;}

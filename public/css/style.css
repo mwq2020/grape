@@ -2,7 +2,7 @@
 /* CSS Document */
 /*首页*/
 .indexMain{width:17.22rem;margin:0 auto;}
-.indexRight{width:3.49rem;font-family:myFirstFont;margin-top:.1rem}
+.indexRight{width:3.49rem;font-family:myFirstFont;}
 .indexRight h3{text-align:center;font-size:.5rem;color:#fff;height:1.35rem;background:url(../images/indexRight.png) repeat;border-radius:.2rem .2rem 0 0;line-height:1.15rem}
 .indexRight h3 i{width:.63rem;height:.74rem;background:url(../images/ballon.png) no-repeat;background-size:100%;float:left;margin-top:.2rem;margin-left:.15rem}
 .indexRight ul{position:relative;margin-top:-.2rem}
@@ -20,25 +20,27 @@
 .banner #pagination li { display:inline-block; list-style:none; width:.1rem; height:.1rem; margin:0 .08rem;border-radius:100%;background:#ca9c1d}
 .banner #pagination li a { display:block; width:100%; height:100%; padding:0; margin:0;  text-indent:-9999px;}
 .banner #pagination li.current { background:#fff}
-.banner02{width:6rem;height:4.07rem;background:url(../images/img02.png) no-repeat;background-size:100%;margin-top:.65rem;position:relative}
+.banner02{width:6rem;height:4.07rem;background:url(../images/img02.png) no-repeat;background-size:100%;margin-top:.5rem;position:relative}
 .banner02 dl{width:5.4rem;margin:0 auto;margin-top:.41rem}
 .banner02 dl dt{width:5.4rem;height:3rem;position:relative}
 .banner02 dl dt img{width:5.4rem;height:3rem;border-radius:.2rem;}
 .play{position:absolute;width:.74rem;height:.74rem;background:url(../images/play.png) no-repeat;background-size:100%;left:50%;margin-left:-.37rem;top:50%;margin-top:-.37rem}
 .banner02 dl dd{font-size:.24rem;text-align:center;height:.6rem;line-height:.6rem}
 .banner02 dl dd a{color:#fff}
-.video{position:relative;width:13.75rem;margin-top:.2rem}
+.video{position:relative;width:13.75rem;margin-top:.08rem}
 .video ul li{float:left;width:3.98rem;height:2.15rem;border:solid .1rem #fff;border-radius:.1rem;overflow:hidden;background:#fff;position:relative;margin-right:.4rem}
 .video ul li img{border-radius:.1rem;width:3.98rem;height:2.15rem}
-.indexNav{height:2.49rem;position:relative;width:100%;overflow:hidden;top:-.3rem}
+.indexNav{height:2.49rem;position:relative;width:100%;overflow:hidden;top:-.18rem}
 .trainBg{position:absolute;width:100%;height:.68rem;background:url(../images/train.png) no-repeat;background-size:100%;left:0;bottom:0}
-.indexNav .nav {padding-left:.1rem;position:relative;z-index:9999;animation: a 20s infinite linear;
+#dh{overflow:hidden}
+.indexNav .nav {padding-left:.1rem;position:relative;z-index:9999;width:19.1rem;height:2.31rem
+				/*animation: a 20s infinite linear;
 				-webkit-animation: a 20s infinite linear;
-				-moz-animation: a 20s infinite linear;transform: translate(18rem, 0);
-           		-webkit-transform: translate(18rem, 0);
-                -moz-transform: translate(18rem, 0);
-                -o-transform: translate(18rem, 0);
-               -ms-transform: translate(18rem, 0);}
+				-moz-animation: a 20s infinite linear;transform: translate(10rem, 0);
+           		-webkit-transform: translate(10rem, 0);
+                -moz-transform: translate(10rem, 0);
+                -o-transform: translate(10rem, 0);
+               -ms-transform: translate(10rem, 0);*/}
 .nav li{float:left;width:2.03rem;height:1.51rem;margin-right:.2rem}
 .nav li .navFont{font-size:.46rem;color:#fff;text-shadow: .02rem .02rem .02rem #333;height:1.3rem;line-height:1.3rem;text-align:center;} 
 .nav li .cicle{top:-.25rem;position:relative;width:1.93rem}
@@ -71,11 +73,11 @@
 
 @keyframes a{
 	form{
-		 transform: translate(18rem, -10px);
-            -webkit-transform: translate(18rem, -10px);
-            -moz-transform: translate(18rem, -10px);
-            -o-transform: translate(18rem, -10px);
-            -ms-transform: translate(18rem, -10px);
+		 transform: translate(-18rem, -10px);
+            -webkit-transform: translate(-18rem, -10px);
+            -moz-transform: translate(-18rem, -10px);
+            -o-transform: translate(-18rem, -10px);
+            -ms-transform: translate(-18rem, -10px);
 	}
 	to{
 		 transform: translate(-18rem, -10px);

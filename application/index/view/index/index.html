@@ -9,10 +9,13 @@
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
     <script type="text/javascript" src="/js/jquery.jslides.js"></script>
+    <script type="text/javascript" src="/js/fsrPMD.js"></script>
 
     <link href="/css/layer.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/static/js/common.js"></script>
+
+
 </head>
 
 <body>
@@ -89,70 +92,81 @@
         <div class="clear"></div>
     </div>
     <div class="indexNav">
-        <ul class="nav">
-            <li class="nav01">
-                <a href="/index/category/index?cat_id=7">
-                    <div class="navFont">民间艺术</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-            <li class="nav02">
-                <a href="/index/category/index?cat_id=1">
-                    <div class="navFont">绘画</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-            <li class="nav03">
-                <a href="/index/category/index?cat_id=2">
-                    <div class="navFont">手工</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-            <li class="nav04">
-                <a href="/index/category/index?cat_id=3">
-                    <div class="navFont">书法</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-            <li class="nav05">
-                <a href="/index/category/index?cat_id=4">
-                    <div class="navFont">舞蹈</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-            <li class="nav06">
-                <a href="/index/category/index?cat_id=5">
-                    <div class="navFont">音乐</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-            <li class="nav07">
-                <a href="/index/category/index?cat_id=6">
-                    <div class="navFont">棋类</div>
-                    <div class="cicle">
-                        <span class="fl"></span><span class="fr"></span>
-                    </div>
-                </a>
-            </li>
-        </ul>
+
+        <!--------------------我修改的内容------------------------->
+        <div id="dh">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+                    <td>
+                        <ul class="nav">
+                            <li class="nav01">
+                                <a href="/index/category/index?cat_id=7">
+                                    <div class="navFont">民间艺术</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav02">
+                                <a href="/index/category/index?cat_id=1">
+                                    <div class="navFont">绘画</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav03">
+                                <a href="/index/category/index?cat_id=2">
+                                    <div class="navFont">手工</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav04">
+                                <a href="/index/category/index?cat_id=3">
+                                    <div class="navFont">书法</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav05">
+                                <a href="/index/category/index?cat_id=4">
+                                    <div class="navFont">舞蹈</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav06">
+                                <a href="/index/category/index?cat_id=5">
+                                    <div class="navFont">音乐</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav07">
+                                <a href="/index/category/index?cat_id=6">
+                                    <div class="navFont">棋类</div>
+                                    <div class="cicle">
+                                        <span class="fl"></span><span class="fr"></span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--------------------我修改的内容------------------------->
         <div class="trainBg"></div>
     </div>
-    <div class="footer">©2013-2018 南京佳朝教育科技有限公司 版权所有 ICP证：苏ICP备13035115号-6</div>
-
 </div>
-
+<div class="footer">©2013-2018 南京佳朝教育科技有限公司 版权所有 ICP证：苏ICP备13035115号-6</div>
 {if !$Think.session.user_id}
 {include file="common/login_pop" /}
 {/if}
@@ -160,5 +174,17 @@
 <style type="text/css">
     .footer{margin-top:-.8rem}
 </style>
+<script type="text/javascript">
+    $(function(){
+        $("#dh").fsrPMD({
+            Event: 'mouseover', //事件
+            Id: 'dh', //容器ID
+            Bq: 'td', //复制html标签
+            Fx: "left", //方向
+            Time: 8             //时间
+        })
+    })
+</script>
+
 </body>
 </html>
