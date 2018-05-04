@@ -100,7 +100,10 @@ $(function(){
                     },2000);
                     //alert('添加喜欢成功');
                     //location.reload();
-                } else {
+                } else if(data.code == 400){
+                    $("#login_pop_div").parent().parent().css("opacity","1");
+                    $("#login_pop_div").parent().parent().css("z-index","9999");
+                }else {
                     alert('添加喜欢失败');
                 }
             } ,

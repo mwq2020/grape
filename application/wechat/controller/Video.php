@@ -18,8 +18,12 @@ class Video extends \think\Controller
         }
 
         //右侧视频推荐
-        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->limit(8)->order('a.view_num','desc')->select();
-        $this->assign('recommand_list',$recommand_list);
+        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')
+            ->where(['a.status'=>1,'a.second_cat_id'=>$video_info['second_cat_id']])
+            ->field('a.*,b.cat_name')
+            ->order('rand()')
+            ->limit(5)
+            ->select();$this->assign('recommand_list',$recommand_list);
         $this->assign('page_title','视频详情');
 
         if($video_info){

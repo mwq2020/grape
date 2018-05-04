@@ -67,7 +67,12 @@ class Video extends Base
         $this->assign('video_info',$video_info);
 
         //右侧视频推荐
-        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->limit(5)->select();
+        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')
+            ->where(['a.status'=>1,'a.second_cat_id'=>$video_info['second_cat_id']])
+            ->field('a.*,b.cat_name')
+            ->order('rand()')
+            ->limit(5)
+            ->select();
         $this->assign('recommand_list',$recommand_list);
         $this->assign('page_title','视频详情');
 
@@ -107,7 +112,9 @@ class Video extends Base
         try {
             $user_id = session('user_id');
             if(empty($user_id)){
-                throw new \Exception('您还没登录，请登录完再过来重试！');
+                $return_data['code'] = 400;
+                exit(json_encode($return_data));
+                //throw new \Exception('您还没登录，请登录完再过来重试！');
             }
             $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
             if(empty($video_id)){
