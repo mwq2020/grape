@@ -15,8 +15,9 @@
                     <div class="fl Library">
                         <select name="faultDiscription" id="schoolId">
                             <option value="0" disabled selected>请选择图书馆</option>
-                            <option value="1">国家图书馆</option>
-                            <option value="2">中关村图书大厦</option>
+                            {volist name="customer_list" id="vo"}
+                                <option value="{$vo.customer_id}">{$vo.customer_name}</option>
+                            {/volist}
                         </select>
                     </div>
                 </li>

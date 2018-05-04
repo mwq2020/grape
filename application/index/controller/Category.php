@@ -3,7 +3,7 @@ namespace app\index\controller;
 use \think\Db;
 use think\Loader;
 
-class Category extends \think\Controller
+class Category extends Base
 {
     /**
      * 视频列表

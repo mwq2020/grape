@@ -4,7 +4,7 @@ use \think\Db;
 use think\Loader;
 use Endroid\QrCode\QrCode;
 
-class Video extends \think\Controller
+class Video extends Base
 {
     /**
      * 视频详情
@@ -130,7 +130,7 @@ class Video extends \think\Controller
     public function make_qrcode()
     {
         $qrCode=new QrCode();
-        $url = 'http://www.zptys.net/index/video/info?video_id=3';//加http://这样扫码可以直接跳转url
+        $url = 'http://www.zptys.net/wechat/video/index?video_id='.intval($_REQUEST['video_id']);//加http://这样扫码可以直接跳转url
         $qrCode->setText($url)
             ->setSize(300)//大小
             ->setLabelFontPath(VENDOR_PATH.'endroid/qrcode/assets/noto_sans.otf')

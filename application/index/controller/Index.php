@@ -3,8 +3,19 @@ namespace app\index\controller;
 use \think\Db;
 use think\Loader;
 
-class Index extends \think\Controller
+class Index extends Base
 {
+    public function run()
+    {
+        $customer_list = Db::table('customer')->select();
+
+//        echo "<pre>";
+//        print_r($customer_list);
+//        exit;
+
+        $this->assign('customer_list',$customer_list);
+    }
+
     public function index()
     {
         //首页banner数据获取
