@@ -15,13 +15,13 @@ class Search extends \think\Controller
         $hot_keyword_list = Loader::model('SearchKeyword')->order('search_num','desc')->limit(6)->select();
         $this->assign('hot_keyword_list',$hot_keyword_list);
 
-        $query = Loader::model('Video')->where('status',1);
+        $query = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name');
         if(!empty($keyword)){ /* 客户输入关键字搜索页面 */
             Cookie::set('keyword',$keyword,30*24*3600);
             if($cat_id){
-                $query = $query->where('cat_id',$cat_id);
+                $query = $query->where('a.cat_id',$cat_id);
             }
-            $query = $query->where('title','like','%'.$keyword.'%');
+            $query = $query->where('a.title','like','%'.$keyword.'%');
             //$query = $query->where('title|title','like','%'.$keyword.'%');
 
             //更新搜索关键字信息
@@ -35,7 +35,7 @@ class Search extends \think\Controller
             }
 
             //获取视频列表
-            $search_list = $query->order('view_num','desc')->paginate(10,false,['query' => $_GET]);
+            $search_list = $query->order('a.view_num','desc')->paginate(10,false,['query' => $_GET]);
             $video_count = $search_list->total();
             $this->assign('video_count', $video_count);
 
@@ -79,7 +79,7 @@ class Search extends \think\Controller
             }
 
             //热门推荐
-            $hot_recommand = Loader::model('Video')->where('status',1)->order('view_num','desc')->limit(5)->select();
+            $hot_recommand = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->order('a.view_num','desc')->limit(5)->select();
             $this->assign('hot_recommand',$hot_recommand);
 
             $this->assign('page_title','视频搜索');
@@ -89,20 +89,20 @@ class Search extends \think\Controller
         } else { /* 初始进搜索页面显示 */
 
             if(!empty($last_keyword)){ /* 有上次搜索结果页面 */
-                $query = $query->where('title|title','like','%'.$last_keyword.'%');
+                $query = $query->where('title','like','%'.$last_keyword.'%');
                 //获取视频列表
                 $search_list = $query->order('view_num','desc')->limit(10)->select();
                 $this->assign('search_list',$search_list);
 
                 //热门推荐
-                $hot_recommand = Loader::model('Video')->where('status',1)->order('view_num','desc')->limit(5)->select();
+                $hot_recommand = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->order('a.view_num','desc')->limit(5)->select();
                 $this->assign('hot_recommand',$hot_recommand);
                 $this->assign('page_title','视频搜索');
                 return $this->fetch('search/index');
             } else { /* 无上次搜索页面 */
 
                 //热门推荐
-                $hot_recommand = Loader::model('Video')->where('status',1)->order('view_num','desc')->limit(10)->select();
+                $hot_recommand = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->order('a.view_num','desc')->limit(10)->select();
                 $this->assign('hot_recommand',$hot_recommand);
 
                 $this->assign('page_title','视频搜索');

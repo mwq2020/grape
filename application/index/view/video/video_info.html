@@ -12,7 +12,7 @@
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
-    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/common.js?v=1"></script>
 
     <script type="text/javascript" src="/jwplayer/jwplayer.js"></script>
     <!--<script type="text/javascript" src="/jwplayer-7.10.4/jwplayer.js"></script>-->
@@ -85,7 +85,7 @@
                             <dl>
                                 <dt>
                                     <a href="/index/video/video_info?video_id={$vo.video_id}"><img src="{$vo.video_img}"></a>
-                                    <em>绘画 | 简笔画</em>
+                                    <em>{$vo.cat_name}</em>
                                 <div class="Picinfo">
                                         <span class="fl">
                                             <b><i><img src="/images/eye.png"></i>{$vo.view_num}</b>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer">©2013-2018 南京佳朝教育科技有限公司 版权所有 ICP证：苏ICP备13035115号-6</div>
+        {include file="common/page_footer" /}
         </div>
 
     </div>
@@ -117,11 +117,13 @@
         <span class="zwClose" id="close_video_desc_btn"></span>
         <div class="detailFOnt">
             <h3>简介详情</h3>
-            <p>{$video_info.mark}</p>
+            <p>{if $video_info.mark != ''} {$video_info.mark} {else} {$video_info.series_video_desc} {/if}</p>
         </div>
     </div>
 </div>
 <!-- 详情弹层end -->
+
+{include file="common/video_like_success" /}
 
 {if !$Think.session.user_id}
 {include file="common/login_pop" /}

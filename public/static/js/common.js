@@ -54,6 +54,14 @@ $(function(){
         $("#login_pop_div").parent().parent().css("z-index","9999");
     })
 
+    // 点击为登录 显示登录弹层
+    $('#video_img').click(function(){
+        console.log('video img click')
+        //$('#login_pop_div').parent().parent().show();
+        $("#login_pop_div").parent().parent().css("opacity","1");
+        $("#login_pop_div").parent().parent().css("z-index","9999");
+    })
+
     //搜索页面点击搜索按钮
     $('#search_btn').click(function(){
         window.location = '/index/search/index?keyword='+$('#search_keywords').val();
@@ -85,7 +93,12 @@ $(function(){
             cache:false, //同理
             success: function(data){
                 if(data.code == 200){
-                    alert('添加喜欢成功');
+                    $('#like_success_pop').show();
+                    var timer = setInterval(function(){
+                        $('#like_success_pop').hide();
+                        clearTimeout(timer);
+                    },2000);
+                    //alert('添加喜欢成功');
                     //location.reload();
                 } else {
                     alert('添加喜欢失败');
