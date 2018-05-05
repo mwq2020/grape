@@ -44,6 +44,9 @@ class User extends \think\Controller
     {
         $error_msg = '';
         if(empty($_POST)){
+            $customer_list = Loader::model('Customer')->select();
+            $this->assign('customer_list',$customer_list);
+
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
             return $this->fetch('user/add');
@@ -62,15 +65,23 @@ class User extends \think\Controller
             if(empty($_REQUEST['school_name'])){
                 throw new \Exception('所属学校不能为空');
             }
+            if(empty($_REQUEST['password'])){
+                throw new \Exception('密码不能为空');
+            }
+            if(empty($_REQUEST['customer_id'])){
+                throw new \Exception('所属客户不能为空');
+            }
 
             //检查账户名是否已经存在
-            $account_exist = Loader::model('User')->where('reader_no',$_REQUEST['reader_no'])->find();
+            $account_exist = Loader::model('User')->where(['reader_no'=>$_REQUEST['reader_no']])->find();
             if(!empty($account_exist)){
                 throw new \Exception('读者证号已经已存在，请更换');
             }
 
             $data = [];
             $data['real_name']  = $_REQUEST['real_name'];
+            $data['customer_id']= intval($_REQUEST['customer_id']);
+            $data['password']   = md5($_REQUEST['password']);
             $data['reader_no']  = $_REQUEST['reader_no'];
             $data['telphone']   = $_REQUEST['telphone'];
             $data['school_name'] = $_REQUEST['school_name'];
@@ -102,6 +113,9 @@ class User extends \think\Controller
         $this->assign('user_info',$user_info);
 
         if(empty($_POST)){
+            $customer_list = Loader::model('Customer')->select();
+            $this->assign('customer_list',$customer_list);
+
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
             return $this->fetch('user/edit');
@@ -120,6 +134,12 @@ class User extends \think\Controller
             if(empty($_REQUEST['school_name'])){
                 throw new \Exception('所属学校不能为空');
             }
+            if(empty($_REQUEST['password'])){
+                throw new \Exception('密码不能为空');
+            }
+            if(empty($_REQUEST['customer_id'])){
+                throw new \Exception('所属客户不能为空');
+            }
 
             //检查账户名是否已经存在
             $map = [];
@@ -130,6 +150,8 @@ class User extends \think\Controller
                 throw new \Exception('读者证号已经已存在，请更换');
             }
 
+            $user_info->customer_id  = $_REQUEST['customer_id'];
+            $user_info->password  = md5($_REQUEST['password']);
             $user_info->real_name  = $_REQUEST['real_name'];
             $user_info->reader_no  = $_REQUEST['reader_no'];
             $user_info->telphone   = $_REQUEST['telphone'];

@@ -34,7 +34,7 @@ class User extends Base
             }
 
             //用户本地表
-            $user_info = Loader::model('User')->where('reader_no',$reader_no)->find();
+            $user_info = Loader::model('User')->where(['reader_no'=>$reader_no,'customer_id'=>$customer_id])->find();
             $password = md5($password);
             if($customer_info['login_type'] == 1){ //本地用户表校验
                 if(empty($user_info)){
@@ -55,6 +55,7 @@ class User extends Base
 
                 if(empty($user_info)){
                     $user_info = [];
+                    $user_info['customer_id']   = $customer_id;
                     $user_info['reader_no']     = $reader_no;
                     $user_info['password']      = $password;
                     $user_info['status']        = 1;

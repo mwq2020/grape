@@ -47,6 +47,25 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">密码</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="password" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">所属客户</label>
+                        <div class="col-sm-9">
+                            <select name="customer_id">
+                                <option value="0">请选择</option>
+                                {volist name="customer_list" id="vo"}
+                                <option value="{$vo.customer_id}">{$vo.customer_name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">联系电话</label>
                         <div class="col-sm-9">
                             <input type="text" name="telphone" value="" />
