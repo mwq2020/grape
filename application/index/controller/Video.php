@@ -39,7 +39,6 @@ class Video extends Base
                 $insert_data = [];
                 $insert_data['video_id'] = $video_id;
                 $insert_data['user_id'] = $user_id;
-                $insert_data['date_time'] = strtotime(date('Y-m-d'));
                 $insert_data['add_time'] = time();
                 $insert_data['update_time'] = time();
                 Db::table('user_view_list')->insert($insert_data);
@@ -76,10 +75,29 @@ class Video extends Base
         $this->assign('recommand_list',$recommand_list);
         $this->assign('page_title','视频详情');
 
+        //当前视频播放次数
         if($video_info){
             $video_info->view_num += 1;
             $video_info->save();
         }
+
+        //统计次数
+        $page_view_num_info = Db::table('statistics')->where(['statistics_key'=>'video_play_num'])->find();
+        if(!empty($page_view_num_info)) {
+            $data = [];
+            $data['id']                 = $page_view_num_info['id'];
+            $data['statistics_value']   = $page_view_num_info['statistics_value']+1;
+            $data['update_time']        = time();
+            Db::table('statistics')->update($data);
+        } else {
+            $data = [];
+            $data['statistics_key']     = 'video_play_num';
+            $data['statistics_value']   = 1;
+            $data['add_time']           = time();
+            $data['update_time']        = time();
+            Db::table('statistics')->insert($data);
+        }
+
 
         //记录视频到浏览视频列表
         $user_id = session('user_id');
@@ -89,7 +107,6 @@ class Video extends Base
                 $insert_data = [];
                 $insert_data['video_id'] = $video_id;
                 $insert_data['user_id'] = $user_id;
-                $insert_data['date_time'] = strtotime(date('Y-m-d'));
                 $insert_data['add_time'] = time();
                 $insert_data['update_time'] = time();
                 Db::table('user_view_list')->insert($insert_data);

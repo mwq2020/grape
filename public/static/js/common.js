@@ -4,11 +4,21 @@ $(function(){
     $('.lgSubmit').click(function(){
         var reader_no = $('#reader_no').val();
         var password = $('#password').val();
+        var customer_id = $('#schoolId').val()
+        if(customer_id == '' || customer_id == 0){
+            return  $('#login_err_msg').html('请选择图书馆！').parent().show();
+        } else {
+            $('#login_err_msg').html('').parent().hide();
+        }
         if(reader_no == ''){
             return  $('#login_err_msg').html('读者证号不能为空！').parent().show();
+        } else {
+            $('#login_err_msg').html('').parent().hide();
         }
         if(password == ''){
             return  $('#login_err_msg').html('密码不能为空！').parent().show();
+        } else {
+            $('#login_err_msg').html('').parent().hide();
         }
         //console.log('登录账号',reader_no);
         //console.log('登录账号',password);
@@ -16,7 +26,7 @@ $(function(){
             type: 'POST',
             async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
             url: '/index/user/login' ,
-            data: 'reader_no='+ reader_no +'&password=' + password + '&m='+ Math.random() ,
+            data: 'customer_id='+customer_id+'&reader_no='+ reader_no +'&password=' + password + '&m='+ Math.random() ,
             dataType:'json',
             cache:false, //同理
             success: function(data){

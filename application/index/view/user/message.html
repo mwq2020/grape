@@ -95,5 +95,10 @@
 <link href="/css/layer.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="/js/ratio.js"></script>
 {include file="common/user_message_info" /}
+
+{if $message_list->isEmpty()}
+{include file="common/no_content" /}
+{/if}
+
 </body>
 </html>

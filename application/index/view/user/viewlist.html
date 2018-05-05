@@ -82,9 +82,9 @@
                             <a href="/index/video/video_info?video_id={$vo.video_id}">
                                 <img src="{$vo.video_img}"/>
                             </a>
-                            <b class="Tag"><i>简笔画</i>|<i>绘画</i></b>
+                            <b class="Tag"><i>{$vo.cat_name}</i></b>
                             <div class="Picinfo">
-                                <span class="fl">{$vo.date_time|date="Y-m-d",###}</span>
+                                <span class="fl">{$vo.add_time|date="Y-m-d",###}</span>
                                 <span class="fr">
                                     <b><i><img src="/images/eye.png" /></i>{$vo.view_num}</b>
                                     <b><i><img src="/images/sc.png" /></i>{$vo.like_num}</b>
@@ -92,7 +92,7 @@
                             </div>
                             <i class="Playbtn"><img src="/images/play.png" /></i>
                         </dt>
-                        <dd>快速画出青苹果</dd>
+                        <dd>{$vo.title}</dd>
                     </dl>
                     {/volist}
                 </div>
@@ -105,5 +105,10 @@
 </div>
 
 {include file="common/page_footer" /}
+
+{if $view_list->isEmpty()}
+{include file="common/no_content" /}
+{/if}
+
 </body>
 </html>

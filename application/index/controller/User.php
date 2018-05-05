@@ -5,7 +5,7 @@ use think\Exception;
 use think\Loader;
 use think\Session;
 
-class User extends \think\Controller
+class User extends Base
 {
     /**
      * 登录操作
@@ -75,36 +75,31 @@ class User extends \think\Controller
             return $this->redirect('/?error=no_login');
         }
 
-        $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id');
+        $query = Db::table('user_view_list')->alias('a')->join('video b','a.video_id=b.video_id')->join('category c','b.second_cat_id=c.cat_id')->field('a.add_time,b.*,c.cat_name');
 
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 0;
         $type = in_array($type,[1,2,3]) ? $type : 0;
         if($type == 1){
             //$end_time = time();
             $start_time = strtotime(date('y-m-d',strtotime('-7 days')));
-            $query = $query->where('a.date_time','>=',$start_time);
+            $query = $query->where('a.add_time','>=',$start_time);
         } elseif($type == 2) {
             //$end_time = time();
             $start_time = strtotime(date('y-m-d',strtotime('-30 days')));
-            $query = $query->where('a.date_time','>=',$start_time);
+            $query = $query->where('a.add_time','>=',$start_time);
         } elseif($type == 3) {
             //$end_time = time();
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
-            $query = $query->where('a.date_time','>=',$start_time);
+            $query = $query->where('a.add_time','>=',$start_time);
         }
         $view_list = $query->where('a.user_id',$user_id)->paginate(8,false,['query' => $_GET]);    //->select(); //todo 用户id 替换成正确的
         $page = $view_list->render();
         $this->assign('page', $page);
-//        echo "<pre>";
-//        print_r($_REQUEST);
-//        print_r($page);
-//        exit;
-//        echo "<pre>";
-//        print_r($view_list);
-//        exit;
+
         $this->assign('view_list',$view_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-历史浏览记录');
+        $this->assign('no_content_txt','暂无浏览记录');
         return $this->fetch('viewlist');
     }
 
@@ -131,6 +126,7 @@ class User extends \think\Controller
         $this->assign('message_list',$message_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-我的消息');
+        $this->assign('no_content_txt','暂无消息');
         return $this->fetch('message');
     }
 
@@ -159,14 +155,10 @@ class User extends \think\Controller
         $page = $product_list->render();
         $this->assign('page', $page);
 
-//        echo "<pre>";
-//        print_r($product_list);
-//        print_r($page);
-//        exit;
-
         $this->assign('product_list',$product_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-我的作品集');
+        $this->assign('no_content_txt','暂无作品');
         return $this->fetch('productionlist');
     }
 

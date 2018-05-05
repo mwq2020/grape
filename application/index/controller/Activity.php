@@ -34,6 +34,7 @@ class Activity extends Base
 
         $this->assign('activity_list',$activity_list);
         $this->assign('page_title','活动列表');
+        $this->assign('no_content_txt','暂无活动');
         return $this->fetch('activity/index');
     }
 

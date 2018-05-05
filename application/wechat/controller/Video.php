@@ -22,7 +22,7 @@ class Video extends \think\Controller
             ->where(['a.status'=>1,'a.second_cat_id'=>$video_info['second_cat_id']])
             ->field('a.*,b.cat_name')
             ->order('rand()')
-            ->limit(5)
+            ->limit(6)
             ->select();$this->assign('recommand_list',$recommand_list);
         $this->assign('page_title','视频详情');
 
@@ -37,10 +37,10 @@ class Video extends \think\Controller
             $view_info = Db::table('user_view_list')->where(['video_id'=>$video_id,'user_id'=>$user_id])->find();
             if(empty($view_info)){
                 $insert_data = [];
-                $insert_data['video_id'] = $video_id;
-                $insert_data['user_id'] = $user_id;
-                $insert_data['date_time'] = strtotime(date('Y-m-d'));
-                $insert_data['add_time'] = time();
+                $insert_data['video_id']    = $video_id;
+                $insert_data['user_id']     = $user_id;
+                $insert_data['date_time']   = strtotime(date('Y-m-d'));
+                $insert_data['add_time']    = time();
                 $insert_data['update_time'] = time();
                 Db::table('user_view_list')->insert($insert_data);
             }

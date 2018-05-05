@@ -83,12 +83,11 @@
                             <i class="Playbtn"><img src="/images/play.png" /></i>
                             </a>
                         </dt>
-                        <dd><a href="#" class="share fr">分享</a>{$vo.title}</dd>
+                        <dd><a href="/index/video/video_info?video_id={$vo.video_id}&from=share" class="share fr">分享</a>{$vo.title}</dd>
                     </dl>
                 {/volist}
-            {$page}
             </div>
-
+            {$page}
         </div>
 
     </div>
@@ -100,5 +99,8 @@
 {include file="common/login_pop" /}
 {/if}
 
+{if !$video_list}
+{include file="common/no_content" /}
+{/if}
 </body>
 </html>

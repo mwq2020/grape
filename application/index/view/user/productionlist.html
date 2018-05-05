@@ -98,5 +98,8 @@
 
 {include file="common/page_footer" /}
 
+{if $product_list->isEmpty()}
+{include file="common/no_content" /}
+{/if}
 </body>
 </html>

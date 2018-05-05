@@ -31,7 +31,7 @@ class Index extends Base
         $this->assign('video_list',$video_list);
 
         //首页右侧推荐展示
-        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->order('a.view_num','desc')->limit(4)->select();
+        $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where('a.status',1)->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
         $this->assign('recommand_list',$recommand_list);
 
 //        echo "<pre>";

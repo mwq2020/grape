@@ -55,6 +55,7 @@ class Category extends Base
         $this->assign('second_cat_id',$second_cat_id);
 
         $this->assign('page_title','视频分类');
+        $this->assign('no_content_txt','暂无内容');
         return $this->fetch('category/index');
     }
 
