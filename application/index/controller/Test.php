@@ -323,4 +323,13 @@ class Test extends \think\Controller
     }
 
 
+    public function cate_data()
+    {
+        $res = Db::table('video')->where(['cat_id' => 4,'status'=>1])->order('video_sn asc')->field('video_id,video_sn,title')->select();
+        echo "<pre>";
+        print_r($res);
+        exit;
+
+    }
+
 }

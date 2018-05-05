@@ -71,6 +71,9 @@ class Customer extends \think\Controller
             if(empty($_REQUEST['end_time'])){
                 throw new \Exception('结束时间不能为空');
             }
+            if(empty($_REQUEST['login_type'])){
+                throw new \Exception('用户登录校验方式不能为空');
+            }
 
             //检查账户名是否已经存在
             $account_exist = Loader::model('Customer')->where('customer_name',$_REQUEST['customer_name'])->find();
@@ -86,6 +89,10 @@ class Customer extends \think\Controller
             $data['sale_person']    = $_REQUEST['sale_person'];
             $data['account_no']     = $_REQUEST['account_no'];
             $data['password']       = md5($_REQUEST['password']);
+
+            $data['type']           = intval($_REQUEST['type']);
+            $data['login_type']     = intval($_REQUEST['login_type']);
+
             $data['start_time']     = strtotime($_REQUEST['start_time']);
             $data['end_time']       = strtotime($_REQUEST['end_time']);
             $data['add_time']       = time();
@@ -150,6 +157,9 @@ class Customer extends \think\Controller
             if(empty($customer_info)){
                 throw new \Exception('客户不存在，刷新试试');
             }
+            if(empty($_REQUEST['login_type'])){
+                throw new \Exception('用户登录校验方式不能为空');
+            }
 
             //检查账户名是否已经存在
             $map = [];
@@ -160,23 +170,13 @@ class Customer extends \think\Controller
                 throw new \Exception('客户名称已存在，请更换');
             }
 
-
-            $data = [];
-            $data['customer_name']  = $_REQUEST['customer_name'];
-            $data['region_name']    = $_REQUEST['region_name'];
-            $data['customer_link_person']   = $_REQUEST['customer_link_person'];
-            $data['link_person_mobile']     = $_REQUEST['link_person_mobile'];
-            $data['sale_person']    = $_REQUEST['sale_person'];
-            $data['account_no']     = $_REQUEST['account_no'];
-            $data['password']       = md5($_REQUEST['password']);
-            $data['start_time']     = strtotime($_REQUEST['start_time']);
-            $data['end_time']       = strtotime($_REQUEST['end_time']);
-            $data['add_time']       = time();
-
             $customer_info->customer_name   = $_REQUEST['customer_name'];
             $customer_info->region_name     = $_REQUEST['region_name'];
             $customer_info->customer_link_person    = $_REQUEST['customer_link_person'];
             $customer_info->link_person_mobile      = $_REQUEST['link_person_mobile'];
+
+            $customer_info->type           = intval($_REQUEST['type']);
+            $customer_info->login_type     = intval($_REQUEST['login_type']);
 
             $customer_info->sale_person = $_REQUEST['sale_person'];
             $customer_info->account_no  = $_REQUEST['account_no'];

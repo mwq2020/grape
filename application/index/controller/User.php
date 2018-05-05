@@ -18,27 +18,62 @@ class User extends Base
             //调用接口判断登录是否正确、
             $reader_no = isset($_REQUEST['reader_no']) ? $_REQUEST['reader_no'] : '';
             $password = isset($_REQUEST['password']) ? $_REQUEST['password'] : '';
-
-            $password = md5($password);
-            $flag = Loader::model('User')->Login($reader_no,$password);
-            if(empty($flag)){
-                //throw new \Exception('登录失败，请检查用户名及密码');
+            $customer_id = isset($_REQUEST['customer_id']) ? $_REQUEST['customer_id'] : 0;
+            if(empty($reader_no)){
+                throw new \Exception('读者证号不能为空！');
+            }
+            if(empty($password)){
+                throw new \Exception('密码不能为空！');
+            }
+            if(empty($customer_id)){
+                throw new \Exception('图书馆不能为空！');
+            }
+            $customer_info = Db::table('customer')->where(['customer_id' => $customer_id])->find();
+            if(empty($customer_info)){
+                throw new \Exception('图书馆不存在！');
             }
 
+            //用户本地表
             $user_info = Loader::model('User')->where('reader_no',$reader_no)->find();
-            if(empty($user_info)){
-                $user_info = [];
-                $user_info['reader_no'] = $reader_no;
-                $user_info['status'] = 1;
-                $user_info['register_time'] = time();
-                $flag = Loader::model('User')->insert($user_info);
-                if(empty($flag)){
-                    throw new \Exception('登录失败，请检查用户名及密码');
+            $password = md5($password);
+            if($customer_info['login_type'] == 1){ //本地用户表校验
+                if(empty($user_info)){
+                    throw new \Exception('登录失败，读者证号不存在');
                 }
-                $user_info['user_id'] = Loader::model('User')->getLastInsID();
+                if($user_info['password'] != $password){
+                    throw new \Exception('登录失败，密码错误');
+                }
+                $update_data = [];
+                $update_data['user_id'] = $user_info['user_id'];
+                $update_data['last_login_time'] = time();
+                Loader::model('User')->update($update_data);
+            } else { //图书馆接口校验
+                $flag = Loader::model('User')->Login($reader_no,$password);
+                if(empty($flag)){
+                    //throw new \Exception('登录失败，请检查用户名及密码');
+                }
+
+                if(empty($user_info)){
+                    $user_info = [];
+                    $user_info['reader_no']     = $reader_no;
+                    $user_info['password']      = $password;
+                    $user_info['status']        = 1;
+                    $user_info['register_time'] = time();
+                    $user_info['last_login_time'] = time();
+                    $flag = Loader::model('User')->insert($user_info);
+                    if(empty($flag)){
+                        throw new \Exception('登录失败，请检查用户名及密码');
+                    }
+                    $user_info['user_id'] = Loader::model('User')->getLastInsID();
+                } else {
+                    $update_data = [];
+                    $update_data['user_id'] = $user_info['user_id'];
+                    $update_data['last_login_time'] = time();
+                    Loader::model('User')->update($update_data);
+                }
             }
+
             $return_data['data'] = ['user_id' => $user_info['user_id'],'reader_no' => $user_info['reader_no']];
-            //session('[start]');
             session('user_id',$user_info['user_id']);
             session('reader_no',$user_info['reader_no']);
             if(!empty($user_info['reader_no'])){
