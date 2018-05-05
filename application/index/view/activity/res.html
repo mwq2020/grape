@@ -143,5 +143,10 @@
 {if !$Think.session.user_id}
 {include file="common/login_pop" /}
 {/if}
+
+{if !$product_list}
+{include file="common/no_content" /}
+{/if}
+
 </body>
 </html>

@@ -216,6 +216,7 @@ class Activity extends Base
         $this->assign('product_list',$product_list);
 
         $this->assign('page_title','活动结果');
+        $this->assign('no_content_txt','暂无作品');
         return $this->fetch('res');
     }
 
@@ -258,6 +259,7 @@ class Activity extends Base
 
         $this->assign('product_list',$product_list);
         $this->assign('page_title','活动作品列表');
+        $this->assign('no_content_txt','暂无作品');
         return $this->fetch('product_list');
     }
 
