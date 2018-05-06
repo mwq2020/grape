@@ -271,4 +271,28 @@ class Activity extends \think\Controller
         return $this->fetch('product_list');
     }
 
+
+    public function upload_product()
+    {
+        $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
+        $activity_info = Loader::model('Activity')->find($activity_id);
+        if($activity_info){
+            $activity_info = $activity_info->toArray();
+
+            $activity_info['activity_gallery'] = json_decode($activity_info['activity_gallery'],true);
+            if($activity_info['start_time'] > time()){
+                $activity_info['status_txt'] = '未开始';
+            } elseif($activity_info['start_time'] <= time() && $activity_info['end_time'] >= time()){
+                $activity_info['status_txt'] = '进行中';
+            }else {
+                $activity_info['status_txt'] = '已结束';
+            }
+        }
+        $this->assign('activity_info',$activity_info);
+
+
+        $this->assign('page_title','活动作品列表');
+        return $this->fetch('common/activity_upload_file');
+    }
+
 }

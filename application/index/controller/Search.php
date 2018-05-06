@@ -74,7 +74,8 @@ class Search extends Base
 //            exit;
 
             /* 搜索无结果是跳转到无搜索结果页面 */
-            if(empty($search_list)){
+            if($search_list->isEmpty()){
+                $this->assign('page_title','视频搜索');
                 return $this->fetch('search/no_result');
             }
 

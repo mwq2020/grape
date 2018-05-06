@@ -47,19 +47,23 @@
             <img width="100%" src="/wechat/images/Ic3.png" />
         </a>
     </div>
-    <div class="ArtNav1Con2 padlr20">
-        <ul>
-            <li><a href="/wechat/search/index">全部({$search_video_num})</a></li>
-            {volist name="cat_list" id="vo"}
-            <li {if $vo.cat_id == 7 && $vo.cat_id == $cat_id }class="Curlibg" {elseif  $vo.cat_id == $cat_id}class="Curlibg2"{/if} >
-                <a href="/wechat/search/index?cat_id={$vo.cat_id}&keyword={$Think.get.keyword}">{$vo.cat_name}({$vo.count_num})</a>
-            </li>
-            {/volist}
-        </ul>
+
+    <div class="ArtNav1Con2 padlr20 Scrolldiv">
+        <div class="ScrollNav">
+            <ul>
+                <li><a href="/wechat/search/index">全部({$search_video_num})</a></li>
+                {volist name="cat_list" id="vo"}
+                <li {if $vo.cat_id == 7 && $vo.cat_id == $cat_id }class="Curlibg" {elseif  $vo.cat_id == $cat_id}class="Curlibg2"{/if} >
+                    <a href="/wechat/search/index?cat_id={$vo.cat_id}&keyword={$Think.get.keyword}">{$vo.cat_name}({$vo.count_num})</a>
+                </li>
+                {/volist}
+            </ul>
+        </div>
     </div>
+
+    {if !$search_list->isEmpty()}
     <div class="pad20 clearfix">
         <div class="SubCon clearfix" id="page_content">
-
             {volist name="search_list" id="vo"}
             <div class="Subct fl">
                 <div class="Titelcon">{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
@@ -75,8 +79,16 @@
             </div>
             {/volist}
         </div>
-
     </div>
+
+    {else}
+    <dl class="noResult">
+        <dt><img width="100%" src="/wechat/images/noresult.png" /></dt>
+        <dd>暂无搜索结果哦~</dd>
+    </dl>
+    {/if}
+
+
 </div>
 <script src="/wechat/js/flickity-docs.min.js"></script>
 <script type="text/javascript">

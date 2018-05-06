@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>4.1.2个人中心（已登录） </title>
+    <title>个人中心</title>
     <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
     <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
@@ -31,10 +31,26 @@
         </dl>
     </div>
     <div class="pad20 Matop84">
-        <div class="centerBar"><a href="/wechat/user/view_list" class="lookNext fr"></a><i class="c1"><img width="100%" src="/wechat/images/c1.png" /></i><p>观看记录<span>共13条，0新</span></p></div>
-        <div class="centerBar"><a href="/wechat/user/collect_list" class="lookNext fr"></a><i class="c2"><img width="100%" src="/wechat/images/c2.png" /></i><p>我的收藏<span>共3条，1新</span></p></div>
-        <div class="centerBar"><a href="/wechat/user/product_list" class="lookNext fr"></a><i class="c3"><img width="100%" src="/wechat/images/c3.png" /></i><p>我的作品<span>共0条，0新</span></p></div>
-        <div class="centerBar"><a href="/wechat/user/message_list" class="lookNext fr"></a><i class="c4"><img width="100%" src="/wechat/images/c4.png" /></i><p>我的消息<span>共0条，0新</span></p></div>
+        <div class="centerBar">
+            <a href="/wechat/user/view_list" class="lookNext fr"></a>
+            <i class="c1"><img width="100%" src="/wechat/images/c1.png" /></i>
+            <p>观看记录<span>共{$statistics_data.view_num}条</span></p>
+        </div>
+        <div class="centerBar">
+            <a href="/wechat/user/collect_list" class="lookNext fr"></a>
+            <i class="c2"><img width="100%" src="/wechat/images/c2.png" /></i>
+            <p>我的收藏<span>共{$statistics_data.collect_num}条</span></p>
+        </div>
+        <div class="centerBar">
+            <a href="/wechat/user/product_list" class="lookNext fr"></a>
+            <i class="c3"><img width="100%" src="/wechat/images/c3.png" /></i>
+            <p>我的作品<span>共{$statistics_data.product_num}条</span></p>
+        </div>
+        <div class="centerBar">
+            <a href="/wechat/user/message_list" class="lookNext fr"></a>
+            <i class="c4"><img width="100%" src="/wechat/images/c4.png" /></i>
+            <p>我的消息<span>共{$statistics_data.message_num}条</span></p>
+        </div>
     </div>
     <a href="/wechat/user/logout" class="Eidtlogin">退出登录</a>
 

@@ -241,7 +241,7 @@ $(function(){
 
 
     //文件上传
-    $('#product_img').on('change', function() {
+    $('#choose_upload_btn').on('change', function() {
         var fd = new FormData();
         fd.append("product_img", $("#product_img").get(0).files[0]);
         $.ajax({
@@ -364,7 +364,7 @@ function timeCounter(times){
         times--;
         if(times<=0){
             clearInterval(timer);
-            $('.hqYzm').html('').removeClass('syRime');
+            $('.hqYzm').html('验证码').removeClass('syRime');
             $.cookie("time_limit",0,{ expires:7, path:"/" });
         }
     },1000);

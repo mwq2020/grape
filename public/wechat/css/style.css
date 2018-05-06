@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 /*首页*/
-.Banner{width:7.1rem;height:3.17rem;background:url(../images/bannerbg.png) no-repeat center bottom;background-size:100%;}
+.Banner{width:7.1rem;height:2.94rem;background:url(../images/bannerbg.png) no-repeat center bottom;background-size:100%;}
 .Banner img{border-radius:0.2rem;}
 .Nav{display:flex;display:-webkit-flex;width:100%;height:1.44rem;margin-top:0.05rem;margin-bottom:0.2rem;}
 .Nav dl{flex:1;-webkit-flex:1;text-align:center}
@@ -9,7 +9,7 @@
 .Nav dl dd{text-align:center;line-height:0.5rem;}
 .Nav dl dd a{font-size:0.24rem;color:#fff}
 
-.eyeTit{display:block;width:2.81rem;height:0.67rem;background:url(../images/eye.png) no-repeat;background-size:100%;text-align:center;line-height:;font-size:0.24rem;color:#333;padding-top:0.2rem;line-height:0.47rem;margin:0 auto;margin-bottom:0.2rem;}
+.eyeTit{display:block;width:2.81rem;height:0.67rem;background:url(../images/eye.png) no-repeat;background-size:100%;text-align:center;line-height:;font-size:0.24rem;color:#333;padding-top:0.2rem;line-height:0.47rem;margin:0 auto;margin-bottom:0.2rem;font-weight:bold}
 
 .Flowerbg{background:url(../images/flowerbg.png) no-repeat center bottom;background-size:100%;padding-bottom:0.75rem;position:relative;width:120%}
 .Videocon{width:3.45rem;height:2.12rem;padding:0.2rem;background:rgba(255,255,255,0.5);border-radius:0.2rem;position:relative;margin-bottom:0.2rem;margin-right:0.2rem;}
@@ -51,14 +51,15 @@
 .SubBar{display:block;width:3.05rem;height:0.35rem;background:rgba(51,51,51,0.4);border-radius:0 0 0.2rem 0.2rem;position:absolute;bottom:0.2rem;left:0.2rem;line-height:0.35rem;}
 .SubBar i{display:inline-block;font-size:0.18rem;color:#fff;line-height:0.35rem;padding:0 0.2rem}
 .SubBar i b{display:block;float:left;margin-top:0.02rem;margin-right:0.06rem;width:0.22rem;height:0.18rem;}
-.SubTag{display:inline-block;height:0.4rem;background:#ff659a;border-radius:0.08rem;color:#fff;text-align:center;line-height:0.4rem;position:absolute;right:0.3rem;top:0.28rem;padding:0 .1rem}
+.SubTag{display:inline-block;padding:0 .1rem;height:0.4rem;background:#ff659a;border-radius:0.08rem;color:#fff;text-align:center;line-height:0.4rem;position:absolute;right:0.3rem;top:0.28rem}
 
 /*艺术库*/
 .ArtNav1{width:100%;height:1.7rem;background:#ca5aec;padding:0 0.2rem;}
 .ArtNav1Con{border-bottom:0.01rem solid #d379ef;height:1rem;}
 .ArtNav1Con ul{float:left}
-.ArtNav1Con ul li{float:left;height:0.6rem;line-height:0.6rem;padding-top:0.12rem;text-align:center;margin-top:0.05rem;width:1rem;}
+.ArtNav1Con ul li{float:left;height:0.6rem;line-height:0.6rem;padding-top:0.12rem;text-align:center;margin-top:0.05rem;width:0.9rem;}
 .ArtNav1Con ul li.Curlibg{color:#333;font-size:0.28rem;background:url(../images/eye2.png) no-repeat;background-size:100% 100%;width:1.4rem;line-height:0.5rem;text-align:center;margin-top:0.12rem;}
+.ArtNav1Con ul li.wid140{width:1.4rem;}
 .ArtNav1Con ul li.Curlibg a{color:#333;font-size:0.28rem}
 .ArtNav1Con ul li a{display:inline-block;color:#fff;font-size:0.26rem;}
 .ArtNav1Con ul li.Curlibg2{olor:#333;font-size:0.28rem;background:url(../images/eye3.png) no-repeat;background-size:100% 100%;width:1.05rem;line-height:0.5rem;text-align:center;margin-top:0.12rem;}
@@ -67,7 +68,7 @@
 .SeachIcon{display:inline-block;width:0.6rem;height:0.6rem;float:right;margin-top:0.2rem;}
 .Scrolldiv{width:100%;position:relative;overflow-x:auto;overflow-y:hidden;}
 .ScrollNav{width:120%;height:0.65rem;line-height:0.65rem;}
-.ScrollNav a{display:inline-block;padding:0 0.2rem;font-size:0.26rem;color:#fff;}
+.ScrollNav a{display:inline-block;padding:0 0.2rem;font-size:0.24rem;color:#fff;}
 .ScrollNav a.Curyellow{font-size:0.28rem;color:#fbd000}
 .sortNav{width:100%;height:0.68rem;line-height:0.68rem;color:#fff;font-size:0.26rem;display:flex;display:-webkit-flex;background:#c557eb;margin-top:0.2rem;}
 .sortNav a{flex:1;-webkit-flex:1;text-align:center;font-size:0.26rem;color:#fff;}
@@ -76,7 +77,7 @@
 .videoiBanner{width:100%;height:4rem;}
 .VideoCon{background:rgba(205,112,239,0.5);padding:0 0.2rem 0.2rem 0.2rem;margin-bottom:0.2rem;height:auto!important;overflow:hidden;}
 .videoTit{display:block;line-height:0.7rem;font-size:0.28rem;color:#fff;}
-.videoTit b{display:inline-block;padding:0 0.1rem;background:#ff659a;border-radius:0.08rem;font-weight:normal;line-height:0.38rem;margin-left:0.1rem;}
+.videoTit b{display:inline-block;padding:0 0.05rem;background:#ff659a;border-radius:0.08rem;font-weight:normal;line-height:0.32rem;margin-left:0.1rem;font-size:0.22rem}
 .Videoinfo{line-height:0.3rem;padding-bottom:0.1rem;}
 .Videoinfo span{color:#fff;font-size:0.24rem;padding-right:0.15rem;display:inline-block;float:left}
 .Videoinfo span i{display:inline-block;float:left;margin-top:0.01rem;margin-right:0.1rem;}

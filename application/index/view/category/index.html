@@ -88,6 +88,12 @@
                 {/volist}
             </div>
             {$page}
+
+            {if !$video_list}
+            <div class="noSearchResult">
+                <span>资源马上更新</span>
+            </div>
+            {/if}
         </div>
 
     </div>
@@ -99,8 +105,5 @@
 {include file="common/login_pop" /}
 {/if}
 
-{if !$video_list}
-{include file="common/no_content" /}
-{/if}
 </body>
 </html>

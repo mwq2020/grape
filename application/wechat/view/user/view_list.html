@@ -7,7 +7,7 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0"/>
     <meta charset="utf-8">
-    <title></title>
+    <title>观看记录</title>
     <link type="text/css" rel="stylesheet" href="/wechat/css/common.css" />
     <link type="text/css" rel="stylesheet" href="/wechat/css/style.css" />
     <script src="/wechat/js/rem750.js" type="text/javascript"></script>
@@ -37,80 +37,27 @@
         <p class="opereBtn clearfix"><a href="#" class="fr edit">清空</a></p>
         <div class="newsBox">
             <h3 class="newsTitle">
-                <span class="arrow fr arrowUp"></span>
                 <i class="seven"></i>
-                最近7天
+                全部播放记录
             </h3>
             <div class="SubCon clearfix marTop20" style="display: block;">
-                {if $type==1}
-                {volist name="view_list" id="vo"}
-                <div class="Subct fl">
-                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
-                    <div class="SubPicm fl">
-                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
-                            <span class="SubBar">
-                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
-                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
-                            </span>
-                        </a>
-                        <span class="SubTag">简笔画</span>
-                    </div>
-                </div>
-                {/volist}
-                {/if}
-            </div>
-        </div>
-        <div class="newsBox">
-            <h3 class="newsTitle">
-                <span class="arrow fr arrowUp"></span>
-                <i class="thirty"></i>
-                近30天
-            </h3>
-            <div class="SubCon clearfix marTop20">
-                {if $type==2}
-                {volist name="view_list" id="vo"}
-                <div class="Subct fl">
-                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
-                    <div class="SubPicm fl">
-                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
-                            <span class="SubBar">
-                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
-                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
-                            </span>
-                        </a>
-                        <span class="SubTag">简笔画</span>
-                    </div>
-                </div>
-                {/volist}
-                {/if}
-            </div>
-        </div>
-        <div class="newsBox">
-            <h3 class="newsTitle">
-                <span class="arrow fr arrowUp"></span>
-                <i class="sixty"></i>
-                近60天
-            </h3>
-            <div class="SubCon clearfix marTop20">
-                {if $type==3}
-                {volist name="view_list" id="vo"}
-                <div class="Subct fl">
-                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
-                    <div class="SubPicm fl">
-                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
-                            <span class="SubBar">
-                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
-                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
-                            </span>
-                        </a>
-                        <span class="SubTag">简笔画</span>
-                    </div>
-                </div>
-                {/volist}
-                {/if}
-            </div>
-        </div>
 
+                {volist name="view_list" id="vo"}
+                <div class="Subct fl">
+                    <div class="Titelcon"><span class="deleCollect"></span>{$vo.title}<i class="Tileft"></i><i class="Tiright"></i></div>
+                    <div class="SubPicm fl">
+                        <a href="/wechat/video/index?video_id={$vo.video_id}"><img width="100%" src="{$vo.video_img}">
+                            <span class="SubBar">
+                                <i class="fl"><b><img width="100%" src="/wechat/images/look.png"></b>{$vo.view_num}</i>
+                                <i class="fr"><b><img width="100%" src="/wechat/images/dz.png"></b>{$vo.like_num}</i>
+                            </span>
+                        </a>
+                        <span class="SubTag">{$vo.cat_name}</span>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+        </div>
     </div>
 </div>
 </body>

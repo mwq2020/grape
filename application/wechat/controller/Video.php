@@ -17,6 +17,9 @@ class Video extends \think\Controller
             return $this->redirect('/wechat/index/index?from=no_video');
         }
 
+        $customer_list = Db::table('customer')->select();
+        $this->assign('customer_list',$customer_list);
+
         //右侧视频推荐
         $recommand_list = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')
             ->where(['a.status'=>1,'a.second_cat_id'=>$video_info['second_cat_id']])
@@ -39,7 +42,6 @@ class Video extends \think\Controller
                 $insert_data = [];
                 $insert_data['video_id']    = $video_id;
                 $insert_data['user_id']     = $user_id;
-                $insert_data['date_time']   = strtotime(date('Y-m-d'));
                 $insert_data['add_time']    = time();
                 $insert_data['update_time'] = time();
                 Db::table('user_view_list')->insert($insert_data);

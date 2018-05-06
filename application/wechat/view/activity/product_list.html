@@ -27,6 +27,20 @@
         <li class="tabBg03"><a href="/wechat/activity/product_list?activity_id={$activity_info.activity_id}">作品展示</a></li>
     </ul>
     <div class="SubCon clearfix">
+        {volist name="product_list" id="vo"}
+        <div class="Subct fl">
+            <div class="Titelcon">{$vo.product_name}<i class="Tileft"></i><i class="Tiright"></i></div>
+            <div class="SubPicm fl">
+                <a href="#"><img width="100%" src="{$vo.product_img}" />
+                    <span class="SubBar">
+                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                    <!--<i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i>-->
+                    </span>
+                </a>
+            </div>
+        </div>
+        {/volist}
+        <!--
         <div class="Subct fl">
             <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
             <div class="SubPicm fl">
@@ -76,17 +90,9 @@
                 <span class="SubTag">简笔画</span>
             </div>
         </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
+        -->
 
     </div>
-
-
 </div>
 
 </body>
