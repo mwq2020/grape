@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>3.5.1活动详情-作品展示（活动结束）</title>
+    <title>活动详情-作品展示</title>
     <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
     <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
@@ -28,74 +28,34 @@
     </ul>
     <div class="Winning">
         <span class="eyeTit">获奖名单</span>
+        {volist name="award_list" id="vo"}
+            <p class="Winpcon"><span>{$vo.award_grade_txt}</span><span>{$vo.telphone}</span><span>{$vo.product_name||mb_substr=0,8,'utf-8'}</span></p>
+        {/volist}
+        <!--
         <p class="Winpcon"><span>一等奖</span><span>张三|092456</span><span>卡通人乌苏雕像</span></p>
         <p class="Winpcon"><span>二等奖</span><span>15210577228</span><span>卡通人乌苏雕像</span></p>
         <p class="Winpcon"><span>三等奖</span><span>张三|092456</span><span>卡通人乌苏雕像</span></p>
         <p class="Winpcon"><span>四等奖</span><span>张三|092456</span><span>卡通人乌苏雕像</span></p>
         <p class="Winpcon"><span>五等奖</span><span>张三|092456</span><span>卡通人乌苏雕像</span></p>
+        -->
     </div>
     <span class="eyeTit">作品展示</span>
     <div class="SubCon clearfix">
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
-        <div class="Subct fl">
-            <div class="Titelcon">快速画出青苹果<i class="Tileft"></i><i class="Tiright"></i></div>
-            <div class="SubPicm fl">
-                <a href="#"><img width="100%" src="/wechat/images/img.png" /><span class="SubBar"><i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>743</i><i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i></span></a>
-                <span class="SubTag">简笔画</span>
-            </div>
-        </div>
 
+        {volist name="product_list" id="vo"}
+        <div class="Subct fl">
+            <div class="Titelcon">{$vo.product_name}<i class="Tileft"></i><i class="Tiright"></i></div>
+            <div class="SubPicm fl">
+                <a href="#"><img width="100%" src="{$vo.product_img}" />
+                    <span class="SubBar">
+                    <i class="fl"><b><img width="100%" src="/wechat/images/look.png" /></b>{$vo.view_num}</i>
+                    <!--<i class="fr"><b><img width="100%" src="/wechat/images/dz.png" /></b>120</i>-->
+                    </span>
+                </a>
+            </div>
+        </div>
+        {/volist}
     </div>
-
-
 </div>
 
 </body>
