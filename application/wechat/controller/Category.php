@@ -4,7 +4,7 @@ use \think\Db;
 use think\Loader;
 use think\Request;
 
-class Category extends \think\Controller
+class Category extends Base
 {
     public function index()
     {

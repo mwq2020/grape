@@ -3,7 +3,7 @@ namespace app\wechat\controller;
 use \think\Db;
 use think\Loader;
 
-class Video extends \think\Controller
+class Video extends Base
 {
     public function index()
     {
@@ -53,6 +53,46 @@ class Video extends \think\Controller
         $this->assign('current_location',$current_location);
 
         return $this->fetch('index');
+    }
+
+    /**
+     * 视频添加收藏
+     */
+    public function add_collect()
+    {
+        $return_data = ['code'=>200,'data'=>['status' => 1],'msg'=>''];
+        try {
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                $return_data['code'] = 400;
+                exit(json_encode($return_data));
+                //throw new \Exception('您还没登录，请登录完再过来重试！');
+            }
+            $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
+            if(empty($video_id)){
+                throw new \Exception('入参错误');
+            }
+            $video_info = Loader::model('Video')->find($video_id);
+            if(empty($video_info)){
+                throw new \Exception('视频不存在');
+            }
+            $video_info->like_num += 1;
+            $video_info->save();
+
+            $collect_info = Db::table('user_collect_list')->where(['video_id'=>$video_id,'user_id'=>$user_id])->find();
+            if(empty($collect_info)){
+                $data = [];
+                $data['video_id']   = $video_id;
+                $data['user_id']    = $user_id;
+                $data['add_time']   = time();
+                Db::table('user_collect_list')->insert($data);
+            }
+
+        } catch (\Exception $e) {
+            $return_data['code'] = 500;
+            $return_data['msg'] = $e->getMessage();
+        }
+        exit(json_encode($return_data));
     }
 
 }

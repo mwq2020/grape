@@ -40,19 +40,18 @@
 <body>
 <div class="wrapMain">
     <div class="videoiBanner">
-        <!--<img width="100%" src="{$video_info.video_img}" />-->
-        {if !$Think.session.reader_no}
-        <img id="video_img" src="{$video_info.video_img}" width="100%">
+        {if !$Think.session.user_id}
+            <img id="video_img" src="{$video_info.video_img}" width="100%" height="100%">
         {/if}
-        <div id="video_player" {if !$Think.session.reader_no}style="display:none;" {/if}></div>
+        <div id="video_player" {if !$Think.session.user_id}style="display:none;" {/if}></div>
     </div>
     <div class="VideoCon">
         <span class="videoTit">{$video_info.title}<b>简笔画</b></span>
         <p class="clearfix Videoinfo">
             <span>
             <i class="Ieye"><img width="100%" src="/wechat/images/look.png" /></i>{$video_info.view_num}次播放</span><span>
-            <i class="Isc"><img width="100%" src="/wechat/images/dz.png" /></i>收藏</span><span>
-            <i class="share"><img width="100%" src="/wechat/images/share.png" /></i>分享
+            <i class="Isc" id="collect_btn" data-video_id="{$video_info.video_id}"><img width="100%" src="/wechat/images/dz.png" /></i>收藏</span><span>
+            <i class="share" id="share_btn"><img width="100%" src="/wechat/images/share.png" /></i>分享
         </span>
         </p>
         <span class="videoJianjie">简介</span>
@@ -87,15 +86,15 @@
 
 </div>
 
-
 {if !$Think.session.user_id}
 {include file="common/login" /}
 {/if}
 
+{include file="common/video_share" /}
 
 </body>
 </html>
-{if $Think.session.reader_no}
+{if $Think.session.user_id}
 <script type="text/javascript">
     jwplayer("video_player").setup({
         "file": "{$video_info.video_url}",//视频文件路径

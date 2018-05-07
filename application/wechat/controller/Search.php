@@ -4,7 +4,7 @@ use \think\Db;
 use think\Loader;
 use think\Cookie;
 
-class Search extends \think\Controller
+class Search extends Base
 {
     public function index()
     {

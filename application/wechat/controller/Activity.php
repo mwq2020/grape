@@ -3,7 +3,7 @@ namespace app\wechat\controller;
 use \think\Db;
 use think\Loader;
 
-class Activity extends \think\Controller
+class Activity extends Base
 {
     public function index()
     {

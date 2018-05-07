@@ -4,7 +4,7 @@ use \think\Db;
 use think\Loader;
 use think\Session;
 
-class User extends \think\Controller
+class User extends Base
 {
     public function index()
     {
@@ -217,7 +217,7 @@ class User extends \think\Controller
         if(empty($user_id)){
             return $this->redirect('/wechat/index/index?error=no_login');
         }
-        $query = Db::table('user_collect_list')->alias('a')->join('video b','a.video_id=b.video_id')->join('category c','b.second_cat_id=c.cat_id')->field('a.id,b.*,c.cat_name');
+        $query = Db::table('user_collect_list')->alias('a')->join('video b','a.video_id=b.video_id')->join('category c','b.second_cat_id=c.cat_id')->field('a.collect_id,b.*,c.cat_name');
         $collect_list = $query->where('a.user_id',$user_id)->order('a.add_time','desc')->paginate(8,false,['query' => $_GET]);    //->select(); //todo 用户id 替换成正确的
         $this->assign('collect_list',$collect_list);
 

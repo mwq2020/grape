@@ -266,6 +266,42 @@ $(function(){
             },
         });
     })
+    
+    $('#collect_btn').click(function () {
+        var video_id = $(this).attr('data-video_id');
+        $.ajax({
+            type: 'POST',
+            async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+            url: '/wechat/video/add_collect' ,
+            data: 'video_id='+ video_id + '&m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    //$('#like_success_pop').show();
+                    //var timer = setInterval(function(){
+                    //    $('#like_success_pop').hide();
+                    //    clearTimeout(timer);
+                    //},2000);
+                    alert('添加喜欢收藏');
+                    //location.reload();
+                } else if(data.code == 400){
+                    $('#login_pop').show();
+                    //$("#login_pop_div").parent().parent().css("opacity","1");
+                    //$("#login_pop_div").parent().parent().css("z-index","9999");
+                }else {
+                    alert('添加收藏失败');
+                }
+            } ,
+            error:function(){
+                alert('网络错误');
+            },
+        });
+    })
+
+    $('#share_btn').click(function(){
+        $('#video_share_pop').show();
+    })
 
 })
 

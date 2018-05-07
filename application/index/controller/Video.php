@@ -138,12 +138,15 @@ class Video extends Base
                 throw new \Exception('入参错误');
             }
             $video_info = Loader::model('Video')->find($video_id);
-            if(empty($video_id)){
+            if(empty($video_info)){
                 throw new \Exception('视频不存在');
             }
 
             $video_info->like_num += 1;
             $video_info->save();
+
+
+
         } catch (\Exception $e) {
             $return_data['code'] = 500;
             $return_data['msg'] = $e->getMessage();
