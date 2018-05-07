@@ -1,0 +1,110 @@
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/manage/index/index">起始页</a>
+            </li>
+
+            <li>
+                <a href="/manage/index/index">验码</a>
+            </li>
+            <li class="active">验码</li>
+        </ul><!-- .breadcrumb -->
+    </div>
+
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="header smaller lighter blue">视频列表</h3>
+
+                <form method="post" action="/manage/video/video_list">
+                    <div class="col-sm-2">
+                        标题 ：<input type="text" name="title" />
+                        <div class="space-12"></div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        分类 ：<input type="text" name="cat_id" />
+                        <div class="space-12"></div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        上传时间
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="input-group input-group-sm">
+                                    <input name="end_time" type="text" id="upload_time" class="form-control" data-date-format="yyyy-mm-dd" />
+                                                <span class="input-group-addon">
+                                                    <i class="icon-calendar"></i>
+                                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-12"></div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input class="btn btn-success" type="submit" value="搜索">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <a href="/manage/video/info" class="btn btn-success">添加视频</a>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <table id="sample-table-2" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>作品id</th>
+                            <th>作品名称</th>
+                            <th>作品类型</th>
+                            <th>缩略图</th>
+                            <th>所属活动</th>
+                            <th>作者姓名</th>
+                            <th>作者读者证号</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {foreach name="product_list" item="vo" key="k"}
+                        <tr>
+                            <td>
+                                <a href="#">{$vo.product_id}</a>
+                            </td>
+                            <td>{$vo.product_name}</td>
+                            <td>{$vo.type}</td>
+                            <td>{$vo.product_img}</td>
+                            <td>{$vo.activity_id}</td>
+                            <td>{$vo.activity_id}</td>
+                            <td>{$vo.activity_id}</td>
+                            <td>
+                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                    <a class="blue" href="/manage/product/info?user_id={$vo.product_id}">
+                                        <i class="icon-zoom-in bigger-130"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="no-margin-top">
+                    {$page}
+                </div>
+
+            </div>
+        </div>
+
+
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
