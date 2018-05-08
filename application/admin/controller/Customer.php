@@ -1,9 +1,9 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
-class Customer extends \think\Controller
+class Customer extends Base
 {
 
     /**
@@ -13,18 +13,23 @@ class Customer extends \think\Controller
     public function index()
     {
         $where = [];
-        if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        if(!empty($_REQUEST['customer_name'])){
+            $where['customer_name'] = ['like','%'.trim($_REQUEST['customer_name']).'%'];
         }
-        if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+        if(!empty($_REQUEST['account_no'])){
+            $where['account_no'] = ['like','%'.trim($_REQUEST['account_no']).'%'];
         }
-
-        $customer_list = Loader::model('Customer')->where($where)->order('customer_id','desc')->paginate(10);
+        if(!empty($_REQUEST['region_name'])){
+            $where['region_name'] = $_REQUEST['region_name'];
+        }
+        if(!empty($_REQUEST['sale_person'])){
+            $where['sale_person'] = ['like','%'.trim($_REQUEST['sale_person']).'%'];
+        }
+        if(!empty($_REQUEST['type'])){
+            $where['type'] = $_REQUEST['type'];
+        }
+        $customer_list = Loader::model('Customer')->where($where)->order('customer_id','desc')->paginate(10,false,['query' => $_GET]);
         $this->assign('customer_list', $customer_list);
-
-        $page = $customer_list->render();
-        $this->assign('page', $page);
 
         $this->view->engine->layout('layout');
         return $this->fetch('customer/index');
@@ -107,7 +112,7 @@ class Customer extends \think\Controller
             $this->view->engine->layout('layout');
             return $this->fetch('customer/add');
         }
-        return $this->redirect('/manage/customer/index');
+        return $this->redirect('/admin/customer/index');
     }
 
     /**
@@ -193,7 +198,7 @@ class Customer extends \think\Controller
             $this->view->engine->layout('layout');
             return $this->fetch('customer/edit');
         }
-        return $this->redirect('/manage/customer/index');
+        return $this->redirect('/admin/customer/index');
     }
 
 

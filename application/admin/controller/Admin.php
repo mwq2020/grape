@@ -1,10 +1,10 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Exception;
 use think\Loader;
 
-class Admin extends \think\Controller
+class Admin extends Base
 {
 
     /**

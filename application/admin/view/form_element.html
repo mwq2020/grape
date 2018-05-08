@@ -1,0 +1,525 @@
+<div class="boxP">
+    <div class="titP">
+        <h4>竖向表单</h4>
+    </div>
+    <div class="formP formV">
+        <!--多输入框-->
+        <dl class="err">
+            <dt>客户名称</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="customer_name" value="" />
+                </div>
+                <span>提示文字提示文字提示文字</span> </dd>
+        </dl>
+
+        <!--单下拉菜单-->
+        <dl>
+            <dt>所属区域</dt>
+            <dd>
+                <ul class="selectP">
+                    <li>
+                        <select name="region_name">
+                            <option value="">请选择</option>
+                            <option value="北京" >北京</option>
+                            <option value="上海" >上海</option>
+                            <option value="广州" >广州</option>
+                            <option value="深圳" >深圳</option>
+                            <option value="内蒙古" >内蒙古</option>
+                        </select>
+                    </li>
+                </ul>
+                <span>请在这里填写正确姓名</span> </dd>
+        </dl>
+
+        <!--单文本输入-->
+        <dl>
+            <dt>客户联系人</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="customer_link_person" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>联系人电话</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="link_person_mobile" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>销售对接人</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="sale_person" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>客户账号</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="account_no" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>密码</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="password" name="password" value="" />
+                </div>
+            </dd>
+        </dl>
+
+
+        <dl>
+            <dt>注册时间</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="start_time" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>失效时间</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="end_time" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>用户类型</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="radio" name="type" value="1" checked />正式用户
+                    <input type="radio" name="type" value="0" />测试用户
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>用户登录校验方式</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="radio" name="login_type" value="1" checked />本地数据表校验登录
+                    <input type="radio" name="login_type" value="2" />提供接口校验登录
+                </div>
+            </dd>
+        </dl>
+
+
+        <!--上传图片-->
+        <dl>
+            <dt>上传封面图片</dt>
+            <dd>
+                <div class="uploadImg">
+                    <div class="btnMng">
+                        <input type="file">
+                        <p>上传图片</p>
+                    </div>
+                    <span>单选文字说明</span>
+                    <div class="view">
+                        <ul class="imgList">
+                            <li><span></span><img src="images/404.jpg"><a class="del" href="javascript:;">×</a></li>
+                            <li><span></span><img src="images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
+                            <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                        </ul>
+                        <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                    </div>
+                </div>
+
+            </dd>
+        </dl>
+
+        <!--上传视频-->
+        <dl>
+            <dt>上传视频</dt>
+            <dd>
+                <a href="#" class="btnP btnWhite" style="height:30px; line-height:30px">添加视频</a><span>视频限制 400M 以内 MP4 格式</span>
+            </dd>
+            <dd>
+                <ul class="videoList">
+                    <li><img src="images/bg.jpg"><video src="images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
+                    <li><img src="images/bg.jpg"><video src="images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
+                </ul>
+            </dd>
+        </dl>
+
+
+
+        <!--单项选择-->
+        <dl>
+            <dt>单项选择</dt>
+            <dd>
+                <div class="inputP">
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                </div>
+                <span>单选文字说明</span> </dd>
+        </dl>
+
+        <!--复选-->
+        <dl>
+            <dt>多项选择</dt>
+            <dd>
+                <div class="inputP">
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                </div>
+                <span>单选文字说明</span> </dd>
+        </dl>
+
+        <!--单项选择和输入框-->
+        <dl>
+            <dt>票数</dt>
+            <dd>
+                <div class="inputP">
+                    <label><input type="radio">不限人数</label>
+                    <label><input type="radio">限制</label><input type="text" class="s" placeholder="人数"><label>人</label>
+                </div>
+            </dd>
+        </dl>
+
+
+        <!--多下拉菜单-->
+        <dl>
+            <dt>活动日期</dt>
+            <dd>
+                <ul class="selectP">
+                    <li>
+                        <select>
+                            <option>年</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select>
+                            <option>月</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select>
+                            <option>日</option>
+                        </select>
+                    </li>
+                </ul>
+                <span>请在这里填写正确姓名</span> </dd>
+        </dl>
+        <dl>
+            <dt>多行文本</dt>
+            <dd>
+                <div class="inputP textareaP">
+                    <textarea placeholder="提示文字"></textarea>
+                    <div class="tip">0/50</div>
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>多行文本</dt>
+            <dd>
+                <div class="inputP textareaP">
+                    <textarea placeholder="提示文字" class="mh100"></textarea>
+                    <div class="tip">0/50</div>
+                </div>
+            </dd>
+        </dl>
+
+        <!--确定按钮-->
+        <dl>
+            <dt>　</dt>
+            <dd> <a href="#" class="btnP">确定</a> </dd>
+        </dl>
+    </div>
+</div><div class="boxP">
+    <div class="titP">
+        <h4>竖向表单</h4>
+    </div>
+    <div class="formP formV">
+        <!--多输入框-->
+        <dl class="err">
+            <dt>客户名称</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="customer_name" value="" />
+                </div>
+                <span>提示文字提示文字提示文字</span> </dd>
+        </dl>
+
+        <!--单下拉菜单-->
+        <dl>
+            <dt>所属区域</dt>
+            <dd>
+                <ul class="selectP">
+                    <li>
+                        <select name="region_name">
+                            <option value="">请选择</option>
+                            <option value="北京" >北京</option>
+                            <option value="上海" >上海</option>
+                            <option value="广州" >广州</option>
+                            <option value="深圳" >深圳</option>
+                            <option value="内蒙古" >内蒙古</option>
+                        </select>
+                    </li>
+                </ul>
+                <span>请在这里填写正确姓名</span> </dd>
+        </dl>
+
+        <!--单文本输入-->
+        <dl>
+            <dt>客户联系人</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="customer_link_person" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>联系人电话</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="link_person_mobile" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>销售对接人</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="sale_person" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>客户账号</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="account_no" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>密码</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="password" name="password" value="" />
+                </div>
+            </dd>
+        </dl>
+
+
+        <dl>
+            <dt>注册时间</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="start_time" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>失效时间</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" name="end_time" value="" />
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>用户类型</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="radio" name="type" value="1" checked />正式用户
+                    <input type="radio" name="type" value="0" />测试用户
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>用户登录校验方式</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="radio" name="login_type" value="1" checked />本地数据表校验登录
+                    <input type="radio" name="login_type" value="2" />提供接口校验登录
+                </div>
+            </dd>
+        </dl>
+
+
+        <!--上传图片-->
+        <dl>
+            <dt>上传封面图片</dt>
+            <dd>
+                <div class="uploadImg">
+                    <div class="btnMng">
+                        <input type="file">
+                        <p>上传图片</p>
+                    </div>
+                    <span>单选文字说明</span>
+                    <div class="view">
+                        <ul class="imgList">
+                            <li><span></span><img src="images/404.jpg"><a class="del" href="javascript:;">×</a></li>
+                            <li><span></span><img src="images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
+                            <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                        </ul>
+                        <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                    </div>
+                </div>
+
+            </dd>
+        </dl>
+
+        <!--上传视频-->
+        <dl>
+            <dt>上传视频</dt>
+            <dd>
+                <a href="#" class="btnP btnWhite" style="height:30px; line-height:30px">添加视频</a><span>视频限制 400M 以内 MP4 格式</span>
+            </dd>
+            <dd>
+                <ul class="videoList">
+                    <li><img src="images/bg.jpg"><video src="images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
+                    <li><img src="images/bg.jpg"><video src="images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
+                </ul>
+            </dd>
+        </dl>
+
+
+
+        <!--单项选择-->
+        <dl>
+            <dt>单项选择</dt>
+            <dd>
+                <div class="inputP">
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                    <label>
+                        <input type="radio">
+                        选项内容</label>
+                </div>
+                <span>单选文字说明</span> </dd>
+        </dl>
+
+        <!--复选-->
+        <dl>
+            <dt>多项选择</dt>
+            <dd>
+                <div class="inputP">
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                    <label>
+                        <input type="checkbox">
+                        选项内容</label>
+                </div>
+                <span>单选文字说明</span> </dd>
+        </dl>
+
+        <!--单项选择和输入框-->
+        <dl>
+            <dt>票数</dt>
+            <dd>
+                <div class="inputP">
+                    <label><input type="radio">不限人数</label>
+                    <label><input type="radio">限制</label><input type="text" class="s" placeholder="人数"><label>人</label>
+                </div>
+            </dd>
+        </dl>
+
+
+        <!--多下拉菜单-->
+        <dl>
+            <dt>活动日期</dt>
+            <dd>
+                <ul class="selectP">
+                    <li>
+                        <select>
+                            <option>年</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select>
+                            <option>月</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select>
+                            <option>日</option>
+                        </select>
+                    </li>
+                </ul>
+                <span>请在这里填写正确姓名</span> </dd>
+        </dl>
+        <dl>
+            <dt>多行文本</dt>
+            <dd>
+                <div class="inputP textareaP">
+                    <textarea placeholder="提示文字"></textarea>
+                    <div class="tip">0/50</div>
+                </div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>多行文本</dt>
+            <dd>
+                <div class="inputP textareaP">
+                    <textarea placeholder="提示文字" class="mh100"></textarea>
+                    <div class="tip">0/50</div>
+                </div>
+            </dd>
+        </dl>
+
+        <!--确定按钮-->
+        <dl>
+            <dt>　</dt>
+            <dd> <a href="#" class="btnP">确定</a> </dd>
+        </dl>
+    </div>
+</div>

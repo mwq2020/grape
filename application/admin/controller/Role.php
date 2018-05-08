@@ -1,9 +1,9 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
-class Role extends \think\Controller
+class Role extends Base
 {
     /**
      * 角色列表

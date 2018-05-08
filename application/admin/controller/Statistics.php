@@ -1,10 +1,10 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
 //作品管理
-class Statistics extends \think\Controller
+class Statistics extends Base
 {
 
     //用户列表（筛选）

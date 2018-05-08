@@ -1,9 +1,9 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
-class Index extends \think\Controller
+class Index extends Base
 {
 
     /**
@@ -16,13 +16,28 @@ class Index extends \think\Controller
         session('[start]');
         $admin_id = session('admin_id');
         if(empty($admin_id)){
-            return redirect('/manage/index/login');
+            return redirect('/admin/index/login');
         }
 
         $view_data = [];
-        $this->view->engine->layout('layout');
+        //$this->view->engine->layout('layout');
         return $this->fetch('index',$view_data);
     }
+
+
+
+    public function top(){
+        return $this->fetch('top');
+    }
+
+    public function left(){
+        return $this->fetch('left');
+    }
+
+    public function right(){
+        return $this->fetch('right');
+    }
+
 
 
     /**
@@ -70,7 +85,7 @@ class Index extends \think\Controller
     {
         //  http://www.thinkphp.cn/info/137.html  session 的使用情况
         session(null);
-        return redirect('/manage/index/index');
+        return redirect('/admin/index/index');
     }
 
 

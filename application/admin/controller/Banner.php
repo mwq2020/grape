@@ -1,9 +1,9 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
-class Banner extends \think\Controller
+class Banner extends Base
 {
 
     /**

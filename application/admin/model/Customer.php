@@ -1,6 +1,6 @@
 <?php
 
-namespace app\manage\model;
+namespace app\admin\model;
 
 use think\Model;
 
@@ -13,6 +13,12 @@ class Customer extends Model
     {
         $list = Customer::select();
         return $list;
+    }
+
+    public function getTypeAttr($value)
+    {
+        $status = [0=>'试用客户',1=>'正式客户'];
+        return $status[$value];
     }
 
 }

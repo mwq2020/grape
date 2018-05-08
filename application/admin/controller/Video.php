@@ -1,9 +1,9 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
-class Video extends \think\Controller
+class Video extends Base
 {
 
     /**

@@ -1,150 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title>紫葡萄少儿艺术库后台管理系统</title>
-    <meta name="keywords" content="紫葡萄少儿艺术库后台管理系统" />
-    <meta name="description" content="紫葡萄少儿艺术库后台管理系统" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- basic styles -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
-
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
-    <![endif]-->
-
-    <!-- page specific plugin styles -->
-
-    <!-- fonts -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-    <!-- ace styles -->
-    <link rel="stylesheet" href="/assets/css/ace.min.css" />
-    <link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
-
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
-    <![endif]-->
-
-    <!-- inline styles related to this page -->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-    <!--[if lt IE 9]>
-    <script src="/assets/js/html5shiv.js"></script>
-    <script src="/assets/js/respond.min.js"></script>
-    <![endif]-->
+    <meta charset="utf-8">
+    <link href="/admin/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/admin/css/public.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/admin/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="/admin/js/js.js"></script>
 </head>
-
-<body class="login-layout">
-<div class="main-container">
-    <div class="main-content">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="login-container">
-                    <div class="center">
-                        <h1>
-                            <i class="icon-leaf green"></i>
-                            <span class="red">紫葡萄少儿艺术库后台管理系统</span>
-                        </h1>
-                    </div>
-
-                    <div class="space-6"></div>
-
-                    <div class="position-relative">
-                        <div id="login-box" class="login-box visible widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <div class="space-6"></div>
-
-                                    <form>
-                                        <fieldset>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input type="text" class="form-control" placeholder="用户名" id="account"/>
-                                                    <i class="icon-user"></i>
-                                                </span>
-                                            </label>
-
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control" placeholder="密码" id="password"/>
-                                                    <i class="icon-lock"></i>
-                                                </span>
-                                            </label>
-
-                                            <div class="space"></div>
-
-                                            <div class="clearfix">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl">记住我</span>
-                                                </label>
-
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary" id="login_btn">
-                                                    <i class="icon-key"></i>
-                                                    登录
-                                                </button>
-                                            </div>
-
-                                            <div class="space-4"></div>
-                                        </fieldset>
-                                    </form>
-                                </div><!-- /widget-main -->
-
-                            </div><!-- /widget-body -->
-                        </div><!-- /login-box -->
-
-                    </div><!-- /position-relative -->
-                </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+<body class="login">
+<div class="boxP">
+    <div class="titP">
+        <h4>紫葡萄艺术库管理平台</h4>
     </div>
-</div><!-- /.main-container -->
+    <div class="formP">
+        <dl>
+            <dt>账户</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" placeholder="输入管理账户" name="account">
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>密码</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="password" placeholder="输入管理密码" name="password">
+                </div>
+            </dd>
+        </dl>
+    </div>
 
-<!-- basic scripts -->
+    <!--公共按钮-->
+    <div class="btnB">
+        <a href="javascript:void(0)" class="btnP" id="login_btn">登 录</a>
+    </div>
 
-<!--[if !IE]> -->
-<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-<!-- <![endif]-->
+</div>
+</body>
+</html>
 
-<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<![endif]-->
-
-<!--[if !IE]> -->
-
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-</script>
-
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-
-<script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-</script>
-
-<!-- inline scripts related to this page -->
 <script type="text/javascript">
     $('#login_btn').click(function(){
         $.ajax({
             type: 'POST',
             async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
-            url: '/manage/index/login' ,
-            data: 'account='+ $('#account').val() +'&password='+$('#password').val()+'&m='+ Math.random() ,
+            url: '/admin/index/login' ,
+            data: 'account='+ $('input[name="account"]').val() +'&password='+$('input[name="password"]').val()+'&m='+ Math.random() ,
             dataType:'json',
             cache:false, //同理
             success: function(data){
                 if(data.status == 200){
-                    window.location = '/manage/index/index';
+                    window.location = '/admin/index/index';
                 } else {
                     alert('登录失败');
                 }
@@ -154,7 +62,8 @@
             },
         });
     })
-</script>
 
-</body>
-</html>
+    if(window!=top){
+        parent.window.location.href = "/admin/index/login";
+    }
+</script>

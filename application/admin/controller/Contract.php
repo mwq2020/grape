@@ -1,10 +1,10 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
 //合同管理
-class Contract extends \think\Controller
+class Contract extends Base
 {
 
     /**

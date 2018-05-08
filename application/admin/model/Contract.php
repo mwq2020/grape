@@ -1,6 +1,6 @@
 <?php
 
-namespace app\manage\model;
+namespace app\admin\model;
 use think\Model;
 
 class Contract extends Model

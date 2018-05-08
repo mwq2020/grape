@@ -1,138 +1,133 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
 
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-        </script>
 
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/manage/index/index">起始页</a>
-            </li>
-
-            <li>
-                <a href="/manage/customer/index">客户添加</a>
-            </li>
-        </ul>
+<div class="boxP">
+    <div class="titP">
+        <h4>修改客户【{$customer_info.customer_id}】</h4>
     </div>
-
-    <div class="page-content">
-
-        {if $error_msg}
-        <!-- 错误提示 -->
-        <div class="col-sm-10">
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">
-                    <i class="icon-remove"></i>
-                </button>
-
-                <strong> <i class="icon-remove"></i> 错误 </strong> 【{$error_msg}】
-            </div>
-        </div>
-        {/if}
-
-        <!-- 验证表单部分 -->
-        <div class="row">
-            <div class="col-xs-12">
-                <form class="form-horizontal" role="form" action="" method="post">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">客户名称</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="customer_name" value="{$customer_info.customer_name}" />
-                        </div>
+    <div class="formP formV">
+        <form action="" method="post">
+            <dl>
+                <dt>客户名称</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="customer_name" value="{$customer_info.customer_name}" maxlength="50"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属区域</label>
-                        <div class="col-sm-9">
+            <dl>
+                <dt>所属区域</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
                             <select name="region_name">
                                 <option value="">请选择</option>
-                                <option value="北京" {if $customer_info.region_name == '北京'}selected{/if} >北京</option>
-                                <option value="上海" {if $customer_info.region_name == '上海'}selected{/if} >上海</option>
-                                <option value="广州" {if $customer_info.region_name == '广州'}selected{/if} >广州</option>
-                                <option value="深圳" {if $customer_info.region_name == '深圳'}selected{/if} >深圳</option>
-                                <option value="内蒙古" {if $customer_info.region_name == '内蒙古'}selected{/if} >内蒙古</option>
+                                <option value="北京" {if $customer_info.region_name=="北京" }selected{/if}>北京</option>
+                                <option value="上海" {if $customer_info.region_name=="上海" }selected{/if}>上海</option>
+                                <option value="广州" {if $customer_info.region_name=="广州" }selected{/if}>广州</option>
+                                <option value="深圳" {if $customer_info.region_name=="深圳" }selected{/if}>深圳</option>
+                                <option value="内蒙古" {if $customer_info.region_name=="内蒙古" }selected{/if}>内蒙古</option>
                             </select>
-                        </div>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>客户联系人</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="customer_link_person" value="{$customer_info.customer_link_person}" maxlength="10"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">客户联系人</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="customer_link_person" value="{$customer_info.customer_link_person}" />
-                        </div>
+            <dl>
+                <dt>联系人电话</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="link_person_mobile" value="{$customer_info.link_person_mobile}" maxlength="11"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">联系人电话</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="link_person_mobile" value="{$customer_info.link_person_mobile}" />
-                        </div>
+            <dl>
+                <dt>销售对接人</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="sale_person" value="{$customer_info.sale_person}" maxlength="20" />
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">销售对接人</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="sale_person" value="{$customer_info.sale_person}" />
-                        </div>
+            <dl>
+                <dt>客户账号</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="account_no" value="{$customer_info.account_no}" maxlength="30" />
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">客户账号</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="account_no" value="{$customer_info.account_no}" />
-                        </div>
+            <dl>
+                <dt>密码</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="password" name="password" value="" maxlength="15"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">密码</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="password" value="" />
-                        </div>
+
+            <dl>
+                <dt>注册时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="start_time" value="{$customer_info.start_time|date='Y-m-d',###}" maxlength="11" />
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">注册时间</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="start_time" value="{$customer_info.start_time|date='Y-m-d',###}" />
-                        </div>
+            <dl>
+                <dt>失效时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="end_time" value="{$customer_info.end_time|date='Y-m-d',###}" maxlength="11"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">时效时间</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="end_time" value="{$customer_info.end_time|date='Y-m-d',###}" />
-                        </div>
+            <dl>
+                <dt>用户类型</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="type" value="1" {if $customer_info.type=='正式客户' }checked{/if}  />正式客户</label>
+                        <label><input type="radio" name="type" value="0" {if $customer_info.type=='试用客户' }checked{/if}  />试用客户</label>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">用户类型</label>
-                        <div class="col-sm-9">
-                            <input type="radio" name="type" value="1" {if $customer_info.type == 1}checked{/if} />正式用户
-                            <input type="radio" name="type" value="0" {if $customer_info.type == 0}checked{/if} />测试用户
-                        </div>
+            <dl>
+                <dt>用户登录校验方式</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="login_type" value="1" {if $customer_info.login_type==1 }checked{/if} />本地数据表校验登录</label>
+                        <label><input type="radio" name="login_type" value="2" {if $customer_info.login_type==2 }checked{/if} />提供接口校验登录</label>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">用户登录校验方式</label>
-                        <div class="col-sm-9">
-                            <input type="radio" name="login_type" value="1" {if $customer_info.login_type == 1}checked{/if} />本地数据表校验登录
-                            <input type="radio" name="login_type" value="2" {if $customer_info.login_type == 2}checked{/if} />提供接口校验登录
-                        </div>
-                    </div>
-
-                    <input type="hidden" name="customer_id" value="{$customer_info.customer_id}"/>
-
-                    <div class="clearfix form-actions">
-                        <div class="col-md-offset-3 col-md-9">
-                            <input class="btn btn-info" type="submit" value="提交"/>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
     </div>
 </div>

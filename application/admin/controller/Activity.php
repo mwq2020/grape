@@ -1,10 +1,10 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Exception;
 use think\Loader;
 
-class Activity extends \think\Controller
+class Activity extends Base
 {
 
     //用户列表（筛选）

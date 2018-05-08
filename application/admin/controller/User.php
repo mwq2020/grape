@@ -1,9 +1,9 @@
 <?php
-namespace app\manage\controller;
+namespace app\admin\controller;
 use \think\Db;
 use think\Loader;
 
-class User extends \think\Controller
+class User extends Base
 {
 
     //用户列表（筛选）
