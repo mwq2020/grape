@@ -1,3 +1,29 @@
+<div class="boxP">
+    <form method="get">
+        <div class="formP">
+            <dl>
+                <dt>读者证号</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="reader_no" value="{$Think.get.reader_no}">
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>姓名</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="real_name" value="{$Think.get.real_name}" >
+                    </div>
+                </dd>
+            </dl>
+
+            <dl class="btnMng"> <dt></dt> <dd> <input type="submit" value="搜索" class="btnP" /> </dd>  </dl>
+        </div>
+    </form>
+</div>
+
 
 <div class="boxP">
     <div class="titP">
@@ -36,16 +62,16 @@
                 <td>{$vo.status == 1 ? '启用' : '禁用'}</td>
                 <td class="opt">
                     {if  $vo.status==1}
-                    <a class="blue" href="/manage/user/change_status?user_id={$vo.user_id}&status=0">
+                    <a class="blue" href="/admin/user/change_status?user_id={$vo.user_id}&status=0">
                         <span>禁用</span>
                     </a>
                     {else}
-                    <a class="blue" href="/manage/user/change_status?user_id={$vo.user_id}&status=1">
+                    <a class="blue" href="/admin/user/change_status?user_id={$vo.user_id}&status=1">
                         <span>启用</span>
                     </a>
                     {/if}
 
-                    <a class="blue" href="/manage/user/edit?user_id={$vo.user_id}">
+                    <a class="blue" href="/admin/user/edit?user_id={$vo.user_id}">
                         <span>编辑</span>
                     </a>
                 </td>
@@ -55,13 +81,6 @@
     </div>
 
     <div class="page_content">
-        <!--
-        <div class="opt">
-            <label><input type="checkbox">全选</label>
-            <a href="#">删除</a>
-            <a href="#">催还</a>
-        </div>
-        -->
         <div class="pageBar">
             <div>总共<em>{$user_list->total()}</em>条, 当前<em>{$user_list->currentPage()}</em>/<em>{$user_list->lastPage()}</em>页</div>
             <div>

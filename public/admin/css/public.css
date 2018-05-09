@@ -1,0 +1,404 @@
+﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0 }
+html,body{height:100%}
+body{ font: 14px/1.5 arial,Microsoft YaHei; color: #333}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font: 14px/1.5 arial,Microsoft YaHei}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, mark, audio, video, canvas { display: block }
+address, cite, dfn, em, var, b, sub, sup { font-style: normal }
+code, kbd, pre, samp { font-family: courier new, courier, monospace }
+h1, h2, h3, h4, h5, h6, button, input, select, textarea { font-size: 100%; overflow:hidden; zoom:1; display:block; zoom:1}
+input, textarea, select { font-family: arial,Microsoft YaHei }
+fieldset, img { border: 0 }
+sup, sub { font-size: 0.6em }
+ul, ol, li { list-style: none; display:block}
+table { border-collapse: collapse; border-spacing: 0 }
+input { outline: 0 }
+textarea { -moz-outline: 0; outline: 0; overflow: auto; vertical-align: top; resize: none; -webkit-appearance: none }
+img { vertical-align: middle }
+iframe { margin: 0; padding: 0; border: 0; font-size: 100% }
+a {text-decoration: none; color:#333}
+a:hover { text-decoration: none; color:#44b549 }
+.none { display: none }
+.block { display: block }
+.fl { float: left}
+.fr { float: right }
+.clearfix:after { visibility: hidden; display: block; font-size: 0; content: "."; clear: both; height: 0; overflow: hidden }
+.clearfix{ *zoom:1 }
+.clear{clear:both}
+label{font-weight:normal!important}
+.bor-btm{ border-bottom:1px solid #eee}
+.bor-btmNone{ border-bottom:none !important}
+.tl{ text-align: left !important;}
+.tr{ text-align: right !important;}
+.tIdt5{ text-indent: 5px !important;}
+.tIdt10{ text-indent: 10px !important;}
+
+.light-blue{color: #15456f !important;}
+
+/**/
+.p20{padding:20px}
+.pt10{ padding-top: 10px !important;}
+.pt20{ padding-top: 20px !important;}
+.pdb10{ padding-bottom: 10px !important;}
+.pdb20{ padding-bottom: 20px !important;}
+.pdl10{ padding-left: 10px !important;}
+.pdl20{ padding-left: 20px !important;}
+.pdr10{ padding-right: 10px !important;}
+.pdr0{ padding-right: 0 !important;}
+.pdr20{ padding-right: 20px !important;}
+.mgl10{ margin-left: 10px !important;}
+.mgl20{ margin-left: 20px !important;}
+.mgr10{ margin-right: 10px !important;}
+.mgr20{ margin-right: 20px !important;}
+.mgt10{ margin-top: 10px !important;}
+.mgt20{ margin-top: 10px !important;}
+.mh100{min-height: 100px !important;}
+.mh50{min-height: 50px !important;}
+
+/*login*/
+body.login{background:#eee; background:url(../images/bg.jpg) no-repeat center; background-size:cover}
+body.login .boxP{position:absolute; width:400px; height:320px; background:#fff; top:50%; left:50%; margin-top:-150px; margin-left:-205px; border:0; box-shadow:0 20px 50px rgba(0,0,0,0.2)}
+body.login .boxP dl{margin:0; padding:5px 0}
+body.login .boxP dt{width:60px; line-height:28px}
+body.login .boxP dd{margin-left:70px}
+body.login .boxP input{width:250px; height:40px}
+body.login .formP{margin:0; border:0}
+body.login .titP{border:0; text-align:center; height:60px; overflow:hidden}
+body.login .titP h4{float:none; line-height:80px; border:0; line-height:70px; font-size:24px}
+body.login .btnMngB{padding:5px 20px}
+body.login .btnB a{ margin-left: 54px; width:202px; line-height:40px; height:40px}
+
+/**/
+.topHead{background:#333; line-height:35px; padding:0 10px; overflow:hidden; zoom:1}
+.topHead a.logo{float:left; font-weight:bold; color:#999}
+.topHead p{float:right; color:#999}
+.topHead p a{color:#fff; margin:0 5px}
+
+/**/
+.tripleList{overflow:hidden; zoom:1}
+.tripleList li{float:left; width:33.3%}
+.tripleList li .boxP{padding-right:20px}
+.tripleList li.double{width:66.7%}
+
+.tripleReport{ border:1px solid #ccc; padding: 20px}
+
+/* 树形菜单开始 */
+.leftMenu {border-right:1px solid #ccc; height:100%}
+.leftMenu h1 { padding-left:30px; cursor:pointer; height:36px; line-height:36px; font-weight:normal; color:#999}
+.leftMenu h1:hover{color:#666}
+.leftMenu ul { display:none;}
+.leftMenu li { padding:0; font-size:14px;}
+.leftMenu li a {padding-left:50px;height:36px; line-height:36px;display:block; text-decoration:none; color:#222; font-weight:normal;} 
+.leftMenu li a:hover { background:#44b548; color:#fff;}
+.leftMenu .On a{ background:#44b548; color:#fff;}
+
+/*按钮样式*/
+.btnB{padding:20px 0; overflow:hidden; text-align: center}
+.btnClear{ clear:both}
+.btnMid{text-align:center}
+.btnP{ display: inline-block; margin-right: 20px; padding:0 30px; height: 32px; line-height: 32px; text-align: center; background: #44b548; color: #fff; border-radius: 5px; border:0; transition: all .3s ease; cursor:pointer}
+.btnP:hover{background:#2f9833; color:#fff}
+.btnDark{background:#666}
+.btnDark:hover{background:#555; color:#fff}
+.btnRed{background:#f30}
+.btnRed:hover{background:#e52e00; color:#fff}
+.btnLigh{background:#eee; color:#999; cursor:no-drop}
+.btnLigh:hover{background:#eee}
+.btnWhite{background:#fff; color:#44b548; border:1px solid #44b548}
+.btnWhite:hover{background:#2f9833; border:1px solid #2f9833; color:#fff}
+.btnMid .btnP{float:none; display:inline-block}
+.btnB a{color: #fff;text-decoration: none;}
+.btnB a:hover{text-decoration: none;}
+.btnB a:visited{text-decoration: none;}
+
+/*消息提示样式*/
+.msgP { background: #eee; color: #333; margin-bottom: 20px; padding: 20px}
+.msgP h4{line-height:24px; font-size:16px; margin-bottom: 10px}
+.msgP h4 b{float:left}
+.msgP h4 a{float:right; font-size:20px; line-height:24px; padding:0 5px; font-weight:normal; color:#000; opacity:0.5}
+.msgP h4 a:hover{ opacity:1}
+.msgP p { line-height: 20px}
+.msgWar { background: #f7f5db; color: #c93; }
+.msgWar h4 a{color:#c93}
+.msgErr { background: #f7dcdb; color: #c33; }
+.msgErr h4 a{color:#c33}
+
+/*tab样式*/
+.tabP{height:39px; position:relative; border-bottom:1px solid #ccc}
+.tabP ul{position:absolute; top:0; left:0; height:40px}
+.tabP li { float: left; height:40px; position:relative}
+.tabP li em{display:block; width:5px; height:5px; border-radius:5px; position:absolute; top:8px; right:15px; background:#f30}
+.tabP li a{display:block; height:37px; line-height:37px; padding:0 20px}
+.tabP li a:hover{border-bottom: 3px solid #ccc; color:#333}
+.tabP li.active a{color:#44b549; border-bottom: 3px solid #44b549}
+
+/*tag样式*/
+.tagP{}
+.tagP .tagTab{background:#eee; border:1px solid #ccc; padding:0 10px; overflow:hidden; zoom:1}
+.tagP .tagTab h4{float:left; font-size:18px; line-height:60px}
+.tagP .tagCon{}
+
+/*主内容容器*/
+.boxP{margin-bottom:20px}
+.boxP .titP{border-bottom:0; position:relative; height:30px; line-height:20px; padding:10px 0}
+.boxP .titP h4{float:left; font-size:16px; border-left:5px solid #44b548; padding:0 10px; display:block; margin:5px 5px 5px 0}
+.boxP .titP em{float:left; color:#44b548; font-weight:bold; font-size:16px; display:block; margin:5px 30px 5px 0}
+.boxP .titP em.err{color:#f30}
+.boxP .titP .btnMng{float:right}
+.boxP .titP .btnMng a.btnP{color:#fff; height:30px; line-height:30px; margin:0 0 0 10px}
+.boxP .titP .btnMng a.btnClose{background:#fff; color:#333; width:auto; padding:0 5px}
+.boxP .titP .btnMng a.btnClose span{font-size:25px; margin-right:3px; float:left}
+.boxP .titP .btnMng a.btnClose:hover{color:#44b548}
+.boxP .titP .tag{float:right; padding:3px 0}
+.boxP .titP .tag li{padding:0 15px; cursor:pointer; height:24px; line-height:24px; float:left; margin-right:10px; border-radius:30px}
+.boxP .titP .tag li:last-child{margin:0}
+.boxP .titP .tag li.active{background:#666; color:#fff}
+.boxP .titP .search{position:relative; float:right}
+.boxP .titP .search .text{background:#fff; border:1px solid #ddd; height:30px; width:200px; position:absolute; top:-1px; right:0; padding:0 10px}
+.boxP .titP .search .text:hover{border:1px solid #ccc}
+.boxP .titP .search .btnP{position:absolute; top:-1px; right:0; z-index:2; border-radius:0; padding:0 10px; width:auto; margin:0}
+.boxP .conP{border:1px solid #ccc; padding:20px}
+.boxP .tagCon .tagS{display:none}
+.boxP .tagCon .active{display:block}
+
+/*表格样式*/
+.tableBox{width: 100%; overflow-x: auto;}
+.tableP { border: 1px solid #ccc; border-collapse: collapse; width: 100%; max-width:150%;}
+.tableP th, .tableP td { vertical-align: middle; padding:10px; text-align:center;}
+.tableP th {background:#ddd}
+.tableP tr:nth-child(2n+1){ background: #f5f5f5}
+.tableP a{float:left}
+.tableP td input[type="checkbox"]{ margin: 0}
+.tableP .opt{text-align:center}
+.tableP .opt a{float:none; margin:0 5px; padding:0 5px; color:#44b548}
+.tableP .opt a:hover{color:#2f9833}
+.tableP tr:hover{background-color: #e9f4ff}
+.w150{width: 150% !important;}
+.tableP.srchTab th, .tableP.srchTab td{padding: 10px; height: auto;}
+.tableP.srchTab tr:hover{background-color: #fff}
+.tableP .percent .pWrap{ position: relative; display: inline-block; width: 100px; height: 15px; border:1px solid #999; vertical-align: middle; margin-right: 5px}
+.tableP .percent .pWrap .in{ position: absolute; left: 0; top:0; display: inline-block; height: 15px; background: #44b548 }
+.tableP .percent em{ font-size: 12px; vertical-align: middle; color:#44b548}
+
+/*page*/
+.pageP{border:1px solid #ccc; border-top:0; padding:10px; overflow:hidden; zoom:1; height:24px; line-height:24px}
+.pageP .opt{float:left}
+.pageP .opt label{display:block; height:24px; line-height: 24px; float:left; margin-right:15px; color:#44b548; font-weight:normal!important}
+.pageP .opt label input{float:left; margin:5px 4px 6px 0}
+.pageP .opt a{color:#44b548; display:block; padding:0 10px; margin-right:5px; float:left}
+.pageP .opt a:hover{color:#2f9833}
+
+.pageP .pageBar{float:right}
+.pageP .pageBar div{float:left; color:#666; margin:0 0 0 20px}
+.pageP .pageBar div em{margin:0 3px}
+.pageP .pageBar div a{color:#44b548; padding:2px 5px; margin:0 5px}
+.pageP .pageBar div a.active{background:#44b548; color:#fff}
+.pageP .pageBar .jump{height:18px; line-height:18px; border:1px solid #ccc; width:18px; display:inline; margin:2px 5px; padding:0 5px}
+
+/*表单*/
+.formP{border:1px solid #eee; padding:15px 15px 20px 15px; overflow:hidden; zoom:1; margin-bottom:20px;}
+.formP dl {float: left; overflow:hidden; zoom:1; position: relative; margin:0 20px 0 0; padding:10px 0;}
+.formP dl dt {float: left; width: 120px; text-align: right; margin-right: 10px; line-height: 18px; padding:7px 0; font-weight:normal!important}
+.formP dl dd {margin-left:130px; overflow:hidden}
+.formP dl dd span{color:#999; font-size:12px}
+.formP dl dt .redSpan{color:#f30; padding:0 3px 0 0; font-size:18px; vertical-align:middle; font-weight:bold}
+.searchFormP{position: relative; margin-bottom: 0}
+.formP .btnP{height:32px; line-height:32px; margin-right:10px}
+.formP .btnP:hover{color:#fff}
+.boxP .searchBtns{ padding: 15px 0; text-align: center; border:1px solid #eee; border-top:0}
+.boxP .searchBtns dt{ display: none}
+
+.formP .rBtn{margin:0;position: absolute; top:10px; right: 0;}
+.formP .rBtn dt{display:none}
+.formP .rBtn dd{margin-left: 0;}
+.formP .btnP{height:32px; line-height:32px; margin-right:10px}
+.formP .btnP:hover{color:#fff}
+
+.formP .openMng{position: absolute;left: 50%;bottom: -1px; z-index: 5; margin-left: -25px; width: 50px; height: 15px; background:#ddd url("../images/open.png") center no-repeat; border:1px solid #eee }
+.formP .closeMng{ background:#ddd url("../images/close.png") center no-repeat; bottom:-2px}
+.textareaP{border:1px solid #ccc; border-radius:3px; overflow:hidden}
+.textareaP textarea{border:0; border-radius:3px; min-height:200px; width:600px; padding:10px; outline: 0}
+.textareaP .tip{line-height:40px; text-align:right; padding:0 15px; color:#999}
+
+.inputP{overflow:hidden; zoom:1}
+.inputP input{ padding:0 5px; line-height: 30px; height: 30px; background:#fff; border:1px solid #ccc; margin:0 5px 5px 0; float:left; border-radius:3px; width:100px}
+.inputP input:hover{border:1px solid #999}
+.inputP input.xs{width:20px}
+.inputP input.s{width:50px}
+.inputP input.l{width:150px}
+.inputP input.xl{width:200px}
+.inputP input.xxl{width:300px}
+.inputP label{float:left; margin:0 10px 5px 0; display:block; height:20px; padding:6px 0}
+.inputP label input{padding:0; line-height:auto; height:auto; margin:3px 5px 0 0; width:auto}
+.inputP label.mid{margin:0; padding:0 3px; line-height:32px; margin-right:5px; color:#999}
+
+.selectP{overflow:hidden; zoom:1}
+.selectP li{width:110px; height:30px; border:1px solid #ccc; margin:0 5px 5px 0; float:left; border-radius:3px}
+.selectP li:hover{border:1px solid #999}
+.selectP select{width:100%; border:0; height:30px; background:#fff; border-radius:3px}
+.selectP li.xs{width:30px}
+.selectP li.s{width:60px}
+.selectP li.l{width:160px}
+.selectP li.xl{width:210px}
+
+.tableP .inputP input{width:92%; padding:0 3%; margin:0}
+.tableP .selectP li{width:92%; padding:0 3%; margin:0}
+
+.uploadImg{}
+.uploadImg .btnMng{position:relative; height:32px; line-height:32px; font-weight:bold; width:80px; overflow:hidden; float:left; margin-right:15px; padding:0}
+.uploadImg .btnMng input{position:absolute; z-index:2; opacity:0; width:1000px; margin-left:-500px; cursor:pointer}
+.uploadImg .btnMng p{display:block; height:30px; line-height:30px; border:1px solid #44b548; color:#44b548; text-align:center; border-radius:3px; transition: all .3s ease}
+.uploadImg .btnMng:hover p{background:#2f9833; border:1px solid #2f9833; color:#fff}
+.uploadImg .view{padding:10px 0; clear:both}
+.uploadImg .view p{display:block; line-height:30px}
+.uploadImg .view p a{margin:0 10px; color:#44b548; text-decoration:underline}
+
+.formP dl.err{}
+.formP dl.err input{border-color:#f30}
+.formP dl.err span{color:#f30}
+.formP dl.err .selectP li{border-color:#f30}
+
+.formV{}
+.formV dl{float:none; padding:10px 0; margin:0}
+.formV .inputP{float:left; margin:0 10px 0 0}
+.formV .selectP{float:left; margin:0 10px 0 0}
+.formV dl dd span{line-height:32px}
+.formV dl.btnMng{clear:both}
+.formV dl a.link{color:#44b548; text-decoration:underline; font-size:12px; line-height:32px}
+
+.formDouble dl{float:left; width:50%}
+.formTriple dl{float:left; width:33%}
+
+/*课程筛选*/
+.filterBox{border:1px solid #ccc; padding:20px}
+.filterBox dl{display:block; overflow:hidden; zoom:1; padding:10px 0 4px; line-height:25px}
+.filterBox dl dt{float:left; width:100px; display:block; color:#666}
+.filterBox dl dd{display:block; margin-left:100px}
+.filterBox dl dd a{display:block; float:left; line-height:25px; padding:0 9px; margin:0 1px 6px 0}
+.filterBox dl dd a:hover{background:#f4f8fd}
+.filterBox dl dd a.On{background:#44b548; color:#fff}
+.filterBox dl dd a.On:hover{background:#2f9833}
+.filterTag{float:right; height:100%; width:295px; text-align:center; padding:30px 0 0}
+
+/*弹出层*/
+.dialogP{background:rgba(0,0,0,0.1); position:fixed; top:0; left:0; z-index: 10; width:100%; height:100%;}
+.dialogP .boxP{width:700px; overflow:hidden; zoom:1; position:absolute; top:100px; left:50%; margin-left:-350px; background:#fff; border:0; box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+.dialogP .titP{}
+.dialogP .conP,.dialogP .tableP,.dialogP .formP{max-height:400px; overflow-x:hidden; overflow-y:auto; margin:0}
+.dialogP .boxTips{ width: 400px; margin-left: -200px; top:200px}
+.dialogP .boxTips .msgInfo{ text-align: center; padding: 40px 15px;border:1px solid #eee}
+.dialogP .boxTips .msgInfoForm{ padding: 50px 15px;border:1px solid #eee}
+.dialogP .boxTips .msgInfoForm dl{overflow:hidden; margin-bottom: 10px;}
+.dialogP .boxTips .msgInfoForm dl dt{float: left; width: 120px; text-align: right; margin-right: 10px; line-height: 18px; padding:7px 0;font-weight:normal!important}
+.dialogP .boxTips .msgInfoForm dl dd{ float: left; height: 32px; line-height: 32px;}
+
+.dialogTime .txt{ float: left; height: 20px; line-height: 20px; margin:0 10px 5px 0; padding: 6px 0; color: #333}
+.dialogTime .selectP li{ border:0}
+.dialogTime .selectP li.s{ width: 90px}
+.dialogTime .selectP li.s .sel{ width: 65px}
+.dialogTime .selectP .sel,.dialogTime .selectP .sel_s{ width: 85px; height: 30px; border: 1px solid #ccc; margin: 0 5px 5px 0; float: left; border-radius: 3px;}
+.dialogTime .selectP .sel_s{ width: 40px}
+.dialogTime .selectP .mid{ display: inline-block; color: #333; float: right; height: 30px; line-height: 30px}
+.dialogTime dd .tips{ display: block; margin-top: 20px; line-height: 30px}
+
+.dialogP .boxEvaluate{ width: 400px; margin-left: -200px}
+.dialogP .evaluateForm{ padding: 20px; border:1px solid #eee; border-left: none;border-right: none}
+.dialogP .evaluateForm .eval{ height: 32px; line-height: 30px}
+.dialogP .evaluateForm .eval .calcSub,.dialogP .evaluateForm .eval .calcPlus{ display: inline-block; font-size: 20px; width: 20px;height: 20px; line-height: 20px; text-align: center; vertical-align: middle}
+.dialogP .evaluateForm .eval input{ margin: 0 5px; width: 20px}
+.dialogP .evaluateForm .textAreaTit{ height: 40px; line-height: 50px; text-align: left; font-weight: normal}
+.dialogP .evaluateForm .textareaP textarea{ width: 340px}
+
+.boxP .noticeMsg li{ position: relative; padding: 15px 0 15px 20px; line-height: 25px; border-bottom: 1px solid #eee}
+.boxP .noticeMsg li i{ position: absolute; left: 0; top:50%; margin-top: -4px; width: 8px; height: 8px; display: inline-block; border-radius: 50%; background: #f1f2f3}
+.boxP .noticeMsg li .operateBtn{ margin-left: 10px; color: #44b548; text-decoration: underline}
+.boxP .noticeMsg li .light-blue{ color: #244EA4 !important;}
+
+/*show评分*/
+.score-tst{ height: 30px; line-height: 30px; margin-right: 30px}
+.score-tst .sc-tst{ position: relative; z-index: 1; vertical-align: middle; display: inline-block; width: 65px; height: 12px; background: url("../images/scoreBg-no.png") left top no-repeat}
+.score-tst .sc-tst .in{ position: absolute; left: 0; top:0; z-index: 2; width: 65px; height: 12px; background: url("../images/scoreBg-red.png") left top no-repeat}
+.score-tst .sc-tst .items{ position: absolute; left: 0; top:0; z-index: 3; width: 65px; height: 12px; line-height: 12px}
+.score-tst .sc-tst .items a{ display: inline-block; float: left; width: 13px; height: 12px}
+.score-tst .sc-tst .items a:hover{ text-decoration: none}
+
+/*搜索筛选*/
+.searchResult{padding:0; margin:0; line-height:30px!important; height:30px}
+.searchResult span{line-height:30px!important; font-size:14px!important; color:#999}
+.searchResult a{font-size:14px; margin:0 5px; line-height:30px}
+
+/*404*/
+.errorP{width:300px; margin:150px auto; background:url(../images/404.jpg) no-repeat top left; padding:15px 0 10px 250px}
+.errorP b{display:block; font-size:35px; line-height:60px; color:#666}
+.errorP span{display:block; color:#999; font-size:12px; line-height:18px; margin-bottom:20px}
+.errorP p{}
+.errorP p a{color:#44b548; margin:0 5px; text-decoration:underline}
+
+/*图片列表*/
+.imgList{padding:20px 0 0; overflow:hidden; zoom:1}
+.imgList li{position:relative; width:120px; height:120px; text-align:center; margin:0 20px 20px 0; float:left; background:#eee}
+.imgList li span{height:100%; vertical-align:middle; display:inline-block}
+.imgList li img{max-height:120px; max-width:120px; display:inline; vertical-align:middle}
+.imgList li a.del{position:absolute; top:0; right:0; background:#666; color:#fff; display:block; width:20px; height:20px; line-height:20px; text-align:center}
+
+/*视频列表*/
+.videoList{padding:20px 0 0; overflow:hidden; zoom:1}
+.videoList li{position:relative; width:240px; margin:0 20px 20px 0; float:left}
+.videoList li img{display:block; width:240px; height:180px; margin-bottom:10px}
+.videoList li video{position:absolute; top:0; left:0; width:240px; height:180px}
+.videoList li p{line-height:25px}
+.videoList li a.del{position:absolute; top:0; right:0; background:#666; color:#fff; display:block; width:20px; height:20px; line-height:20px; text-align:center}
+
+/*上传视频*/
+.upLoadVideo .uploadImg .view img{width:120px; height:80px }
+
+/*表格树*/
+.collapsed { display: none; }
+.tablemain {background-color:#ccf;border-collapse: collapse; border: solid 1px #447; padding: 0px; text-align: left; }
+#treet1 td,#treet2 td { padding:0 10px; height: 40px; line-height: 40px}
+#treet1 .adeimg, #treet1 .ttimage, #treet1 .parimg, #treet1 .preimg { border: none; margin: 0px 5px 0 0; padding: 0px; vertical-align: bottom; width:40px; height: 40px; }
+#treet1 .adeimg, #treet1 .parimg {cursor: pointer; }
+.treetable .tblSort{ padding-left: 100px !important; position: relative}
+.treetable .tblSort .btnP{ position: absolute; padding: 0 20px; font-size: 12px; display: none; left: 5px; top:50%; margin-top: -16px}
+.treetable .tblSort a.btnSt{ display: inline-block; margin: 0 10px; width: 20px; height: 20px; background: url("../images/TreeTable/sort-top.png") center no-repeat; background-size: 20px; cursor: pointer}
+.treetable .tblSort a.btnSt-top-disable{  background: url("../images/TreeTable/sort-top-disable.png") center no-repeat; background-size: 20px}
+.treetable .tblSort a.btnSt-up{ background: url("../images/TreeTable/sort-up.png") center no-repeat; background-size: 20px}
+.treetable .tblSort a.btnSt-up-disable{ background: url("../images/TreeTable/sort-up-disable.png") center no-repeat; background-size: 20px}
+.treetable .tblSort a.btnSt-down{ background: url("../images/TreeTable/sort-down.png") center no-repeat; background-size: 20px}
+.treetable .tblSort a.btnSt-down-disable{ background: url("../images/TreeTable/sort-down-disable.png") center no-repeat; background-size: 20px}
+.treetable .tblSort a.btnSt-btm{ background: url("../images/TreeTable/sort-btm.png") center no-repeat; background-size: 20px}
+.treetable .tblSort a.btnSt-btm-disable{ background: url("../images/TreeTable/sort-btm-disable.png") center no-repeat; background-size: 20px}
+.treetable th.tblSort{ padding-left: 150px !important; text-align: left}
+.treetable tr{ background: #fff!important;}
+.treetable tr:nth-child(2n){ background: #f5f5f5!important}
+.treetable tr.hover{background-color: #e9f4ff !important; }
+
+/*上传文件*/
+.chooseFile{ position: relative; padding-left: 80px; width: 290px; height: 20px; margin: 20px auto}
+.chooseFile label{ position: absolute; left: 0; top:0; height: 20px; line-height: 20px; font-size: 14px; margin-right: 10px}
+.chooseFile input{ height: 20px; line-height: 20px; font-size: 12px; color: #999; font-weight: normal}
+
+.typeTable{ width: 100%; border:1px solid #eee;border-collapse:collapse}
+.typeTable td{ text-align: center;  font-size: 12px; vertical-align: middle; padding: 10px; border:1px solid #eee}
+.typeTable td p{ font-size: 30px; color: #44b548; height: 40px; line-height: 40px; font-family: Arial}
+
+
+
+.page_content{border:1px solid #ccc; border-top:0; padding:10px; overflow:hidden; zoom:1; height:24px; line-height:24px}
+.page_content .opt{float:left}
+.page_content .opt label{display:block; height:24px; line-height: 24px; float:left; margin-right:15px; color:#44b548; font-weight:normal!important}
+.page_content .opt label input{float:left; margin:5px 4px 6px 0}
+.page_content .opt a{color:#44b548; display:block; padding:0 10px; margin-right:5px; float:left}
+.page_content .opt a:hover{color:#2f9833}
+
+.page_content .pageBar{float:right}
+.page_content .pageBar div{float:left; color:#666; margin:0 0 0 20px}
+.page_content .pageBar div em{margin:0 3px}
+.page_content .pageBar div a{color:#44b548; padding:2px 5px; margin:0 5px}
+.page_content .pageBar div a.active{background:#44b548; color:#fff}
+.page_content .pageBar .jump{height:18px; line-height:18px; border:1px solid #ccc; width:18px; display:inline; margin:2px 5px; padding:0 5px}
+
+.page_content .pagination {margin:0;}
+.page_content .pagination li {display: inline-block;margin-right: 1px;padding:2px 5px;border: 1px solid #e2e2e2;min-width:20px;text-align: center;}
+.page_content .pagination li.active {background: #009688;color: #fff;border: 1px solid #009688;}
+.page_content .pagination li a {display: block;text-align: center;padding:0;}
+.page_content .pageP .pageBar a { padding:0px;}

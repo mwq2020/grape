@@ -1,0 +1,213 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+
+<div class="boxP">
+    <div class="titP">
+        <h4>添加视频</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post">
+            <dl>
+                <dt>资源名称</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="title" value="" maxlength="200"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>所属一级分类</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="cat_id" id="first_cat">
+                                <option value="0">请选择</option>
+                                <option value="1">绘画</option>
+                                <option value="2">手工</option>
+                                <option value="3">书法</option>
+                                <option value="4">舞蹈</option>
+                                <option value="5">音乐</option>
+                                <option value="6">棋类</option>
+                                <option value="7">民间艺术</option>
+                            </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>所属二级分类</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                        <select name="second_cat_id" id="second_cat">
+                            <option value="0">请选择</option>
+                        </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>视频位置</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                        <select name="position">
+                            <option value="0">请选择</option>
+                            <option value="1" >首页1</option>
+                            <option value="2" >首页2</option>
+                            <option value="3" >首页3</option>
+                            <option value="4" >首页4</option>
+                        </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <!--
+            <dl>
+                <dt>视频封面</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="file" name="video_img" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>视频文件</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="file" name="video" />
+                    </div>
+                </dd>
+            </dl>
+            -->
+
+            <!--上传图片-->
+            <dl>
+                <dt>上传封面图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="video_img" id="video_img" />
+                            <p>上传图片</p>
+                        </div>
+                        <span>单选文字说明</span>
+                        <div class="view">
+                            <ul class="imgList">
+                                <li><span></span><img src="/admin/images/404.jpg" id="video_img_preview"><a class="del" href="javascript:;">×</a></li>
+                                <!--
+                                <li><span></span><img src="/admin/images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                                -->
+                            </ul>
+                            <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                        </div>
+                    </div>
+
+                </dd>
+            </dl>
+
+            <!--上传视频-->
+            <dl>
+                <dt>上传视频</dt>
+                <dd>
+                    <input type="file" name="video" id="video" style="display:none;"/>
+                    <a href="javascript:void(0)" id="video_upload_btn" class="btnP btnWhite" style="height:30px; line-height:30px">添加视频</a><span>视频限制 400M 以内 MP4 格式</span>
+                </dd>
+                <dd>
+                    <ul class="videoList">
+                        <li><img src="/admin/images/bg.jpg">
+                            <video src="/admin/images/1234.mp4" controls id="video_preview"></video>
+                            <p></p>
+                            <a class="del" href="javascript:;">×</a>
+                        </li>
+                        <!--
+                        <li><img src="/admin/images/bg.jpg"><video src="/admin/images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
+                        -->
+                    </ul>
+                </dd>
+            </dl>
+
+
+            <dl>
+                <dt>用户状态</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="status" value="1" checked />立即发布</label>
+                        <label><input type="radio" name="status" value="0" />待发布</label>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>排序</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="sort" value="" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>视频简介</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="mark" placeholder="请输入简介" maxlength="1000"></textarea>
+                        <!--<div class="tip">0/50</div>-->
+                    </div>
+                </dd>
+            </dl>
+
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        //切换以及分类
+        $('#first_cat').change(function () {
+            $('#second_cat').empty().append('<option value="0">请选择</option>');
+            $.ajax({
+                type: 'POST',
+                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+                url: '/admin/video/get_child_category' ,
+                data: 'cat_id='+ $(this).val(),
+                dataType:'json',
+                cache:false, //同理
+                success: function(data){
+                    if(data.code == 200){
+                        //$('#second_cat').append('<option value="0">请选择</option>');
+                        $.each(data.data, function (i,n) {
+                            $('#second_cat').append('<option value="'+ n.cat_id +'">'+ n.cat_name +'</option>')
+                        })
+                    } else {
+                        alert('获取子分类失败');
+                    }
+                } ,
+                error:function(){
+                    alert('获取子分类失败');
+                },
+            });
+        })
+
+        $('#').change(function(){
+
+        })
+    })
+</script>
+
+

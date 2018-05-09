@@ -6,12 +6,6 @@ use think\Loader;
 class User extends Base
 {
 
-    //用户列表（筛选）
-    //详情
-    //禁用
-    //添加
-    //修改
-
     /**
      * 用户列表
      * @return mixed
@@ -19,18 +13,15 @@ class User extends Base
     public function index()
     {
         $where = [];
-        if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        if(!empty($_REQUEST['reader_no'])){
+            $where['reader_no'] = ['like','%'.trim($_REQUEST['reader_no']).'%'];
         }
-        if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+        if(!empty($_REQUEST['real_name'])){
+            $where['real_name'] = ['like','%'.trim($_REQUEST['real_name']).'%'];
         }
 
-        $user_list = Loader::model('User')->where($where)->order('user_id','desc')->paginate(10);
+        $user_list = Loader::model('User')->where($where)->order('user_id','desc')->paginate(10,false,['query' => $_GET]);
         $this->assign('user_list', $user_list);
-
-        $page = $user_list->render();
-        $this->assign('page', $page);
 
         $this->view->engine->layout('layout');
         return $this->fetch('user/index');
@@ -99,7 +90,7 @@ class User extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('user/add');
         }
-        return $this->redirect('/manage/user/index');
+        return $this->redirect('/admin/user/index');
     }
 
     /**
@@ -112,10 +103,10 @@ class User extends Base
         $user_info = Loader::model('User')->find($_REQUEST['user_id']);
         $this->assign('user_info',$user_info);
 
-        if(empty($_POST)){
-            $customer_list = Loader::model('Customer')->select();
-            $this->assign('customer_list',$customer_list);
+        $customer_list = Loader::model('Customer')->select();
+        $this->assign('customer_list',$customer_list);
 
+        if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
             return $this->fetch('user/edit');
@@ -135,7 +126,7 @@ class User extends Base
                 throw new \Exception('所属学校不能为空');
             }
             if(empty($_REQUEST['password'])){
-                throw new \Exception('密码不能为空');
+                //throw new \Exception('密码不能为空');
             }
             if(empty($_REQUEST['customer_id'])){
                 throw new \Exception('所属客户不能为空');
@@ -151,7 +142,9 @@ class User extends Base
             }
 
             $user_info->customer_id  = $_REQUEST['customer_id'];
-            $user_info->password  = md5($_REQUEST['password']);
+            if(empty($_REQUEST['password'])) {
+                $user_info->password = md5($_REQUEST['password']);
+            }
             $user_info->real_name  = $_REQUEST['real_name'];
             $user_info->reader_no  = $_REQUEST['reader_no'];
             $user_info->telphone   = $_REQUEST['telphone'];
@@ -167,7 +160,7 @@ class User extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('user/edit');
         }
-        return $this->redirect('/manage/user/index');
+        return $this->redirect('/admin/user/index');
     }
 
 
@@ -186,10 +179,8 @@ class User extends Base
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
-            $this->view->engine->layout('layout');
-            return $this->fetch('user/add');
         }
-        return $this->redirect('/manage/user/index');
+        return $this->redirect('/admin/user/index');
     }
 
 }
