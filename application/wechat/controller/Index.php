@@ -22,13 +22,13 @@ class Index extends Base
 
         //首页精彩推荐
         $video_list= [];
-        $video_list[1] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'1'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
-        $video_list[2] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'2'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
-        $video_list[3] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'3'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
-        $video_list[4] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'4'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
+        $video_list[1] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'7'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
+        $video_list[2] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'1'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
+        $video_list[3] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'2'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
+        $video_list[4] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'3'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
         $video_list[5] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'4'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
-        $video_list[6] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'6'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
-        $video_list[7] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'7'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
+        $video_list[6] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'5'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
+        $video_list[7] = Db::table('video')->alias('a')->join('category b','a.second_cat_id=b.cat_id')->where(['a.status'=>1,'a.cat_id'=>'6'])->field('a.*,b.cat_name')->order('rand()')->limit(4)->select();
         $this->assign('video_list',$video_list);
 
         $this->assign('page_title','紫葡萄少儿艺术库');

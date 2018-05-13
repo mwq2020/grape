@@ -6,6 +6,7 @@
     <title>{if $page_title}{$page_title}{else}个人中心-我的消息{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
@@ -82,6 +83,13 @@
                         <span>{$vo.add_time|date="Y-m-d",###}</span>
                     </div>
                     {/volist}
+
+                    {if $message_list->isEmpty()}
+                    <div class="noSearchResult">
+                        <span>{$no_content_txt}</span>
+                    </div>
+                    {/if}
+
                 </div>
                 {$page}
             </div>
@@ -95,10 +103,6 @@
 <link href="/css/layer.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="/js/ratio.js"></script>
 {include file="common/user_message_info" /}
-
-{if $message_list->isEmpty()}
-{include file="common/no_content" /}
-{/if}
 
 </body>
 </html>

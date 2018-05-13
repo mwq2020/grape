@@ -62,6 +62,13 @@
                 </a>
             </div>
         {/volist}
+
+        {if !$activity_list}
+        <div class="noSearchResult">
+            <span>{$no_content_txt}</span>
+        </div>
+        {/if}
+
         </div>
         {$page}
     </div>
@@ -76,8 +83,5 @@
 {include file="common/login_pop" /}
 {/if}
 
-{if !$activity_list}
-{include file="common/no_content" /}
-{/if}
 </body>
 </html>

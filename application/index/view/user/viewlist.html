@@ -6,6 +6,7 @@
     <title>{if $page_title}{$page_title}{else}个人中心-观看记录{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
@@ -95,6 +96,12 @@
                         <dd>{$vo.title}</dd>
                     </dl>
                     {/volist}
+
+                    {if $view_list->isEmpty()}
+                    <div class="noSearchResult">
+                        <span>{$no_content_txt}</span>
+                    </div>
+                    {/if}
                 </div>
                 {$page}
             </div>
@@ -106,9 +113,7 @@
 
 {include file="common/page_footer" /}
 
-{if $view_list->isEmpty()}
-{include file="common/no_content" /}
-{/if}
+
 
 </body>
 </html>

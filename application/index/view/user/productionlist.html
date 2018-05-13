@@ -6,6 +6,7 @@
     <title>{if $page_title}{$page_title}{else}个人中心-我的作品列表{/if}</title>
     <link href="/css/common.css" type="text/css" rel="stylesheet">
     <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
@@ -89,6 +90,12 @@
                         </dl>
                     </div>
                     {/volist}
+
+                    {if $product_list->isEmpty()}
+                    <div class="noSearchResult">
+                        <span>{$no_content_txt}</span>
+                    </div>
+                    {/if}
                 </div>
                 {$page}
             </div>
@@ -98,8 +105,5 @@
 
 {include file="common/page_footer" /}
 
-{if $product_list->isEmpty()}
-{include file="common/no_content" /}
-{/if}
 </body>
 </html>

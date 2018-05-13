@@ -129,6 +129,12 @@
                             </dl>
                         </div>
                         {/volist}
+
+                        {if !$product_list}
+                        <div class="noSearchResult">
+                            <span>{$no_content_txt}</span>
+                        </div>
+                        {/if}
                     </div>
                 </div>
             </div>
@@ -144,9 +150,6 @@
 {include file="common/login_pop" /}
 {/if}
 
-{if !$product_list}
-{include file="common/no_content" /}
-{/if}
 
 </body>
 </html>

@@ -176,7 +176,7 @@
 /*****作品展示******/
 .videoLeft{width:9.36rem;margin-left:.3rem}
 .videoLeft h3{height:.8rem;line-height:.8rem;font-size:.44rem}
-.videoMid{width:9.37rem;height:6.08rem;}
+.videoMid{width:9.37rem;height:5.28rem;}
 .videoBot{height:.6rem;line-height:.6rem;color:#888;font-size:.22rem}
 .videoBot a{color:#888}
 .share{background:url(../images/videoIcon.png) no-repeat left center;background-size:.3rem .3rem;padding-left:.4rem;margin-right:.4rem}
@@ -318,7 +318,7 @@
 .Tx{width:1.2rem;height:1.2rem;border-radius:50%;margin-left:-0.6rem;overflow:hidden}
 
 .Txcon{width:2rem;padding-top:0.1rem;}
-.Txcon span{font-size:0.18rem;line-height:0.3rem;color:#666}
+.Txcon span{font-size:0.18rem;line-height:0.3rem;color:#666;display:block}
 .Dlbtn {display:block;width:1.03rem;height:0.37rem;text-align:center;line-height:0.32rem;background:url(../images/btnbg.png) no-repeat center top;font-size:0.16rem;color:#666;margin-top:0.05rem;}
 
 
@@ -370,6 +370,7 @@
 .marTop3{margin-top:.3rem}
 .marTop7{padding-top:.7rem}
 .marTop1{margin-top:.1rem}
+.huihuaListBox{position:relative;min-height:6.6rem;}
 .huihuaListBox dl{width:4.25rem;height:2.65rem;background:#f8f8f8;margin-left:.35rem;float:left;padding:.1rem;margin-bottom:.2rem;border-radius:.16rem;}
 .huihuaListBox dl dt{width:4.25rem;height:2.2rem;position:relative;overflow:hidden;border-radius:.1rem;background:#ff0}
 .huihuaListBox dl dt img{height:100%;width:100%}
@@ -394,3 +395,6 @@
 /***********************报名成功*********************/
 .signSucess{width:5.2rem;height:3.48rem;background:rgba(0,0,0,0.7);position:fixed;top:50%;margin-top:-1.74rem;left:50%;margin-left:-2.6rem;border-radius:.2rem}
 .heart{background:url(../images/heart.png) no-repeat left center;background-size:.32rem .3rem}
+
+/*2018.5.8*/
+.Positionpage{position:absolute;left:0;bottom:0;width:100%;}

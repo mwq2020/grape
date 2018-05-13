@@ -47,7 +47,7 @@ class Video extends Base
 
 
         $cat_list = Loader::model('Category')->getCategoryList();
-        $current_location = $cat_list[$video_info->cat_id]['cat_name'] ."-".$cat_list[$video_info->second_cat_id]['cat_name'];
+        $current_location = $cat_list[$video_info->cat_id]['cat_name'] ." - ".$cat_list[$video_info->second_cat_id]['cat_name'];
         $this->assign('current_location',$current_location);
 
         return $this->fetch('video/info');

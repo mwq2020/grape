@@ -4,15 +4,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{if $page_title}{$page_title}{else}视频分类{/if}</title>
-    <link href="/css/common.css" type="text/css" rel="stylesheet">
-    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/common.css?v=1" type="text/css" rel="stylesheet">
+    <link href="/css/style.css?v=1" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/js/wrap.js"></script>
     <script type="text/javascript" src="/js/jquery.event.drag-1.5.min.js"></script>
     <script type="text/javascript" src="/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/js/flip.js"></script>
 
-    <link href="/css/layer.css" type="text/css" rel="stylesheet">
+    <link href="/css/layer.css?v=1" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/js/ratio.js"></script>
     <script type="text/javascript" src="/static/js/common.js"></script>
 </head>
@@ -86,14 +86,16 @@
                         <dd><a href="/index/video/video_info?video_id={$vo.video_id}&from=share" class="share fr">分享</a>{$vo.title}</dd>
                     </dl>
                 {/volist}
+
+                {if !$video_list}
+                <div class="noSearchResult">
+                    <span>资源马上更新</span>
+                </div>
+                {/if}
             </div>
             {$page}
 
-            {if !$video_list}
-            <div class="noSearchResult">
-                <span>资源马上更新</span>
-            </div>
-            {/if}
+
         </div>
 
     </div>

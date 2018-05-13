@@ -15,6 +15,30 @@ class Test extends \think\Controller
      */
     public function index()
     {
+
+        $video_list = Loader::model('Video')->select();
+        foreach($video_list as $row){
+
+            echo $row->title."<br>";
+
+            $title = str_replace(['《','》'],['',''],$row->title);
+            echo $title."<br>";
+//            $row->title = $title;
+//            $row->save();
+
+//            $title = trim(preg_replace('/^[\d]*/','',$row->title),'.');
+//            echo $title."<br>";
+//            $row->title = $title;
+//            $row->save();
+
+
+//            $title = preg_replace('/^[第\d*集]*/u','',$row->title);
+//            echo $title."<br>";
+//            $row->title = $title;
+//            $row->save();
+        }
+
+        exit;
         $path = dirname(__FILE__); //找到当前脚本所在路径
         $PHPExcel = new PHPExcel(); //实例化PHPExcel类，类似于在桌面上新建一个Excel表格
         $PHPSheet = $PHPExcel->getActiveSheet(); //获得当前活动sheet的操作对象
