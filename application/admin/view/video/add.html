@@ -11,7 +11,7 @@
         <h4>添加视频</h4>
     </div>
     <div class="formP formV">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <dl>
                 <dt>资源名称</dt>
                 <dd>
@@ -71,26 +71,6 @@
                 </dd>
             </dl>
 
-            <!--
-            <dl>
-                <dt>视频封面</dt>
-                <dd>
-                    <div class="inputP">
-                        <input type="file" name="video_img" />
-                    </div>
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>视频文件</dt>
-                <dd>
-                    <div class="inputP">
-                        <input type="file" name="video" />
-                    </div>
-                </dd>
-            </dl>
-            -->
-
             <!--上传图片-->
             <dl>
                 <dt>上传封面图片</dt>
@@ -100,17 +80,17 @@
                             <input type="file" name="video_img" id="video_img" />
                             <p>上传图片</p>
                         </div>
-                        <span>单选文字说明</span>
+                        <span>请上传图片格式的文件</span>
+                        <!--
                         <div class="view">
                             <ul class="imgList">
                                 <li><span></span><img src="/admin/images/404.jpg" id="video_img_preview"><a class="del" href="javascript:;">×</a></li>
-                                <!--
                                 <li><span></span><img src="/admin/images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
                                 <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
-                                -->
                             </ul>
                             <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
                         </div>
+                        -->
                     </div>
 
                 </dd>
@@ -123,6 +103,7 @@
                     <input type="file" name="video" id="video" style="display:none;"/>
                     <a href="javascript:void(0)" id="video_upload_btn" class="btnP btnWhite" style="height:30px; line-height:30px">添加视频</a><span>视频限制 400M 以内 MP4 格式</span>
                 </dd>
+                <!--
                 <dd>
                     <ul class="videoList">
                         <li><img src="/admin/images/bg.jpg">
@@ -130,11 +111,10 @@
                             <p></p>
                             <a class="del" href="javascript:;">×</a>
                         </li>
-                        <!--
                         <li><img src="/admin/images/bg.jpg"><video src="/admin/images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
-                        -->
                     </ul>
                 </dd>
+                -->
             </dl>
 
 
@@ -204,9 +184,11 @@
             });
         })
 
-        $('#').change(function(){
-
-        })
+        //点击文件上传操作
+        $('#video_upload_btn').click(function() {
+            //console.log('fffffff');
+            $('#video').click();
+        });
     })
 </script>
 

@@ -65,16 +65,16 @@
 
 
                         {if  $vo.status==1}
-                        <a class="blue" href="/manage/video/change_status?video_id={$vo.video_id}&status=0">
+                        <a class="blue" href="/admin/video/change_status?video_id={$vo.video_id}&status=0">
                             <span>禁用</span>
                         </a>
                         {else}
-                        <a class="blue" href="/manage/video/change_status?video_id={$vo.video_id}&status=1">
+                        <a class="blue" href="/admin/video/change_status?video_id={$vo.video_id}&status=1">
                             <span>启用</span>
                         </a>
                         {/if}
 
-                        <a class="blue" href="/manage/video/info?video_id={$vo.video_id}">
+                        <a class="blue" href="/admin/video/edit?video_id={$vo.video_id}">
                             <span>编辑</span>
                         </a>
 

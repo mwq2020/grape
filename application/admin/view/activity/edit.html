@@ -1,220 +1,231 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
 
 
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-        </script>
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/manage/index/index">起始页</a>
-            </li>
-        </ul>
+<div class="boxP">
+    <div class="titP">
+        <h4>添加活动</h4>
     </div>
-
-    <div class="page-content">
-
-        {if $error_msg}
-        <!-- 错误提示 -->
-        <div class="col-sm-10">
-            <h3 class="header smaller lighter green">
-                <i class="icon-bullhorn"></i>
-                错误提示
-            </h3>
-
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">
-                    <i class="icon-remove"></i>
-                </button>
-                {$error_msg}
-            </div>
-        </div>
-        {/if}
-
-
-        <!-- 验证表单部分 -->
-        <div class="row">
-            <div class="col-xs-12">
-                <form class="form-horizontal" role="form" action="/manage/activity/edit" enctype="multipart/form-data" method="post">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 活动名称 </label>
-                        <div class="col-sm-9">
-                            <input type="text" name="activity_name" value="{$activity_info.activity_name??''}" />
-                        </div>
+    <div class="formP formV">
+        <form action="" method="post" enctype="multipart/form-data">
+            <dl>
+                <dt>活动名称</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="activity_name" value="{$activity_info.activity_name}" maxlength="100"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" >所属机构 </label>
-                        <div class="col-sm-9">
-                            <select name="cat_id">
+            <dl>
+                <dt>所属机构</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="customer_id">
                                 <option value="0">请选择</option>
-                                <option value="1">绘画</option>
-                                <option value="2">手工</option>
-                                <option value="3">书法</option>
-                                <option value="4">舞蹈</option>
-                                <option value="5">音乐</option>
-                                <option value="6">棋类</option>
-                                <option value="7">民间艺术</option>
+                                {volist name="customer_list" id="customer"}
+                                <option value="{$customer.customer_id}" {if $customer.customer_id == $activity_info.customer_id} selected {/if} >{$customer.customer_name}</option>
+                                {/volist}
                             </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+
+            <dl>
+                <dt>活动时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="start_time" id="start_time" value="{$activity_info.start_time|date='Y-m-d H:i:s',###}" />
+                        <input type="input" name="end_time" id="end_time" value="{$activity_info.end_time|date='Y-m-d H:i:s',###}" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>活动地点</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="address" value="{$activity_info.address}" maxlength="200"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>能否报名</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="is_signup" value="1" {if 1 == $activity_info.is_signup} checked {/if} />能</label>
+                        <label><input type="radio" name="is_signup" value="2" {if 2 == $activity_info.is_signup} checked {/if} />不能</label>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>报名时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="signup_start_time" id="signup_start_time" value="{$activity_info.signup_start_time|date='Y-m-d H:i:s',###}" />
+                        <input type="input" name="signup_end_time" id="signup_end_time" value="{$activity_info.signup_end_time|date='Y-m-d H:i:s',###}" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>人数限制</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="max_number" value="{$activity_info.max_number}" maxlength="6"/>
+                    </div>
+                </dd>
+            </dl>
+
+
+            <!--上传图片-->
+            <dl>
+                <dt>活动图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="activity_img" value=""/>
+                            <p>上传图片</p>
+
+                            <!--
+                            <input type="file" name="activity_img" />
+                            <input type="file" name="activity_gallery_1" />
+                            <input type="file" name="activity_gallery_2" />
+                            <input type="file" name="activity_gallery_3" />
+                            -->
+
                         </div>
+                        <span>请上传图片格式的文件</span>
+                        <!--
+                        <div class="view">
+                            <ul class="imgList">
+                                <li><span></span><img src="/admin/images/404.jpg" id="video_img_preview"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="/admin/images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                            </ul>
+                            <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                        </div>
+                        -->
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">活动时间</label>
-                        <div class="col-sm-4">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="start_date" type="text" id="start_date" class="form-control" data-date-format="yyyy-mm-dd" />
-                                        <span class="input-group-addon">
-                                            <i class="icon-calendar"></i>
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
+                </dd>
+            </dl>
 
-                        <div class="col-sm-4">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="end_date" type="text" id="end_date" class="form-control" data-date-format="yyyy-mm-dd" />
-                                        <span class="input-group-addon">
-                                            <i class="icon-calendar"></i>
-                                        </span>
-                                </div>
-                            </div>
+            <dl>
+                <dt>活动相册图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="activity_gallery_1" value=""/>
+                            <p>上传图片</p>
                         </div>
+                        <span>请上传图片格式的文件</span>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 活动位置 </label>
-                        <div class="col-sm-9">
-                            <input type="text" name="address" />
+            <dl>
+                <dt>活动相册图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="activity_gallery_2" value=""/>
+                            <p>上传图片</p>
                         </div>
+                        <span>请上传图片格式的文件</span>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 能否报名 </label>
-                        <div class="col-sm-9">
-                            <input type="checkbox" name="is_signup" />
+            <dl>
+                <dt>活动相册图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="activity_gallery_3" value=""/>
+                            <p>上传图片</p>
                         </div>
+                        <span>请上传图片格式的文件</span>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">报名时间</label>
-                        <div class="col-sm-4">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="signup_start_date" type="text" id="signup_start_date" class="form-control" data-date-format="yyyy-mm-dd" />
-                                        <span class="input-group-addon">
-                                            <i class="icon-calendar"></i>
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-sm-4">
-                            <div class="col-xs-6">
-                                <div class="input-group input-group-sm">
-                                    <input name="signup_end_date" type="text" id="signup_end_date" class="form-control" data-date-format="yyyy-mm-dd" />
-                                        <span class="input-group-addon">
-                                            <i class="icon-calendar"></i>
-                                        </span>
-                                </div>
-                            </div>
-                        </div>
+            <dl>
+                <dt>活动简介</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="activity_desc" placeholder="请输入简介" maxlength="1000">{$activity_info.activity_desc}</textarea>
+                        <!--<div class="tip">0/50</div>-->
                     </div>
+                    <span>每一段落请用<xmp><p></p></xmp>包裹起来</span>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 人数限制 </label>
-                        <div class="col-sm-9">
-                            <input type="text" name="max_number" maxlength="6"/>
-                        </div>
+            <dl>
+                <dt>参与方式</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="join_rule" placeholder="请输入简介" maxlength="1000">{$activity_info.join_rule}</textarea>
+                        <!--<div class="tip">0/50</div>-->
                     </div>
+                    <span>每一段落请用<xmp><p></p></xmp>包裹起来</span>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 活动图片 </label>
-                        <div class="col-sm-9">
-                            <input type="file" name="video" />
-                            <input type="file" name="video" />
-                            <input type="file" name="video" />
-                        </div>
+            <dl>
+                <dt>活动奖励</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="activity_reward" placeholder="请输入简介" maxlength="1000">{$activity_info.activity_reward}</textarea>
+                        <!--<div class="tip">0/50</div>-->
                     </div>
+                    <span>每一段落请用<xmp><p></p></xmp>包裹起来</span>
+                </dd>
+            </dl>
 
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">活动简介：</label>
-                        <div class="col-sm-9">
-                            <textarea name="activity_desc" id="form-field-11" class="autosize-transition form-control" placeholder="请活动简介"></textarea>
-                        </div>
+            <dl>
+                <dt>特别注意</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="special_attention" placeholder="请输入简介" maxlength="1000">{$activity_info.special_attention}</textarea>
+                        <!--<div class="tip">0/50</div>-->
                     </div>
+                    <span>每一段落请用<xmp><p></p></xmp>包裹起来</span>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">参与方式：</label>
-                        <div class="col-sm-9">
-                            <textarea name="join_rule" id="form-field-12" class="autosize-transition form-control" placeholder="请参与方式"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">活动奖励：</label>
-                        <div class="col-sm-9">
-                            <textarea name="activity_reward" id="form-field-13" class="autosize-transition form-control" placeholder="请活动奖励"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">特别注意：</label>
-                        <div class="col-sm-9">
-                            <textarea name="special_attention" id="form-field-14" class="autosize-transition form-control" placeholder="请特别注意"></textarea>
-                        </div>
-                    </div>
-
-                    <input type="hidden" name="video_id" value="{$video_info.video_id??''}" />
-
-                    <div class="clearfix form-actions">
-                        <div class="col-md-offset-3 col-md-9">
-                            <input class="btn btn-info" type="submit" value="提交"/>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
     </div>
-</div><!-- /.main-content -->
+</div>
 
 <script>
-    jQuery(function($) {
-        $("#start_date").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd"
-        });
-        $("#end_date").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd"
-        });
-
-        $("#signup_start_date").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd"
-        });
-        $("#signup_end_date").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd"
-        });
-
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#start_time,#end_time,#signup_start_time,#signup_end_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d H:i:s"
     });
+
+    $(function () {
+
+    })
 </script>
-
-
-
-
-
-
 

@@ -41,13 +41,7 @@ class Video extends Base
             return $this->fetch('video/add');
         }
 
-
-        $view_data = [];
-        $view_data['error_msg'] = '';
         try {
-
-            $video_id = isset($_REQUEST['video_id']) ? $_REQUEST['video_id'] : 0;
-
             if(empty($_REQUEST['title'])){
                 throw new \Exception('视频分类id不能为空');
             }
@@ -80,92 +74,58 @@ class Video extends Base
                 }
             }
 
-            if(empty($video_id)){
-                $data = [];
-                $data['cat_id']         = $_REQUEST['cat_id'];
-                $data['second_cat_id']  = $_REQUEST['second_cat_id'];
-                $data['title']          = $_REQUEST['title'];
-                if($image_name){
-                    $data['video_img']      = '/static/image/video/'.$image_name;
-                }
-                if($video_name){
-                    $data['video_url']      = '/static/video/'.$video_name;
-                }
-                $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 0;
-                $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
-                $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
-                $data['mark']         = isset($_REQUEST['mark']) ? $_REQUEST['mark'] : '';
-                $data['add_time']       = time();
-                $data['update_time']    = time();
-                $flag = Db::table('video')->insert($data);
-                if(empty($flag)){
-                    throw new \Exception('保存数据错误，请重试');
-                }
-            } else {
-                $data = [];
-                $data['cat_id']         = $_REQUEST['cat_id'];
-                $data['second_cat_id']  = $_REQUEST['second_cat_id'];
-                $data['title']          = $_REQUEST['title'];
-                if($image_name){
-                    $data['video_img']      = $image_name;
-                }
-                if($video_name){
-                    $data['video_url']      = $video_name;
-                }
-                $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 2;
-                $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
-                $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
-                $data['mark']         = isset($_REQUEST['mark']) ? $_REQUEST['mark'] : '';
-                $data['update_time']    = time();
-                $flag = Db::table('video')->where('video_id', $video_id)->update($data);
-                if(empty($flag)){
-                    throw new \Exception('保存数据错误，请重试');
-                }
+            $data = [];
+            $data['cat_id']         = $_REQUEST['cat_id'];
+            $data['second_cat_id']  = $_REQUEST['second_cat_id'];
+            $data['title']          = $_REQUEST['title'];
+            if($image_name){
+                $data['video_img']      = '/static/image/video/'.$image_name;
+            }
+            if($video_name){
+                $data['video_url']      = '/static/video/'.$video_name;
+            }
+            $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 0;
+            $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
+            $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
+            $data['mark']           = isset($_REQUEST['mark']) ? $_REQUEST['mark'] : '';
+            $data['add_time']       = time();
+            $data['update_time']    = time();
+            $flag = Db::table('video')->insert($data);
+            if(empty($flag)){
+                throw new \Exception('保存数据错误，请重试');
             }
 
         } catch (\Exception $e){
-            $view_data['error_msg'] = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('video/add',$view_data);
+            return $this->fetch('video/add');
         }
+        $this->redirect('/admin/video/index');
     }
 
 
     /**
-     * 视频的添加、修改页面
-     * @return mixed
-     */
-    public function  info()
-    {
-        $view_data = [];
-        $view_data['error_msg'] = '';
-        $view_data['second_cat_list'] = [];
-        $view_data['video_info'] = ['cat_id'=>0,'position'=>0,'status'=>1];
-
-        $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
-        if($video_id){
-            $video_info = Db::table('video')->find($video_id);
-            $view_data['video_info'] = $video_info;
-
-            $second_cat_list = Db::table('Category')->where('parent_id',$video_info['cat_id'])->select();
-            $view_data['second_cat_list'] = $second_cat_list;
-        }
-
-        $this->view->engine->layout('layout');
-        return $this->fetch('video/info',$view_data);
-    }
-
-    /**
-     * 视频的添加和编辑
+     * 视频的编辑
      */
     public function edit()
     {
-        $view_data = [];
-        $view_data['error_msg'] = '';
+        $error_msg = '';
+        $video_id = isset($_REQUEST['video_id']) ? $_REQUEST['video_id'] : 0;
+        $video_info = Db::table('video')->find($video_id);
+        $this->assign('video_info',$video_info);
+
+        $second_cat_list = Db::table('Category')->where('parent_id',$video_info['cat_id'])->select();
+        $this->assign('second_cat_list',$second_cat_list);
+        if(empty($_POST)){
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('video/edit');
+        }
+
         try {
-
-            $video_id = isset($_REQUEST['video_id']) ? $_REQUEST['video_id'] : 0;
-
+            if(empty($video_id)){
+                throw new \Exception('视频id不能为空');
+            }
             if(empty($_REQUEST['title'])){
                 throw new \Exception('视频分类id不能为空');
             }
@@ -181,7 +141,7 @@ class Video extends Base
             if($file){
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/video');
                 if($info){
-                    $image_name =  $info->getSaveName();
+                    $image_name =  '/static/image/video/'.$info->getSaveName();
                 }else{
                     throw new \Exception('图片保存失败【'.$file->getError().'】');
                 }
@@ -192,62 +152,38 @@ class Video extends Base
             if($file){
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'video');
                 if($info){
-                    $video_name =  $info->getSaveName();
+                    $video_name =  '/static/image/video/'.$info->getSaveName();
                 }else{
                     throw new \Exception('图片保存失败【'.$file->getError().'】');
                 }
             }
 
-            if(empty($video_id)){
-                $data = [];
-                $data['cat_id']         = $_REQUEST['cat_id'];
-                $data['second_cat_id']  = $_REQUEST['second_cat_id'];
-                $data['title']          = $_REQUEST['title'];
-                if($image_name){
-                    $data['video_img']      = '/static/image/video/'.$image_name;
-                }
-                if($video_name){
-                    $data['video_url']      = '/static/video/'.$video_name;
-                }
-                $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 0;
-                $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
-                $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
-                $data['mark']         = isset($_REQUEST['mark']) ? $_REQUEST['mark'] : '';
-                $data['add_time']       = time();
-                $data['update_time']    = time();
-                $flag = Db::table('video')->insert($data);
-                if(empty($flag)){
-                    throw new \Exception('保存数据错误，请重试');
-                }
-            } else {
-                $data = [];
-                $data['cat_id']         = $_REQUEST['cat_id'];
-                $data['second_cat_id']  = $_REQUEST['second_cat_id'];
-                $data['title']          = $_REQUEST['title'];
-                if($image_name){
-                    $data['video_img']      = $image_name;
-                }
-                if($video_name){
-                    $data['video_url']      = $video_name;
-                }
-                $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 2;
-                $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
-                $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
-                $data['mark']         = isset($_REQUEST['mark']) ? $_REQUEST['mark'] : '';
-                $data['update_time']    = time();
-                $flag = Db::table('video')->where('video_id', $video_id)->update($data);
-                if(empty($flag)){
-                    throw new \Exception('保存数据错误，请重试');
-                }
+            $data = [];
+            $data['cat_id']         = $_REQUEST['cat_id'];
+            $data['second_cat_id']  = $_REQUEST['second_cat_id'];
+            $data['title']          = $_REQUEST['title'];
+            if($image_name){
+                $data['video_img']      = $image_name;
+            }
+            if($video_name){
+                $data['video_url']      = $video_name;
+            }
+            $data['status']         = isset($_REQUEST['status']) ? $_REQUEST['status'] : 2;
+            $data['position']       = isset($_REQUEST['position']) ? $_REQUEST['position'] : 0;
+            $data['sort']           = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 0;
+            $data['mark']         = isset($_REQUEST['mark']) ? $_REQUEST['mark'] : '';
+            $data['update_time']    = time();
+            $flag = Db::table('video')->where('video_id', $video_id)->update($data);
+            if(empty($flag)){
+                throw new \Exception('保存数据错误，请重试');
             }
 
         } catch (\Exception $e){
-            $view_data['error_msg'] = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('video/info',$view_data);
+            return $this->fetch('video/edit');
         }
-
-        $this->redirect('/manage/video/video_list');
+        $this->redirect('/admin/video/index');
     }
 
     /**
@@ -257,22 +193,22 @@ class Video extends Base
     public function change_status()
     {
         try {
-            if(!isset($_REQUEST['status']) || empty($_REQUEST['admin_id'])){
+            if(!isset($_REQUEST['status']) || empty($_REQUEST['video_id'])){
                 throw new \Exception('入参错误');
             }
-            $admin_info = Loader::model('video')->where('video_id',$_REQUEST['video_id'])->find();
-            if(empty($admin_info)){
+            $video_info = Loader::model('video')->where('video_id',$_REQUEST['video_id'])->find();
+            if(empty($video_info)){
                 throw new \Exception('视频不存在');
             }
-            $admin_info->status = intval($_REQUEST['status']);
-            $admin_info->save();
+            $video_info->status = intval($_REQUEST['status']);
+            $video_info->save();
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
             return $this->fetch('video/edit');
         }
-        return $this->redirect('video/edit');
+        return $this->redirect('/admin/video/index');
     }
 
     /**
