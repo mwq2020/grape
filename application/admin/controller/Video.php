@@ -15,16 +15,22 @@ class Video extends Base
 
         $where = [];
         if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+            $where['a.title'] = ['like','%'.trim($_REQUEST['title']).'%'];
         }
         if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+            $where['a.cat_id'] = intval($_REQUEST['cat_id']);
         }
 
         $cat_list = Loader::model('Category')->where('parent_id',0)->order('cat_id','asc')->select();
         $this->assign('cat_list', $cat_list);
 
-        $video_list = Loader::model('Video')->where($where)->order('video_id','desc')->paginate(10,false,['query' => $_GET]);
+        //$video_list = Loader::model('Video')->where($where)->order('video_id','desc')->paginate(10,false,['query' => $_GET]);
+        $video_list = Db::table('video')->alias('a')
+                     ->join('category b','a.cat_id=b.cat_id')
+                     ->join('category c','a.second_cat_id=c.cat_id')
+                     ->where($where)->order('a.video_id','desc')
+                     ->field('a.*,b.cat_name,c.cat_name as second_cat_name')
+                     ->paginate(10,false,['query' => $_GET]);
         $this->assign('video_list', $video_list);
 
         $this->view->engine->layout('layout');

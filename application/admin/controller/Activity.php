@@ -16,13 +16,19 @@ class Activity extends Base
     {
         $where = [];
         if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+            $where['a.title'] = ['like','%'.trim($_REQUEST['title']).'%'];
         }
         if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+            $where['a.cat_id'] = intval($_REQUEST['cat_id']);
         }
 
-        $activity_list = Loader::model('Activity')->where($where)->order('activity_id','desc')->paginate(10);
+        //$activity_list = Loader::model('Activity')->where($where)->order('activity_id','desc')->paginate(10);
+
+        $activity_list = Db::table('activity')->alias('a')
+                    ->join('customer b','a.customer_id=b.customer_id')
+                    ->where($where)->order('a.activity_id','desc')
+                    ->field('a.*,b.customer_name')
+                    ->paginate(10,false,['query' => $_GET]);
         $this->assign('activity_list', $activity_list);
 
         $page = $activity_list->render();
@@ -242,6 +248,35 @@ class Activity extends Base
             $this->assign('error_msg',$error_msg);
         }
         return $this->redirect('/admin/activity/index');
+    }
+
+
+    /**
+     * 活动列表
+     * @return mixed
+     */
+    public function signup_list()
+    {
+        $where = [];
+        $where['a.activity_id'] = $_REQUEST['activity_id'];
+        if(!empty($_REQUEST['title'])){
+            $where['a.title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        }
+        if(!empty($_REQUEST['cat_id'])){
+            $where['a.cat_id'] = intval($_REQUEST['cat_id']);
+        }
+
+        //$activity_list = Loader::model('Activity')->where($where)->order('activity_id','desc')->paginate(10);
+
+        $signup_list = Db::table('activity_signup')->alias('a')
+            ->join('user b','a.user_id=b.user_id')
+            ->where($where)->order('a.id','desc')
+            ->field('b.*,a.id,a.add_time as signup_time,a.mobile as signup_mobile,a.activity_id')
+            ->paginate(10,false,['query' => $_GET]);
+        $this->assign('signup_list', $signup_list);
+
+        $this->view->engine->layout('layout');
+        return $this->fetch('activity/signup_list');
     }
 
 

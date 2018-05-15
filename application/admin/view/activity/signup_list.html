@@ -2,10 +2,10 @@
     <form method="get">
         <div class="formP">
             <dl>
-                <dt>活动名称</dt>
+                <dt>读者证号</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="title" value="{$Think.get.title}">
+                        <input type="text" name="reader_no" value="{$Think.get.reader_no}">
                     </div>
                 </dd>
             </dl>
@@ -17,32 +17,29 @@
 
 <div class="boxP">
     <div class="titP">
-        <h4>活动列表</h4>
-        <div class="btnMng">
-            <a href="/admin/activity/add" class="btnP">新建</a>
-        </div>
+        <h4>报名列表</h4>
     </div>
 
     <!--公共表格-->
     <div class="tableBox">
         <table class="tableP">
             <tr>
-                <th>活动id</th>
-                <th>活动名称</th>
-                <th>所属机构</th>
-                <th>导航图</th>
-                <th>创建时间</th>
-                <th>活动状态</th>
+                <th>用户id</th>
+                <th>读者证号</th>
+                <th>头像</th>
+                <th>联系电话</th>
+                <th>报名时间</th>
+                <th>状态</th>
                 <th>操作</th>
             </tr>
 
-            {foreach name="activity_list" item="vo" key="k"}
+            {foreach name="signup_list" item="vo"}
             <tr>
-                <td>{$vo.activity_id}</td>
-                <td>{$vo.activity_name}</td>
-                <td>{$vo.customer_name}</td>
-                <td><img width="30" src="{$vo.activity_img}"/></td>
-                <td>{:date('Y-m-d H:i:s',$vo['add_time'])}</td>
+                <td>{$vo.user_id}</td>
+                <td>{$vo.reader_no}</td>
+                <td><img width="30" src="{$vo.avatar}"/></td>
+                <td>{$vo.signup_mobile}</td>
+                <td>{$vo.signup_time|date="Y-m-d H:i:s",###}</td>
                 <td>{$vo.status == 1 ? '启用' : '禁用'}</td>
                 <td class="opt">
                     {if  $vo.status==1}
@@ -58,11 +55,6 @@
                     <a class="blue" href="/admin/activity/edit?activity_id={$vo.activity_id}">
                         <span>编辑</span>
                     </a>
-
-                    <a class="blue" href="/admin/activity/signup_list?activity_id={$vo.activity_id}">
-                        <span>报名用户</span>
-                    </a>
-
                 </td>
             </tr>
             {/foreach}
@@ -71,9 +63,9 @@
 
     <div class="page_content">
         <div class="pageBar">
-            <div>总共<em>{$activity_list->total()}</em>条, 当前<em>{$activity_list->currentPage()}</em>/<em>{$activity_list->lastPage()}</em>页</div>
+            <div>总共<em>{$signup_list->total()}</em>条, 当前<em>{$signup_list->currentPage()}</em>/<em>{$signup_list->lastPage()}</em>页</div>
             <div>
-                {$activity_list->render()}
+                {$signup_list->render()}
             </div>
         </div>
     </div>
