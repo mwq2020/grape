@@ -15,7 +15,7 @@ class Base extends \think\Controller
 
     public function all_run()
     {
-        $customer_list = Db::table('customer')->select();
+        $customer_list = Db::table('customer')->order('convert(customer_name using gbk) collate gbk_chinese_ci asc')->select();
         $this->assign('customer_list',$customer_list);
 
         $page_view_num_info = Db::table('statistics')->where(['statistics_key'=>'page_view_num'])->find();

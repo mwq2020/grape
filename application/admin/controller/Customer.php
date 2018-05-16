@@ -86,12 +86,19 @@ class Customer extends Base
                 throw new \Exception('账户名已存在，请更换');
             }
 
+
+            $is_admin_exist = Loader::model('Admin')->where('account',$_REQUEST['account_no'])->find();
+            if(!empty($is_admin_exist)){
+                throw new \Exception('客户的账号已经存在，请修改账户名');
+            }
+
             $data = [];
             $data['customer_name']  = $_REQUEST['customer_name'];
             $data['region_name']    = $_REQUEST['region_name'];
             $data['customer_link_person']   = $_REQUEST['customer_link_person'];
             $data['link_person_mobile']     = $_REQUEST['link_person_mobile'];
             $data['sale_person']    = $_REQUEST['sale_person'];
+
             $data['account_no']     = $_REQUEST['account_no'];
             $data['password']       = md5($_REQUEST['password']);
 
@@ -104,6 +111,17 @@ class Customer extends Base
             $flag = Loader::model('Customer')->insert($data);
             if(empty($flag)){
                 throw new \Exception('客户添加失败');
+            }
+
+            $admin_data = [];
+            $admin_data['account']      = $_REQUEST['account_no'];
+            $admin_data['password']     =  md5($_REQUEST['password']);
+            $admin_data['user_name']    = $_REQUEST['customer_name'];
+            $admin_data['status']       = 1;
+            $admin_data['add_time']     = time();
+            $flag = Loader::model('Admin')->insert($admin_data);
+            if(empty($flag)){
+                throw new \Exception('客户后台账号添加失败');
             }
 
         } catch (\Exception $e){

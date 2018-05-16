@@ -7,13 +7,8 @@ class Index extends Base
 {
     public function run()
     {
-        $customer_list = Db::table('customer')->select();
-
-//        echo "<pre>";
-//        print_r($customer_list);
-//        exit;
-
-        $this->assign('customer_list',$customer_list);
+//        $customer_list = Db::table('customer')->select();
+//        $this->assign('customer_list',$customer_list);
     }
 
     public function index()
