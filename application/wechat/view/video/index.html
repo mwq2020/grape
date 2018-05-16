@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>详情页视频</title>
+    <title>{$video_info.title}</title>
     <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
     <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
@@ -46,7 +46,7 @@
         <div id="video_player" {if !$Think.session.user_id}style="display:none;" {/if}></div>
     </div>
     <div class="VideoCon">
-        <span class="videoTit">{$video_info.title}<b>简笔画</b></span>
+        <span class="videoTit">{$video_info.title}<b>{$current_location}</b></span>
         <p class="clearfix Videoinfo">
             <span><i class="Ieye"><img width="100%" src="/wechat/images/look.png" /></i>{$video_info.view_num}次播放</span>
             <span><i class="Isc" id="collect_btn" data-video_id="{$video_info.video_id}"><img width="100%" src="/wechat/images/dz.png" /></i>收藏</span>

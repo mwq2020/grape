@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>个人中心</title>
+    <title>我的</title>
     <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
     <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
     <script src="/wechat/js/jquery-1.9.0.min.js" type="text/javascript"></script>
     <script src="/wechat/js/main.js" type="text/javascript"></script>
     <script src="/wechat/js/rem750.js" type="text/javascript"></script>
+    <script src="/wechat/js/common.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -52,9 +53,13 @@
             <p>我的消息<span>共{$statistics_data.message_num}条</span></p>
         </div>
     </div>
-    <a href="/wechat/user/logout" class="Eidtlogin">退出登录</a>
+
+    <!--<a href="/wechat/user/logout" class="Eidtlogin">退出登录</a>-->
+    <a href="javascript:void(0)" id="logout_btn" class="Eidtlogin">退出登录</a>
 
 </div>
+
+{include file="common/logout" /}
 
 </body>
 </html>

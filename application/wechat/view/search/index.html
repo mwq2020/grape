@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title>2.2搜索</title>
+    <title>搜索</title>
     <link rel="stylesheet" href="/wechat/css/flickity-docs.css" media="screen" />
     <link href="/wechat/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/wechat/css/style.css" type="text/css" rel="stylesheet"/>
@@ -38,15 +38,21 @@
 <body>
 <div class="wrapMain">
     <div class="VideoCon pad20">
-        <div class="Seachercon  fl"><input class="Seachinput" type="text" value="搜索书名" id="search_keywords"/>
+        <div class="Seachercon  fl"><input class="Seachinput" type="text" value="请输入想要搜索的内容" id="search_keywords"/>
             <i><img width="100%" src="/wechat/images/close2.png" /></i>
         </div>
         <a href="javascript:void(0)" class="SeachIcon fr" id="search_btn"><img width="100%" src="/wechat/images/Ic3.png" /></a>
     </div>
     <span class="eyeTit">热门搜索</span>
     <div class="pad20">
-        {volist name="search_word_list" id="vo"}
-            <div class="SubjectTitel titBg"><i class="k1"><img width="100%" src="/wechat/images/k1.png" /></i>{$vo.keyword}</div>
+        {volist name="search_word_list" id="vo" key="k"}
+            <div class="SubjectTitel titBg">
+                {if $k <= 3}
+                <i class="k1"><img width="100%" src="/wechat/images/k{$k}.png" /></i><a href="/wechat/search/index?keyword={$vo.keyword}">{$vo.keyword}</a>
+                {else}
+                <i class="k1"><img width="100%" src="/wechat/images/k4.png" /></i><a href="/wechat/search/index?keyword={$vo.keyword}">{$vo.keyword}</a>
+                {/if}
+            </div>
         {/volist}
 
         <!--

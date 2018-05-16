@@ -34,9 +34,9 @@
         </div>
         <div class="Scrolldiv">
             <div class="ScrollNav">
-                <a href="/wechat/category/index" class="Curyellow">全部</a>
+                <a href="/wechat/category/index" {if $second_cat_id == 0}class="Curyellow"{/if}>全部</a>
                 {volist name="second_cat_list" id="vo"}
-                    <a href="/wechat/category/index?cat_id={$cat_id}&second_cat_id={$vo.cat_id}">{$vo.cat_name}</a>
+                    <a href="/wechat/category/index?cat_id={$cat_id}&second_cat_id={$vo.cat_id}" {if $second_cat_id == $vo.cat_id}class="Curyellow"{/if}>{$vo.cat_name}</a>
                 {/volist}
             </div>
         </div>

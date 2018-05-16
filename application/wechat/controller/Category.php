@@ -51,7 +51,7 @@ class Category extends Base
         $this->assign('sort',$sort);
         $this->assign('cat_id',$cat_id);
         $this->assign('second_cat_id',$second_cat_id);
-        $this->assign('page_title','视频分类');
+        $this->assign('page_title','艺术库');
         $this->assign('is_ajax',0);
         if (!Request::instance()->isAjax()){
             return $this->fetch('category/index');

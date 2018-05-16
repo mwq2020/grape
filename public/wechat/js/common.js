@@ -2,7 +2,7 @@ $(function(){
 
     //数据框焦点时自动清除搜索内容
     $('.Seachinput').focus(function(){
-        if($(this).val() == '搜索书名'){
+        if($(this).val() == '请输入想要搜索的内容'){
             $(this).val('');
         }
     })
@@ -10,9 +10,15 @@ $(function(){
     //数据框失去焦点并且没有输入任何内容回复提示
     $('.Seachinput').blur(function(){
         if($(this).val() == ''){
-            $(this).val('搜索书名');
+            $(this).val('请输入想要搜索的内容');
         }
     })
+
+    $('.Seachinput').bind('keyup', function(event) {
+        if (event.keyCode == "13") {
+            window.location = '/wechat/search/index?keyword='+$('#search_keywords').val();
+        }
+    });
 
     //搜索页面点击搜索按钮
     $('#search_btn').click(function(){
@@ -302,6 +308,16 @@ $(function(){
     $('#share_btn').click(function(){
         $('#video_share_pop').show();
     })
+
+    //点击退出按钮显示退出弹层
+    $('#logout_btn').click(function(){
+        $('#logout_pop').show();
+    })
+
+    $('#logout_cancel').click(function(){
+        $('#logout_pop').hide();
+    })
+
 
 })
 
