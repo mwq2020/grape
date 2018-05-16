@@ -1,6 +1,12 @@
+
 <div class="boxP">
     <form method="get">
-        <div class="formP">
+    <div class="titP">
+        <h4>查询条件</h4>
+    </div>
+    <div class="boxP">
+        <div class="formP searchFormP">
+            <!--单文本输入-->
             <dl>
                 <dt>作品名称</dt>
                 <dd>
@@ -9,8 +15,59 @@
                     </div>
                 </dd>
             </dl>
-            <dl class="btnMng"> <dt></dt> <dd> <input type="submit" value="搜索" class="btnP" /> </dd>  </dl>
+
+            <dl>
+                <dt>所属活动</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="activity_id">
+                                <option value="">请选择</option>
+                                {volist name="activity_list" id="vo"}
+                                <option value="{$vo.activity_id}" {if $Think.get.activity_id == $vo.activity_id}selected{/if}>{$vo.activity_name}</option>
+                                {/volist}
+                            </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>上传者</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" class="l" name="user_name" value="{$Think.get.user_name}">
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>类型</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="type">
+                                <option value="">请选择</option>
+                                <option value="1" {if $Think.get.type == 1}selected{/if}>图片</option>
+                                <option value="2" {if $Think.get.type == 2}selected{/if}>视频</option>
+                                <option value="3" {if $Think.get.type == 3}selected{/if}>音频</option>
+                            </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <a href="javascript:void(0)" class="btnExpand openMng"></a>
         </div>
+        <!--确定按钮-->
+        <dl class="rBtn searchBtns">
+            <dt>　</dt>
+            <dd>
+                <input type="submit" class="btnP" value="确定">
+                <a href="javascript:void(0)" class="btnP btnDark">重置</a>
+            </dd>
+        </dl>
+    </div>
     </form>
 </div>
 
@@ -53,9 +110,13 @@
                 <td>{$vo.reader_no}</td>
                 <td class="opt">
 
-                    <a class="blue" href="/admin/product/change_status?product_id={$vo.product_id}&status=1">
+                    <a class="blue set_award_grade_btn" href="javascript:void(0)" data-product_name="{$vo.product_name}" data-product_id="{$vo.product_id}">
                         <span>设置奖项</span>
                     </a>
+
+                    <!--<a class="blue set_award_grade_btn" href="/admin/product/change_status?product_id={$vo.product_id}&status=1">-->
+                        <!--<span>设置奖项</span>-->
+                    <!--</a>-->
 
                     <a class="blue" href="/admin/product/edit?product_id={$vo.product_id}">
                         <span>编辑</span>
@@ -76,3 +137,69 @@
         </div>
     </div>
 </div>
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>
+
+<div class="dialogP" style="display:none;" id="set_award_grade_pop">
+    <div class="boxP boxTips">
+        <!--公共标题-->
+        <div class="titP">
+            <h4>设置奖项</h4>
+            <!--公共标题-按钮-->
+            <div class="btnMng">
+                <!--<a href="#" class="btnP">新建</a>-->
+                <a href="javascript:void(0)" class="btnP btnClose"><span>×</span>关闭</a>
+            </div>
+        </div>
+
+        <div class="msgInfoForm">
+            <dl>
+                <dt>作品名称</dt>
+                <dd>
+                    <div class="inputP">
+                        <span class="txt" id="product_name">xxxx作品</span>
+                        <input type="hidden" id="product_id" name="product_id" value="">
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>奖项等级</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="award_grade" value="1" checked />一等奖</label>
+                        <label><input type="radio" name="award_grade" value="2" />二等奖</label>
+                        <label><input type="radio" name="award_grade" value="3" />三等奖</label>
+                        <label><input type="radio" name="award_grade" value="100" />优秀奖</label>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <!--公共按钮-->
+        <div class="btnB">
+            <a href="javascript:void(0)" class="btnP product_award_confirm_btn">确定</a>
+            <a href="javascript:void(0)" class="btnP btnDark">取消</a>
+        </div>
+    </div>
+</div>
+

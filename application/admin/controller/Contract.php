@@ -14,11 +14,17 @@ class Contract extends Base
     public function index()
     {
         $where = [];
-        if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        if(!empty($_REQUEST['customer_name'])){
+            $where['customer_name'] = ['like','%'.trim($_REQUEST['customer_name']).'%'];
         }
-        if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+        if(!empty($_REQUEST['order_amount'])){
+            $where['order_amount'] = intval($_REQUEST['order_amount']);
+        }
+        if(!empty($_REQUEST['start_time'])){
+            $where[' add_time'] = ['EGT',strtotime($_REQUEST['start_time'])];
+        }
+        if(!empty($_REQUEST['end_time'])){
+            $where['add_time'] = ['ELT',strtotime($_REQUEST['end_time'])];
         }
 
         $contract_list = Loader::model('Contract')->where($where)->order('contract_id','desc')->paginate(10);

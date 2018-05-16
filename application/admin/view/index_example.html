@@ -1,0 +1,223 @@
+
+<div class="boxP">
+    <form method="get">
+        <div class="titP">
+            <h4>查询条件</h4>
+        </div>
+        <div class="boxP">
+            <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>作品名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="product_name" value="{$Think.get.product_name}">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>所属活动</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" placeholder="书店名称">
+                        </div>
+                    </dd>
+                </dl>
+                <!--多下拉菜单-->
+                <dl>
+                    <dt>开通时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="redSpan">*</span>性别</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select>
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>书店名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" placeholder="书店名称">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>开通时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="redSpan">*</span>性别</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select>
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>开通时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="redSpan">*</span>性别</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select>
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>书店名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" placeholder="书店名称">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>书店名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" placeholder="书店名称">
+                        </div>
+                    </dd>
+                </dl>
+
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
+            </div>
+            <!--确定按钮-->
+            <dl class="rBtn searchBtns">
+                <dt>　</dt>
+                <dd>
+                    <input type="submit" class="btnP" value="确定">
+                    <a href="javascript:void(0)" class="btnP btnDark">重置</a>
+                </dd>
+            </dl>
+        </div>
+    </form>
+</div>
+
+
+<div class="boxP">
+    <div class="titP">
+        <h4>活动列表</h4>
+    </div>
+
+    <!--公共表格-->
+    <div class="tableBox">
+        <table class="tableP">
+            <tr>
+                <th>作品id</th>
+                <th>作品名称</th>
+                <th>作品类型</th>
+                <th>缩略图</th>
+                <th>所属活动</th>
+                <th>作者姓名</th>
+                <th>作者读者证号</th>
+                <th>操作</th>
+            </tr>
+
+            {foreach name="product_list" item="vo" key="k"}
+            <tr>
+                <td>{$vo.product_id}</td>
+                <td>{$vo.product_name}</td>
+                <td>
+                    {if $vo.type == 1}
+                    图片
+                    {elseif $vo.type == 2}
+                    视频
+                    {elseif $vo.type == 3}
+                    音频
+                    {/if}
+                </td>
+                <td><img src="{$vo.product_img}" width="30"></td>
+                <td>{$vo.activity_name}</td>
+                <td>{$vo.real_name}</td>
+                <td>{$vo.reader_no}</td>
+                <td class="opt">
+
+                    <a class="blue" href="/admin/product/change_status?product_id={$vo.product_id}&status=1">
+                        <span>设置奖项</span>
+                    </a>
+
+                    <a class="blue" href="/admin/product/edit?product_id={$vo.product_id}">
+                        <span>编辑</span>
+                    </a>
+
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="page_content">
+        <div class="pageBar">
+            <div>总共<em>{$product_list->total()}</em>条, 当前<em>{$product_list->currentPage()}</em>/<em>{$product_list->lastPage()}</em>页</div>
+            <div>
+                {$product_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>
+

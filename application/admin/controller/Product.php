@@ -7,12 +7,6 @@ use think\Loader;
 class Product extends Base
 {
 
-    //用户列表（筛选）
-    //详情
-    //禁用
-    //添加
-    //修改
-
     /**
      * 作品列表
      * @return mixed
@@ -20,16 +14,18 @@ class Product extends Base
     public function index()
     {
         $where = [];
-        if(!empty($_REQUEST['title'])){
-            $where['title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        if(!empty($_REQUEST['product_name'])){
+            $where['a.product_name'] = ['like','%'.trim($_REQUEST['product_name']).'%'];
         }
-        if(!empty($_REQUEST['cat_id'])){
-            $where['cat_id'] = intval($_REQUEST['cat_id']);
+        if(!empty($_REQUEST['activity_id'])){
+            $where['a.activity_id'] = intval($_REQUEST['activity_id']);
         }
-
-        //$product_list = Loader::model('Product')->where($where)->order('product_id','desc')->paginate(10);
-        //$this->assign('product_list', $product_list);
-
+        if(!empty($_REQUEST['user_name'])){
+            $where['b.reader_no'] = ['like','%'.trim($_REQUEST['user_name']).'%'];
+        }
+        if(!empty($_REQUEST['type'])){
+            $where['a.type'] = intval($_REQUEST['type']);
+        }
 
         $product_list = Db::table('product')->alias('a')
             ->join('user b','a.user_id=b.user_id')
@@ -39,9 +35,27 @@ class Product extends Base
             ->paginate(10,false,['query' => $_GET]);
         $this->assign('product_list', $product_list);
 
+        $activity_list = Db::table('activity')->select();
+        $this->assign('activity_list', $activity_list);
 
         $this->view->engine->layout('layout');
         return $this->fetch('product/index');
+    }
+
+    //设置作品的等级
+    public function set_award_grade()
+    {
+        $return_data = ['flag'=>false];
+        try {
+            $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id'] : 0;
+            $product_info = Loader::model('Product')->find($product_id);
+            $product_info->award_grade = intval($_REQUEST['award_grade']);
+            $product_info->save();
+            $return_data['flag'] = true;
+            $this->ajax_return($return_data,200);
+        } catch (\Exception $e) {
+            $this->ajax_return($return_data,500);
+        }
     }
 
 }
