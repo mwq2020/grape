@@ -63,6 +63,7 @@ class Banner extends Base
             $data = [];
             $data['title']          = $_REQUEST['title'];
             $data['url']            = $_REQUEST['url'];
+            $data['wechat_url']     = $_REQUEST['wechat_url'];
             $data['banner_img']     = $image_name ? '/static/image/banner/'.$image_name : '';
             $data['status']         = intval($_REQUEST['status']);
             $data['banner_type']    = $_REQUEST['banner_type'];
@@ -78,7 +79,7 @@ class Banner extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('banner/add');
         }
-        return $this->redirect('banner/index');
+        return $this->redirect('/admin/banner/index');
     }
 
 
@@ -114,6 +115,7 @@ class Banner extends Base
 
             $banner_info->title = $_REQUEST['title'];
             $banner_info->url = $_REQUEST['url'];
+            $banner_info->wechat_url = $_REQUEST['wechat_url'];
             if($image_name){
                 $banner_info->banner_img = $image_name ? '/static/image/banner/'.$image_name : '';
             }
@@ -131,7 +133,7 @@ class Banner extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('banner/edit');
         }
-        return $this->redirect('banner/index');
+        return $this->redirect('/admin/banner/index');
     }
 
     /**
@@ -151,12 +153,9 @@ class Banner extends Base
             $banner_info->status = intval($_REQUEST['status']);
             $banner_info->save();
         } catch (\Exception $e){
-            $error_msg = $e->getMessage();
-            $this->assign('error_msg',$error_msg);
-            $this->view->engine->layout('layout');
-            return $this->fetch('banner/add');
+            //$error_msg = $e->getMessage();
         }
-        return $this->redirect('/manage/banner/index');
+        return $this->redirect('/admin/banner/index');
     }
 
 }

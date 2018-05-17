@@ -1,108 +1,113 @@
 
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-        </script>
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
 
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/manage/index/index">起始页</a>
-            </li>
-        </ul>
+
+<div class="boxP">
+    <div class="titP">
+        <h4>banner添加</h4>
     </div>
+    <div class="formP formV">
+        <form action="" method="post" enctype="multipart/form-data">
 
-    <div class="page-content">
-
-        {if $error_msg}
-        <!-- 错误提示 -->
-        <div class="col-sm-10">
-            <h3 class="header smaller lighter green">
-                <i class="icon-bullhorn"></i>
-                错误提示
-            </h3>
-
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">
-                    <i class="icon-remove"></i>
-                </button>
-                {$error_msg}
-            </div>
-        </div>
-        {/if}
-
-
-        <!-- 验证表单部分 -->
-        <div class="row">
-            <div class="col-xs-12">
-                <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">banner标题</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="title" value="" />
-                        </div>
+            <dl>
+                <dt>banner标题</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="title" value="" maxlength="100"/>
                     </div>
+                </dd>
+            </dl>
 
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">banner链接</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="url" />
-                        </div>
+            <dl>
+                <dt>banner链接</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="url" value="" maxlength="200"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">banner图片</label>
-                        <div class="col-sm-9">
-                            <input type="file" name="banner_img" />
-                        </div>
+            <dl>
+                <dt>微信banner链接</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="wechat_url" value="" maxlength="200"/>
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">banner位置</label>
-                        <div class="col-sm-9">
+            <dl>
+                <dt>banner位置</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
                             <select name="banner_type">
                                 <option value="0">请选择</option>
                                 <option value="index_banner">首页banner</option>
                             </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+
+            <!--上传图片-->
+            <dl>
+                <dt>banner图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="banner_img" id="banner_img" value=""/>
+                            <p>上传图片</p>
                         </div>
+                        <span>请上传图片格式的文件</span>
+
+                        <!--
+                        <div class="view">
+                            <ul class="imgList">
+                                <li><span></span><img src="/admin/images/404.jpg" id="video_img_preview"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="/admin/images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                            </ul>
+                            <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                        </div>
+                        -->
+
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">状态</label>
-                        <div class="col-sm-9">
-                            <input type="radio" name="status" value="1" checked />启用
-                            <input type="radio" name="status" value="0" /> 禁用
-                        </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>能否报名</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="status" value="1" checked />启用</label>
+                        <label><input type="radio" name="status" value="0" />禁用</label>
                     </div>
+                </dd>
+            </dl>
 
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">简介：</label>
-                        <div class="col-sm-9">
-                            <textarea name="remark" id="form-field-11" class="autosize-transition form-control" placeholder="请banner简介"></textarea>
-                        </div>
+            <dl>
+                <dt>简介</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="remark" placeholder="请输入简介" maxlength="200"></textarea>
+                        <!--<div class="tip">0/50</div>-->
                     </div>
+                </dd>
+            </dl>
 
-
-                    <div class="clearfix form-actions">
-                        <div class="col-md-offset-3 col-md-9">
-                            <input class="btn btn-info" type="submit" value="提交"/>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
     </div>
-</div><!-- /.main-content -->
-
-
-
-
-
-
-
-
+</div>

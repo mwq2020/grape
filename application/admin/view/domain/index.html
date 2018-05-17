@@ -1,0 +1,156 @@
+
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<div class="boxP">
+    <form method="get">
+        <div class="titP">
+            <h4>查询条件</h4>
+        </div>
+        <div class="boxP">
+            <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="copyright_year" value="{$Think.get.copyright_year}">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>公司名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" name="company_name" value="{$Think.get.company_name}">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>工信部备案号</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" name="industry_record" value="{$Think.get.industry_record}">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>公安备案号</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" class="l" name="police_record" value="{$Think.get.police_record}">
+                        </div>
+                    </dd>
+                </dl>
+
+
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
+            </div>
+            <!--确定按钮-->
+            <dl class="rBtn searchBtns">
+                <dt>　</dt>
+                <dd>
+                    <input type="submit" class="btnP" value="确定">
+                    <a href="javascript:void(0)" class="btnP btnDark">重置</a>
+                </dd>
+            </dl>
+        </div>
+    </form>
+</div>
+
+
+<div class="boxP">
+    <div class="titP">
+        <h4>域名列表</h4>
+        <div class="btnMng">
+            <a href="/admin/domain/add" class="btnP">新建</a>
+        </div>
+    </div>
+
+    <!--公共表格-->
+    <div class="tableBox">
+        <table class="tableP">
+            <tr>
+                <th>域名id</th>
+                <th>时间</th>
+                <th>公司名称</th>
+                <th>工信部备案号</th>
+                <th>公安备案号</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+
+            {foreach name="domain_list" item="vo" key="k"}
+            <tr>
+                <td>{$vo.domain_id}</td>
+                <td>{$vo.copyright_year}</td>
+                <td>{$vo.company_name}</td>
+                <td>{$vo.industry_record}</td>
+                <td>{$vo.police_record}</td>
+                <td>
+                    {if $vo.status == 1}
+                    启用
+                    {else}
+                    禁用
+                    {/if}
+                </td>
+                <td class="opt">
+                    {if $vo.status == 1}
+                    <a class="blue" href="/admin/domain/change_status?domain_id={$vo.domain_id}&status=0">
+                        <span>禁用</span>
+                    </a>
+                    {else}
+                    <a class="blue" href="/admin/domain/change_status?domain_id={$vo.domain_id}&status=1">
+                        <span>启用</span>
+                    </a>
+                    {/if}
+
+                    <a class="blue" href="/admin/domain/edit?domain_id={$vo.domain_id}">
+                        <span>编辑</span>
+                    </a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="page_content">
+        <div class="pageBar">
+            <div>总共<em>{$domain_list->total()}</em>条, 当前<em>{$domain_list->currentPage()}</em>/<em>{$domain_list->lastPage()}</em>页</div>
+            <div>
+                {$domain_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>
+<script>
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#start_time,#end_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d"
+    });
+</script>

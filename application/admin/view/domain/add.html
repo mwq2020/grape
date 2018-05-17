@@ -1,0 +1,86 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+<div class="boxP">
+    <div class="titP">
+        <h4>域名添加</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <dl>
+                <dt>公司名</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="company_name" value="" maxlength="20"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="copyright_year" value="" maxlength="100"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>工信部备案号</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="industry_record" value="" maxlength="50"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>工信部备案链接</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="industry_url" value="" maxlength="500"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>公安网备号</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="police_record" value="" maxlength="50"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>公安网备链接</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="police_url" value="" maxlength="500"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>状态</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="status" value="1" checked />启用</label>
+                        <label><input type="radio" name="status" value="0" />禁用</label>
+                    </div>
+                </dd>
+            </dl>
+
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
+    </div>
+</div>
