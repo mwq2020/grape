@@ -51,6 +51,9 @@ class Contract extends Base
         }
 
         try {
+            if(empty($_REQUEST['contract_no'])){
+                throw new \Exception('合同编号不能为空');
+            }
             if(empty($_REQUEST['title'])){
                 throw new \Exception('合同名称不能为空');
             }
@@ -87,8 +90,14 @@ class Contract extends Base
                 throw new \Exception('合同名称已存在，请更换');
             }
 
+            $account_exist = Loader::model('Contract')->where('contract_no',$_REQUEST['contract_no'])->find();
+            if(!empty($account_exist)){
+                throw new \Exception('合同编号已存在，请更换');
+            }
+
             $data = [];
-            $data['title']    = $_REQUEST['title'];
+            $data['contract_no']    = $_REQUEST['contract_no'];
+            $data['title']          = $_REQUEST['title'];
             $data['contract_start_time']    = strtotime($_REQUEST['contract_start_time']);
             $data['contract_end_time']      = strtotime($_REQUEST['contract_end_time']);
             $data['customer_name']  = $_REQUEST['customer_name'];
@@ -110,7 +119,7 @@ class Contract extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('contract/add');
         }
-        return $this->redirect('/manage/contract/index');
+        return $this->redirect('/admin/contract/index');
     }
 
     /**
@@ -193,7 +202,7 @@ class Contract extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('contract/edit');
         }
-        return $this->redirect('/manage/contract/index');
+        return $this->redirect('/admin/contract/index');
     }
 
 }

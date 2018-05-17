@@ -1,141 +1,132 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
 
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-        </script>
 
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/manage/index/index">起始页</a>
-            </li>
-            <li>
-                <a href="/manage/contract/index">合同列表</a>
-            </li>
-        </ul><!-- .breadcrumb -->
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<div class="boxP">
+    <div class="titP">
+        <h4>添加活动</h4>
     </div>
+    <div class="formP formV">
+        <form action="" method="post" enctype="multipart/form-data">
 
-    <div class="page-content">
+            <dl>
+                <dt>合同编号</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="contract_no" value="" maxlength="20"/>
+                    </div>
+                </dd>
+            </dl>
 
-        {if $error_msg}
-        <!-- 错误提示 -->
-        <div class="col-sm-10">
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">
-                    <i class="icon-remove"></i>
-                </button>
-                <strong><i class="icon-remove"></i>错误</strong> 【{$error_msg}】
-            </div>
-        </div>
-        {/if}
+            <dl>
+                <dt>合同名称</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="title" value="" maxlength="100"/>
+                    </div>
+                </dd>
+            </dl>
 
-        <!-- 验证表单部分 -->
-        <div class="row">
-            <div class="col-xs-12">
-                <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">合同名称</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="title" value="" />
+            <dl>
+                <dt>合同起止时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="contract_start_time" id="contract_start_time" value="" /> <input type="input" name="contract_end_time" id="contract_end_time" value="" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>客户姓名</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="customer_name" value="" maxlength="20"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>合同金额</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="order_amount" value="" maxlength="8"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>合同签订时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="contract_time" id="contract_time" value="" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>联系人</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="link_person" value="" maxlength="30" />
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>联系人电话</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="link_person_phone" value="" maxlength="20"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <!--上传图片-->
+            <dl>
+                <dt>合同附件</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="btnMng">
+                            <input type="file" name="contract_img" id="video_img" value=""/>
+                            <p>上传图片</p>
                         </div>
+                        <span>请上传图片格式的文件</span>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">合同起止时间</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="contract_start_time" value="" /> ~ <input type="text" name="contract_end_time" value="" />
-                        </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>备注</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="remark" placeholder="请输入简介" maxlength="200"></textarea>
+                        <!--<div class="tip">0/50</div>-->
                     </div>
+                </dd>
+            </dl>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">客户姓名</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="customer_name" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">合同金额</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="order_amount" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">合同签订时间</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="contract_time" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">联系人</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="link_person" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">联系电话</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="link_person_phone" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">合同附件</label>
-                        <div class="col-sm-9">
-                            <input type="file" name="contract_img" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">备注</label>
-                        <div class="col-sm-9">
-                            <textarea name="remark"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="clearfix form-actions">
-                        <div class="col-md-offset-3 col-md-9">
-                            <input class="btn btn-info" type="submit" value="提交"/>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
     </div>
-</div><!-- /.main-content -->
+</div>
 
 <script>
-    $(function () {
-        //切换以及分类
-        $('#first_cat').change(function () {
-            $('#second_cat').empty().append('<option value="0">请选择</option>');
-            $.ajax({
-                type: 'POST',
-                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
-                url: '/manage/video/get_child_category' ,
-                data: 'cat_id='+ $(this).val(),
-                dataType:'json',
-                cache:false, //同理
-                success: function(data){
-                    if(data.code == 200){
-                        $('#second_cat').append('<option value="0">请选择</option>');
-                        $.each(data.data, function (i,n) {
-                            $('#second_cat').append('<option value="'+ n.cat_id +'">'+ n.cat_name +'</option>')
-                        })
-                    } else {
-                        alert('获取子分类失败');
-                    }
-                } ,
-                error:function(){
-                    alert('获取子分类失败');
-                },
-            });
-        })
-    })
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#contract_start_time,#contract_end_time,#contract_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d"
+    });
 </script>
