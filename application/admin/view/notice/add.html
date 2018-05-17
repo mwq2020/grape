@@ -1,0 +1,96 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<div class="boxP">
+    <div class="titP">
+        <h4>合同添加</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <dl>
+                <dt>标题</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="title" value="" maxlength="20"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>内容</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="content" placeholder="请输入简介" maxlength="200"></textarea>
+                        <!--<div class="tip">0/50</div>-->
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>发送对象</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="send_type">
+                                <option value="0">请选择</option>
+                                <option value="1">所有人</option>
+                                <option value="2">指定用户</option>
+                            </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl id="reader_no_list_div" style="display: none;">
+                <dt>内容</dt>
+                <dd>
+                    <div class="inputP textareaP">
+                        <textarea name="reader_no_list" placeholder="指定对象读者证号，用逗号隔开" maxlength="2000"></textarea>
+                        <span>指定对象读者证号，用逗号隔开</span>
+                        <!--<div class="tip">0/50</div>-->
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>指定发布时间</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="input" name="send_time" id="send_time" value="" />
+                    </div>
+                </dd>
+            </dl>
+
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+
+<script>
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#send_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d"
+    });
+    $('select[name="send_type"]').change(function(){
+        if($('select[name="send_type"]').val() == 2){
+            $('#reader_no_list_div').show();
+        } else {
+            $('#reader_no_list_div').hide();
+        }
+    })
+</script>

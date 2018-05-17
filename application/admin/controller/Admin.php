@@ -15,23 +15,25 @@ class Admin extends Base
     {
         $where = [];
         if(!empty($_REQUEST['account'])){
-            $where['account'] = ['like','%'.trim($_REQUEST['account']).'%'];
+            $where['a.account'] = ['like','%'.trim($_REQUEST['account']).'%'];
         }
         if(!empty($_REQUEST['user_name'])){
-            $where['user_name'] = ['like','%'.trim($_REQUEST['user_name']).'%'];
+            $where['a.user_name'] = ['like','%'.trim($_REQUEST['user_name']).'%'];
         }
         if(!empty($_REQUEST['role_id'])){
-            $where['role_id'] = intval($_REQUEST['role_id']);
+            $where['a.role_id'] = intval($_REQUEST['role_id']);
         }
 
         $role_list = Loader::model('Role')->where('status',1)->select();
         $this->assign('role_list',$role_list);
 
-        $admin_list = Loader::model('Admin')->where($where)->order('admin_id','desc')->paginate(10);
+        //$admin_list = Loader::model('Admin')->where($where)->order('admin_id','desc')->paginate(10,false,['query' => $_GET]);
+        $admin_list = Db::table('admin')->alias('a')
+                    ->join('role b','a.role_id=b.role_id')
+                    ->where($where)->order('a.admin_id','desc')
+                    ->field('a.*,b.role_name')
+                    ->paginate(10,false,['query' => $_GET]);
         $this->assign('admin_list', $admin_list);
-
-        $page = $admin_list->render();
-        $this->assign('page', $page);
 
         $this->view->engine->layout('layout');
         return $this->fetch('admin/index');
@@ -50,7 +52,7 @@ class Admin extends Base
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('admin/admin_add');
+            return $this->fetch('admin/add');
         }
 
         try {
@@ -101,9 +103,9 @@ class Admin extends Base
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('admin/admin_add');
+            return $this->fetch('admin/add');
         }
-        return $this->redirect('/manage/admin/index');
+        return $this->redirect('/admin/admin/index');
     }
 
     /**
@@ -122,7 +124,7 @@ class Admin extends Base
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('admin/admin_edit');
+            return $this->fetch('admin/edit');
         }
 
         try {
@@ -181,7 +183,8 @@ class Admin extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('admin/admin_edit');
         }
-        return $this->redirect('/manage/admin/index');
+
+        return $this->redirect('/admin/admin/index');
     }
 
 
@@ -200,10 +203,8 @@ class Admin extends Base
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
-            $this->view->engine->layout('layout');
-            return $this->fetch('admin/admin_add');
         }
-        return $this->redirect('/manage/admin/index');
+        return $this->redirect('/admin/admin/index',302);
     }
 
     /**
@@ -250,13 +251,12 @@ class Admin extends Base
                 if(empty($flag)){
                     throw new \Exception('密码修改失败');
                 }
-                return $this->redirect('/manage/index/index');
-            } catch (\Exception $e){
+                $this->redirect('/admin/index/right',302);
+            } catch (\Exception $e) {
                 $this->assign('error_msg', $e->getMessage());
                 $this->view->engine->layout('layout');
                 return $this->fetch('admin/modify_password');
             }
-
         }
 
         $this->assign('error_msg', '');

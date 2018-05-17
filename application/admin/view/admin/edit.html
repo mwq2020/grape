@@ -1,0 +1,94 @@
+
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+
+<div class="boxP">
+    <div class="titP">
+        <h4>管理员添加</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post" enctype="multipart/form-data">
+
+            <dl>
+                <dt>账号登录</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="account" value="{$admin_info.account}" maxlength="50"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>用户名</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="user_name" value="{$admin_info.user_name}" maxlength="10"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>邮箱</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="email" value="{$admin_info.email}" maxlength="50"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>手机号</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="mobile" value="{$admin_info.mobile}" maxlength="11"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>密码</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="password" name="password" value="" maxlength="16"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>确认密码</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="password" name="password_repeat" value="" maxlength="16"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>管理员角色</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="role_id">
+                                <option value="0">请选择</option>
+                                {volist name="role_list" id="vo"}
+                                <option value="{$vo.role_id}" {if $admin_info.role_id == $vo.role_id}selected{/if} >{$vo.role_name}</option>
+                                {/volist}
+                            </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
+    </div>
+</div>

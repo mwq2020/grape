@@ -28,7 +28,7 @@ class Activity extends Base
                     ->join('customer b','a.customer_id=b.customer_id')
                     ->where($where)->order('a.activity_id','desc')
                     ->field('a.*,b.customer_name')
-                    ->paginate(10,false,['query' => $_GET]);
+                    ->paginate(10 ,false,['query' => $_GET]);
         $this->assign('activity_list', $activity_list);
 
         $page = $activity_list->render();

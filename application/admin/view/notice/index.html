@@ -6,37 +6,39 @@
         </div>
         <div class="boxP">
             <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>标题</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="title" value="{$Think.get.title}">
+                        </div>
+                    </dd>
+                </dl>
 
                 <dl>
-                    <dt>管理员角色</dt>
+                    <dt>状态</dt>
                     <dd>
                         <ul class="selectP">
                             <li>
-                                <select name="role_id">
+                                <select name="status">
                                     <option value="">请选择</option>
-                                    {volist name="role_list" id="vo"}
-                                    <option value="{$vo.role_id}" {if $Think.get.role_id == $vo.role_id}selected{/if} >{$vo.role_name}</option>
-                                    {/volist}
+                                    <option value="1" {if $Think.get.status == 1}selected{/if}>已发送</option>
+                                    <option value="0" {if $Think.get.status == 0}selected{/if}>未发送</option>
                                 </select>
                             </li>
                         </ul>
                     </dd>
                 </dl>
 
+                <!--多下拉菜单-->
                 <dl>
-                    <dt>登录名</dt>
+                    <dt>发布时间</dt>
                     <dd>
                         <div class="inputP">
-                            <input type="text" class="l" name="account" value="{$Think.get.account}">
-                        </div>
-                    </dd>
-                </dl>
-
-                <dl>
-                    <dt>真实姓名</dt>
-                    <dd>
-                        <div class="inputP">
-                            <input type="text" class="l" name="user_name" value="{$Think.get.user_name}">
+                            <input type="text" placeholder="起始时间" name="start_time" id="start_time" value="{$Think.get.start_time}">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间" name="end_time" id="end_time" value="{$Think.get.end_time}">
                         </div>
                     </dd>
                 </dl>
@@ -58,9 +60,9 @@
 
 <div class="boxP">
     <div class="titP">
-        <h4>管理员列表</h4>
+        <h4>公告列表</h4>
         <div class="btnMng">
-            <a href="/admin/admin/add" class="btnP">新建</a>
+            <a href="/admin/notice/add" class="btnP">新建</a>
         </div>
     </div>
 
@@ -68,41 +70,34 @@
     <div class="tableBox">
         <table class="tableP">
             <tr>
-                <th>管理员id</th>
-                <th>账号</th>
-                <th>角色</th>
-                <th>用户名</th>
-                <th>邮箱</th>
-                <th>手机号</th>
-                <th>最近登录</th>
-                <th>状态</th>
+                <th>公告id</th>
+                <th>标题</th>
+                <th>内容</th>
+                <th>创建人</th>
+                <th>发布时间</th>
+                <th>发送状态</th>
+                <th>用户列表</th>
                 <th>操作</th>
             </tr>
 
-            {foreach name="admin_list" item="vo" key="k"}
+            {foreach name="notice_list" item="vo" key="k"}
             <tr>
-                <td>{$vo.admin_id}</td>
-                <td>{$vo.account}</td>
-                <td>{$vo.role_name}</td>
-                <td>{$vo.user_name}</td>
-                <td>{$vo.email}</td>
-                <td>{$vo.mobile}</td>
-                <td>{if $vo['last_login_time'] > 0} {:date('Y-m-d H:i:s',$vo['last_login_time'])} {else} 没登录过 {/if}</td>
-                <td>{$vo.status == 1 ? '启用' : '禁用'}</td>
+                <td>{$vo.notice_id}</td>
+                <td>{$vo.title}</td>
+                <td>{$vo.content}</td>
+                <td>{$vo.create_name}</td>
+                <td>{$vo.send_time|date="Y-m-d H:i:s",###}</td>
+                <td>{if $vo.status ==1}已发送{else}未发送{/if}</td>
+                <td>用户列表</td>
                 <td class="opt">
-                        {if  $vo.status==1}
-                        <a class="blue" href="/admin/admin/change_status?admin_id={$vo.admin_id}&status=0">
-                            <span>禁用</span>
-                        </a>
-                        {else}
-                        <a class="blue" href="/admin/admin/change_status?admin_id={$vo.admin_id}&status=1">
-                            <span>启用</span>
-                        </a>
-                        {/if}
 
-                        <a class="blue" href="/admin/admin/edit?admin_id={$vo.admin_id}">
-                            <span>编辑</span>
-                        </a>
+                    <a class="blue" href="/admin/notice/send?notice_id={$vo.notice_id}">
+                        <span>发送</span>
+                    </a>
+
+                    <a class="blue" href="/admin/notice/edit?notice_id={$vo.notice_id}">
+                        <span>编辑</span>
+                    </a>
                 </td>
             </tr>
             {/foreach}
@@ -111,9 +106,9 @@
 
     <div class="page_content">
         <div class="pageBar">
-            <div>总共<em>{$admin_list->total()}</em>条, 当前<em>{$admin_list->currentPage()}</em>/<em>{$admin_list->lastPage()}</em>页</div>
+            <div>总共<em>{$notice_list->total()}</em>条, 当前<em>{$notice_list->currentPage()}</em>/<em>{$notice_list->lastPage()}</em>页</div>
             <div>
-                {$admin_list->render()}
+                {$notice_list->render()}
             </div>
         </div>
     </div>
@@ -141,7 +136,6 @@
         searchExpand();
     })
 </script>
-
 
 <link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>

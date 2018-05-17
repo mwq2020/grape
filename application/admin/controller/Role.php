@@ -13,9 +13,6 @@ class Role extends Base
         $role_list = Loader::model('Role')->order('role_id','desc')->paginate(10);
         $this->assign('role_list',$role_list);
 
-        $page = $role_list->render();
-        $this->assign('page', $page);
-
         $this->view->engine->layout('layout');
         return $this->fetch('role/index');
     }
@@ -63,9 +60,9 @@ class Role extends Base
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('role/admin_add');
+            return $this->fetch('role/add');
         }
-        return $this->redirect('/manage/role/index');
+        return $this->redirect('/admin/role/index');
     }
 
     /**
@@ -115,7 +112,7 @@ class Role extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('role/edit');
         }
-        return $this->redirect('/manage/role/index');
+        return $this->redirect('/admin/role/index');
     }
 
 
@@ -137,7 +134,7 @@ class Role extends Base
             $this->view->engine->layout('layout');
             return $this->fetch('admin/add');
         }
-        return $this->redirect('/manage/role/index');
+        return $this->redirect('/admin/role/index');
     }
 
 

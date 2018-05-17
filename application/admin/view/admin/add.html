@@ -1,3 +1,4 @@
+
 {if $error_msg}
 <div class="msgP msgErr">
     <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
@@ -5,74 +6,81 @@
 </div>
 {/if}
 
+
 <div class="boxP">
     <div class="titP">
-        <h4>域名编辑</h4>
+        <h4>管理员添加</h4>
     </div>
     <div class="formP formV">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
 
             <dl>
-                <dt>公司名</dt>
+                <dt>账号登录</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="company_name" value="{$domain_info.company_name}" maxlength="20"/>
+                        <input type="text" name="account" value="" maxlength="50"/>
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>时间</dt>
+                <dt>用户名</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="copyright_year" value="{$domain_info.copyright_year}" maxlength="100"/>
+                        <input type="text" name="user_name" value="" maxlength="10"/>
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>工信部备案号</dt>
+                <dt>邮箱</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="industry_record" value="{$domain_info.industry_record}" maxlength="50"/>
+                        <input type="text" name="email" value="" maxlength="50"/>
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>工信部备案链接</dt>
+                <dt>手机号</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="industry_url" value="{$domain_info.industry_url}" maxlength="500"/>
+                        <input type="text" name="mobile" value="" maxlength="11"/>
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>公安网备号</dt>
+                <dt>密码</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="police_record" value="{$domain_info.police_record}" maxlength="50"/>
+                        <input type="password" name="password" value="" maxlength="16"/>
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>公安网备链接</dt>
+                <dt>确认密码</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="police_url" value="{$domain_info.police_url}" maxlength="500"/>
+                        <input type="password" name="password_repeat" value="" maxlength="16"/>
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>状态</dt>
+                <dt>管理员角色</dt>
                 <dd>
-                    <div class="inputP">
-                        <label><input type="radio" name="status" value="1" {if $domain_info.status ==1}checked {/if} />启用</label>
-                        <label><input type="radio" name="status" value="0" {if $domain_info.status ==0}checked {/if} />禁用</label>
-                    </div>
+                    <ul class="selectP">
+                        <li>
+                            <select name="role_id">
+                                <option value="0">请选择</option>
+                                {volist name="role_list" id="vo"}
+                                <option value="{$vo.role_id}" >{$vo.role_name}</option>
+                                {/volist}
+                            </select>
+                        </li>
+                    </ul>
                 </dd>
             </dl>
 

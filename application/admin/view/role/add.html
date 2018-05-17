@@ -1,124 +1,64 @@
 
-<div class="main-content">
-    <div class="breadcrumbs" id="breadcrumbs">
-        <script type="text/javascript">
-            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-        </script>
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
 
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-home home-icon"></i>
-                <a href="/manage/index/index">起始页</a>
-            </li>
-
-            <li>
-                <a href="/manage/role/index">角色列表</a>
-            </li>
-        </ul><!-- .breadcrumb -->
+<div class="boxP">
+    <div class="titP">
+        <h4>添加角色</h4>
     </div>
+    <div class="formP formV">
+        <form action="" method="post">
+        <!--单文本输入-->
+        <dl>
+            <dt>角色名称</dt>
+            <dd>
+                <div class="inputP">
+                    <input type="text" class="xxl" name="role_name" value=""  maxlength="20"/>
+                </div>
+            </dd>
+        </dl>
 
-    <div class="page-content">
+        <!--复选-->
+        <dl>
+            <dt>选择分类</dt>
 
-        {if $error_msg}
-        <!-- 错误提示 -->
-        <div class="col-sm-10">
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">
-                    <i class="icon-remove"></i>
-                </button>
+            {foreach name="privilege_lsit" item="vo" key="privilege_key"}
+            <dd>
+                <div class="inputP">
+                    <label><input type="checkbox"><strong>{$vo.name}</strong></label>
+                </div>
+            </dd>
+            <dd style="margin-bottom:20px">
+                <div class="inputP">
+                    {foreach name="vo.child" item="role_list" key="role_key"}
+                    {foreach name="role_list" item="item_row" key="item_key"}
+                        <label><input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1" >{$item_row}</label>
+                    {/foreach}
+                    {/foreach}
+                </div>
+            </dd>
+            {/foreach}
+        </dl>
 
-                <strong>
-                    <i class="icon-remove"></i>
-                    错误
-                </strong>
-                【{$error_msg}】
-            </div>
-        </div>
-        {/if}
+        <dl>
+            <dt>备注</dt>
+            <dd>
+                <div class="inputP textareaP" id="special_attention">
+                    <textarea name="remark"  placeholder="请输入备注" maxlength="1000"></textarea>
+                    <!--<div class="tip">0/50</div>-->
+                </div>
+            </dd>
+        </dl>
 
-        <!-- 验证表单部分 -->
-        <div class="row">
-            <div class="col-xs-12">
-                <form class="form-horizontal" role="form" action="" method="post">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">角色名称</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="role_name" value="" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 管理员权限 </label>
-                        <div class="col-sm-30">
-                            <input type="checkbox" name="select_all">全选
-                            <br>
-                            <table>
-                                {foreach name="privilege_lsit" item="vo" key="privilege_key"}
-                                    <tr>
-                                        <td>{$vo.name}</td>
-                                        <td>
-                                            <div style="border:1px solid #cccccc;margin:5px 10px;">
-                                                {foreach name="vo.child" item="role_list" key="role_key"}
-                                                    <div>
-                                                    {foreach name="role_list" item="item_row" key="item_key"}
-                                                        <input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1">{$item_row}
-                                                    {/foreach}
-                                                    </div>
-                                                {/foreach}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {/foreach}
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">备注</label>
-                        <div class="col-sm-9">
-                            <textarea name="remark"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="clearfix form-actions">
-                        <div class="col-md-offset-3 col-md-9">
-                            <input class="btn btn-info" type="submit" value="提交"/>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
+        <!--确定按钮-->
+        <dl>
+            <dt></dt>
+            <dd> <input type="submit" value="确定" class="btnP" > </dd>
+        </dl>
+        </form>
     </div>
-</div><!-- /.main-content -->
-
-<script>
-    $(function () {
-        //切换以及分类
-        $('#first_cat').change(function () {
-            $('#second_cat').empty().append('<option value="0">请选择</option>');
-            $.ajax({
-                type: 'POST',
-                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
-                url: '/manage/video/get_child_category' ,
-                data: 'cat_id='+ $(this).val(),
-                dataType:'json',
-                cache:false, //同理
-                success: function(data){
-                    if(data.code == 200){
-                        $('#second_cat').append('<option value="0">请选择</option>');
-                        $.each(data.data, function (i,n) {
-                            $('#second_cat').append('<option value="'+ n.cat_id +'">'+ n.cat_name +'</option>')
-                        })
-                    } else {
-                        alert('获取子分类失败');
-                    }
-                } ,
-                error:function(){
-                    alert('获取子分类失败');
-                },
-            });
-        })
-    })
-</script>
+</div>
