@@ -28,6 +28,23 @@ class Customer extends Base
         if(!empty($_REQUEST['type'])){
             $where['type'] = $_REQUEST['type'];
         }
+
+        //注册时间
+        if(!empty($_REQUEST['start_time'])){
+            $where['a.add_time'] = ['>',strtotime($_REQUEST['start_time'])];
+        }
+        if(!empty($_REQUEST['end_time'])){
+            $where[' a.add_time'] = ['<',strtotime($_REQUEST['end_time'])];
+        }
+
+        //失效时间
+        if(!empty($_REQUEST['invalid_start_time'])){
+            $where['a.end_time'] = ['>',strtotime($_REQUEST['invalid_start_time'])];
+        }
+        if(!empty($_REQUEST['invalid_end_time'])){
+            $where[' a.end_time'] = ['<',strtotime($_REQUEST['invalid_end_time'])];
+        }
+
         $customer_list = Loader::model('Customer')->where($where)->order('customer_id','desc')->paginate(10,false,['query' => $_GET]);
         $this->assign('customer_list', $customer_list);
 
