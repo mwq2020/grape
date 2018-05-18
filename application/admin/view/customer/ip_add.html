@@ -1,0 +1,61 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+<div class="boxP">
+    <div class="titP">
+        <h4>添加ip</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post">
+            <dl>
+                <dt>起始ip</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="start_ip" value="" maxlength="50"/>
+                    </div>
+                    <span>请输入起始ip</span>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>结束ip</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="end_ip" value="" maxlength="50"/>
+                    </div>
+                    <span>请输入结束ip</span>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>流媒体地址</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="media_url" value="" maxlength="50"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>免登陆</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="is_free_login" value="1" checked />是</label>
+                        <label><input type="radio" name="is_free_login" value="0" />否</label>
+                    </div>
+                </dd>
+            </dl>
+
+            <input type="hidden" name="customer_id"  value="{$Think.get.customer_id}"/>
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd> <input type="submit" value="确定" class="btnP" > </dd>
+            </dl>
+        </form>
+    </div>
+</div>

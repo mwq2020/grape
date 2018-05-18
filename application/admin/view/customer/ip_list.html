@@ -1,0 +1,66 @@
+
+<div class="boxP">
+    <div class="titP">
+        <h4>客户ip列表</h4>
+        <div class="btnMng">
+            <a href="/admin/customer/ip_add?customer_id={$Think.get.customer_id}" class="btnP">新建</a>
+        </div>
+    </div>
+
+    <!--公共表格-->
+    <div class="tableBox">
+        <table class="tableP">
+            <tr>
+                <th>ip编号</th>
+                <th>起始ip</th>
+                <th>终止ip</th>
+                <th>流媒体地址</th>
+                <th>是否免登陆</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+
+            {foreach name="ip_list" item="vo" key="k"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.start_ip|long2ip}</td>
+                <td>{$vo.end_ip|long2ip}</td>
+                <td>{$vo.media_url}</td>
+                <td>{if $vo.is_free_login ==1}是{else}否{/if}</td>
+                <td>{if $vo.status== 1}启用{else}禁用{/if}</td>
+                <td class="opt">
+                    {if $vo.status ==1}
+                        <a href="/admin/customer/ip_change_status?id={$vo.id}&status=0">
+                            <span>禁用</span>
+                        </a>
+                    {else}
+                        <a href="/admin/customer/ip_change_status?id={$vo.id}&status=1">
+                            <span>启用</span>
+                        </a>
+                    {/if}
+
+                    <a href="/admin/customer/ip_edit?id={$vo.id}">
+                        <span>编辑</span>
+                    </a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="page_content">
+        <!--
+        <div class="opt">
+            <label><input type="checkbox">全选</label>
+            <a href="#">删除</a>
+            <a href="#">催还</a>
+        </div>
+        -->
+        <div class="pageBar">
+            <div>总共<em>{$ip_list->total()}</em>条, 当前<em>{$ip_list->currentPage()}</em>/<em>{$ip_list->lastPage()}</em>页</div>
+            <div>
+                {$ip_list->render()}
+            </div>
+        </div>
+    </div>
+</div>

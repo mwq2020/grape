@@ -53,7 +53,7 @@ class Customer extends Base
     }
 
     /**
-     * 管理员添加
+     * 客户添加
      * @return mixed
      */
     public function add()
@@ -151,7 +151,7 @@ class Customer extends Base
     }
 
     /**
-     * 管理员修改
+     * 客户修改
      * @return mixed
      */
     public function edit()
@@ -258,5 +258,140 @@ class Customer extends Base
         return $this->redirect('/manage/admin/index');
     }
 
+
+    /**
+     * 客户列表
+     * @return mixed
+     */
+    public function ip_list()
+    {
+        $where = [];
+        $where['customer_id'] = $_REQUEST['customer_id'];
+
+        $ip_list = Db::table('customer_ip_list')->where($where)->order('id','desc')->paginate(10,false,['query' => $_GET]);
+        $this->assign('ip_list', $ip_list);
+
+        $this->view->engine->layout('layout');
+        return $this->fetch('customer/ip_list');
+    }
+
+    /**
+     * 客户添加
+     * @return mixed
+     */
+    public function ip_add()
+    {
+        $error_msg = '';
+        if(empty($_POST)){
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('customer/ip_add');
+        }
+
+        try {
+            if(empty($_REQUEST['customer_id'])){
+                throw new \Exception('customer_id不能为空');
+            }
+            if(empty($_REQUEST['start_ip'])){
+                throw new \Exception('起始ip不能为空');
+            }
+            if(empty($_REQUEST['end_ip'])){
+                throw new \Exception('结束ip不能为空');
+            }
+            if(empty($_REQUEST['media_url'])){
+                throw new \Exception('流媒体地址不能为空');
+            }
+
+            $data = [];
+            $data['customer_id']= $_REQUEST['customer_id'];
+            $data['start_ip']   = ip2long($_REQUEST['start_ip']);
+            $data['end_ip']     = ip2long($_REQUEST['end_ip']);
+            $data['media_url']  = $_REQUEST['media_url'];
+            $data['is_free_login'] = intval($_REQUEST['is_free_login']);
+            $data['status']    = 1;
+            $data['add_time']       = time();
+            $data['update_time']       = time();
+            $flag = Db::table('customer_ip_list')->insert($data);
+            if(empty($flag)){
+                throw new \Exception('ip限制添加失败');
+            }
+
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('customer/ip_add');
+        }
+        return $this->redirect('/admin/customer/ip_list?customer_id='.$_REQUEST['customer_id']);
+    }
+
+    /**
+     * 客户修改
+     * @return mixed
+     */
+    public function ip_edit()
+    {
+        $error_msg = '';
+        $ip_info = Db::table('customer_ip_list')->find($_REQUEST['id']);
+        $this->assign('ip_info',$ip_info);
+
+        if(empty($_POST)){
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('customer/ip_edit');
+        }
+
+        try {
+            if(empty($_REQUEST['customer_id'])){
+                throw new \Exception('customer_id不能为空');
+            }
+            if(empty($_REQUEST['start_ip'])){
+                throw new \Exception('起始ip不能为空');
+            }
+            if(empty($_REQUEST['end_ip'])){
+                throw new \Exception('结束ip不能为空');
+            }
+            if(empty($_REQUEST['media_url'])){
+                throw new \Exception('流媒体地址不能为空');
+            }
+
+            $data = [];
+            $data['start_ip']      = ip2long($_REQUEST['start_ip']);
+            $data['end_ip']        = ip2long($_REQUEST['end_ip']);
+            $data['media_url']     = $_REQUEST['media_url'];
+            $data['is_free_login'] = intval($_REQUEST['is_free_login']);
+            $data['update_time']   = time();
+            $flag = Db::table('customer_ip_list')->where(['id'=>$_REQUEST['id']])->update($data);
+            if(empty($flag)){
+                throw new \Exception('ip限制修改失败');
+            }
+
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('customer/ip_edit');
+        }
+        return $this->redirect('/admin/customer/ip_list?customer_id='.$_REQUEST['customer_id']);
+    }
+
+
+    public function ip_change_status()
+    {
+        try {
+            if(!isset($_REQUEST['status']) || empty($_REQUEST['id'])){
+                throw new \Exception('入参错误');
+            }
+            $ip_info = Db::table('customer_ip_list')->where('id',$_REQUEST['id'])->find();
+            if(empty($ip_info)){
+                throw new \Exception('ip限制不存在');
+            }
+            Db::table('customer_ip_list')->where(['id'=>$_REQUEST['id']])->update(['status' => intval($_REQUEST['status'])]);
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+        }
+        return $this->redirect('/admin/customer/ip_list?customer_id='.$ip_info['customer_id']);
+    }
 
 }
