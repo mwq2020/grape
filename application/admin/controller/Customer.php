@@ -103,8 +103,7 @@ class Customer extends Base
                 throw new \Exception('账户名已存在，请更换');
             }
 
-
-            $is_admin_exist = Loader::model('Admin')->where('account',$_REQUEST['account_no'])->find();
+            $is_admin_exist = Loader::model('User')->where('reader_no',$_REQUEST['account_no'])->find();
             if(!empty($is_admin_exist)){
                 throw new \Exception('客户的账号已经存在，请修改账户名');
             }
@@ -130,13 +129,15 @@ class Customer extends Base
                 throw new \Exception('客户添加失败');
             }
 
-            $admin_data = [];
-            $admin_data['account']      = $_REQUEST['account_no'];
-            $admin_data['password']     =  md5($_REQUEST['password']);
-            $admin_data['user_name']    = $_REQUEST['customer_name'];
-            $admin_data['status']       = 1;
-            $admin_data['add_time']     = time();
-            $flag = Loader::model('Admin')->insert($admin_data);
+            $customer_id = Loader::model('Customer')->getLastInsID();
+            $user_data = [];
+            $user_data['customer_id']  = $customer_id;
+            $user_data['reader_no']    = $_REQUEST['account_no'];
+            $user_data['password']     =  md5($_REQUEST['password']);
+            $user_data['real_name']    = $_REQUEST['customer_name'];
+            $user_data['status']       = 1;
+            $user_data['register_time']     = time();
+            $flag = Loader::model('User')->insert($user_data);
             if(empty($flag)){
                 throw new \Exception('客户后台账号添加失败');
             }
@@ -214,10 +215,8 @@ class Customer extends Base
             $customer_info->region_name     = $_REQUEST['region_name'];
             $customer_info->customer_link_person    = $_REQUEST['customer_link_person'];
             $customer_info->link_person_mobile      = $_REQUEST['link_person_mobile'];
-
             $customer_info->type           = intval($_REQUEST['type']);
             $customer_info->login_type     = intval($_REQUEST['login_type']);
-
             $customer_info->sale_person = $_REQUEST['sale_person'];
             $customer_info->account_no  = $_REQUEST['account_no'];
             $customer_info->password    = md5($_REQUEST['password']);

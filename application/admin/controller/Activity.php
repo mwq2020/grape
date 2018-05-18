@@ -153,6 +153,7 @@ class Activity extends Base
 
         $activity_id = isset($_REQUEST['activity_id']) ? $_REQUEST['activity_id'] : 0;
         $activity_info = Loader::model('Activity')->find($_REQUEST['activity_id']);
+        $activity_info->activity_gallery = empty($activity_info->activity_gallery) ? [] : json_decode($activity_info->activity_gallery,true);
         $this->assign('activity_info', $activity_info);
         $customer_list = Loader::model('Customer')->getCustomerSelectList();
         $this->assign('customer_list', $customer_list);

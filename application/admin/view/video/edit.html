@@ -83,17 +83,15 @@
                             <input type="file" name="video_img" id="video_img" />
                             <p>上传图片</p>
                         </div>
-                        <span>请上传图片格式的文件</span>
-                        <!--
+                        <span>请上传图片格式的文件,格式jpg、png、gif</span>
+                        {if $video_info.video_img}
                         <div class="view">
                             <ul class="imgList">
-                                <li><span></span><img src="/admin/images/404.jpg" id="video_img_preview"><a class="del" href="javascript:;">×</a></li>
-                                <li><span></span><img src="/admin/images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
-                                <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="{$video_info.video_img}" id="video_img_preview"></li>
                             </ul>
-                            <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                            <!--<span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>-->
                         </div>
-                        -->
+                        {/if}
                     </div>
 
                 </dd>
@@ -106,18 +104,16 @@
                     <input type="file" name="video" id="video" style="display:none;"/>
                     <a href="javascript:void(0)" id="video_upload_btn" class="btnP btnWhite" style="height:30px; line-height:30px">添加视频</a><span>视频限制 400M 以内 MP4 格式</span>
                 </dd>
-                <!--
+                {if $video_info.video_url}
                 <dd>
                     <ul class="videoList">
-                        <li><img src="/admin/images/bg.jpg">
-                            <video src="/admin/images/1234.mp4" controls id="video_preview"></video>
-                            <p></p>
-                            <a class="del" href="javascript:;">×</a>
+                        <li>
+                            <img src="{$video_info.video_img}">
+                            <video src="{$video_info.video_url}" controls id="video_preview"></video>
                         </li>
-                        <li><img src="/admin/images/bg.jpg"><video src="/admin/images/1234.mp4" controls></video><p>视频标题文字名称视频标题文字名称</p><a class="del" href="javascript:;">×</a></li>
                     </ul>
                 </dd>
-                -->
+                {/if}
             </dl>
 
             <dl>

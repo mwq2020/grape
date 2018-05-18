@@ -94,26 +94,16 @@
                         <div class="btnMng">
                             <input type="file" name="activity_img" value=""/>
                             <p>上传图片</p>
-
-                            <!--
-                            <input type="file" name="activity_img" />
-                            <input type="file" name="activity_gallery_1" />
-                            <input type="file" name="activity_gallery_2" />
-                            <input type="file" name="activity_gallery_3" />
-                            -->
-
                         </div>
                         <span>请上传图片格式的文件</span>
-                        <!--
+                        {if $activity_info.activity_img}
                         <div class="view">
                             <ul class="imgList">
-                                <li><span></span><img src="/admin/images/404.jpg" id="video_img_preview"><a class="del" href="javascript:;">×</a></li>
-                                <li><span></span><img src="/admin/images/bg.jpg"><a class="del" href="javascript:;">×</a></li>
-                                <li><span></span><img src="http://img.redocn.com/sheji/20170123/chuangyichunzishejimobanyishuzishejisucai_7814679_small.jpg"><a class="del" href="javascript:;">×</a></li>
+                                <li><span></span><img src="{$activity_info.activity_img}"></li>
                             </ul>
-                            <span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>
+                            <!--<span>图片上传要求说明文字图片上传要求说明文字 jpg、png、gif</span>-->
                         </div>
-                        -->
+                        {/if}
                     </div>
 
                 </dd>
@@ -128,6 +118,17 @@
                             <p>上传图片</p>
                         </div>
                         <span>请上传图片格式的文件</span>
+
+                        {if $activity_info.activity_gallery}
+                        <div class="view">
+                            <ul class="imgList">
+                                {volist name="$activity_info.activity_gallery" id="vo"}
+                                <li><span></span><img src="{$vo}"></li>
+                                {/volist}
+                            </ul>
+                        </div>
+                        {/if}
+
                     </div>
                 </dd>
             </dl>
