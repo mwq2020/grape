@@ -1,69 +1,109 @@
+
 <div class="boxP">
     <form method="get">
-    <div class="formP">
-        <dl>
-            <dt>客户名称</dt>
-            <dd>
-                <div class="inputP">
-                    <input type="text" placeholder="请输入客户名称" name="customer_name" value="{$Think.get.customer_name}">
-                </div>
-            </dd>
-        </dl>
+        <div class="titP">
+            <h4>查询条件</h4>
+        </div>
+        <div class="boxP">
+            <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>客户名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="customer_name" value="{$Think.get.customer_name}">
+                        </div>
+                    </dd>
+                </dl>
 
-        <dl>
-            <dt>账号</dt>
-            <dd>
-                <div class="inputP">
-                    <input type="text" placeholder="请输入账号" name="account_no" value="{$Think.get.account_no}" >
-                </div>
-            </dd>
-        </dl>
+                <dl>
+                    <dt>账号</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="account_no" value="{$Think.get.account_no}">
+                        </div>
+                    </dd>
+                </dl>
 
-        <dl>
-            <dt>区域</dt>
-            <dd>
-                <ul class="selectP">
-                    <li>
-                        <select name="region_name">
-                            <option value="">请选择</option>
-                            <option value="北京" {if $Think.get.region_name == '北京'}selected{/if}>北京</option>
-                            <option value="上海" {if $Think.get.region_name == '上海'}selected{/if}>上海</option>
-                            <option value="广州" {if $Think.get.region_name == '广州'}selected{/if}>广州</option>
-                            <option value="深圳" {if $Think.get.region_name == '深圳'}selected{/if}>深圳</option>
-                        </select>
-                    </li>
-                </ul>
-            </dd>
-        </dl>
+                <dl>
+                    <dt>区域</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select name="region_name">
+                                    <option value="">请选择</option>
+                                    <option value="北京" {if $Think.get.region_name == '北京'}selected{/if}>北京</option>
+                                    <option value="上海" {if $Think.get.region_name == '上海'}selected{/if}>上海</option>
+                                    <option value="广州" {if $Think.get.region_name == '广州'}selected{/if}>广州</option>
+                                    <option value="深圳" {if $Think.get.region_name == '深圳'}selected{/if}>深圳</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
 
-        <dl>
-            <dt>销售对接人</dt>
-            <dd>
-                <div class="inputP">
-                    <input type="text" placeholder="请输入销售对接人" name="sale_person" value="{$Think.get.sale_person}">
-                </div>
-            </dd>
-        </dl>
+                <dl>
+                    <dt>销售对接人</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="sale_person" value="{$Think.get.sale_person}">
+                        </div>
+                    </dd>
+                </dl>
 
-        <dl>
-            <dt>客户类型</dt>
-            <dd>
-                <ul class="selectP">
-                    <li>
-                        <select name="type">
-                            <option value="">请选择</option>
-                            <option value="1" {if $Think.get.type == '1'}selected{/if}>正式客户</option>
-                            <option value="0" {if $Think.get.type == '0'}selected{/if}>使用客户</option>
-                        </select>
-                    </li>
-                </ul>
-            </dd>
-        </dl>
+                <dl>
+                    <dt>客户类型</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select name="type">
+                                    <option value="">请选择</option>
+                                    <option value="1" {if $Think.get.type == '1'}selected{/if}>正式客户</option>
+                                    <option value="0" {if $Think.get.type == '0'}selected{/if}>使用客户</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
 
-        <dl class="btnMng"> <dt></dt> <dd> <input type="submit" value="搜索" class="btnP" /> </dd>  </dl>
-    </div>
+                <!--多下拉菜单-->
+                <dl>
+                    <dt>注册时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间" name="start_time" id="start_time" value="{$Think.get.start_time}">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间" name="end_time" id="end_time" value="{$Think.get.end_time}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>失效时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间" name="invalid_start_time" id="invalid_start_time" value="{$Think.get.invalid_start_time}">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间" name="invalid_end_time" id="invalid_end_time" value="{$Think.get.invalid_end_time}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
+            </div>
+            <!--确定按钮-->
+            <dl class="rBtn searchBtns">
+                <dt>　</dt>
+                <dd>
+                    <input type="submit" class="btnP" value="确定">
+                    <!--<a href="javascript:void(0)" class="btnP btnDark">重置</a>-->
+                </dd>
+            </dl>
+        </div>
     </form>
 </div>
+
+
 
 
 <div class="boxP">
@@ -149,3 +189,37 @@
         </div>
     </div>
 </div>
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>
+
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script>
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#start_time,#end_time,#invalid_start_time,#invalid_end_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d"
+    });
+</script>

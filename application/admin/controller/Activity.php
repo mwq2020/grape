@@ -15,14 +15,30 @@ class Activity extends Base
     public function index()
     {
         $where = [];
-        if(!empty($_REQUEST['title'])){
-            $where['a.title'] = ['like','%'.trim($_REQUEST['title']).'%'];
+        if(!empty($_REQUEST['activity_name'])){
+            $where['a.activity_name'] = ['like','%'.trim($_REQUEST['activity_name']).'%'];
         }
-        if(!empty($_REQUEST['cat_id'])){
-            $where['a.cat_id'] = intval($_REQUEST['cat_id']);
+        if(!empty($_REQUEST['customer_id'])){
+            $where['a.customer_id'] = intval($_REQUEST['customer_id']);
         }
 
-        //$activity_list = Loader::model('Activity')->where($where)->order('activity_id','desc')->paginate(10);
+        if(!empty($_REQUEST['start_time'])){
+            $where['a.add_time'] = ['>',strtotime($_REQUEST['start_time'])];
+        }
+        if(!empty($_REQUEST['end_time'])){
+            $where[' a.add_time'] = ['<',strtotime($_REQUEST['end_time'])];
+        }
+
+        if(!empty($_REQUEST['status'])){
+            if($_REQUEST['status'] == 1){
+                $where['a.start_time'] = ['>',time()];
+            } elseif($_REQUEST['status'] == 2){
+                $where['a.start_time'] = ['<',time()];
+                $where['a.end_time'] = ['>',time()];
+            } elseif($_REQUEST['status'] == 3){
+                $where['a.end_time'] = ['<',time()];
+            }
+        }
 
         $activity_list = Db::table('activity')->alias('a')
                     ->join('customer b','a.customer_id=b.customer_id')
@@ -31,8 +47,8 @@ class Activity extends Base
                     ->paginate(10 ,false,['query' => $_GET]);
         $this->assign('activity_list', $activity_list);
 
-        $page = $activity_list->render();
-        $this->assign('page', $page);
+        $customer_list = Loader::model('Customer')->getCustomerSelectList();
+        $this->assign('customer_list', $customer_list);
 
         $this->view->engine->layout('layout');
         return $this->fetch('activity/index');

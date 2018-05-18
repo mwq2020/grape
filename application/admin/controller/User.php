@@ -19,6 +19,12 @@ class User extends Base
         if(!empty($_REQUEST['real_name'])){
             $where['real_name'] = ['like','%'.trim($_REQUEST['real_name']).'%'];
         }
+        if(!empty($_REQUEST['start_time'])){
+            $where['register_time'] = ['>',strtotime($_REQUEST['start_time'])];
+        }
+        if(!empty($_REQUEST['end_time'])){
+            $where[' register_time'] = ['<',strtotime($_REQUEST['end_time'])];
+        }
 
         $user_list = Loader::model('User')->where($where)->order('user_id','desc')->paginate(10,false,['query' => $_GET]);
         $this->assign('user_list', $user_list);

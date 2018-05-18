@@ -20,6 +20,12 @@ class Video extends Base
         if(!empty($_REQUEST['cat_id'])){
             $where['a.cat_id'] = intval($_REQUEST['cat_id']);
         }
+        if(!empty($_REQUEST['start_time'])){
+            $where['a.add_time'] = ['>',strtotime($_REQUEST['start_time'])];
+        }
+        if(!empty($_REQUEST['end_time'])){
+            $where[' a.add_time'] = ['<',strtotime($_REQUEST['end_time'])];
+        }
 
         $cat_list = Loader::model('Category')->where('parent_id',0)->order('cat_id','asc')->select();
         $this->assign('cat_list', $cat_list);

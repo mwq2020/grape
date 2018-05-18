@@ -1,33 +1,64 @@
+
 <div class="boxP">
     <form method="get">
-        <div class="formP">
-            <dl>
-                <dt>资源名称</dt>
+        <div class="titP">
+            <h4>查询条件</h4>
+        </div>
+        <div class="boxP">
+            <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>资源名称</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="title" value="{$Think.get.title}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>分类</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select name="cat_id">
+                                    <option value="">请选择</option>
+                                    {volist name="cat_list" id="vo"}
+                                    <option value="{$vo.cat_id}" {if $Think.get.cat_id == $vo.cat_id} selected {/if}>{$vo.cat_name}</option>
+                                    {/volist}
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+
+                <!--多下拉菜单-->
+                <dl>
+                    <dt>上传时间</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间" name="start_time" id="start_time" value="{$Think.get.start_time}">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间" name="end_time" id="end_time" value="{$Think.get.end_time}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
+            </div>
+            <!--确定按钮-->
+            <dl class="rBtn searchBtns">
+                <dt>　</dt>
                 <dd>
-                    <div class="inputP">
-                        <input type="text" name="title" value="{$Think.get.title}">
-                    </div>
+                    <input type="submit" class="btnP" value="确定">
+                    <a href="javascript:void(0)" class="btnP btnDark">重置</a>
                 </dd>
             </dl>
-
-            <dl>
-                <dt>分类</dt>
-                <dd>
-                    <div class="inputP">
-                        <select name="cat_id">
-                            <option value="0">请选择</option>
-                            {volist name="cat_list" id="vo"}
-                            <option value="{$vo.cat_id}" {if $Think.get.cat_id == $vo.cat_id} selected {/if}>{$vo.cat_name}</option>
-                            {/volist}
-                        </select>
-                    </div>
-                </dd>
-            </dl>
-
-            <dl class="btnMng"> <dt></dt> <dd> <input type="submit" value="搜索" class="btnP" /> </dd>  </dl>
         </div>
     </form>
 </div>
+
+
 
 
 <div class="boxP">
@@ -90,3 +121,37 @@
         </div>
     </div>
 </div>
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>
+
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script>
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#start_time,#end_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d"
+    });
+</script>
