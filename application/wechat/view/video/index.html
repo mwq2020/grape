@@ -40,10 +40,7 @@
 <body>
 <div class="wrapMain">
     <div class="videoiBanner">
-        {if !$Think.session.user_id}
-            <img id="video_img" src="{$video_info.video_img}" width="100%" height="100%">
-        {/if}
-        <div id="video_player" {if !$Think.session.user_id}style="display:none;" {/if}></div>
+        <div id="video_player"></div>
     </div>
     <div class="VideoCon">
         <span class="videoTit">{$video_info.title}<b>{$current_location}</b></span>
@@ -92,7 +89,6 @@
 
 </body>
 </html>
-{if $Think.session.user_id}
 <script type="text/javascript">
     jwplayer("video_player").setup({
         "file": "{$video_info.video_url}",//视频文件路径
@@ -108,4 +104,3 @@
         "autostart":"false",//自动播放（留空则不启用自动播放）
     });
 </script>
-{/if}
