@@ -40,21 +40,22 @@
                 <td><img width="30" src="{$vo.avatar}"/></td>
                 <td>{$vo.signup_mobile}</td>
                 <td>{$vo.signup_time|date="Y-m-d H:i:s",###}</td>
-                <td>{$vo.status == 1 ? '启用' : '禁用'}</td>
+                <td>{if $vo.status == 1}通过{elseif $vo.status == 2}拒绝{else}未审核{/if}</td>
                 <td class="opt">
-                    {if  $vo.status==1}
-                    <a class="blue" href="/admin/activity/change_status?activity_id={$vo.activity_id}&status=0">
-                        <span>禁用</span>
+                    {if  $vo.status==0}
+                    <a class="blue" href="/admin/activity/change_signup_status?id={$vo.id}&status=1">
+                        <span>通过</span>
                     </a>
-                    {else}
-                    <a class="blue" href="/admin/activity/change_status?activity_id={$vo.activity_id}&status=1">
-                        <span>启用</span>
+                    <a class="blue" href="/admin/activity/change_signup_status?id={$vo.id}&status=2">
+                        <span>拒绝</span>
                     </a>
                     {/if}
 
-                    <a class="blue" href="/admin/activity/edit?activity_id={$vo.activity_id}">
+                    <!--
+                    <a class="blue" href="/admin/activity/edit?id={$vo.id}">
                         <span>编辑</span>
                     </a>
+                    -->
                 </td>
             </tr>
             {/foreach}

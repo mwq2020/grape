@@ -128,20 +128,27 @@ class Customer extends Base
             if(empty($flag)){
                 throw new \Exception('客户添加失败');
             }
-
             $customer_id = Loader::model('Customer')->getLastInsID();
-            $user_data = [];
-            $user_data['customer_id']  = $customer_id;
-            $user_data['reader_no']    = $_REQUEST['account_no'];
-            $user_data['password']     =  md5($_REQUEST['password']);
-            $user_data['real_name']    = $_REQUEST['customer_name'];
-            $user_data['status']       = 1;
-            $user_data['register_time']     = time();
-            $flag = Loader::model('User')->insert($user_data);
-            if(empty($flag)){
-                throw new \Exception('客户后台账号添加失败');
-            }
 
+
+            //查询后台账号
+            $user_info =  Loader::model('User')->where(['reader_no'=>$_REQUEST['account_no']])->find();
+            if($user_info){
+                $user_info->password = md5($_REQUEST['password']);
+                $user_info->save();
+            } else {
+                $user_data = [];
+                $user_data['customer_id']  = $customer_id;
+                $user_data['reader_no']    = $_REQUEST['account_no'];
+                $user_data['password']     =  md5($_REQUEST['password']);
+                $user_data['real_name']    = $_REQUEST['customer_name'];
+                $user_data['status']       = 1;
+                $user_data['register_time']     = time();
+                $flag = Loader::model('User')->insert($user_data);
+                if(empty($flag)){
+                    throw new \Exception('客户后台账号添加失败');
+                }
+            }
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
@@ -215,8 +222,10 @@ class Customer extends Base
             $customer_info->region_name     = $_REQUEST['region_name'];
             $customer_info->customer_link_person    = $_REQUEST['customer_link_person'];
             $customer_info->link_person_mobile      = $_REQUEST['link_person_mobile'];
+
             $customer_info->type           = intval($_REQUEST['type']);
             $customer_info->login_type     = intval($_REQUEST['login_type']);
+
             $customer_info->sale_person = $_REQUEST['sale_person'];
             $customer_info->account_no  = $_REQUEST['account_no'];
             $customer_info->password    = md5($_REQUEST['password']);
@@ -226,6 +235,26 @@ class Customer extends Base
             if(empty($flag)){
                 throw new \Exception('客户修改失败');
             }
+
+            //查询后台账号
+            $user_info =  Loader::model('User')->where(['reader_no'=>$_REQUEST['account_no']])->find();
+            if($user_info){
+                $user_info->password = md5($_REQUEST['password']);
+                $user_info->save();
+            } else {
+                $user_data = [];
+                $user_data['customer_id']  = $_REQUEST['customer_id'];
+                $user_data['reader_no']    = $_REQUEST['account_no'];
+                $user_data['password']     =  md5($_REQUEST['password']);
+                $user_data['real_name']    = $_REQUEST['customer_name'];
+                $user_data['status']       = 1;
+                $user_data['register_time']     = time();
+                $flag = Loader::model('User')->insert($user_data);
+                if(empty($flag)){
+                    throw new \Exception('客户后台账号添加失败');
+                }
+            }
+
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);

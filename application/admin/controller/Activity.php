@@ -288,12 +288,33 @@ class Activity extends Base
         $signup_list = Db::table('activity_signup')->alias('a')
             ->join('user b','a.user_id=b.user_id')
             ->where($where)->order('a.id','desc')
-            ->field('b.*,a.id,a.add_time as signup_time,a.mobile as signup_mobile,a.activity_id')
+            ->field('b.*,a.id,a.add_time as signup_time,a.mobile as signup_mobile,a.activity_id,a.status')
             ->paginate(10,false,['query' => $_GET]);
         $this->assign('signup_list', $signup_list);
 
         $this->view->engine->layout('layout');
         return $this->fetch('activity/signup_list');
+    }
+
+    /**
+     * 编辑用户的报名状态
+     */
+    public function change_signup_status()
+    {
+        try {
+            if(!isset($_REQUEST['status']) || empty($_REQUEST['id'])){
+                throw new \Exception('入参错误');
+            }
+            $signup_info = Db::table('activity_signup')->where('id',$_REQUEST['id'])->find();
+            if(empty($signup_info)){
+                throw new \Exception('报名信息不存在');
+            }
+            Db::table('activity_signup')->where('id',$_REQUEST['id'])->update(['status'=>intval($_REQUEST['status'])]);
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+        }
+        return $this->redirect('/admin/activity/signup_list?activity_id='.$signup_info['activity_id']);
     }
 
 

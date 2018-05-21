@@ -118,7 +118,7 @@
     <div class="tableBox">
         <table class="tableP">
             <tr>
-                <th>客户id <!--<input type="checkbox">-->  </th>
+                <th>客户id</th>
                 <th>客户名称</th>
                 <th>账号</th>
                 <th>销售对接人</th>
@@ -126,15 +126,13 @@
                 <th>客户类型</th>
                 <th>注册日期</th>
                 <th>失效日期</th>
+                <th>微信首页链接</th>
                 <th>操作</th>
             </tr>
 
             {foreach name="customer_list" item="vo" key="k"}
             <tr>
-                <td>
-                    <!--<input type="checkbox">-->
-                    {$vo.customer_id}
-                </td>
+                <td>{$vo.customer_id}</td>
                 <td>{$vo.customer_name}</td>
                 <td>{$vo.account_no}</td>
                 <td>{$vo.sale_person}</td>
@@ -142,6 +140,7 @@
                 <td>{$vo.type}</td>
                 <td>{$vo.start_time|date="Y-m-d",###}</td>
                 <td>{$vo.end_time|date="Y-m-d",###}</td>
+                <td><a href="/wechat/index/index?customer_id={$vo.customer_id}" target="_blank">微信首页地址</a></td>
                 <td class="opt">
 
                         <a href="/admin/customer/edit?customer_id={$vo.customer_id}">

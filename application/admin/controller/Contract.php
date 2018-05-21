@@ -176,7 +176,7 @@ class Contract extends Base
             if(!empty($account_exist)){
                 throw new \Exception('合同名已存在，请更换');
             }
-
+            $contract_info->contract_no    = $_REQUEST['contract_no'];
             $contract_info->title    = $_REQUEST['title'];
             $contract_info->contract_start_time     = strtotime($_REQUEST['contract_start_time']);
             $contract_info->contract_end_time       = strtotime($_REQUEST['contract_end_time']);

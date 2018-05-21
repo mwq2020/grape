@@ -17,7 +17,7 @@
             <dt>角色名称</dt>
             <dd>
                 <div class="inputP">
-                    <input type="text" class="xxl" name="role_name" value=""  maxlength="20"/>
+                    <input type="text" class="xxl" name="role_name" value="" maxlength="20"/>
                 </div>
             </dd>
         </dl>
@@ -29,14 +29,18 @@
             {foreach name="privilege_lsit" item="vo" key="privilege_key"}
             <dd>
                 <div class="inputP">
-                    <label><input type="checkbox"><strong>{$vo.name}</strong></label>
+                    <label><input type="checkbox" class="series_{$privilege_key}" id="series_{$privilege_key}" data-series="{$privilege_key}" value="1" checked />
+                        <strong>{$vo.name}</strong>
+                    </label>
                 </div>
             </dd>
             <dd style="margin-bottom:20px">
                 <div class="inputP">
                     {foreach name="vo.child" item="role_list" key="role_key"}
                     {foreach name="role_list" item="item_row" key="item_key"}
-                        <label><input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1" >{$item_row}</label>
+                        <label>
+                            <input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1" class="item_{$privilege_key}" />{$item_row}
+                        </label>
                     {/foreach}
                     {/foreach}
                 </div>
@@ -62,3 +66,29 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(function () {
+        //console.log($('#series_customer').attr('checked'));
+
+        $("input[class^='series_']").change(function(){
+            console.log(this,$(this).attr('data-series'));
+            var series_name = $(this).attr('data-series');
+            var series_id = $(this).attr('id');
+            console.log('series_name=' + series_name);
+            console.log('id='+$(this).attr('id'));
+            console.log($('#'+series_id));
+
+//            console.log($('#series_'+series_name).attr('checked'));
+//            console.log($("input[class^='series_']").length);
+
+            console.log($('#'+series_id).val());
+            if($('#'+series_id).attr('selected') == true){
+                console.log('----选中',$('#'+series_id).attr('selected'));
+            } else {
+                console.log('----未选中',$('#'+series_id).attr('selected'));
+            }
+//            $(this).attr('checked',false);
+        })
+    })
+</script>

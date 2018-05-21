@@ -120,8 +120,8 @@
                 <dt>用户状态</dt>
                 <dd>
                     <div class="inputP">
-                        <label><input type="radio" name="status" value="1" {if $video_info.position == 1}checked{/if} />立即发布</label>
-                        <label><input type="radio" name="status" value="0" {if $video_info.position == 0}checked{/if} />待发布</label>
+                        <label><input type="radio" name="status" value="1" {if $video_info.status == 1}checked{/if} />立即发布</label>
+                        <label><input type="radio" name="status" value="0" {if $video_info.status == 0}checked{/if} />待发布</label>
                     </div>
                 </dd>
             </dl>
