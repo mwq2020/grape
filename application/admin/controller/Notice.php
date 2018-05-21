@@ -241,7 +241,7 @@ class Notice extends Base
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
         }
-        return $this->redirect('/admin/notice/send_list?notice_id='.$_REQUEST['notice_id']);
+        return $this->redirect('/admin/notice/index?notice_id='.$_REQUEST['notice_id']);
     }
 
 
