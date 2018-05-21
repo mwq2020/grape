@@ -1,0 +1,116 @@
+
+<div class="boxP">
+    <form method="get">
+        <div class="titP">
+            <h4>查询条件</h4>
+        </div>
+        <div class="boxP">
+            <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>用户id</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="user_id" value="{$Think.get.user_id}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>读者证号</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="reader_no" value="{$Think.get.reader_no}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>姓名</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" name="real_name" value="{$Think.get.real_name}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <input type="hidden" name="notice_id" value="{$Think.get.notice_id}">
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
+            </div>
+            <!--确定按钮-->
+            <dl class="rBtn searchBtns">
+                <dt>　</dt>
+                <dd>
+                    <input type="submit" class="btnP" value="确定">
+                    <a href="javascript:void(0)" class="btnP btnDark">重置</a>
+                </dd>
+            </dl>
+        </div>
+    </form>
+</div>
+
+
+<div class="boxP">
+    <div class="titP">
+        <h4>公告发送用户列表</h4>
+    </div>
+
+    <!--公共表格-->
+    <div class="tableBox">
+        <table class="tableP">
+            <tr>
+                <th>编号id</th>
+                <th>用户id</th>
+                <th>读者证号</th>
+                <th>姓名</th>
+                <th>操作</th>
+            </tr>
+
+            {foreach name="notice_user_list" item="vo" key="k"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.user_id}</td>
+                <td>{$vo.reader_no}</td>
+                <td>{$vo.real_name}</td>
+                <td class="opt">
+                    <a class="blue" href="/admin/notice/delete_user?id={$vo.id}&notice_id={$vo.notice_id}">
+                        <span>删除</span>
+                    </a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="page_content">
+        <div class="pageBar">
+            <div>总共<em>{$notice_user_list->total()}</em>条, 当前<em>{$notice_user_list->currentPage()}</em>/<em>{$notice_user_list->lastPage()}</em>页</div>
+            <div>
+                {$notice_user_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>

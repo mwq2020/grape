@@ -14,7 +14,7 @@
         <h4>公告编辑</h4>
     </div>
     <div class="formP formV">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post">
 
             <dl>
                 <dt>标题</dt>
@@ -50,8 +50,8 @@
                 </dd>
             </dl>
 
-            <dl id="reader_no_list_div" style="display: none;">
-                <dt>内容</dt>
+            <dl id="reader_no_list_div" {if $notice_info.send_type ==1}style="display: none;"{/if}>
+                <dt>发送对象的读者证号</dt>
                 <dd>
                     <div class="inputP textareaP">
                         <textarea name="reader_no_list" placeholder="指定对象读者证号，用逗号隔开" maxlength="2000"></textarea>

@@ -88,7 +88,7 @@
                 <td>{$vo.create_name}</td>
                 <td>{$vo.send_time|date="Y-m-d H:i:s",###}</td>
                 <td>{if $vo.status ==1}已发送{else}未发送{/if}</td>
-                <td>用户列表</td>
+                <td class="opt">{if $vo.send_type ==1}所有人{else}<a href="/admin/notice/send_list?notice_id={$vo.notice_id}">用户列表</a>{/if}</td>
                 <td class="opt">
 
                     <a class="blue" href="/admin/notice/send?notice_id={$vo.notice_id}">
