@@ -202,6 +202,49 @@ class Notice extends Base
     }
 
 
+    public function send()
+    {
+
+        try{
+            $notice_info = Db::table('notice')->find($_REQUEST['notice_id']);
+            if(empty($notice_info)){
+                throw new \Exception('公告不存在');
+            }
+
+            if($notice_info['send_type'] == 2){
+                $notice_user_list = Db::table('notice_user')->where(['notice_id' => $_REQUEST['notice_id']])->select();
+                if(empty($notice_user_list)){
+                    throw new \Exception('发送用户不能为空');
+                }
+            } else {
+                $notice_user_list = Db::table('notice_user')->select();
+                if(empty($notice_user_list)){
+                    throw new \Exception('发送用户不能为空');
+                }
+            }
+
+            foreach($notice_user_list as $row) {
+                $message_data = [];
+                $message_data['user_id'] = $row['user_id'];
+                $message_data['sender'] = $notice_info['create_name'];
+                $message_data['title'] = $notice_info['title'];
+                $message_data['content'] = $notice_info['content'];
+                $message_data['type'] = 1;
+                $message_data['status'] = 0;
+                $message_data['add_time'] = time();
+                Db::table('message')->insert($message_data);
+            }
+
+            //标记已发送
+            Db::table('notice')->update(['status'=>1,'send_time' => time(),'notice_id'=>$_REQUEST['notice_id']]);
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+        }
+        return $this->redirect('/admin/notice/send_list?notice_id='.$_REQUEST['notice_id']);
+    }
+
+
     /**
      * 消息列表
      */

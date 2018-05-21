@@ -91,6 +91,7 @@
                 <td class="opt">{if $vo.send_type ==1}所有人{else}<a href="/admin/notice/send_list?notice_id={$vo.notice_id}">用户列表</a>{/if}</td>
                 <td class="opt">
 
+                    {if $vo.status == 0}
                     <a class="blue" href="/admin/notice/send?notice_id={$vo.notice_id}">
                         <span>发送</span>
                     </a>
@@ -98,6 +99,7 @@
                     <a class="blue" href="/admin/notice/edit?notice_id={$vo.notice_id}">
                         <span>编辑</span>
                     </a>
+                    {/if}
                 </td>
             </tr>
             {/foreach}
