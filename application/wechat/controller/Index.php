@@ -2,6 +2,7 @@
 namespace app\wechat\controller;
 use \think\Db;
 use think\Loader;
+use think\Cookie;
 
 class Index extends Base
 {
@@ -19,6 +20,11 @@ class Index extends Base
             ->limit(4)
             ->select();
         $this->assign('recommand_list',$recommand_list);
+
+
+        if($_REQUEST['customer_id']){
+            Cookie::set('customer_id',intval($_REQUEST['customer_id']),3600*24*365);
+        }
 
         //首页精彩推荐
         $video_list= [];

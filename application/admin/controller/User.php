@@ -148,7 +148,7 @@ class User extends Base
             }
 
             $user_info->customer_id  = $_REQUEST['customer_id'];
-            if(empty($_REQUEST['password'])) {
+            if(!empty($_REQUEST['password'])) {
                 $user_info->password = md5($_REQUEST['password']);
             }
             $user_info->real_name  = $_REQUEST['real_name'];

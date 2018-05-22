@@ -73,13 +73,13 @@ class Customer extends Base
                 throw new \Exception('所属区域不能为空');
             }
             if(empty($_REQUEST['customer_link_person'])){
-                throw new \Exception('客户联系人不能为空');
+                //throw new \Exception('客户联系人不能为空');
             }
             if(empty($_REQUEST['link_person_mobile'])){
-                throw new \Exception('联系人电话不能为空');
+                //throw new \Exception('联系人电话不能为空');
             }
             if(empty($_REQUEST['sale_person'])){
-                throw new \Exception('销售对接人不能为空');
+                //throw new \Exception('销售对接人不能为空');
             }
             if(empty($_REQUEST['account_no'])){
                 throw new \Exception('客户账号不能为空');
@@ -103,17 +103,19 @@ class Customer extends Base
                 throw new \Exception('账户名已存在，请更换');
             }
 
-            $is_admin_exist = Loader::model('User')->where('reader_no',$_REQUEST['account_no'])->find();
-            if(!empty($is_admin_exist)){
+            /*
+            $is_user_exist = Loader::model('User')->where('reader_no',$_REQUEST['account_no'])->find();
+            if(!empty($is_user_exist)){
                 throw new \Exception('客户的账号已经存在，请修改账户名');
             }
+            */
 
             $data = [];
             $data['customer_name']  = $_REQUEST['customer_name'];
             $data['region_name']    = $_REQUEST['region_name'];
-            $data['customer_link_person']   = $_REQUEST['customer_link_person'];
-            $data['link_person_mobile']     = $_REQUEST['link_person_mobile'];
-            $data['sale_person']    = $_REQUEST['sale_person'];
+            $data['customer_link_person']   = empty($_REQUEST['customer_link_person']) ? '' : $_REQUEST['customer_link_person'];
+            $data['link_person_mobile']     = empty($_REQUEST['link_person_mobile']) ? '' : $_REQUEST['link_person_mobile'];
+            $data['sale_person']    = empty($_REQUEST['sale_person']) ? '' : $_REQUEST['sale_person'];
 
             $data['account_no']     = $_REQUEST['account_no'];
             $data['password']       = md5($_REQUEST['password']);
@@ -182,13 +184,13 @@ class Customer extends Base
                 throw new \Exception('所属区域不能为空');
             }
             if(empty($_REQUEST['customer_link_person'])){
-                throw new \Exception('客户联系人不能为空');
+                //throw new \Exception('客户联系人不能为空');
             }
             if(empty($_REQUEST['link_person_mobile'])){
-                throw new \Exception('联系人电话不能为空');
+                //throw new \Exception('联系人电话不能为空');
             }
             if(empty($_REQUEST['sale_person'])){
-                throw new \Exception('销售对接人不能为空');
+                //throw new \Exception('销售对接人不能为空');
             }
             if(empty($_REQUEST['account_no'])){
                 throw new \Exception('客户账号不能为空');
@@ -219,9 +221,9 @@ class Customer extends Base
             }
 
             $customer_info->customer_name   = $_REQUEST['customer_name'];
-            $customer_info->region_name     = $_REQUEST['region_name'];
-            $customer_info->customer_link_person    = $_REQUEST['customer_link_person'];
-            $customer_info->link_person_mobile      = $_REQUEST['link_person_mobile'];
+            $customer_info->region_name     = empty($_REQUEST['region_name']) ? '' : $_REQUEST['region_name'];
+            $customer_info->customer_link_person    = empty($_REQUEST['customer_link_person']) ? '' : $_REQUEST['customer_link_person'];
+            $customer_info->link_person_mobile      = empty($_REQUEST['link_person_mobile']) ? '' : $_REQUEST['link_person_mobile'];
 
             $customer_info->type           = intval($_REQUEST['type']);
             $customer_info->login_type     = intval($_REQUEST['login_type']);
