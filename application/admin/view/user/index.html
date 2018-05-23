@@ -6,6 +6,23 @@
         </div>
         <div class="boxP">
             <div class="formP searchFormP">
+
+                <dl>
+                    <dt>客户</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select name="customer_id">
+                                    <option value="">请选择</option>
+                                    {volist name="customer_list" id="vo"}
+                                        <option value="{$vo.customer_id}" {if $Think.get.customer_id == $vo.customer_id}selected{/if}>{$vo.customer_name}</option>
+                                    {/volist}
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+
                 <!--单文本输入-->
                 <dl>
                     <dt>读者证号</dt>
@@ -37,7 +54,7 @@
                     </dd>
                 </dl>
 
-                <!--<a href="javascript:void(0)" class="btnExpand openMng"></a>-->
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
             </div>
             <!--确定按钮-->
             <dl class="rBtn searchBtns">

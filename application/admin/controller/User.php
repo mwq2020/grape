@@ -12,9 +12,16 @@ class User extends Base
      */
     public function index()
     {
+        $customer_list = Loader::model('Customer')->select();
+        $this->assign('customer_list',$customer_list);
+
+
         $where = [];
         if(!empty($_REQUEST['reader_no'])){
             $where['reader_no'] = ['like','%'.trim($_REQUEST['reader_no']).'%'];
+        }
+        if(!empty($_REQUEST['customer_id'])){
+            $where['customer_id'] = intval($_REQUEST['customer_id']);
         }
         if(!empty($_REQUEST['real_name'])){
             $where['real_name'] = ['like','%'.trim($_REQUEST['real_name']).'%'];
