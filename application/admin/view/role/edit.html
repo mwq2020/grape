@@ -29,14 +29,19 @@
                 {foreach name="privilege_lsit" item="vo" key="privilege_key"}
                 <dd>
                     <div class="inputP">
-                        <label><input type="checkbox"><strong>{$vo.name}</strong></label>
+                        <label><input type="checkbox" class="series_{$privilege_key}" {if condition="isset($privilege_data[$privilege_key])"}checked{/if} id="series_{$privilege_key}" data-series="{$privilege_key}" value="1">
+                            <strong>{$vo.name}</strong>
+                        </label>
                     </div>
                 </dd>
                 <dd style="margin-bottom:20px">
                     <div class="inputP">
                         {foreach name="vo.child" item="role_list" key="role_key"}
                         {foreach name="role_list" item="item_row" key="item_key"}
-                        <label><input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1" >{$item_row}</label>
+                        <label>
+                            <input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" {if condition="isset($privilege_data[$privilege_key][$role_key][$item_key])"}checked{/if} value="1" class="item_{$privilege_key}" data-series="{$privilege_key}" >
+                            {$item_row}
+                        </label>
                         {/foreach}
                         {/foreach}
                     </div>
@@ -63,3 +68,29 @@
     </div>
 </div>
 
+<script>
+    $(function () {
+        $("input[class^='series_']").click(function(){
+            var series_name = $(this).attr('data-series');
+            var series_id = $(this).attr('id');
+            if($(this).is(":checked")){
+                console.log('选中')
+                $('.item_'+series_name).prop('checked',true);
+            } else {
+                console.log('未选中')
+                $('.item_'+series_name).prop('checked',false);
+            }
+        })
+
+        $("input[class^='item_']").click(function(){
+            var series_name = $(this).attr('data-series');
+            if($(this).is(":checked")){
+                console.log('项目选中='+series_name)
+                $('.series_'+series_name).prop('checked',true);
+            } else {
+                //console.log('项目未选中='+series_name)
+                //$('.series_'+series_name).prop('checked',false);
+            }
+        })
+    })
+</script>

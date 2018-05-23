@@ -78,6 +78,13 @@ class Role extends Base
         $role_info = Loader::model('Role')->find($_REQUEST['role_id']);
         $this->assign('role_info',$role_info);
 
+        $privilege_data = json_decode($role_info->privilege_data,true);
+        $this->assign('privilege_data',$privilege_data);
+//        echo "<pre>";
+//        print_r($privilege_data);
+//        print_r($role_info);
+//        exit;
+
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
