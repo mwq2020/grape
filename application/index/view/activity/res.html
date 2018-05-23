@@ -79,41 +79,14 @@
                                     <td align="center">{$vo.telphone}</td>
                                 </tr>
                                 {/volist}
-
-                                <!--
-                                <tr>
-                                    <td align="center">一等奖</td>
-                                    <td align="center">卡通人物塑雕 </td>
-                                    <td align="center">09383</td>
-                                    <td align="center"> 姚沛晨</td>
-                                </tr>
-                                <tr>
-                                    <td align="center">一等奖</td>
-                                    <td align="center">卡通人物塑雕 </td>
-                                    <td align="center">09383</td>
-                                    <td align="center"> 姚沛晨</td>
-                                </tr>
-                                <tr>
-                                    <td align="center">一等奖</td>
-                                    <td align="center">卡通人物塑雕 </td>
-                                    <td align="center">09383</td>
-                                    <td align="center"> 姚沛晨</td>
-                                </tr>
-                                <tr>
-                                    <td align="center">一等奖</td>
-                                    <td align="center">卡通人物塑雕 </td>
-                                    <td align="center">09383</td>
-                                    <td align="center"> 姚沛晨</td>
-                                </tr>
-                                -->
                             </table>
                         </div>
                     </div>
                 </div>
                 {/if}
 
+                {if $product_list}
                 <span class="zpzsTit">作品展示</span>
-
                 <div class="MarTop40">
                     <div class="Worksshow">
                         {volist name="product_list" id="vo"}
@@ -129,14 +102,15 @@
                             </dl>
                         </div>
                         {/volist}
-
-                        {if !$product_list}
-                        <div class="noSearchResult">
-                            <span>{$no_content_txt}</span>
-                        </div>
-                        {/if}
                     </div>
                 </div>
+                {/if}
+
+                {if !$product_list}
+                <div class="noSearchResult">
+                    <span>{$no_content_txt}</span>
+                </div>
+                {/if}
             </div>
         </div>
     </div>

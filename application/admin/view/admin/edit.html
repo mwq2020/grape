@@ -18,7 +18,7 @@
                 <dt>账号登录</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="account" value="{$admin_info.account}" maxlength="50"/>
+                        <input type="text" name="account" value="{$admin_info.account}" maxlength="50" {if $admin_info.account =='admin'}readonly{/if}/>
                     </div>
                 </dd>
             </dl>

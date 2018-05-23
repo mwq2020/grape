@@ -83,8 +83,16 @@
                             <dd>
                                 <a href="/index/user/product_info?product_id={$vo.product_id}">{$vo.product_name}</a>
                                 <p>活动名称：{$vo.activity_name}</p>
-                                <p>参加实践：{$vo.add_time|date="Y-m-d",###}</p>
-                                <span class="Mc">获奖等级：<i>一等奖</i>
+                                <p>参加时间：{$vo.add_time|date="Y-m-d",###}</p>
+                                {if $vo.award_grade == 1}
+                                    <span class="Mc">获奖等级：<i>一等奖</i>
+                                {elseif $vo.award_grade == 2}
+                                    <span class="Mc">获奖等级：<i>二等奖</i>
+                                {elseif $vo.award_grade == 3}
+                                    <span class="Mc">获奖等级：<i>三等奖</i>
+                                {elseif $vo.award_grade > 0}
+                                    <span class="Mc">获奖等级：<i>优秀奖</i>
+                                {/if}
                                 </span>
                             </dd>
                         </dl>

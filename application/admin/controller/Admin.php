@@ -27,7 +27,6 @@ class Admin extends Base
         $role_list = Loader::model('Role')->where('status',1)->select();
         $this->assign('role_list',$role_list);
 
-        //$admin_list = Loader::model('Admin')->where($where)->order('admin_id','desc')->paginate(10,false,['query' => $_GET]);
         $admin_list = Db::table('admin')->alias('a')
                     ->join('role b','a.role_id=b.role_id')
                     ->where($where)->order('a.admin_id','desc')

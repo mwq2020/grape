@@ -45,10 +45,6 @@ class Activity extends Base
      */
     public function info()
     {
-//        echo "<pre>";
-//        print_r($_REQUEST);
-//        print_r(session('reader_no'));
-//        exit;
         $activity_id = isset($_REQUEST['activity_id']) ? intval($_REQUEST['activity_id']) : 0;
         $activity_info = Loader::model('Activity')->find($activity_id);
         if($activity_info){
@@ -87,9 +83,6 @@ class Activity extends Base
         }
         $this->assign('is_signup',$is_signup);
         $this->assign('is_upload_product',$is_upload_product);
-//        echo "<pre>";
-//        print_r($activity_info);
-//        exit;
 
         //作品页面
         $product_image_src = isset($_REQUEST['file_path']) ? $_REQUEST['file_path'] : '';
@@ -211,8 +204,13 @@ class Activity extends Base
         $this->assign('award_list',$award_list);
 
         //所有作品展示
-        $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id')->join('user c','a.user_id=c.user_id');
-        $product_list = $query->select();
+        $where = [];
+        $where['a.activity_id'] = $activity_id;
+        $product_list = Db::table('product')->alias('a')
+            ->join('activity b','a.activity_id=b.activity_id')
+            ->join('user c','a.user_id=c.user_id')
+            ->where($where)
+            ->select();
         $this->assign('product_list',$product_list);
 
         $this->assign('page_title','活动结果');
@@ -241,7 +239,6 @@ class Activity extends Base
             }
         }
 
-
         //活动状态
         $activity_status = 'starting';
         if($activity_info['end_time'] <= time()){
@@ -251,7 +248,12 @@ class Activity extends Base
         }
         $this->assign('activity_status',$activity_status);
 
-        $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id')->join('user c','a.user_id=c.user_id');
+        $where = [];
+        $where['a.activity_id'] = $activity_id;
+        $query = Db::table('product')->alias('a')
+            ->join('activity b','a.activity_id=b.activity_id')
+            ->join('user c','a.user_id=c.user_id')
+            ->where($where);
         $product_list = $query->paginate(6,false,['query' => $_GET]);
 
         $page = $product_list->render();

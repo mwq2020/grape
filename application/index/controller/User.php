@@ -156,9 +156,7 @@ class User extends Base
         $message_list = Db::table('message')->where('type',$type)->where('user_id',$user_id)->paginate(5,false,['query' => $_GET]);
         $page = $message_list->render();
         $this->assign('page', $page);
-//        echo "<pre>";
-//        print_r($message_list);
-//        exit;
+
         $this->assign('message_list',$message_list);
         $this->assign('type',$type);
         $this->assign('page_title','用户中心-我的消息');
