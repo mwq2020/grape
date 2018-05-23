@@ -184,7 +184,7 @@ class Activity extends Base
                     $image_name =  $info->getSaveName();
                     array_push($activity_gallery,'/static/image/activity/'.$image_name);
                 }else{
-                    throw new \Exception('图片保存失败【'.$file->getError().'】');
+                    throw new \Exception('图片1保存失败【'.$file->getError().'】');
                 }
             }
             $file = request()->file('activity_gallery_2');
@@ -194,7 +194,7 @@ class Activity extends Base
                     $image_name =  $info->getSaveName();
                     array_push($activity_gallery,'/static/image/activity/'.$image_name);
                 }else{
-                    throw new \Exception('图片保存失败【'.$file->getError().'】');
+                    throw new \Exception('图片2保存失败【'.$file->getError().'】');
                 }
             }
             $file = request()->file('activity_gallery_3');
@@ -204,7 +204,7 @@ class Activity extends Base
                     $image_name =  $info->getSaveName();
                     array_push($activity_gallery,'/static/image/activity/'.$image_name);
                 }else{
-                    throw new \Exception('图片保存失败【'.'/static/image/activity/'.$file->getError().'】');
+                    throw new \Exception('图片3保存失败【'.'/static/image/activity/'.$file->getError().'】');
                 }
             }
 
