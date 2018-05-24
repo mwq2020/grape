@@ -22,7 +22,7 @@ class Index extends Base
         $this->assign('recommand_list',$recommand_list);
 
 
-        if($_REQUEST['customer_id']){
+        if(isset($_REQUEST['customer_id'])){
             Cookie::set('customer_id',intval($_REQUEST['customer_id']),3600*24*365);
         }
 

@@ -1,0 +1,221 @@
+
+<div class="boxP">
+    <!--<form method="get">-->
+        <div class="titP">
+            <h4>查询条件</h4>
+        </div>
+        <div class="boxP">
+            <div class="formP searchFormP">
+                <!--单文本输入-->
+                <dl>
+                    <dt>选择时段</dt>
+                    <dd>
+                        <div class="inputP">
+                            <label><input type="radio" name="type" value="1" checked />今日</label>
+                            <label><input type="radio" name="type" value="2" />昨日</label>
+                            <label><input type="radio" name="type" value="2" />本周</label>
+                            <label><input type="radio" name="type" value="2" />上周</label>
+                            <label><input type="radio" name="type" value="2" />本月</label>
+                            <label><input type="radio" name="type" value="2" />上月</label>
+                        </div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>所属机构</dt>
+                    <dd>
+                        <ul class="selectP">
+                            <li>
+                                <select name="customer_id">
+                                    <option value="">请选择</option>
+                                    {volist name="customer_list" id="vo"}
+                                    <option value="{$vo.customer_id}" {if $Think.get.customer_id == $vo.customer_id}selected{/if}>{$vo.customer_name}</option>
+                                    {/volist}
+                                </select>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+
+                <!--多下拉菜单-->
+                <dl>
+                    <dt>自定义时段</dt>
+                    <dd>
+                        <div class="inputP">
+                            <input type="text" placeholder="起始时间" name="start_time" id="start_time" value="{$Think.get.start_time}">
+                            <label class="mid">至</label>
+                            <input type="text" placeholder="结束时间" name="end_time" id="end_time" value="{$Think.get.end_time}">
+                        </div>
+                    </dd>
+                </dl>
+
+                <a href="javascript:void(0)" class="btnExpand openMng"></a>
+            </div>
+            <!--确定按钮-->
+            <dl class="rBtn searchBtns">
+                <dt>　</dt>
+                <dd>
+                    <input type="submit" class="btnP btnSearch" value="确定">
+                    <a href="javascript:void(0)" class="btnP btnDark">重置</a>
+                </dd>
+            </dl>
+        </div>
+    <!--</form>-->
+</div>
+
+
+<script type="text/javascript" src="/admin/js/echarts.min.js"></script>
+<div class="boxP">
+    <div class="tableBox p20">
+        <div id='visitCanvas' style="width: 1100px;height:400px;"></div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $(".btnSearch").click(function () {
+            // 如果自定义时间段都选择了值则按照自定义时间段+过滤项
+            // 没有选择自定义时间则按照时间段+过滤项
+            // 选择时段
+            var rdoTimeType = $("input[name=rdoTimeType]:checked").val();
+            // 自定义时间段
+            var startTime = $("#txtStart").val();
+            var endTime = $("#txtEnd").val();
+            var province = $('#selProvince').children('option:selected').val();
+            var customId = $.trim($('#selCustomIdlist').val());
+            // 如果自定义时间段都选择了值则按照自定义时间段+过滤项 timeType值为1
+            // 没有选择自定义时间则按照时间段+过滤项 timeType值为2
+            var timeType = (startTime && endTime) ? 1 : 2;
+            // 大洲
+            var continent = $('#selContinentslist').children('option:selected').val();
+            // 地区
+            var area = $('#selArealist').children('option:selected').val();
+            // 国家
+            var country = $('#selCountrylist').children('option:selected').val();
+            // 分类
+            var category = $('#selCateIdlist').children('option:selected').val();
+            // 项目名称
+            var projectName = $.trim($('#txtName').val());
+            var reqParams = {
+                timeType: timeType,
+                rdoTimeType: rdoTimeType,
+                startTime: startTime,
+                endTime: endTime,
+                province: province,
+                customId: customId,
+                continent: continent,
+                area: area,
+                country: country,
+                category: category,
+                projectName: projectName
+            };
+            // reqParams 报表数据请求参数
+            // _mocker 线名称
+            DrawVisit("visitCanvas", "/report/VisitReportData", reqParams);
+        });
+        $(".btnSearch").click();
+    });
+
+    function DrawVisit(continer, url, reqParams) {
+        $("#" + continer).html('查询数据...');
+        // 报表每条线的数据
+        // 如[ { name:'IP', type:'line', data:[11, 11, 15, 13, 12, 13, 10] }, { name:'独立用户', type:'line', data:[1, -2, 2, 5, 3, 2, 0] }, { name:'新独立用户', type:'line', data:[1, -2, 2, 5, 3, 2, 0] } ]
+        var array = [];
+        ////创建x轴标签文本
+        var labels = [];
+        var _title = "日访问量";
+        // var _subtitle = "副标题";
+        // 线条名称
+        var _legend = [ 'IP', '独立用户', '新独立用户' ];
+        $.ajax({
+            url: url,
+            type: "post",
+            data: reqParams,
+            async: false,
+            success: function (data) {
+                array = data.data;
+                labels = data.labels;
+            }
+        });
+        if (array && array.length > 0) {
+            $("#" + continer).height(400).html('');
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById(continer));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: _title
+                },
+                tooltip: {
+                    trigger: 'axis',
+                },
+                legend: {
+                    data: _legend,
+                    right: "9%",
+                },
+                calculable: true,
+                xAxis: {
+                    type: "category",
+                    data: labels,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 45
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} 次'
+                    }
+                },
+                series: array
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+        else {
+            // padding-left: 500px;padding-top: 50px;
+            $("#" + continer).html('无数据');
+        }
+    }
+
+</script>
+
+
+
+
+
+
+
+<script>
+    //form查询表单展开收起效果
+    function searchExpand(){
+        var at = 'auto';
+        var sfp = $('.searchFormP');
+        var btn = $('.searchFormP .btnExpand');
+        $('.searchFormP').css('height',45);
+        btn.on('click',function(){
+            var h = sfp.height();
+            if(h<=50){
+                btn.addClass('closeMng');
+                sfp.css('height',at);
+            }else{
+                btn.removeClass('closeMng');
+                sfp.css('height',45);
+            }
+        })
+    }
+    $(function(){
+        searchExpand();
+    })
+</script>
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script>
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#start_time,#end_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d H:i"
+    });
+</script>

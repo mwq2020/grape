@@ -175,38 +175,49 @@ class Activity extends Base
                 }else{
                     throw new \Exception('图片保存失败【'.$file->getError().'】');
                 }
+                unset($file);
             }
 
             $file = request()->file('activity_gallery_1');
             if($file){
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/activity');
                 if($info){
-                    $image_name =  $info->getSaveName();
-                    array_push($activity_gallery,'/static/image/activity/'.$image_name);
+                    $image_name1 =  $info->getSaveName();
+                    //echo '第一张图片'.$image_name1."<br>";
+                    array_push($activity_gallery,'/static/image/activity/'.$image_name1);
                 }else{
                     throw new \Exception('图片1保存失败【'.$file->getError().'】');
                 }
+                unset($file);
             }
             $file = request()->file('activity_gallery_2');
             if($file){
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/activity');
                 if($info){
-                    $image_name =  $info->getSaveName();
-                    array_push($activity_gallery,'/static/image/activity/'.$image_name);
+                    $image_name2 =  $info->getSaveName();
+                    //echo '第二张图片'.$image_name2."<br>";
+                    array_push($activity_gallery,'/static/image/activity/'.$image_name2);
                 }else{
                     throw new \Exception('图片2保存失败【'.$file->getError().'】');
                 }
+                unset($file);
             }
             $file = request()->file('activity_gallery_3');
             if($file){
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/activity');
                 if($info){
-                    $image_name =  $info->getSaveName();
-                    array_push($activity_gallery,'/static/image/activity/'.$image_name);
+                    $image_name3 =  $info->getSaveName();
+                    //echo '第三张图片'.$image_name3."<br>";
+                    array_push($activity_gallery,'/static/image/activity/'.$image_name3);
                 }else{
                     throw new \Exception('图片3保存失败【'.'/static/image/activity/'.$file->getError().'】');
                 }
+                unset($file);
             }
+
+//            echo "<pre>";
+//            print_r($activity_gallery);
+//            exit;
 
             $data = [];
             $data['activity_name']  = $_REQUEST['activity_name'];
@@ -232,14 +243,16 @@ class Activity extends Base
             $data['status']             = 1;
             $flag = Loader::model('Activity')->where('activity_id', $activity_id)->update($data);
             if(empty($flag)){
-                throw new \Exception('活动添加失败');
+                throw new \Exception('活动修改失败');
             }
         } catch (\Exception $e) {
             $this->assign('error_msg', $e->getMessage());
+            echo $e->getMessage();exit;
+
             $customer_list = Loader::model('Customer')->getCustomerSelectList();
             $this->assign('customer_list', $customer_list);
             $this->view->engine->layout('layout');
-            return $this->fetch('activity/add');
+            return $this->fetch('activity/edit');
         }
         return $this->redirect('activity/index');
     }
