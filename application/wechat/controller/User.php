@@ -284,6 +284,9 @@ class User extends Base
         exit(json_encode($return_data));
     }
 
+    /**
+     * 清空播放列表
+     */
     public function clear_view_list()
     {
         $return_data = ['code' => 200,'msg' => '','data'=>['flag'=>0]];
@@ -301,6 +304,9 @@ class User extends Base
         exit(json_encode($return_data));
     }
 
+    /**
+     * 删除收藏视频列表
+     */
     public function clear_collect_list()
     {
         $return_data = ['code' => 200,'msg' => '','data'=>['flag'=>0,'request'=>$_REQUEST]];
@@ -314,6 +320,26 @@ class User extends Base
             if(!empty($collect_ids) && is_array($collect_ids)){
                 Db::table('user_collect_list')->where('collect_id','in',$collect_ids)->delete();
             }
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
+    /**
+     * 清空消息
+     */
+    public function clear_message_list()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>['flag'=>0,'request'=>$_REQUEST]];
+        try {
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                $return_data['code']    = 400;
+                $return_data['msg']     = '请登录';
+            }
+            Db::table('message')->where(['user_id' => $user_id])->delete();
         } catch (\Exception $e){
             $return_data['code']    = 500;
             $return_data['msg']     = $e->getMessage();

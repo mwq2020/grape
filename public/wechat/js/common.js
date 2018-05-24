@@ -324,7 +324,7 @@ $(function(){
             type: 'POST',
             async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
             url: '/wechat/user/clear_view_list' ,
-            data: '?m='+ Math.random() ,
+            data: 'm='+ Math.random() ,
             dataType:'json',
             cache:false, //同理
             success: function(data){
@@ -341,8 +341,59 @@ $(function(){
             },
         });
     })
-    
 
+    //点消息详情标记已读
+    $('.message_info').click(function(){
+        var message_id = $(this).attr('data-message_id');
+        var status = $(this).attr('data-message_status');
+        if(status == 1){
+            return false;
+        }
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '/wechat/user/change_message_status' ,
+            data: 'message_id='+message_id+'&m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    location.reload();
+                } else if(data.code == 400){
+                    location.reload();
+                }else {
+                    //alert('清空浏览列表失败');
+                }
+            } ,
+            error:function(){
+                alert('网络错误');
+            },
+        });
+    })
+
+    //点击清空消息按钮
+    $('#message_clear_btn').click(function(){
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: '/wechat/user/clear_message_list' ,
+            data: 'm='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    location.reload();
+                } else if(data.code == 400){
+                    location.reload();
+                }else {
+                    alert('清空消息失败');
+                }
+            } ,
+            error:function(){
+                alert('网络错误');
+            },
+        });
+    })
 
 })
 
