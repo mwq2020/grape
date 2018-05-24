@@ -188,6 +188,8 @@ class User extends Base
         }
 
         $query = Db::table('product')->alias('a')->join('activity b','a.activity_id=b.activity_id');
+
+        /*
         $type = isset($_REQUEST['type']) ? intval($_REQUEST['type']) : 1;
         $type = in_array($type,[1,2,3]) ? $type : 1;
         if($type == 1){
@@ -200,9 +202,10 @@ class User extends Base
             $start_time = strtotime(date('y-m-d',strtotime('-180 days')));
             $query = $query->where('a.add_time','>=',$start_time);
         }
+        */
         $product_list = $query->where('a.user_id',$user_id)->paginate(8,false,['query' => $_GET]);
         $this->assign('product_list',$product_list);
-        $this->assign('type',$type);
+        //$this->assign('type',$type);
         $this->assign('page_title','用户中心-我的作品集');
         return $this->fetch('product_list');
     }
@@ -316,7 +319,7 @@ class User extends Base
                 $return_data['code']    = 400;
                 $return_data['msg']     = '请登录';
             }
-            $collect_ids  = $_REQUEST['collect_ids'];
+            $collect_ids  = isset($_REQUEST['collect_ids']) ? $_REQUEST['collect_ids'] : [];
             if(!empty($collect_ids) && is_array($collect_ids)){
                 Db::table('user_collect_list')->where('collect_id','in',$collect_ids)->delete();
             }
@@ -340,6 +343,29 @@ class User extends Base
                 $return_data['msg']     = '请登录';
             }
             Db::table('message')->where(['user_id' => $user_id])->delete();
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
+    /**
+     * 删除作品列表
+     */
+    public function clear_product_list()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>['flag'=>0,'request'=>$_REQUEST]];
+        try {
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                $return_data['code']    = 400;
+                $return_data['msg']     = '请登录';
+            }
+            $product_ids  = isset($_REQUEST['product_ids']) ? $_REQUEST['product_ids'] : [];
+            if(!empty($product_ids) && is_array($product_ids)){
+                Db::table('product')->where('product_id','in',$product_ids)->delete();
+            }
         } catch (\Exception $e){
             $return_data['code']    = 500;
             $return_data['msg']     = $e->getMessage();
