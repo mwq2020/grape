@@ -318,6 +318,31 @@ $(function(){
         $('#logout_pop').hide();
     })
 
+    //播放浏览记录页面-清空按钮
+    $('#view_clear_btn').click(function () {
+        $.ajax({
+            type: 'POST',
+            async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+            url: '/wechat/user/clear_view_list' ,
+            data: '?m='+ Math.random() ,
+            dataType:'json',
+            cache:false, //同理
+            success: function(data){
+                if(data.code == 200){
+                    location.reload();
+                } else if(data.code == 400){
+                    location.reload();
+                }else {
+                    alert('清空浏览列表失败');
+                }
+            } ,
+            error:function(){
+                alert('网络错误');
+            },
+        });
+    })
+    
+
 
 })
 

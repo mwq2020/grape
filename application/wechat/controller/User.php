@@ -217,8 +217,12 @@ class User extends Base
         if(empty($user_id)){
             return $this->redirect('/wechat/index/index?error=no_login');
         }
-        $query = Db::table('user_collect_list')->alias('a')->join('video b','a.video_id=b.video_id')->join('category c','b.second_cat_id=c.cat_id')->field('a.collect_id,b.*,c.cat_name');
-        $collect_list = $query->where('a.user_id',$user_id)->order('a.add_time','desc')->paginate(8,false,['query' => $_GET]);    //->select(); //todo 用户id 替换成正确的
+        $query = Db::table('user_collect_list')->alias('a')
+            ->join('video b','a.video_id=b.video_id')
+            ->join('category c','b.second_cat_id=c.cat_id')
+            ->field('a.collect_id,b.*,c.cat_name');
+        $collect_list = $query->where('a.user_id',$user_id)->order('a.add_time','desc')
+                        ->paginate(8,false,['query' => $_GET]);
         $this->assign('collect_list',$collect_list);
 
         $this->assign('page_title','紫葡萄少儿艺术库-我的收藏');
@@ -278,7 +282,44 @@ class User extends Base
             $return_data['msg']     = $e->getMessage();
         }
         exit(json_encode($return_data));
-
     }
+
+    public function clear_view_list()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>['flag'=>0]];
+        try {
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                $return_data['code']    = 400;
+                $return_data['msg']     = '请登录';
+            }
+            Db::table('user_view_list')->where(['user_id' => $user_id])->delete();
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
+    public function clear_collect_list()
+    {
+        $return_data = ['code' => 200,'msg' => '','data'=>['flag'=>0,'request'=>$_REQUEST]];
+        try {
+            $user_id = session('user_id');
+            if(empty($user_id)){
+                $return_data['code']    = 400;
+                $return_data['msg']     = '请登录';
+            }
+            $collect_ids  = $_REQUEST['collect_ids'];
+            if(!empty($collect_ids) && is_array($collect_ids)){
+                Db::table('user_collect_list')->where('collect_id','in',$collect_ids)->delete();
+            }
+        } catch (\Exception $e){
+            $return_data['code']    = 500;
+            $return_data['msg']     = $e->getMessage();
+        }
+        exit(json_encode($return_data));
+    }
+
 
 }
