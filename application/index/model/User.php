@@ -1,8 +1,9 @@
 <?php
 
 namespace app\index\model;
-
 use think\Model;
+use think\Db;
+use think\Loader;
 
 class User extends Model
 {
@@ -35,6 +36,48 @@ class User extends Model
             return false;
         }
         return false;
+    }
+
+    /**
+     * 通过客户ip
+     * @param $ip
+     * @return bool
+     */
+    public function customerFreeLogin($ip)
+    {
+        $user_id = session('user_id');
+        if(!empty($user_id) || empty($ip)) {
+            return false;
+        }
+
+        $ip2lang = ip2long($ip);
+        $where = [];
+        $where['start_ip'] = ['<=',$ip2lang];
+        $where['end_ip'] = ['>=',$ip2lang];
+        $where['is_free_login'] = 1;
+        $ip_info = Db::table('customer_ip_list')->where($where)->find();
+        if(empty($ip_info)){
+            return false;
+        }
+        $customer_info = Db::table('customer')->find($ip_info['customer_id']);
+        if(empty($customer_info)){
+            return false;
+        }
+        $user_info = Db::table('user')->where(['reader_no'=>$customer_info['account_no'],'customer_id'=>$customer_info['customer_id']])->find();
+        if(empty($user_info)){
+            return false;
+        }
+
+        session('user_id',$user_info['user_id']);
+        session('reader_no',$user_info['reader_no']);
+        if(!empty($user_info['reader_no'])){
+            session('real_name',$user_info['reader_no']);
+        } else {
+            session('real_name',$user_info['telphone']);
+        }
+        session('avatar','/static/image/user/default_user.jpg');
+        session('user_info',$user_info);
+        return true;
     }
 
 }

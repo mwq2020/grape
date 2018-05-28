@@ -1,8 +1,9 @@
 <?php
 namespace app\index\controller;
-use \think\Db;
+use think\Db;
 use think\Loader;
 use Endroid\QrCode\QrCode;
+use think\Request;
 
 class Video extends Base
 {
@@ -12,6 +13,11 @@ class Video extends Base
      */
     public function info()
     {
+        if(empty($user_id)) {
+            $ip = Request::instance()->ip();
+            Loader::model('User')->customerFreeLogin($ip);
+        }
+
         //获取当前视频的详情
         $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
         $video_info = Loader::model('Video')->find($video_id);
@@ -60,6 +66,13 @@ class Video extends Base
      */
     public function video_info()
     {
+
+        if(empty($user_id)) {
+            $ip = Request::instance()->ip();
+            //$ip = '27.151.120.90';
+            Loader::model('User')->customerFreeLogin($ip);
+        }
+
         //获取当前视频的详情
         $video_id = isset($_REQUEST['video_id']) ? intval($_REQUEST['video_id']) : 0;
         $video_info = Loader::model('Video')->find($video_id);
