@@ -39,7 +39,7 @@ class User extends Model
     }
 
     /**
-     * 通过客户ip
+     * 通过客户ip来判断是否免登陆【自动登录】
      * @param $ip
      * @return bool
      */
@@ -55,6 +55,7 @@ class User extends Model
         $where['start_ip'] = ['<=',$ip2lang];
         $where['end_ip'] = ['>=',$ip2lang];
         $where['is_free_login'] = 1;
+        $where['status'] = 1;
         $ip_info = Db::table('customer_ip_list')->where($where)->find();
         if(empty($ip_info)){
             return false;

@@ -165,6 +165,10 @@ class Activity extends Base
         }
 
         try{
+
+//            echo "<pre>";
+//            print_r($_FILES);
+
             $activity_img = '';
             $activity_gallery = [];
             $file = request()->file('activity_img');
@@ -183,7 +187,8 @@ class Activity extends Base
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/activity');
                 if($info){
                     $image_name1 =  $info->getSaveName();
-                    //echo '第一张图片'.$image_name1."<br>";
+//                    echo '第一张图片'.$image_name1."<br>";
+//                    print_r($file);
                     array_push($activity_gallery,'/static/image/activity/'.$image_name1);
                 }else{
                     throw new \Exception('图片1保存失败【'.$file->getError().'】');
@@ -195,7 +200,8 @@ class Activity extends Base
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/activity');
                 if($info){
                     $image_name2 =  $info->getSaveName();
-                    //echo '第二张图片'.$image_name2."<br>";
+//                    echo '第二张图片'.$image_name2."<br>";
+//                    print_r($file);
                     array_push($activity_gallery,'/static/image/activity/'.$image_name2);
                 }else{
                     throw new \Exception('图片2保存失败【'.$file->getError().'】');
@@ -207,7 +213,8 @@ class Activity extends Base
                 $info = $file->move(ROOT_PATH . 'public' . DS . 'static'. DS . 'image/activity');
                 if($info){
                     $image_name3 =  $info->getSaveName();
-                    //echo '第三张图片'.$image_name3."<br>";
+//                    echo '第三张图片'.$image_name3."<br>";
+//                    print_r($file);
                     array_push($activity_gallery,'/static/image/activity/'.$image_name3);
                 }else{
                     throw new \Exception('图片3保存失败【'.'/static/image/activity/'.$file->getError().'】');

@@ -183,5 +183,11 @@ class Video extends Base
         exit;
     }
 
+    public function test_ip()
+    {
+        $ip = Request::instance()->ip();
+        echo "您当前的ip为:[".$ip."]";
+    }
+
 
 }
