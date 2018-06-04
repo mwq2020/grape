@@ -72,7 +72,8 @@
             <dt>客户账号</dt>
             <dd>
                 <div class="inputP">
-                    <input type="text" name="account_no" value="" maxlength="30" />
+                    <input type="text" name="account_no" style="display: none;"/>
+                    <input type="text" name="account_no" value="" maxlength="30" autocomplete="off"/>
                 </div>
             </dd>
         </dl>
@@ -81,7 +82,8 @@
             <dt>密码</dt>
             <dd>
                 <div class="inputP">
-                    <input type="password" name="password" value="" maxlength="15"/>
+                    <input type="password" name="password" style="display: none;"/>
+                    <input type="password" name="password" value="" maxlength="15" autocomplete="off"/>
                 </div>
             </dd>
         </dl>
@@ -109,7 +111,7 @@
             <dd>
                 <div class="inputP">
                     <label><input type="radio" name="type" value="1" checked />正式用户</label>
-                    <label><input type="radio" name="type" value="0" />测试用户</label>
+                    <label><input type="radio" name="type" value="0" />试用用户</label>
                 </div>
             </dd>
         </dl>

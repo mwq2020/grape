@@ -41,7 +41,7 @@
                 <dt>读者证号</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="reader_no" value="{$user_info.reader_no}" maxlength="20"/>
+                        <input type="text" name="reader_no" value="{$user_info.reader_no}" maxlength="20" autocomplete="off"/>
                     </div>
                 </dd>
             </dl>
@@ -50,6 +50,7 @@
                 <dt>密码</dt>
                 <dd>
                     <div class="inputP">
+                        <input type="password" name="password" style="display: none;" autocomplete="off"/>
                         <input type="password" name="password" value="" maxlength="15"/>
                     </div>
                 </dd>

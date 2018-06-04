@@ -79,7 +79,7 @@
                 <dt>客户账号</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="text" name="account_no" value="{$customer_info.account_no}" maxlength="30" readonly/>
+                        <input type="text" name="account_no" value="{$customer_info.account_no}" maxlength="30" autocomplete="off" readonly />
                     </div>
                 </dd>
             </dl>
@@ -88,11 +88,11 @@
                 <dt>密码</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="password" name="password" value="" maxlength="15"/>
+                        <input type="password" name="password" style="display: none;"/>
+                        <input type="password" name="password" value="" maxlength="15" autocomplete="off"/>
                     </div>
                 </dd>
             </dl>
-
 
             <dl>
                 <dt>注册时间</dt>
@@ -117,7 +117,7 @@
                 <dd>
                     <div class="inputP">
                         <label><input type="radio" name="type" value="1" {if $customer_info.type=='正式客户' }checked{/if}  />正式客户</label>
-                        <label><input type="radio" name="type" value="0" {if $customer_info.type=='试用客户' }checked{/if}  />试用客户</label>
+                        <label><input type="radio" name="type" value="0" {if $customer_info.type=='试用客户' }checked{/if}  />试用用户</label>
                     </div>
                 </dd>
             </dl>

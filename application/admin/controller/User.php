@@ -47,10 +47,10 @@ class User extends Base
     public function add()
     {
         $error_msg = '';
-        if(empty($_POST)){
-            $customer_list = Loader::model('Customer')->select();
-            $this->assign('customer_list',$customer_list);
+        $customer_list = Loader::model('Customer')->select();
+        $this->assign('customer_list',$customer_list);
 
+        if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
             return $this->fetch('user/add');
