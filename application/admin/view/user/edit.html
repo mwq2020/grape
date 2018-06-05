@@ -13,7 +13,7 @@
     <div class="formP formV">
         <form action="" method="post">
             <dl>
-                <dt>姓名</dt>
+                <dt><span class="redSpan">*</span>姓名</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="real_name" value="{$user_info.real_name}" maxlength="30"/>
@@ -22,7 +22,7 @@
             </dl>
 
             <dl>
-                <dt>所属客户</dt>
+                <dt><span class="redSpan">*</span>所属客户</dt>
                 <dd>
                     <ul class="selectP">
                         <li>
@@ -38,7 +38,7 @@
             </dl>
 
             <dl>
-                <dt>读者证号</dt>
+                <dt><span class="redSpan">*</span>读者证号</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="reader_no" value="{$user_info.reader_no}" maxlength="20" autocomplete="off"/>
@@ -47,7 +47,7 @@
             </dl>
 
             <dl>
-                <dt>密码</dt>
+                <dt><span class="redSpan">*</span>密码</dt>
                 <dd>
                     <div class="inputP">
                         <input type="password" name="password" style="display: none;" autocomplete="off"/>
@@ -57,7 +57,7 @@
             </dl>
 
             <dl>
-                <dt>联系电话</dt>
+                <dt><span class="redSpan">*</span>联系电话</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="telphone" value="{$user_info.telphone}" maxlength="11" />

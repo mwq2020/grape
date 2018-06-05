@@ -35,6 +35,10 @@ class User extends Base
 
             //用户本地表
             $user_info = Loader::model('User')->where(['reader_no'=>$reader_no,'customer_id'=>$customer_id])->find();
+            if($user_info['status'] == 0){
+                throw new \Exception('用户已禁用！');
+            }
+
             $password = md5($password);
             if($customer_info['login_type'] == 1){ //本地用户表校验
                 if(empty($user_info)){

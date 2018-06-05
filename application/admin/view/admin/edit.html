@@ -15,7 +15,7 @@
         <form action="" method="post" enctype="multipart/form-data">
 
             <dl>
-                <dt>账号登录</dt>
+                <dt><span class="redSpan">*</span>账号登录</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="account" value="{$admin_info.account}" maxlength="50" {if $admin_info.account =='admin'}readonly{/if}/>
@@ -24,7 +24,7 @@
             </dl>
 
             <dl>
-                <dt>用户名</dt>
+                <dt><span class="redSpan">*</span>用户名</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="user_name" value="{$admin_info.user_name}" maxlength="10"/>

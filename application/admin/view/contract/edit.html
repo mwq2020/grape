@@ -13,7 +13,7 @@
         <form action="" method="post" enctype="multipart/form-data">
 
             <dl>
-                <dt>合同编号</dt>
+                <dt><span class="redSpan">*</span>合同编号</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="contract_no" value="{$contract_info.contract_no}" maxlength="20" readonly/>
@@ -22,7 +22,7 @@
             </dl>
 
             <dl>
-                <dt>合同名称</dt>
+                <dt><span class="redSpan">*</span>合同名称</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="title" value="{$contract_info.title}" maxlength="100"/>
@@ -31,7 +31,7 @@
             </dl>
 
             <dl>
-                <dt>合同起止时间</dt>
+                <dt><span class="redSpan">*</span>合同起止时间</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="contract_start_time" id="contract_start_time" value="{$contract_info.contract_start_time|date='Y-m-d',###}" />
@@ -41,7 +41,7 @@
             </dl>
 
             <dl>
-                <dt>客户姓名</dt>
+                <dt><span class="redSpan">*</span>客户姓名</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="customer_name" value="{$contract_info.customer_name}" maxlength="20"/>
@@ -50,7 +50,7 @@
             </dl>
 
             <dl>
-                <dt>合同金额</dt>
+                <dt><span class="redSpan">*</span>合同金额</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="order_amount" value="{$contract_info.order_amount}" maxlength="8"/>
@@ -59,7 +59,7 @@
             </dl>
 
             <dl>
-                <dt>合同签订时间</dt>
+                <dt><span class="redSpan">*</span>合同签订时间</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="contract_time" id="contract_time" value="{$contract_info.contract_time|date='Y-m-d',###}" />
@@ -68,7 +68,7 @@
             </dl>
 
             <dl>
-                <dt>联系人</dt>
+                <dt><span class="redSpan">*</span>联系人</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="link_person" value="{$contract_info.link_person}" maxlength="30" />

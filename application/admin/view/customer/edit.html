@@ -13,7 +13,7 @@
     <div class="formP formV">
         <form action="" method="post">
             <dl>
-                <dt>客户名称</dt>
+                <dt><span class="redSpan">*</span>客户名称</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="customer_name" value="{$customer_info.customer_name}" maxlength="50"/>
@@ -31,7 +31,7 @@
             </dl>
 
             <dl>
-                <dt>所属区域</dt>
+                <dt><span class="redSpan">*</span>所属区域</dt>
                 <dd>
                     <ul class="selectP">
                         <li>
@@ -41,7 +41,39 @@
                                 <option value="上海" {if $customer_info.region_name=="上海" }selected{/if}>上海</option>
                                 <option value="广州" {if $customer_info.region_name=="广州" }selected{/if}>广州</option>
                                 <option value="深圳" {if $customer_info.region_name=="深圳" }selected{/if}>深圳</option>
-                                <option value="内蒙古" {if $customer_info.region_name=="内蒙古" }selected{/if}>内蒙古</option>
+                                <option value="呼和浩特" {if $customer_info.region_name=="呼和浩特" }selected{/if}>内蒙古</option>
+                                <option value="济南" {if $customer_info.region_name=="济南" }selected{/if}>济南</option>
+                                <option value="石家庄" {if $customer_info.region_name=="石家庄" }selected{/if}>石家庄</option>
+                                <option value="长春" {if $customer_info.region_name=="长春" }selected{/if}>长春</option>
+                                <option value="哈尔滨" {if $customer_info.region_name=="哈尔滨" }selected{/if}>哈尔滨</option>
+                                <option value="沈阳" {if $customer_info.region_name=="沈阳" }selected{/if}>沈阳</option>
+                                <option value="乌鲁木齐" {if $customer_info.region_name=="乌鲁木齐" }selected{/if}>乌鲁木齐</option>
+                                <option value="兰州" {if $customer_info.region_name=="兰州" }selected{/if}>兰州</option>
+                                <option value="银川" {if $customer_info.region_name=="银川" }selected{/if}>银川</option>
+                                <option value="太原" {if $customer_info.region_name=="太原" }selected{/if}>太原</option>
+                                <option value="西安" {if $customer_info.region_name=="西安" }selected{/if}>西安</option>
+                                <option value="郑州" {if $customer_info.region_name=="郑州" }selected{/if}>郑州</option>
+                                <option value="合肥" {if $customer_info.region_name=="合肥" }selected{/if}>合肥</option>
+                                <option value="南京" {if $customer_info.region_name=="南京" }selected{/if}>南京</option>
+                                <option value="杭州" {if $customer_info.region_name=="杭州" }selected{/if}>杭州</option>
+                                <option value="福州" {if $customer_info.region_name=="福州" }selected{/if}>福州</option>
+                                <option value="广州" {if $customer_info.region_name=="广州" }selected{/if}>广州</option>
+                                <option value="南昌" {if $customer_info.region_name=="南昌" }selected{/if}>南昌</option>
+                                <option value="海口" {if $customer_info.region_name=="海口" }selected{/if}>海口</option>
+                                <option value="南宁" {if $customer_info.region_name=="南宁" }selected{/if}>南宁</option>
+                                <option value="贵阳" {if $customer_info.region_name=="贵阳" }selected{/if}>贵阳</option>
+                                <option value="长沙" {if $customer_info.region_name=="长沙" }selected{/if}>长沙</option>
+                                <option value="武汉" {if $customer_info.region_name=="武汉" }selected{/if}>武汉</option>
+                                <option value="成都" {if $customer_info.region_name=="成都" }selected{/if}>成都</option>
+                                <option value="昆明" {if $customer_info.region_name=="昆明" }selected{/if}>昆明</option>
+                                <option value="拉萨" {if $customer_info.region_name=="拉萨" }selected{/if}>拉萨</option>
+                                <option value="西宁" {if $customer_info.region_name=="西宁" }selected{/if}>西宁</option>
+                                <option value="天津" {if $customer_info.region_name=="天津" }selected{/if}>天津</option>
+                                <option value="上海" {if $customer_info.region_name=="上海" }selected{/if}>上海</option>
+                                <option value="重庆" {if $customer_info.region_name=="重庆" }selected{/if}>重庆</option>
+                                <option value="台北" {if $customer_info.region_name=="台北" }selected{/if}>台北</option>
+                                <option value="香港" {if $customer_info.region_name=="香港" }selected{/if}>香港</option>
+                                <option value="澳门" {if $customer_info.region_name=="澳门" }selected{/if}>澳门</option>
                             </select>
                         </li>
                     </ul>
@@ -49,7 +81,7 @@
             </dl>
 
             <dl>
-                <dt>客户联系人</dt>
+                <dt><span class="redSpan">*</span>客户联系人</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="customer_link_person" value="{$customer_info.customer_link_person}" maxlength="10"/>
@@ -58,7 +90,7 @@
             </dl>
 
             <dl>
-                <dt>联系人电话</dt>
+                <dt><span class="redSpan">*</span>联系人电话</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="link_person_mobile" value="{$customer_info.link_person_mobile}" maxlength="11"/>
@@ -67,7 +99,7 @@
             </dl>
 
             <dl>
-                <dt>销售对接人</dt>
+                <dt><span class="redSpan">*</span>销售对接人</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="sale_person" value="{$customer_info.sale_person}" maxlength="20" />
@@ -76,7 +108,7 @@
             </dl>
 
             <dl>
-                <dt>客户账号</dt>
+                <dt><span class="redSpan">*</span>客户账号</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="account_no" value="{$customer_info.account_no}" maxlength="30" autocomplete="off" readonly />
@@ -95,7 +127,7 @@
             </dl>
 
             <dl>
-                <dt>注册时间</dt>
+                <dt><span class="redSpan">*</span>注册时间</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="start_time" id="start_time" value="{$customer_info.start_time|date='Y-m-d',###}" maxlength="11" />
@@ -104,7 +136,7 @@
             </dl>
 
             <dl>
-                <dt>失效时间</dt>
+                <dt><span class="redSpan">*</span>失效时间</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="end_time" id="end_time" value="{$customer_info.end_time|date='Y-m-d',###}" maxlength="11"/>
@@ -113,7 +145,7 @@
             </dl>
 
             <dl>
-                <dt>用户类型</dt>
+                <dt><span class="redSpan">*</span>用户类型</dt>
                 <dd>
                     <div class="inputP">
                         <label><input type="radio" name="type" value="1" {if $customer_info.type=='正式客户' }checked{/if}  />正式客户</label>
@@ -123,7 +155,7 @@
             </dl>
 
             <dl>
-                <dt>用户登录校验方式</dt>
+                <dt><span class="redSpan">*</span>用户登录校验方式</dt>
                 <dd>
                     <div class="inputP">
                         <label><input type="radio" name="login_type" value="1" {if $customer_info.login_type==1 }checked{/if} />本地数据表校验登录</label>

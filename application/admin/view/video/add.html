@@ -13,7 +13,7 @@
     <div class="formP formV">
         <form action="" method="post" enctype="multipart/form-data">
             <dl>
-                <dt>资源名称</dt>
+                <dt><span class="redSpan">*</span>资源名称</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="title" value="" maxlength="200"/>
@@ -22,7 +22,7 @@
             </dl>
 
             <dl>
-                <dt>所属一级分类</dt>
+                <dt><span class="redSpan">*</span>所属一级分类</dt>
                 <dd>
                     <ul class="selectP">
                         <li>
@@ -42,7 +42,7 @@
             </dl>
 
             <dl>
-                <dt>所属二级分类</dt>
+                <dt><span class="redSpan">*</span>所属二级分类</dt>
                 <dd>
                     <ul class="selectP">
                         <li>
@@ -73,7 +73,7 @@
 
             <!--上传图片-->
             <dl>
-                <dt>上传封面图片</dt>
+                <dt><span class="redSpan">*</span>上传封面图片</dt>
                 <dd>
                     <div class="uploadImg">
                         <div class="btnMng">
@@ -98,7 +98,7 @@
 
             <!--上传视频-->
             <dl>
-                <dt>上传视频</dt>
+                <dt><span class="redSpan">*</span>上传视频</dt>
                 <dd>
                     <input type="file" name="video" id="video" style="display:none;"/>
                     <a href="javascript:void(0)" id="video_upload_btn" class="btnP btnWhite" style="height:30px; line-height:30px">添加视频</a><span>视频限制 400M 以内 MP4 格式</span>
@@ -138,7 +138,7 @@
             </dl>
 
             <dl>
-                <dt>视频简介</dt>
+                <dt><span class="redSpan">*</span>视频简介</dt>
                 <dd>
                     <div class="inputP textareaP">
                         <textarea name="mark" placeholder="请输入简介" maxlength="1000"></textarea>
@@ -179,7 +179,7 @@
                     }
                 } ,
                 error:function(){
-                    alert('获取子分类失败');
+                    alert('网络错误，获取子分类失败');
                 },
             });
         })

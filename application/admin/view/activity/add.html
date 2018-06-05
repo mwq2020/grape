@@ -14,7 +14,7 @@
     <div class="formP formV">
         <form action="" method="post" enctype="multipart/form-data">
             <dl>
-                <dt>活动名称</dt>
+                <dt><span class="redSpan">*</span>活动名称</dt>
                 <dd>
                     <div class="inputP">
                         <input type="text" name="activity_name" value="" maxlength="100"/>
@@ -23,7 +23,7 @@
             </dl>
 
             <dl>
-                <dt>所属机构</dt>
+                <dt><span class="redSpan">*</span>所属机构</dt>
                 <dd>
                     <ul class="selectP">
                         <li>
@@ -40,16 +40,17 @@
 
 
             <dl>
-                <dt>活动时间</dt>
+                <dt><span class="redSpan">*</span>活动时间</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="input" name="start_time" id="start_time" value="" /> <input type="input" name="end_time" id="end_time" value="" />
+                        <input type="input" name="start_time" id="start_time" value="" autocomplete="off" />
+                        <input type="input" name="end_time" id="end_time" value="" autocomplete="off" />
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>活动地点</dt>
+                <dt><span class="redSpan">*</span>活动地点</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="address" value="" maxlength="200"/>
@@ -58,7 +59,7 @@
             </dl>
 
             <dl>
-                <dt>能否报名</dt>
+                <dt><span class="redSpan">*</span>能否报名</dt>
                 <dd>
                     <div class="inputP">
                         <label><input type="radio" name="is_signup" value="1" checked />能</label>
@@ -68,16 +69,17 @@
             </dl>
 
             <dl>
-                <dt>报名时间</dt>
+                <dt><span class="redSpan">*</span>报名时间</dt>
                 <dd>
                     <div class="inputP">
-                        <input type="input" name="signup_start_time" id="signup_start_time" value="" /> <input type="input" name="signup_end_time" id="signup_end_time" value="" />
+                        <input type="input" name="signup_start_time" id="signup_start_time" value="" autocomplete="off" />
+                        <input type="input" name="signup_end_time" id="signup_end_time" value="" autocomplete="off" />
                     </div>
                 </dd>
             </dl>
 
             <dl>
-                <dt>人数限制</dt>
+                <dt><span class="redSpan">*</span>人数限制</dt>
                 <dd>
                     <div class="inputP">
                         <input type="input" name="max_number" value="" maxlength="6"/>
@@ -88,7 +90,7 @@
 
             <!--上传图片-->
             <dl>
-                <dt>活动图片</dt>
+                <dt><span class="redSpan">*</span>活动图片</dt>
                 <dd>
                     <div class="uploadImg">
                         <div class="btnMng">
@@ -160,7 +162,7 @@
 
 
             <dl>
-                <dt>活动简介</dt>
+                <dt><span class="redSpan">*</span>活动简介</dt>
                 <dd>
                     <div class="inputP textareaP">
                         <textarea name="activity_desc" id="activity_desc" placeholder="请输入简介" maxlength="1000"></textarea>
@@ -171,7 +173,7 @@
             </dl>
 
             <dl>
-                <dt>参与方式</dt>
+                <dt><span class="redSpan">*</span>参与方式</dt>
                 <dd>
                     <div class="inputP textareaP">
                         <textarea name="join_rule" id="join_rule" placeholder="请输入简介" maxlength="1000"></textarea>
@@ -183,7 +185,7 @@
 
 
             <dl>
-                <dt>活动奖励</dt>
+                <dt><span class="redSpan">*</span>活动奖励</dt>
                 <dd>
                     <div class="inputP textareaP">
                         <textarea name="activity_reward" id="activity_reward" placeholder="请输入简介" maxlength="1000"></textarea>
@@ -195,7 +197,7 @@
 
 
             <dl>
-                <dt>特别注意</dt>
+                <dt><span class="redSpan">*</span>特别注意</dt>
                 <dd>
                     <div class="inputP textareaP" id="special_attention">
                         <textarea name="special_attention"  placeholder="请输入简介" maxlength="1000"></textarea>
