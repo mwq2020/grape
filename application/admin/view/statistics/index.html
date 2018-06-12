@@ -55,7 +55,8 @@
             <dl class="rBtn searchBtns">
                 <dt>　</dt>
                 <dd>
-                    <input type="submit" class="btnP btnSearch" value="确定">
+                    <!--<input type="submit" class="btnP btnSearch" value="确定">-->
+                    <a href="javascript:void(0)" class="btnP btnSearch">确定</a>
                     <a href="javascript:void(0)" class="btnP btnDark">重置</a>
                 </dd>
             </dl>
@@ -66,8 +67,8 @@
 
 <script type="text/javascript" src="/admin/js/echarts.min.js"></script>
 <div class="boxP">
-    <div class="tableBox p20">
-        <div id='visitCanvas' style="width: 1100px;height:400px;"></div>
+    <div class="tableBox">
+        <div id='visitCanvas' style="width:1100px;height:400px;"></div>
     </div>
 </div>
 
@@ -111,9 +112,9 @@
             };
             // reqParams 报表数据请求参数
             // _mocker 线名称
-            DrawVisit("visitCanvas", "/report/VisitReportData", reqParams);
+            DrawVisit("visitCanvas", "/admin/statistics/report_data", reqParams);
         });
-        $(".btnSearch").click();
+        // $(".btnSearch").click();
     });
 
     function DrawVisit(continer, url, reqParams) {
@@ -126,21 +127,25 @@
         var _title = "日访问量";
         // var _subtitle = "副标题";
         // 线条名称
-        var _legend = [ 'IP', '独立用户', '新独立用户' ];
+        var _legend = [ 'IP', '独立用户', '新独立用户','独立ip','访问量' ];
         $.ajax({
             url: url,
             type: "post",
             data: reqParams,
             async: false,
-            success: function (data) {
-                array = data.data;
-                labels = data.labels;
+            dataType:"json",
+            success: function (res) {
+                array = res.data;
+                labels = res.labels;
             }
         });
+
         if (array && array.length > 0) {
             $("#" + continer).height(400).html('');
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById(continer));
+            console.log('data',array);
+            console.log('chat',myChart);
             // 指定图表的配置项和数据
             var option = {
                 title: {
@@ -171,7 +176,7 @@
                 series: array
             };
             // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
+            myChart.setOption(option,true);
         }
         else {
             // padding-left: 500px;padding-top: 50px;
@@ -182,40 +187,3 @@
 </script>
 
 
-
-
-
-
-
-<script>
-    //form查询表单展开收起效果
-    function searchExpand(){
-        var at = 'auto';
-        var sfp = $('.searchFormP');
-        var btn = $('.searchFormP .btnExpand');
-        $('.searchFormP').css('height',45);
-        btn.on('click',function(){
-            var h = sfp.height();
-            if(h<=50){
-                btn.addClass('closeMng');
-                sfp.css('height',at);
-            }else{
-                btn.removeClass('closeMng');
-                sfp.css('height',45);
-            }
-        })
-    }
-    $(function(){
-        searchExpand();
-    })
-</script>
-<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
-<script>
-    $.datetimepicker.setLocale('ch');//设置选择器为中文
-    $('#start_time,#end_time').datetimepicker({
-        dayOfWeekStart : 1,
-        lang:'ch',
-        format : "Y-m-d H:i"
-    });
-</script>
