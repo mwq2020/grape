@@ -198,7 +198,7 @@ class Test extends \think\Controller
      * @throws \PHPExcel_Reader_Exception
      * CLI 访问  php public/index.php index/test/read_execl
      */
-    public function import_video()
+    public function import_videos()
     {
         echo "<pre>";
         $video_dir = 'E:/website/grape/public/static/video/美术798';
@@ -355,5 +355,49 @@ class Test extends \think\Controller
         exit;
 
     }
+
+    public function import_video()
+    {
+        // 34 围棋 35 象棋
+
+        echo "<pre>导入文件开始<br>";
+        $dir = "E:/website/grape/public/static/video/棋类/象棋/*";
+        $win_dir = iconv("UTF-8","GBK",$dir);
+        foreach(glob($win_dir) as $row){
+            $file_name = str_replace('E:/website/grape/public','',iconv("GBK","UTF-8",$row));
+
+            $file_info = pathinfo($file_name);
+            if($file_info['extension'] == 'jpg'){
+                continue;
+            }
+
+
+            echo "视频文件地址：".$file_name."<br>";
+            echo "封面文件地址：".str_replace('.mp4','.jpg',$file_name)."<br>";
+
+            $video_data = [];
+            $video_data['video_sn'] = '';
+            $video_data['cat_id'] = 6;
+            $video_data['second_cat_id'] = 35;
+            $video_data['title'] = basename(str_replace('.mp4','',$file_name));
+            $video_data['video_url'] = $file_name;
+            $video_data['video_img'] = str_replace('.mp4','.jpg',$file_name);
+            $video_data['mark'] = '象棋';
+            $video_data['series_video_desc'] = '';
+            $video_data['supplier_name'] = 'admin';
+            $video_data['status'] = 1;
+            $video_data['add_time'] = time();
+            $video_data['update_time'] = time();
+            print_r($video_data);
+//            $flag = Loader::model('Video')->insert($video_data);
+//            if(empty($flag)){
+//                echo $video_data['video_url']."插入数据库失败<br>";
+//            } else{
+//                echo '<hr>'.$video_data['video_url']."插入数据库成功<br>";
+//            }
+
+        }
+    }
+
 
 }
