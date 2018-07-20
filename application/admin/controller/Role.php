@@ -18,14 +18,25 @@ class Role extends Base
     }
 
     /**
-     * 管理员添加
+     * 角色添加
      * @return mixed
      */
     public function add()
     {
         $error_msg = '';
-        $privilege_lsit = $this->getPrivilegeList();
+
+        $privilege_lsit = [];
+        $resource_list=  Loader::model('Resource')->where('status',1)->order('parent_id asc')->select();
+        foreach($resource_list as $row)
+        {
+            if($row->parent_id == 0){
+                $privilege_lsit[$row->resource_id]= ['resource_id' => $row->resource_id,'resource_name' =>$row->resource_name];
+            } else {
+                $privilege_lsit[$row->parent_id]['child'][$row->resource_id] = ['resource_id' => $row->resource_id,'resource_name' =>$row->resource_name];
+            }
+        }
         $this->assign('privilege_lsit',$privilege_lsit);
+
 
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
@@ -55,6 +66,30 @@ class Role extends Base
             if(empty($flag)){
                 throw new \Exception('角色添加失败');
             }
+            $role_id = Loader::model('Role')->getLastInsID();
+
+            foreach($_REQUEST['privilege'] as $privilege_group_id => $privilege_group){
+
+                $role_resource_data = [];
+                $role_resource_data['role_id'] = $role_id;
+                $role_resource_data['resource_id'] = $privilege_group_id;
+                $role_resource_data['add_time'] = time();
+                $flag = Db::table('role_resource')->insert($role_resource_data);
+                if(empty($flag)){
+                    throw new \Exception('角色权限添加失败');
+                }
+
+                foreach($privilege_group as $privilege_id => $privilege){
+                    $role_resource_data = [];
+                    $role_resource_data['role_id'] = $role_id;
+                    $role_resource_data['resource_id'] = $privilege_id;
+                    $role_resource_data['add_time'] = time();
+                    $flag = Db::table('role_resource')->insert($role_resource_data);
+                    if(empty($flag)){
+                        throw new \Exception('角色权限添加失败');
+                    }
+                }
+            }
 
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
@@ -72,18 +107,28 @@ class Role extends Base
     public function edit()
     {
         $error_msg = '';
-        $privilege_lsit = $this->getPrivilegeList();
+
+        $privilege_lsit = [];
+        $resource_list=  Loader::model('Resource')->where('status',1)->order('parent_id asc')->select();
+        foreach($resource_list as $row) {
+            if($row->parent_id == 0){
+                $privilege_lsit[$row->resource_id]= ['resource_id' => $row->resource_id,'resource_name' =>$row->resource_name];
+            } else {
+                $privilege_lsit[$row->parent_id]['child'][$row->resource_id] = ['resource_id' => $row->resource_id,'resource_name' =>$row->resource_name];
+            }
+        }
         $this->assign('privilege_lsit',$privilege_lsit);
 
         $role_info = Loader::model('Role')->find($_REQUEST['role_id']);
         $this->assign('role_info',$role_info);
 
-        $privilege_data = json_decode($role_info->privilege_data,true);
-        $this->assign('privilege_data',$privilege_data);
-//        echo "<pre>";
-//        print_r($privilege_data);
-//        print_r($role_info);
-//        exit;
+        $resource_ids = [];
+        $role_resource_list = Db::table('role_resource')->where(['role_id' => $_REQUEST['role_id']])->select();
+        foreach($role_resource_list as $row){
+            array_push($resource_ids,$row['resource_id']);
+        }
+        $this->assign('resource_ids',$resource_ids);
+
 
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
@@ -107,12 +152,38 @@ class Role extends Base
 
             $privilege_data = isset($_REQUEST['privilege']) ? $_REQUEST['privilege'] : [];
             $role_info->role_name       = $_REQUEST['role_name'];
-            $role_info->privilege_data  = json_encode($privilege_data);
+            $role_info->privilege_data  = '';
             $role_info->remark          = $_REQUEST['remark'];
             $flag = $role_info->save();
             if(empty($flag)){
                 throw new \Exception('角色修改失败');
             }
+
+            $role_id = $_REQUEST['role_id'];
+            Db::table('role_resource')->where(['role_id' => $role_id])->delete();
+            foreach($_REQUEST['privilege'] as $privilege_group_id => $privilege_group){
+
+                $role_resource_data = [];
+                $role_resource_data['role_id'] = $role_id;
+                $role_resource_data['resource_id'] = $privilege_group_id;
+                $role_resource_data['add_time'] = time();
+                $flag = Db::table('role_resource')->insert($role_resource_data);
+                if(empty($flag)){
+                    throw new \Exception('角色权限添加失败');
+                }
+
+                foreach($privilege_group as $privilege_id => $privilege){
+                    $role_resource_data = [];
+                    $role_resource_data['role_id'] = $role_id;
+                    $role_resource_data['resource_id'] = $privilege_id;
+                    $role_resource_data['add_time'] = time();
+                    $flag = Db::table('role_resource')->insert($role_resource_data);
+                    if(empty($flag)){
+                        throw new \Exception('角色权限添加失败');
+                    }
+                }
+            }
+
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);

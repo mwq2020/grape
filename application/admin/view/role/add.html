@@ -30,18 +30,17 @@
             <dd>
                 <div class="inputP">
                     <label><input type="checkbox" class="series_{$privilege_key}" id="series_{$privilege_key}" data-series="{$privilege_key}" value="1" />
-                        <strong>{$vo.name}</strong>
+                        <strong>{$vo.resource_name}</strong>
                     </label>
                 </div>
             </dd>
             <dd style="margin-bottom:20px">
                 <div class="inputP">
-                    {foreach name="vo.child" item="role_list" key="role_key"}
-                    {foreach name="role_list" item="item_row" key="item_key"}
+                    {foreach name="vo.child" item="item_info" key="item_key"}
                         <label>
-                            <input type="checkbox" name="privilege[{$privilege_key}][{$role_key}][{$item_key}]" value="1" class="item_{$privilege_key}" data-series="{$privilege_key}"/>{$item_row}
+                            <input type="checkbox" name="privilege[{$privilege_key}][{$item_key}]" value="1"
+                                   class="item_{$privilege_key}" data-series="{$privilege_key}"/>{$item_info.resource_name}
                         </label>
-                    {/foreach}
                     {/foreach}
                 </div>
             </dd>

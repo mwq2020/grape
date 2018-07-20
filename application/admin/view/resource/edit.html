@@ -1,0 +1,81 @@
+
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+<div class="boxP">
+    <div class="titP">
+        <h4>添加权限资源</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post">
+            <!--单文本输入-->
+            <dl>
+                <dt>权限资源名称</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" class="xxl" name="resource_name" value="{$resource_info.resource_name}" maxlength="20"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>权限资源url</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" class="xxl" name="url" value="{$resource_info.url}" maxlength="50"/>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>父级资源id</dt>
+                <dd>
+                    <ul class="selectP">
+                        <li>
+                            <select name="parent_id">
+                                <option value="0">顶级菜单</option>
+                                {volist name="parent_resource" id="vo"}
+                                <option value="{$vo.resource_id}" {if $vo.resource_id == $resource_info.parent_id}selected{/if} >{$vo.resource_name}</option>
+                                {/volist}
+                            </select>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>状态</dt>
+                <dd>
+                    <div class="inputP">
+                        <label><input type="radio" name="status" value="1" {if $resource_info.status ==1}checked{/if} />启用</label>
+                        <label><input type="radio" name="status" value="0" {if $resource_info.status ==0}checked{/if}/>禁用</label>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>备注</dt>
+                <dd>
+                    <div class="inputP textareaP" id="special_attention">
+                        <textarea name="remark"  placeholder="请输入备注" maxlength="1000">{$resource_info.remark}</textarea>
+                    </div>
+                </dd>
+            </dl>
+
+            <input type="hidden" name="resource_id" value="{$resource_info.resource_id}" />
+
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd>
+                    <input type="submit" value="确定" class="btnP" >
+                    <a href="/admin/resource/index" class="btnP btnDark">取消</a>
+                </dd>
+            </dl>
+        </form>
+    </div>
+</div>

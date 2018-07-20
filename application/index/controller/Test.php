@@ -9,45 +9,60 @@ use PHPExcel;
 class Test extends \think\Controller
 {
     public $file_list = [];
+
+    public function login(){
+
+        try {
+            $param = [];
+            $param['strUserName'] = '080812300021';
+            $param['strUserPin'] = 751008;
+            $param['strAutherizeKey'] = '';
+
+            libxml_disable_entity_loader(false);
+            $client = new \SoapClient('http://58.60.1.135:8085/service.asmx?WSDL');
+            $ret = $client->Login($param);
+            echo "<pre>";
+            print_r($ret);
+
+
+//            $client = new \SoapClient('http://58.60.1.135:8085/service.asmx?op=Login');
+//            $result =  $client->__soapCall('Login', $param);
+//            echo "<pre>";
+//            print_r($result);
+
+        } catch (\Exception $e){
+            echo "<pre>";
+            echo ''.$e;
+        }
+
+    }
     /**
      * 导出execl
      * @throws \PHPExcel_Reader_Exception
      */
     public function index()
     {
-
+        $count_num = 0;
         $video_list = Loader::model('Video')->select();
         foreach($video_list as $row){
-
-            echo $row->title."<br>";
-
-            $title = str_replace(['《','》'],['',''],$row->title);
-            echo $title."<br>";
-//            $row->title = $title;
-//            $row->save();
-
-//            $title = trim(preg_replace('/^[\d]*/','',$row->title),'.');
-//            echo $title."<br>";
-//            $row->title = $title;
-//            $row->save();
-
-
-//            $title = preg_replace('/^[第\d*集]*/u','',$row->title);
-//            echo $title."<br>";
-//            $row->title = $title;
-//            $row->save();
+            $video_img = "E:/website/grape/public".iconv("UTF-8","GBK",$row['video_img']);
+            if(!file_exists($video_img)){
+                echo "视频id:{$row['video_id']}   {$row['video_img']} 封面不存在<br>";
+                $count_num ++;
+            }
+            $video_url = "E:/website/grape/public".iconv("UTF-8","GBK",$row['video_url']);
+            if(!file_exists($video_img)){
+                //echo "视频id:{$row['video_id']}   {$row['video_url']} 视频不存在<br>";
+            }
         }
-
+        echo "一共{$count_num}个视频封面不存在!<br>";
         exit;
-        $path = dirname(__FILE__); //找到当前脚本所在路径
-        $PHPExcel = new PHPExcel(); //实例化PHPExcel类，类似于在桌面上新建一个Excel表格
-        $PHPSheet = $PHPExcel->getActiveSheet(); //获得当前活动sheet的操作对象
-        $PHPSheet->setTitle('demo'); //给当前活动sheet设置名称
-        $PHPSheet->setCellValue('A1','姓名')->setCellValue('B1','分数');//给当前活动sheet填充数据，数据填充是按顺序一行一行填充的，假如想给A1留空，可以直接setCellValue('A1','');
-        $PHPSheet->setCellValue('A2','张三')->setCellValue('B2','50');
-        $PHPWriter = PHPExcel_IOFactory::createWriter($PHPExcel,'Excel2007');//按照指定格式生成Excel文件，'Excel2007'表示生成2007版本的xlsx，
-        $PHPWriter->save('/tmp/demo.xlsx'); //表示在$path路径下面生成demo.xlsx文件
-        exit('success');
+    }
+
+
+    public function mwq()
+    {
+        echo "this is a test page";
     }
 
     /**
@@ -200,6 +215,7 @@ class Test extends \think\Controller
      */
     public function import_videos()
     {
+        exit;
         echo "<pre>";
         $video_dir = 'E:/website/grape/public/static/video/美术798';
         //$video_dir = '/www/www/grape/public/static/*';

@@ -73,6 +73,7 @@ class Index extends Base
             session('admin_info',$admin);
             session('admin_id',$admin['admin_id']);
             session('account',$admin['account']);
+            session('role_id',$admin['role_id']);
 
         } catch (\Exception $e) {
             $ajax_data['status'] = 500;

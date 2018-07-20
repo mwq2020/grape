@@ -1,0 +1,57 @@
+
+<div class="boxP">
+    <div class="titP">
+        <h4>管理员列表</h4>
+        <div class="btnMng">
+            <a href="/admin/resource/add" class="btnP">新建</a>
+        </div>
+    </div>
+
+    <!--公共表格-->
+    <div class="tableBox">
+        <table class="tableP">
+            <tr>
+                <th>资源id</th>
+                <th>权限资源名称</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+
+            {foreach name="resource_list" item="vo" key="k"}
+            <tr>
+                <td>{$vo.resource_id}</td>
+                <td>{$vo.resource_name}</td>
+                <td>{if $vo['add_time'] > 0} {:date('Y-m-d H:i:s',$vo['add_time'])} {else} 无 {/if}</td>
+                <td>{$vo.status == 1 ? '启用' : '禁用'}</td>
+                <td>{$vo.remark}</td>
+                <td class="opt">
+                    {if  $vo.status==1}
+                    <a class="blue" href="/admin/resource/change_status?resource_id={$vo.resource_id}&status=0">
+                        <span>禁用</span>
+                    </a>
+                    {else}
+                    <a class="blue" href="/admin/resource/change_status?resource_id={$vo.resource_id}&status=1">
+                        <span>启用</span>
+                    </a>
+                    {/if}
+
+                    <a class="blue" href="/admin/resource/edit?resource_id={$vo.resource_id}">
+                        <span>编辑</span>
+                    </a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="page_content">
+        <div class="pageBar">
+            <div>总共<em>{$resource_list->total()}</em>条, 当前<em>{$resource_list->currentPage()}</em>/<em>{$resource_list->lastPage()}</em>页</div>
+            <div>
+                {$resource_list->render()}
+            </div>
+        </div>
+    </div>
+</div>
