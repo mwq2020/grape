@@ -17,7 +17,11 @@ class Base extends \think\Controller
         $controller = strtolower($request->controller());
         $action = strtolower($request->action());
         //没登录切访问的是登录页面或者登出页面
-        if(($controller == 'index' && $action == 'login') || ($controller == 'index' && $action == 'logout')){
+        if(
+            ($controller == 'index' && $action == 'login') ||
+            ($controller == 'index' && $action == 'logout') ||
+            ($controller == 'index' && $action == 'region_list')
+        ){
             return true;
         }
 
@@ -66,7 +70,7 @@ class Base extends \think\Controller
 
     }
 
-    public function ajax_return ($data,$code)
+    public function ajax_return ($data,$code=200)
     {
         echo json_encode(['code' => $code,'data' => $data]);
         exit;

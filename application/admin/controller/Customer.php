@@ -59,6 +59,8 @@ class Customer extends Base
     public function add()
     {
         $error_msg = '';
+        $province_list = Db::table('region')->where('region_type=1')->select();
+        $this->assign('province_list',$province_list);
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
@@ -70,7 +72,7 @@ class Customer extends Base
                 throw new \Exception('客户名称不能为空');
             }
             if(empty($_REQUEST['region_name'])){
-                throw new \Exception('所属区域不能为空');
+                //throw new \Exception('所属区域不能为空');
             }
             if(empty($_REQUEST['customer_link_person'])){
                 //throw new \Exception('客户联系人不能为空');
@@ -112,7 +114,11 @@ class Customer extends Base
 
             $data = [];
             $data['customer_name']  = $_REQUEST['customer_name'];
-            $data['region_name']    = $_REQUEST['region_name'];
+            //$data['region_name']    = $_REQUEST['region_name'];
+            $data['province_id']    = intval($_REQUEST['province_id']);
+            $data['city_id']        = intval($_REQUEST['city_id']);
+            $data['district_id']    = intval($_REQUEST['district_id']);
+
             $data['customer_link_person']   = empty($_REQUEST['customer_link_person']) ? '' : $_REQUEST['customer_link_person'];
             $data['link_person_mobile']     = empty($_REQUEST['link_person_mobile']) ? '' : $_REQUEST['link_person_mobile'];
             $data['sale_person']    = empty($_REQUEST['sale_person']) ? '' : $_REQUEST['sale_person'];
@@ -170,6 +176,21 @@ class Customer extends Base
         $customer_info = Loader::model('Customer')->find($_REQUEST['customer_id']);
         $this->assign('customer_info',$customer_info);
 
+        $province_list = Db::table('region')->where('region_type=1')->select();
+        $this->assign('province_list',$province_list);
+
+        $city_list = [];
+        if(!empty($customer_info->province_id)){
+            $city_list = Db::table('region')->where('parent_id='.$customer_info->province_id)->select();
+            $this->assign('city_list',$city_list);
+        }
+
+        $district_list = [];
+        if(!empty($customer_info->city_id)){
+            $district_list = Db::table('region')->where('parent_id='.$customer_info->city_id)->select();
+            $this->assign('district_list',$district_list);
+        }
+
         if(empty($_POST)){
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
@@ -181,7 +202,7 @@ class Customer extends Base
                 throw new \Exception('客户名称不能为空');
             }
             if(empty($_REQUEST['region_name'])){
-                throw new \Exception('所属区域不能为空');
+                //throw new \Exception('所属区域不能为空');
             }
             if(empty($_REQUEST['customer_link_person'])){
                 //throw new \Exception('客户联系人不能为空');
@@ -196,7 +217,7 @@ class Customer extends Base
                 throw new \Exception('客户账号不能为空');
             }
             if(empty($_REQUEST['password'])){
-                throw new \Exception('密码不能为空');
+                //throw new \Exception('密码不能为空');
             }
             if(empty($_REQUEST['start_time'])){
                 throw new \Exception('注册时间不能为空');
@@ -221,9 +242,13 @@ class Customer extends Base
             }
 
             $customer_info->customer_name   = $_REQUEST['customer_name'];
-            $customer_info->region_name     = empty($_REQUEST['region_name']) ? '' : $_REQUEST['region_name'];
+            //$customer_info->region_name     = empty($_REQUEST['region_name']) ? '' : $_REQUEST['region_name'];
             $customer_info->customer_link_person    = empty($_REQUEST['customer_link_person']) ? '' : $_REQUEST['customer_link_person'];
             $customer_info->link_person_mobile      = empty($_REQUEST['link_person_mobile']) ? '' : $_REQUEST['link_person_mobile'];
+
+            $customer_info->province_id    = intval($_REQUEST['province_id']);
+            $customer_info->city_id        = intval($_REQUEST['city_id']);
+            $customer_info->district_id    = intval($_REQUEST['district_id']);
 
             $customer_info->type           = intval($_REQUEST['type']);
             $customer_info->login_type     = intval($_REQUEST['login_type']);
@@ -241,8 +266,10 @@ class Customer extends Base
             //查询后台账号
             $user_info =  Loader::model('User')->where(['reader_no'=>$_REQUEST['account_no']])->find();
             if($user_info){
-                $user_info->password = md5($_REQUEST['password']);
-                $user_info->save();
+                if(!empty($_REQUEST['password'])){
+                    $user_info->password = md5($_REQUEST['password']);
+                    $user_info->save();
+                }
             } else {
                 $user_data = [];
                 $user_data['customer_id']  = $_REQUEST['customer_id'];

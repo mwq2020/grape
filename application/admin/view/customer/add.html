@@ -27,46 +27,23 @@
             <dd>
                 <ul class="selectP">
                     <li>
-                        <select name="region_name">
+                        <select name="province_id" id="province">
                             <option value="">请选择</option>
-                            <option value="北京" >北京</option>
-                            <option value="上海" >上海</option>
-                            <option value="广州" >广州</option>
-                            <option value="深圳" >深圳</option>
-                            <option value="呼和浩特" >呼和浩特</option>
-                            <option value="济南" >济南</option>
-                            <option value="石家庄" >石家庄</option>
-                            <option value="长春" >长春</option>
-                            <option value="哈尔滨" >哈尔滨</option>
-                            <option value="沈阳" >沈阳</option>
-                            <option value="乌鲁木齐" >乌鲁木齐</option>
-                            <option value="兰州" >兰州</option>
-                            <option value="银川" >银川</option>
-                            <option value="太原" >太原</option>
-                            <option value="西安" >西安</option>
-                            <option value="郑州" >郑州</option>
-                            <option value="合肥" >合肥</option>
-                            <option value="南京" >南京</option>
-                            <option value="杭州" >杭州</option>
-                            <option value="福州" >福州</option>
-                            <option value="广州" >广州</option>
-                            <option value="南昌" >南昌</option>
-                            <option value="海口" >海口</option>
-                            <option value="南宁" >南宁</option>
-                            <option value="贵阳" >贵阳</option>
-                            <option value="长沙" >长沙</option>
-                            <option value="武汉" >武汉</option>
-                            <option value="成都" >成都</option>
-                            <option value="昆明" >昆明</option>
-                            <option value="拉萨" >拉萨</option>
-                            <option value="西宁" >西宁</option>
-                            <option value="天津" >天津</option>
-                            <option value="上海" >上海</option>
-                            <option value="重庆" >重庆</option>
-                            <option value="台北" >台北</option>
-                            <option value="香港" >香港</option>
-                            <option value="澳门" >澳门</option>
+                            {volist name="province_list" id="vo"}
+                                <option value="{$vo.region_id}">{$vo.region_name}</option>
+                            {/volist}
                         </select>
+                    </li>
+                    <li>
+                        <select name="city_id" id="city">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
+                    <li>
+                        <select name="district_id" id="district">
+                            <option value="">请选择</option>
+                        </select>
+                    </li>
                     </li>
                 </ul>
                 <span>请选择所属区域</span>
@@ -179,4 +156,64 @@
         lang:'ch',
         format : "Y-m-d"
     });
+
+    $(function(){
+        $('#province').change(function(){
+            if($('#province').val() == 0 || $('#province').val() == ''){
+                return false;
+            }
+            $('#city').html('<option value="0">请选择</option>');
+            $.ajax({
+                type: 'POST',
+                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+                url: '/admin/index/region_list' ,
+                data: 'parent_id='+ $('#province').val() +'&m='+ Math.random() ,
+                dataType:'json',
+                cache:false, //同理
+                success: function(data){
+                    if(data.code ==200){
+                        var select_str = '<option value="0">请选择</option>';
+                        $.each(data.data,function(idx,obj){
+                            select_str +=  '<option value="'+obj.region_id+'">'+obj.region_name+'</option>';
+                        })
+                        $('#city').html(select_str);
+                    } else{
+                        alert('获取数据错误');
+                    }
+                } ,
+                error:function(){
+                    alert('获取数据失败，请刷新重试');
+                },
+            });
+        })
+
+        $('#city').change(function(){
+            if($('#city').val() == 0 || $('#city').val() == ''){
+                return false;
+            }
+            $('#district').html('<option value="0">请选择</option>');
+            $.ajax({
+                type: 'POST',
+                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+                url: '/admin/index/region_list' ,
+                data: 'parent_id='+ $('#city').val() +'&m='+ Math.random() ,
+                dataType:'json',
+                cache:false, //同理
+                success: function(data){
+                    if(data.code ==200){
+                        var select_str = '<option value="0">请选择</option>';
+                        $.each(data.data,function(idx,obj){
+                            select_str +=  '<option value="'+obj.region_id+'">'+obj.region_name+'</option>';
+                        })
+                        $('#district').html(select_str);
+                    } else{
+                        alert('获取数据错误');
+                    }
+                } ,
+                error:function(){
+                    alert('获取数据失败，请刷新重试');
+                },
+            });
+        })
+    })
 </script>

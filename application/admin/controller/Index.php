@@ -90,6 +90,15 @@ class Index extends Base
     }
 
 
+    public function region_list()
+    {
+        $parent_id = isset($_REQUEST['parent_id']) ? intval($_REQUEST['parent_id']) : 0;
+        $map = ['parent_id' => $parent_id];
+        $region_list = Db::table('region')->where($map)->select();
+        $this->ajax_return($region_list);
+    }
+
+
     public function test()
     {
         $view_data = [];

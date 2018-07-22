@@ -35,48 +35,32 @@
                 <dd>
                     <ul class="selectP">
                         <li>
-                            <select name="region_name">
+                            <select name="province_id" id="province">
                                 <option value="">请选择</option>
-                                <option value="北京" {if $customer_info.region_name=="北京" }selected{/if}>北京</option>
-                                <option value="上海" {if $customer_info.region_name=="上海" }selected{/if}>上海</option>
-                                <option value="广州" {if $customer_info.region_name=="广州" }selected{/if}>广州</option>
-                                <option value="深圳" {if $customer_info.region_name=="深圳" }selected{/if}>深圳</option>
-                                <option value="呼和浩特" {if $customer_info.region_name=="呼和浩特" }selected{/if}>内蒙古</option>
-                                <option value="济南" {if $customer_info.region_name=="济南" }selected{/if}>济南</option>
-                                <option value="石家庄" {if $customer_info.region_name=="石家庄" }selected{/if}>石家庄</option>
-                                <option value="长春" {if $customer_info.region_name=="长春" }selected{/if}>长春</option>
-                                <option value="哈尔滨" {if $customer_info.region_name=="哈尔滨" }selected{/if}>哈尔滨</option>
-                                <option value="沈阳" {if $customer_info.region_name=="沈阳" }selected{/if}>沈阳</option>
-                                <option value="乌鲁木齐" {if $customer_info.region_name=="乌鲁木齐" }selected{/if}>乌鲁木齐</option>
-                                <option value="兰州" {if $customer_info.region_name=="兰州" }selected{/if}>兰州</option>
-                                <option value="银川" {if $customer_info.region_name=="银川" }selected{/if}>银川</option>
-                                <option value="太原" {if $customer_info.region_name=="太原" }selected{/if}>太原</option>
-                                <option value="西安" {if $customer_info.region_name=="西安" }selected{/if}>西安</option>
-                                <option value="郑州" {if $customer_info.region_name=="郑州" }selected{/if}>郑州</option>
-                                <option value="合肥" {if $customer_info.region_name=="合肥" }selected{/if}>合肥</option>
-                                <option value="南京" {if $customer_info.region_name=="南京" }selected{/if}>南京</option>
-                                <option value="杭州" {if $customer_info.region_name=="杭州" }selected{/if}>杭州</option>
-                                <option value="福州" {if $customer_info.region_name=="福州" }selected{/if}>福州</option>
-                                <option value="广州" {if $customer_info.region_name=="广州" }selected{/if}>广州</option>
-                                <option value="南昌" {if $customer_info.region_name=="南昌" }selected{/if}>南昌</option>
-                                <option value="海口" {if $customer_info.region_name=="海口" }selected{/if}>海口</option>
-                                <option value="南宁" {if $customer_info.region_name=="南宁" }selected{/if}>南宁</option>
-                                <option value="贵阳" {if $customer_info.region_name=="贵阳" }selected{/if}>贵阳</option>
-                                <option value="长沙" {if $customer_info.region_name=="长沙" }selected{/if}>长沙</option>
-                                <option value="武汉" {if $customer_info.region_name=="武汉" }selected{/if}>武汉</option>
-                                <option value="成都" {if $customer_info.region_name=="成都" }selected{/if}>成都</option>
-                                <option value="昆明" {if $customer_info.region_name=="昆明" }selected{/if}>昆明</option>
-                                <option value="拉萨" {if $customer_info.region_name=="拉萨" }selected{/if}>拉萨</option>
-                                <option value="西宁" {if $customer_info.region_name=="西宁" }selected{/if}>西宁</option>
-                                <option value="天津" {if $customer_info.region_name=="天津" }selected{/if}>天津</option>
-                                <option value="上海" {if $customer_info.region_name=="上海" }selected{/if}>上海</option>
-                                <option value="重庆" {if $customer_info.region_name=="重庆" }selected{/if}>重庆</option>
-                                <option value="台北" {if $customer_info.region_name=="台北" }selected{/if}>台北</option>
-                                <option value="香港" {if $customer_info.region_name=="香港" }selected{/if}>香港</option>
-                                <option value="澳门" {if $customer_info.region_name=="澳门" }selected{/if}>澳门</option>
+                                {volist name="province_list" id="vo"}
+                                <option value="{$vo.region_id}" {if $customer_info.province_id==$vo.region_id}selected{/if}>{$vo.region_name}</option>
+                                {/volist}
                             </select>
                         </li>
+                        <li>
+                            <select name="city_id" id="city">
+                                <option value="">请选择</option>
+                                {volist name="city_list" id="vo"}
+                                <option value="{$vo.region_id}" {if $customer_info.city_id==$vo.region_id}selected{/if}>{$vo.region_name}</option>
+                                {/volist}
+                            </select>
+                        </li>
+                        <li>
+                            <select name="district_id" id="district">
+                                <option value="">请选择</option>
+                                {volist name="district_list" id="vo"}
+                                <option value="{$vo.region_id}" {if $customer_info.district_id==$vo.region_id}selected{/if}>{$vo.region_name}</option>
+                                {/volist}
+                            </select>
+                        </li>
+                        </li>
                     </ul>
+                    <span>请选择所属区域</span>
                 </dd>
             </dl>
 
@@ -178,6 +162,7 @@
 
 <link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+
 <script>
     $.datetimepicker.setLocale('ch');//设置选择器为中文
     $('#start_time,#end_time').datetimepicker({
@@ -185,4 +170,64 @@
         lang:'ch',
         format : "Y-m-d"
     });
+
+    $(function(){
+        $('#province').change(function(){
+            if($('#province').val() == 0 || $('#province').val() == ''){
+                return false;
+            }
+            $('#city').html('<option value="0">请选择</option>');
+            $.ajax({
+                type: 'POST',
+                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+                url: '/admin/index/region_list' ,
+                data: 'parent_id='+ $('#province').val() +'&m='+ Math.random() ,
+                dataType:'json',
+                cache:false, //同理
+                success: function(data){
+                    if(data.code ==200){
+                        var select_str = '<option value="0">请选择</option>';
+                        $.each(data.data,function(idx,obj){
+                            select_str +=  '<option value="'+obj.region_id+'">'+obj.region_name+'</option>';
+                        })
+                        $('#city').html(select_str);
+                    } else{
+                        alert('获取数据错误');
+                    }
+                } ,
+                error:function(){
+                    alert('获取数据失败，请刷新重试');
+                },
+            });
+        })
+
+        $('#city').change(function(){
+            if($('#city').val() == 0 || $('#city').val() == ''){
+                return false;
+            }
+            $('#district').html('<option value="0">请选择</option>');
+            $.ajax({
+                type: 'POST',
+                async: false, //注意这里要求为Boolean类型的参数，false不能写成'false'不然会被解析成true
+                url: '/admin/index/region_list' ,
+                data: 'parent_id='+ $('#city').val() +'&m='+ Math.random() ,
+                dataType:'json',
+                cache:false, //同理
+                success: function(data){
+                    if(data.code ==200){
+                        var select_str = '<option value="0">请选择</option>';
+                        $.each(data.data,function(idx,obj){
+                            select_str +=  '<option value="'+obj.region_id+'">'+obj.region_name+'</option>';
+                        })
+                        $('#district').html(select_str);
+                    } else{
+                        alert('获取数据错误');
+                    }
+                } ,
+                error:function(){
+                    alert('获取数据失败，请刷新重试');
+                },
+            });
+        })
+    })
 </script>
