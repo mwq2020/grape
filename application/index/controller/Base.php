@@ -4,6 +4,7 @@ use \think\Db;
 use think\Exception;
 use think\Loader;
 use think\Request;
+use think\Cookie;
 
 class Base extends \think\Controller
 {
@@ -25,12 +26,17 @@ class Base extends \think\Controller
         $this->assign('page_view_num',$page_view_num);
         $this->assign('video_play_num',$video_play_num);
 
-        if(Request::instance()->isAjax()){
+        if(!Request::instance()->isAjax()){
+
+            $ip =  Request::instance()->ip();
             $data = [];
+            $data['ip']             = ip2long($ip);
+            $data['customer_id']    = intval( Cookie::get('customer_id'));
             $data['device_info']    = $_SERVER['HTTP_USER_AGENT'];
             $data['add_time']       = time();
             Db::table('view_log')->insert($data);
 
+            /*
             if(!empty($page_view_num_info)) {
                 $data = [];
                 $data['id']                 = $page_view_num_info['id'];
@@ -45,6 +51,7 @@ class Base extends \think\Controller
                 $data['update_time']        = time();
                 Db::table('statistics')->insert($data);
             }
+            */
         }
     }
 

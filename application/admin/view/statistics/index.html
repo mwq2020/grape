@@ -42,9 +42,9 @@
                     <dt>自定义时段</dt>
                     <dd>
                         <div class="inputP">
-                            <input type="text" placeholder="起始时间" name="start_time" id="start_time" value="{$Think.get.start_time}">
+                            <input type="text" placeholder="起始时间" name="start_time" id="start_time" value="{$Think.get.start_time}" autocomplete="off">
                             <label class="mid">至</label>
-                            <input type="text" placeholder="结束时间" name="end_time" id="end_time" value="{$Think.get.end_time}">
+                            <input type="text" placeholder="结束时间" name="end_time" id="end_time" value="{$Think.get.end_time}" autocomplete="off">
                         </div>
                     </dd>
                 </dl>
@@ -64,11 +64,21 @@
     <!--</form>-->
 </div>
 
+<link href="/admin/js/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/admin/js/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script>
+    $.datetimepicker.setLocale('ch');//设置选择器为中文
+    $('#start_time,#end_time').datetimepicker({
+        dayOfWeekStart : 1,
+        lang:'ch',
+        format : "Y-m-d"
+    });
+</script>
 
 <script type="text/javascript" src="/admin/js/echarts.min.js"></script>
 <div class="boxP">
     <div class="tableBox">
-        <div id='visitCanvas' style="width:1100px;height:400px;"></div>
+        <div id='visitCanvas' style="width:1100px;height:600px;"></div>
     </div>
 </div>
 
@@ -76,14 +86,14 @@
     $(function () {
         $(".btnSearch").click(function () {
             var type = $("input[name=type]:checked").val();
-            var startTime = $("#start_time").val();
-            var endTime = $("#end_time").val();
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
             var customer_id = $("#customer_id").val();
 
             var reqParams = {
                 type: type,
-                startTime: startTime,
-                endTime: endTime,
+                start_time: start_time,
+                end_time: end_time,
                 customer_id: customer_id
             };
 
@@ -99,7 +109,7 @@
         var array = [];
         ////创建x轴标签文本
         var labels = [];
-        var _title = "日访问量";
+        var _title = "用户访问量图标";
         // var _subtitle = "副标题";
         // 线条名称
         var _legend = [ 'IP', '独立用户', '新独立用户','独立ip','访问量' ];
@@ -133,19 +143,26 @@
                 },
                 legend: {
                     data: _legend,
-                    right: "9%",
+                    right: "10%",
+                },
+                grid: {
+                    left: '10%',
+                    bottom:'35%'
+
                 },
                 calculable: true,
                 xAxis: {
                     type: "category",
+                    name: '时间',
                     data: labels,
                     axisLabel: {
                         interval: 0,
                         rotate: 45
-                    }
+                    },
                 },
                 yAxis: {
                     type: 'value',
+                    name:'次数',
                     axisLabel: {
                         formatter: '{value} 次'
                     }
