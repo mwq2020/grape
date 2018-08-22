@@ -294,25 +294,30 @@ class Customer extends Base
     }
 
 
-    public function change_status()
+    /**
+     * 删除客户操作
+     */
+    public function delete()
     {
         try {
-            if(!isset($_REQUEST['status']) || empty($_REQUEST['admin_id'])){
+            if(empty($_REQUEST['customer_id'])){
                 throw new \Exception('入参错误');
             }
-            $admin_info = Loader::model('Admin')->where('admin_id',$_REQUEST['admin_id'])->find();
-            if(empty($admin_info)){
-                throw new \Exception('管理员不存在');
+            $customer_info = Loader::model('Customer')->where('customer_id',$_REQUEST['customer_id'])->find();
+            if(empty($customer_info)){
+                throw new \Exception('客户不存在');
             }
-            $admin_info->status = intval($_REQUEST['status']);
-            $admin_info->save();
+            $customer_info->delete();
+
+            Db::table('customer_ip_list')->where(['customer_id'=>$_REQUEST['customer_id']])->delete();
+
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
             $this->assign('error_msg',$error_msg);
             $this->view->engine->layout('layout');
-            return $this->fetch('admin/admin_add');
+            return $this->fetch('customer/index');
         }
-        return $this->redirect('/manage/admin/index');
+        return $this->redirect('/admin/customer/index');
     }
 
 
