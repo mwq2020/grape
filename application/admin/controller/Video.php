@@ -224,6 +224,93 @@ class Video extends Base
     }
 
     /**
+     * 生成视频封面
+     */
+    public function make_face() {
+
+        $error_msg = '';
+        $video_id = isset($_REQUEST['video_id']) ? $_REQUEST['video_id'] : 0;
+        $video_info = Db::table('video')->find($video_id);
+        $this->assign('video_info',$video_info);
+        if(empty($_POST)){
+            $this->assign('error_msg',$error_msg);
+            $this->view->engine->layout('layout');
+            return $this->fetch('video/make_face');
+        }
+
+
+        $time_point = isset($_REQUEST['time_point']) ? $_REQUEST['time_point'] : 0;//截取视频的时间点
+        $quality = isset($_REQUEST['quality']) ? $_REQUEST['quality'] : 0;//截取视频的时间点
+
+        try {
+            if(empty($time_point)){
+                throw new \Exception("视频的截图时间点不能为空");
+            }
+
+            if(empty($quality)){
+                throw new \Exception("画质不能为空");
+            }
+
+            if(empty($video_info) || empty($video_info['video_url'])){
+                throw new \Exception("视频不能为空");
+            }
+
+
+            if(PHP_OS == 'Darwin'){
+                $video_url = "/www/www/grape/public".$video_info['video_url'];
+                $ffmpeg_base_bin = "ffmpeg";
+            } else {
+                $video_url = "E:/website/grape/public".iconv("UTF-8","GBK",$video_info['video_url']);
+                $ffmpeg_base_bin = "E:/ffmpeg/bin/ffmpeg.exe";
+            }
+
+            if(!file_exists($video_url)){
+                throw new \Exception("视频[{$video_url}]不能为空");
+            }
+
+            $image_url =  dirname($video_url)."/".$video_id."_".time().".jpg";
+            $system_bash = "{$ffmpeg_base_bin} -i {$video_url} -y -f image2 -ss {$time_point} -s 640x360 -vframes 1  {$image_url}";
+            exec($system_bash);
+//            echo "图片不存路径:".$image_url;
+//            echo "<hr>";
+//            echo "执行脚本命令:".$system_bash;
+//            echo "<hr>";
+//            //echo exec($system_bash);
+//            echo "<hr>";
+//            echo exec('whoami');
+//            exit;
+
+            if(!file_exists($image_url)){
+                throw new \Exception("图片[{$image_url}]生成失败");
+            }
+            $data = [];
+            if(PHP_OS == 'Darwin'){
+                $data['video_img'] = str_replace('/www/www/grape/public','',$image_url);
+            } else {
+                $data['video_img'] = str_replace('E:/website/grape/public','',$image_url);
+            }
+
+            $data['update_time'] = time();
+            echo "<pre>";
+            print_r($data);
+            exit;
+
+            //$flag = Db::table('video')->where('video_id', $video_id)->update($data);
+            //if(empty($flag)){
+                //throw new \Exception('保存数据错误，请重试');
+            //}
+
+        } catch (\Exception $e){
+            $error_msg = $e->getMessage();
+            $this->assign('error_msg',$error_msg);
+            return $this->fetch('video/make_face');
+        }
+        return $this->redirect('/admin/video/index');
+    }
+
+
+
+    /**
      * tp 上传文件代码
      */
     public function upload()

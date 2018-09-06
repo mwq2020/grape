@@ -42,20 +42,23 @@ class Test extends \think\Controller
      */
     public function index()
     {
-        $count_num = 0;
+        $video_num = 0;
+        $image_num = 0;
         $video_list = Loader::model('Video')->select();
         foreach($video_list as $row){
             $video_img = "E:/website/grape/public".iconv("UTF-8","GBK",$row['video_img']);
             if(!file_exists($video_img)){
                 echo "视频id:{$row['video_id']}   {$row['video_img']} 封面不存在<br>";
-                $count_num ++;
+                $image_num ++;
             }
             $video_url = "E:/website/grape/public".iconv("UTF-8","GBK",$row['video_url']);
-            if(!file_exists($video_img)){
-                //echo "视频id:{$row['video_id']}   {$row['video_url']} 视频不存在<br>";
+            if(!file_exists($video_url)){
+                $video_num++;
+                echo "视频id:{$row['video_id']}   {$row['video_url']} 视频不存在<br>";
             }
         }
-        echo "一共{$count_num}个视频封面不存在!<br>";
+        echo "一共{$image_num}个视频封面不存在!<br>";
+        echo "一共{$video_num}个视频视频不存在!<br>";
         exit;
     }
 
