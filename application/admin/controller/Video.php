@@ -240,16 +240,16 @@ class Video extends Base
 
 
         $time_point = isset($_REQUEST['time_point']) ? $_REQUEST['time_point'] : 0;//截取视频的时间点
-        $quality = isset($_REQUEST['quality']) ? $_REQUEST['quality'] : 0;//截取视频的时间点
+        //$quality = isset($_REQUEST['quality']) ? $_REQUEST['quality'] : 0;//截取视频的时间点
 
         try {
             if(empty($time_point)){
                 throw new \Exception("视频的截图时间点不能为空");
             }
 
-            if(empty($quality)){
-                throw new \Exception("画质不能为空");
-            }
+//            if(empty($quality)){
+//                throw new \Exception("画质不能为空");
+//            }
 
             if(empty($video_info) || empty($video_info['video_url'])){
                 throw new \Exception("视频不能为空");
@@ -271,7 +271,7 @@ class Video extends Base
             $image_url =  dirname($video_url)."/".$video_id."_".time().".jpg";
             $system_bash = "{$ffmpeg_base_bin} -i {$video_url} -y -f image2 -ss {$time_point} -s 640x360 -vframes 1  {$image_url}";
             exec($system_bash);
-//            echo "图片不存路径:".$image_url;
+//            echo "图片保存路径:".$image_url;
 //            echo "<hr>";
 //            echo "执行脚本命令:".$system_bash;
 //            echo "<hr>";
@@ -288,24 +288,23 @@ class Video extends Base
                 $data['video_img'] = str_replace('/www/www/grape/public','',$image_url);
             } else {
                 $data['video_img'] = str_replace('E:/website/grape/public','',$image_url);
+                $data['video_img'] = iconv("GBK","UTF-8",$data['video_img']);
+            }
+            $data['update_time'] = time();
+
+            $flag = Db::table('video')->where('video_id', $video_id)->update($data);
+            if(empty($flag)){
+                throw new \Exception('保存数据错误，请重试');
             }
 
-            $data['update_time'] = time();
-            echo "<pre>";
-            print_r($data);
-            exit;
-
-            //$flag = Db::table('video')->where('video_id', $video_id)->update($data);
-            //if(empty($flag)){
-                //throw new \Exception('保存数据错误，请重试');
-            //}
-
+            //echo "ssss保存成功";exit;
         } catch (\Exception $e){
             $error_msg = $e->getMessage();
+            echo $error_msg;exit;
             $this->assign('error_msg',$error_msg);
             return $this->fetch('video/make_face');
         }
-        return $this->redirect('/admin/video/index');
+        $this->redirect('/admin/video/index');
     }
 
 

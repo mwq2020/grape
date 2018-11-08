@@ -62,6 +62,24 @@ class Test extends \think\Controller
         exit;
     }
 
+    public function update_video() {
+//        $list = Db::table('video')->select();
+//        foreach($list as $row){
+//            if(strpos($row['video_url'],'+') != false){
+//                echo $row['video_url']."<br>";
+//                $new_video_url = str_replace('+','',$row['video_url']);
+//                $old_video_url = "E:/website/grape/public".$row['video_url'];
+//
+//                if(copy(iconv("UTF-8","GBK",$old_video_url),iconv("UTF-8","GBK","E:/website/grape/public".$new_video_url))){
+//                    $data = ['video_url' => $new_video_url,'update_time' => time()];
+//                    Db::table('video')->where('video_id',$row['video_id'])->update($data);
+//                } else {
+//                    echo "复制文件".$old_video_url."[{$new_video_url}]失败<br>";
+//                }
+//            }
+//        }
+    }
+
 
     public function mwq()
     {

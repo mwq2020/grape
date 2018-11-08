@@ -1,0 +1,96 @@
+{if $error_msg}
+<div class="msgP msgErr">
+    <h4><b>消息提示</b><a href="#" class="close_message_btn">×</a></h4>
+    <p>错误消息:&nbsp;{$error_msg}</p>
+</div>
+{/if}
+
+
+<div class="boxP">
+    <div class="titP">
+        <h4>生成封面</h4>
+    </div>
+    <div class="formP formV">
+        <form action="" method="post">
+            <dl>
+                <dt>资源名称</dt>
+                <dd>
+                    <div class="inputP">
+                        {$video_info.title}
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt><span class="redSpan">*</span>时间点</dt>
+                <dd>
+                    <div class="inputP">
+                        <input type="text" name="time_point" value="00:00:02" maxlength="200"/><span>截取当前输入时间点的图片作为封面</span>
+                    </div>
+                </dd>
+            </dl>
+
+            <!--<dl>-->
+                <!--<dt><span class="redSpan">*</span>画质</dt>-->
+                <!--<dd>-->
+                    <!--<ul class="selectP">-->
+                        <!--<li>-->
+                            <!--<select name="quality">-->
+                                <!--<option value="128k" >128k</option>-->
+                                <!--<option value="256k" selected >256k</option>-->
+                                <!--<option value="512k" >512k</option>-->
+                            <!--</select>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</dd>-->
+            <!--</dl>-->
+
+            <!--上传图片-->
+            {if $video_info.video_img}
+            <dl>
+                <dt>封面图片</dt>
+                <dd>
+                    <div class="uploadImg">
+                        <div class="view">
+                            <ul class="imgList">
+                                <li><span></span><img src="{$video_info.video_img}" id="video_img_preview"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </dd>
+            </dl>
+            {/if}
+
+            <!--上传视频-->
+            {if $video_info.video_url}
+            <dl>
+                <dt>视频</dt>
+                <dd>
+                    <ul class="videoList">
+                        <li>
+                            <img src="{$video_info.video_img}">
+                            <video src="{$video_info.video_url}" controls id="video_preview"></video>
+                            <span>视频地址:{$video_info.video_url}</span>
+                            <span>封面地址:{$video_info.video_img}</span>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            {/if}
+
+
+            <!--<input type="hidden" name="video_id" value="{$video_info.video_id}" />-->
+
+            <!--确定按钮-->
+            <dl>
+                <dt></dt>
+                <dd>
+                    <input type="submit" value="确定" class="btnP" >
+                    <a href="/admin/video/index" class="btnP btnDark">取消</a>
+                </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+
